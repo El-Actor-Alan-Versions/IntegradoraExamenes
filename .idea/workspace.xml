@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Integradira-Tjuans:war" />
+      <artifact name="practica3e:war" />
+      <artifact name="practica3e:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,78 +11,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/HelloServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/beans.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-grid.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-grid.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-grid.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-grid.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-grid.rtl.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-grid.rtl.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-grid.rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-grid.rtl.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-reboot.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-reboot.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-reboot.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-reboot.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-reboot.rtl.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-reboot.rtl.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-reboot.rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-reboot.rtl.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-utilities.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-utilities.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-utilities.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-utilities.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-utilities.rtl.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-utilities.rtl.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-utilities.rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap-utilities.rtl.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.rtl.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.rtl.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/bootstrap.rtl.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/cExamenes.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/calificaciones.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/desktop-1.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/editarPerfil.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/estilos.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/examenes.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/global.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/indexAdmin.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/login.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/2550260.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/añadir (2).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/añadir.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/calificaciones.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/consultar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/gestionar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/grupos.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/historial.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/iconoRobado.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/icons8-modificar-100.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/perfil (2).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/perfil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/perfilGestion.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/user.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/usuario.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/usuarios.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/utils/DatabaseConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/utils/DatabaseConnectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/indexAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/indexAdmin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/registrarPersona.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/registrarPersona.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,9 +46,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2iIpm8oQQhrxTFIdo2vJWEqmtGI" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -127,10 +60,10 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Tomcat Server.Tomcat 10.1.8.executor": "Run",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/walge/Downloads/integradoraDemoE/Integradira-Tjuans/src/main/webapp",
+    "last_opened_file_path": "C:/Users/walge/Downloads/integradoraDemoE/ubuntu/IntegradoraExamenes",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -145,19 +78,22 @@
       <recent name="C:\Users\walge\Downloads\integradoraDemoE\Integradira-Tjuans\src\main\java\mx\edu\utez\integradiratjuans" />
       <recent name="C:\Users\walge\Downloads\integradoraDemoE\Integradira-Tjuans\src\main\java" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\walge\Downloads\integradoraDemoE\ubuntu\IntegradoraExamenes\src\main\webapp" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 10.1.8" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.8" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="UPDATING_POLICY" value="hot-swap-classes" />
+      <option name="UPDATING_POLICY" value="redeploy-artifacts" />
       <deployment>
-        <artifact name="Integradira-Tjuans:war">
+        <artifact name="practica3e:war exploded">
           <settings>
-            <option name="CONTEXT_PATH" value="/Integradira_Tjuans_war" />
+            <option name="CONTEXT_PATH" value="/practica3e_war_exploded" />
           </settings>
         </artifact>
-        <artifact name="Integradira-Tjuans:war exploded">
+        <artifact name="practica3e:war">
           <settings>
-            <option name="CONTEXT_PATH" value="/Integradira_Tjuans_war_exploded" />
+            <option name="CONTEXT_PATH" value="/practica3e_war" />
           </settings>
         </artifact>
       </deployment>
@@ -236,6 +172,8 @@
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
           <artifact name="Integradira-Tjuans:war" />
+          <artifact name="practica3e:war exploded" />
+          <artifact name="practica3e:war" />
         </option>
       </method>
     </configuration>
@@ -257,6 +195,7 @@
       <option name="presentableId" value="Default" />
       <updated>1719188101655</updated>
       <workItem from="1719188102689" duration="4168000" />
+      <workItem from="1719200849587" duration="1007000" />
     </task>
     <servers />
   </component>

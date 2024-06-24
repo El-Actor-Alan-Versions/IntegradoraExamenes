@@ -35,7 +35,7 @@
                     <a class="nav-link" href="indexAdmin.jsp">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="jsp/registrarPersona.jsp">Usuarios</a>
+                    <a class="nav-link" href="registrarPersona.jsp">Usuarios</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="jsp/gestionarGrupos.jsp">Grupos</a>
@@ -57,7 +57,7 @@
                         <img src="img/usuarios.png" class="text-center" width="68" alt="Usuarios">
                         <h5 class="card-title">Registrar Usuarios</h5>
                         <p class="card-text">Administra los usuarios de la plataforma.</p>
-                        <a href="jsp/registrarPersona.jsp" class="btn btn-primary rounded-pill">Registrar</a>
+                        <a href="registrarPersona.jsp" class="btn btn-primary rounded-pill">Registrar</a>
                     </div>
                 </div>
             </div>
