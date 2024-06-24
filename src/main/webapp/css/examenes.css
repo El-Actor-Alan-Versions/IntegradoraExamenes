@@ -1,0 +1,87 @@
+/* Cambia los colores del form y navbar por el color del body */
+body, html {
+    height: 100%;
+    background-color: #fff;
+}
+
+/* Estilos para el formulario */
+.form-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav{
+    justify-content: end;
+}
+
+
+#Formulario {
+    background-color: white;
+    width: 400px; /* Ajusta el ancho según sea necesario */
+    padding: 30px; /* Ajusta el relleno interno según sea necesario */
+    border-radius: 10px; /* Ajusta el radio de borde según sea necesario */
+    margin: 50px auto; /* Margen automático vertical y horizontal */
+}
+  /* Cambiar el color de la barra de navegación */
+.options-section .card {
+    margin-bottom: 30px;
+}
+
+.btn {
+    background-color: #19c1c7 ; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de la fuente */
+    font-weight: bold; /* Peso de la fuente */
+    text-align: center; /* Alineación del texto */
+    cursor: pointer; /* Cursor de puntero */
+    transition: background-color 0.3s, transform 0.3s; /* Transiciones para animaciones */
+}
+
+.btn:hover {
+    background-color: #374fd8; /* Color de fondo al pasar el ratón */
+    transform: scale(1.05); /* Efecto de zoom al pasar el ratón */
+}
+
+.btn:active {
+    background-color: #19c1c7; /* Color de fondo al hacer clic */
+    transform: scale(1); /* Reducir el zoom al hacer clic */
+}
+
+.rounded-pill {
+    border-radius: 100px; /* Borde redondeado */
+}
+
+.btn-block {
+    display:grid; /* Ocupa el 100% del contenedor padre */
+    width: 50%; /* Anchura completa */
+}
+
+/* Clases para los diferentes fondos */
+/* .bg-fuerte {
+    background-color: #61d487;
+}
+
+.bg-fBaja {
+    background-color: #7bdfa0;
+}
+
+.bg-media {
+    background-color: #96eab9;
+}
+
+.bg-bajo {
+    background-color: #b0f4d1;
+}
+
+.bg-mBajo {
+    background-color: #caffea;
+} */
+
+
+
+
+

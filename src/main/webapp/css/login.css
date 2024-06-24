@@ -1,0 +1,84 @@
+/* Importing Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+/* Custom styles for the navbar */
+.custom-navbar {
+    background-color: #343a40; /* Color de contraste oscuro para la navbar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.custom-navbar-brand {
+    font-family: 'Roboto', sans-serif; /* Custom font */
+    font-size: 2rem; /* Font size */
+    color: #ffffff !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Text shadow for effect */
+}
+
+/* Estilos para el botón */
+.btn {
+    background-color: #19c1c7 ; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de la fuente */
+    font-weight: bold; /* Peso de la fuente */
+    text-align: center; /* Alineación del texto */
+    cursor: pointer; /* Cursor de puntero */
+    transition: background-color 0.3s, transform 0.3s; /* Transiciones para animaciones */
+}
+
+.btn:hover {
+    background-color: #374fd8; /* Color de fondo al pasar el ratón */
+    transform: scale(1.05); /* Efecto de zoom al pasar el ratón */
+}
+
+.btn:active {
+    background-color: #19c1c7; /* Color de fondo al hacer clic */
+    transform: scale(1); /* Reducir el zoom al hacer clic */
+}
+
+.rounded-pill {
+    border-radius: 100px; /* Borde redondeado */
+}
+
+.btn-block {
+    display:grid; /* Ocupa el 100% del contenedor padre */
+    width: 50%; /* Anchura completa */
+}
+
+/*Fuente*/
+@font-face {
+    font-family: 'Reddit mono';
+    src: url(../fonts/Reddit_Mono/static/RedditMono-Black.ttf);
+    font-weight: bold;
+    font-style: bold;
+}
+
+h1{
+    font-family: 'Reddit mono', sans-serif;
+    font-size: x-large;
+}
+a{
+    font-family: 'Reddit mono';
+    font-size: xx-small;
+
+}
+
+
+body, html {
+    height: 100%;
+    margin: 0;
+    background-color: #f0f0f0; /* Gris minimalista */
+}
+.form-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    max-height: 600px;
+}
+
