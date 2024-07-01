@@ -1,31 +1,23 @@
 package mx.edu.utez.integradiratjuans.model;
 
-import java.io.Serializable;
-
-public class Docente implements Serializable {
-
-
+public class Docente {
     private String matricula;
     private String nombre;
-    private String apellido_paterno;
-    private String apellido_materno;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
     private String correo;
-    private String contra;
-    private Boolean estado;
-
-
+    private String contraseña;
 
     public Docente() {
     }
 
-    public Docente(String matricula, String nombre, String apellido_paterno, String apellido_materno, String correo, String contra, Boolean estado) {
+    public Docente(String matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contraseña) {
         this.matricula = matricula;
         this.nombre = nombre;
-        this.apellido_paterno = apellido_paterno;
-        this.apellido_materno = apellido_materno;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
         this.correo = correo;
-        this.contra = contra;
-        this.estado = estado;
+        this.contraseña = contraseña;
     }
 
     public String getMatricula() {
@@ -44,20 +36,20 @@ public class Docente implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getApellido_paterno() {
-        return apellido_paterno;
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
     }
 
-    public void setApellido_paterno(String apellido_paterno) {
-        this.apellido_paterno = apellido_paterno;
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
     }
 
-    public String getApellido_materno() {
-        return apellido_materno;
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
     }
 
-    public void setApellido_materno(String apellido_materno) {
-        this.apellido_materno = apellido_materno;
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
     }
 
     public String getCorreo() {
@@ -68,22 +60,11 @@ public class Docente implements Serializable {
         this.correo = correo;
     }
 
-    public String getContra() {
-        return contra;
-    }
-    public void setContra(String contra) {
-        this.contra = contra;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public Boolean getEstado() {
-        return estado;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
-
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
-    }
-
-
 }
-
-

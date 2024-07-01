@@ -67,7 +67,7 @@
                         <img src="img/grupos.png" class="text-center" width="68" alt="Grupos">
                         <h5 class="card-title">Gestionar Grupos</h5>
                         <p class="card-text">Administra los grupos de usuarios.</p>
-                        <a href="jsp/gestionarGrupos.html" class="btn btn-primary rounded-pill">Gestionar</a>
+                        <a href="gestionUsuario.jsp" class="btn btn-primary rounded-pill">Gestionar</a>
                     </div>
                 </div>
             </div>

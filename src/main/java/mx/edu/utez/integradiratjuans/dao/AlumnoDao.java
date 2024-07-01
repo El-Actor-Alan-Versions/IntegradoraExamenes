@@ -3,63 +3,42 @@ package mx.edu.utez.integradiratjuans.dao;
 import mx.edu.utez.integradiratjuans.model.Alumno;
 import mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class AlumnoDao {
 
-    // Función para obtener un alumno con su matrícula y contraseña
-    public Alumno getOne(String matricula, String contra) {
-        Alumno a = new Alumno();
-        String query = "SELECT * FROM alumno WHERE matricula = ? AND contra = SHA2(?, 256)";
+    public Alumno getOne(String matricula, String contraseña) {
+        Alumno alumno = null;
+        String query = "SELECT * FROM alumno WHERE matricula = ? AND contraseña = SHA2(?, 256)";
 
-        try {
-            // 1) Conectarnos a la BD
-            Connection con = DatabaseConnectionManager.getConnection();
-            // 2) Configurar el query y ejecutarlo
-            PreparedStatement ps = con.prepareStatement(query);
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
             ps.setString(1, matricula);
-            ps.setString(2, contra);
-            ResultSet rs = ps.executeQuery();
-            // 3) Obtener la información
-            if (rs.next()) {
-                // Entonces llenamos la información del alumno
-                a.setMatricula(rs.getString("matricula"));
-                a.setNombre(rs.getString("nombre"));
-                a.setApellido_paterno(rs.getString("apellido_paterno"));
-                a.setApellido_materno(rs.getString("apellido_materno"));
-                a.setCorreo(rs.getString("correo"));
-                a.setContra(rs.getString("contra"));
-                a.setEstado(rs.getBoolean("estado"));
-                a.setId_grupo(rs.getInt("id_grupo"));
+            ps.setString(2, contraseña);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    alumno = new Alumno();
+                    alumno.setMatricula(rs.getString("matricula"));
+                    alumno.setNombre(rs.getString("nombre"));
+                    alumno.setApellidoPaterno(rs.getString("apellido_paterno"));
+                    alumno.setApellidoMaterno(rs.getString("apellido_materno"));
+                    alumno.setCorreo(rs.getString("correo"));
+                    alumno.setContraseña(rs.getString("contraseña"));
+                    alumno.setIdGrupo(rs.getInt("id_grupo"));
+                }
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return a;
+
+        return alumno;
     }
 
-    // Función para insertar un nuevo alumno
-    public boolean insert(Alumno a) {
-        boolean flag = false;
-        String query = "INSERT INTO alumno(matricula, nombre, apellido_paterno, apellido_materno, correo, contra, estado, id_grupo) VALUES (?, ?, ?, ?, ?, SHA2(?, 256), ?, ?)";
-        try {
-            Connection con = DatabaseConnectionManager.getConnection();
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, a.getMatricula());
-            ps.setString(2, a.getNombre());
-            ps.setString(3, a.getApellido_paterno());
-            ps.setString(4, a.getApellido_materno());
-            ps.setString(5, a.getCorreo());
-            ps.setString(6, a.getContra());
-            ps.setBoolean(7, a.getEstado());
-            ps.setInt(8, a.getId_grupo());
-            if (ps.executeUpdate() == 1) {
-                flag = true; // Significa que se insertó en la BD
-                System.out.println("OK");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return flag;
-    }
+    // Aquí podrías implementar métodos adicionales como insert, update, getAll, etc.
 }

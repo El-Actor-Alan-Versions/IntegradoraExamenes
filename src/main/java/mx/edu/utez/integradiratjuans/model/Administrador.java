@@ -1,25 +1,23 @@
 package mx.edu.utez.integradiratjuans.model;
 
-public class Alumno {
+public class Administrador {
     private String matricula;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String correo;
     private String contraseña;
-    private int idGrupo; // Suponiendo que idGrupo es el identificador del grupo al que pertenece el alumno
 
-    public Alumno() {
+    public Administrador() {
     }
 
-    public Alumno(String matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contraseña, int idGrupo) {
+    public Administrador(String matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contraseña) {
         this.matricula = matricula;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.correo = correo;
         this.contraseña = contraseña;
-        this.idGrupo = idGrupo;
     }
 
     public String getMatricula() {
@@ -68,13 +66,5 @@ public class Alumno {
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
-    }
-
-    public int getIdGrupo() {
-        return idGrupo;
-    }
-
-    public void setIdGrupo(int idGrupo) {
-        this.idGrupo = idGrupo;
     }
 }

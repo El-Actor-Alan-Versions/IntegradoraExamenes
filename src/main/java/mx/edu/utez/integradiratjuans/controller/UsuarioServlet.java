@@ -6,8 +6,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import mx.edu.utez.integradiratjuans.dao.UsuarioDao;
-import mx.edu.utez.integradiratjuans.model.Usuario;
+import mx.edu.utez.integradiratjuans.dao.AdministradorDao;
+import mx.edu.utez.integradiratjuans.dao.AlumnoDao;
+import mx.edu.utez.integradiratjuans.dao.DocenteDao;
+import mx.edu.utez.integradiratjuans.model.Administrador;
+import mx.edu.utez.integradiratjuans.model.Alumno;
+import mx.edu.utez.integradiratjuans.model.Docente;
 
 import java.io.IOException;
 
@@ -15,39 +19,42 @@ import java.io.IOException;
 public class UsuarioServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String nombre_usuario = req.getParameter("nombre_usuario");
+        String nombreUsuario = req.getParameter("nombre_usuario");
         String contra = req.getParameter("contra");
 
-        // Conectar a la base de datos y buscar al usuario por nombre de usuario y contraseña
-        UsuarioDao dao = new UsuarioDao();
-        Usuario usuario = dao.getOne(nombre_usuario, contra);
+        // Validar credenciales para cada tipo de usuario
+        AdministradorDao adminDao = new AdministradorDao();
+        Administrador admin = adminDao.getOne(nombreUsuario, contra);
 
-        // En el método doPost del servlet UsuarioServlet
-        if (usuario == null) {
-            // Si el usuario no existe en la base de datos, establecer mensaje de error en la sesión
-            HttpSession sesion = req.getSession();
-            sesion.setAttribute("mensaje", "El usuario no existe en la BD");
+        AlumnoDao alumnoDao = new AlumnoDao();
+        Alumno alumno = alumnoDao.getOne(nombreUsuario, contra);
 
-            resp.sendRedirect("index.jsp"); // Redirigir a la página de inicio de sesión
+        DocenteDao docenteDao = new DocenteDao();
+        Docente docente = docenteDao.getOne(nombreUsuario, contra);
+
+        String ruta = "index.jsp"; // Página por defecto
+
+        if (admin != null) {
+            // Si es administrador, redirigir a vista de administrador
+            HttpSession session = req.getSession();
+            session.setAttribute("usuario", admin);
+            ruta = "indexAdmin.jsp";
+        } else if (alumno != null) {
+            // Si es alumno, redirigir a vista de alumno
+            HttpSession session = req.getSession();
+            session.setAttribute("usuario", alumno);
+            ruta = "indexAlumno.jsp";
+        } else if (docente != null) {
+            // Si es docente, redirigir a vista de docente
+            HttpSession session = req.getSession();
+            session.setAttribute("usuario", docente);
+            ruta = "indexDocente.jsp";
         } else {
-            // Si el usuario existe, determinar a qué página redirigir según el tipo de usuario
-            int tipoUsuario = usuario.getTipo_usuario();
-            String ruta;
-
-            if (tipoUsuario == 1) {
-                ruta = "indexAdmin.jsp"; // Redirigir a la página del administrador
-            } else if (tipoUsuario == 2) {
-                ruta = "indexDocente.jsp"; // Redirigir a la página del docente
-            } else { //Agregar el tipoUsuario == 3
-                ruta = "index.jsp"; // Puedes manejar otro tipo de usuarios aquí
-            }
-
-            // Guardar usuario en la sesión si es necesario
-            HttpSession sesion = req.getSession();
-            sesion.setAttribute("usuario", usuario);
-
-            // Redireccionar a la página correspondiente
-            resp.sendRedirect(ruta);
+            // Si no coincide con ningún usuario, mostrar mensaje de error y redirigir a login
+            HttpSession session = req.getSession();
+            session.setAttribute("mensaje", "Credenciales incorrectas");
         }
+
+        resp.sendRedirect(ruta);
     }
 }
