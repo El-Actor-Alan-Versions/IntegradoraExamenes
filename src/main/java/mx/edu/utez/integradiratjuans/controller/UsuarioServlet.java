@@ -38,7 +38,7 @@ public class UsuarioServlet extends HttpServlet {
                 ruta = "indexAdmin.jsp"; // Redirigir a la página del administrador
             } else if (tipoUsuario == 2) {
                 ruta = "indexDocente.jsp"; // Redirigir a la página del docente
-            } else {
+            } else { //Agregar el tipoUsuario == 3
                 ruta = "index.jsp"; // Puedes manejar otro tipo de usuarios aquí
             }
 

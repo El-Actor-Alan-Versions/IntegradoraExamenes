@@ -64,6 +64,7 @@
                 <option value="" disabled selected>Selecciona el tipo de usuario</option>
                 <option value="1">Administrador</option>
                 <option value="2">Docente</option>
+                <option value="3">Alumno</option>
                 <!-- Agrega más opciones según tus necesidades -->
             </select>
         </div>
