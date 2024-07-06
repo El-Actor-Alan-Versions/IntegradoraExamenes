@@ -33,7 +33,7 @@
                 <a class="nav-link" href="indexDocente.jsp">Inicio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="jsp/registroExamenes.jsp">Crear Examen</a>
+                <a class="nav-link" href="gestionarExamenes.jsp">Crear Examen</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="jsp/gestionarCalificaciones.jsp">Gestionar Calificaciones</a>
@@ -55,7 +55,7 @@
                         <img src="img/añadir (2).png" class="text-center" width="68" alt="Examen">
                         <h5 class="card-title">Crear Examen</h5>
                         <p class="card-text">Diseña y publica nuevos exámenes fácilmente.</p>
-                        <a href="jsp/registroExamenes.jsp" class="btn btn-primary rounded-pill">Crear</a>
+                        <a href="crearExamen.jsp" class="btn btn-primary rounded-pill">Crear</a>
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                         <img src="img/calificaciones.png" class="text-center" width="68" alt="calificaciones">
                         <h5 class="card-title">Gestionar Calificaciones</h5>
                         <p class="card-text">Administra y revisa las calificaciones de los estudiantes.</p>
-                        <a href="jsp/gestionarCalificaciones.jsp" class="btn btn-primary rounded-pill">Gestionar</a>
+                        <a href="gestionarExamenes.jsp" class="btn btn-primary rounded-pill">Gestionar</a>
                     </div>
                 </div>
             </div>

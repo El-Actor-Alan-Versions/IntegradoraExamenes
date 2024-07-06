@@ -41,40 +41,59 @@
 
 <div class="container mt-5">
     <h2 class="text-center">Registrar Persona</h2>
-    <form id="registroPersona" method="POST" action="sign_in">
+    <form id="registroPersona" method="POST" action="registrarUsuario">
         <div class="mb-3">
-            <label for="nombre_usuario" class="form-label">Nombre de Usuario</label>
-            <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" required>
+            <label for="matricula" class="form-label">Matrícula</label>
+            <input type="text" class="form-control" id="matricula" name="matricula" required>
         </div>
         <div class="mb-3">
-            <label for="pass1" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="pass1" name="pass1" required>
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
         </div>
         <div class="mb-3">
-            <label for="pass2" class="form-label">Repite Contraseña</label>
-            <input type="password" class="form-control" id="pass2" name="pass2" required>
+            <label for="apellidoPaterno" class="form-label">Apellido Paterno</label>
+            <input type="text" class="form-control" id="apellidoPaterno" name="apellidoPaterno" required>
         </div>
         <div class="mb-3">
-            <label for="correo_usuario" class="form-label">Correo Electrónico</label>
-            <input type="email" class="form-control" id="correo_usuario" name="correo_usuario" required>
+            <label for="apellidoMaterno" class="form-label">Apellido Materno</label>
+            <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno" required>
         </div>
         <div class="mb-3">
-            <label for="tipo_usuario" class="form-label">Tipo de Usuario</label>
-            <select class="form-control" id="tipo_usuario" name="tipo_usuario" required>
+            <label for="correo" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" id="correo" name="correo" required>
+        </div>
+        <div class="mb-3">
+            <label for="contrasena" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+        </div>
+        <div class="mb-3">
+            <label for="tipoUsuario" class="form-label">Tipo de Usuario</label>
+            <select class="form-control" id="tipoUsuario" name="tipoUsuario" required>
                 <option value="" disabled selected>Selecciona el tipo de usuario</option>
-                <option value="1">Administrador</option>
-                <option value="2">Docente</option>
-                <option value="3">Alumno</option>
+                <option value="administrador">Administrador</option>
+                <option value="docente">Docente</option>
+                <option value="alumno">Alumno</option>
                 <!-- Agrega más opciones según tus necesidades -->
             </select>
+        </div>
+        <div class="mb-3" id="grupo-container" style="display: none;">
+            <label for="id_grupo" class="form-label">ID del Grupo</label>
+            <input type="text" class="form-control" id="id_grupo" name="id_grupo">
         </div>
         <button type="submit" class="btn btn-primary m-2">Registrar</button>
     </form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../js/registroPersona.js"></script>
+<script>
+    document.getElementById('tipoUsuario').addEventListener('change', function () {
+        const grupoContainer = document.getElementById('grupo-container');
+        if (this.value === 'alumno') {
+            grupoContainer.style.display = 'block';
+        } else {
+            grupoContainer.style.display = 'none';
+        }
+    });
+</script>
 </body>
 </html>
-
-

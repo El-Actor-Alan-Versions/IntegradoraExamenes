@@ -39,5 +39,24 @@ public class AdministradorDao {
         return administrador;
     }
 
-    // Aquí podrías implementar métodos adicionales como insert, update, getAll, etc.
+    //aca inserta
+    public boolean insert(Administrador admin) {
+        boolean flag = false;
+        String query = "INSERT INTO Administrador (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, admin.getMatricula());
+            ps.setString(2, admin.getNombre());
+            ps.setString(3, admin.getApellidoPaterno());
+            ps.setString(4, admin.getApellidoMaterno());
+            ps.setString(5, admin.getCorreo());
+            ps.setString(6, admin.getContraseña());
+            if (ps.executeUpdate() == 1) {
+                flag = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
 }

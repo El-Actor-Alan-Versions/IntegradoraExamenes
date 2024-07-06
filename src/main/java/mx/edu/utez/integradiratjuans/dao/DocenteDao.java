@@ -39,5 +39,22 @@ public class DocenteDao {
         return docente;
     }
 
-    // Aquí podrías implementar métodos adicionales como insert, update, getAll, etc.
-}
+    public boolean insert(Docente docente) {
+        boolean flag = false;
+        String query = "INSERT INTO Docente (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, docente.getMatricula());
+            ps.setString(2, docente.getNombre());
+            ps.setString(3, docente.getApellidoPaterno());
+            ps.setString(4, docente.getApellidoMaterno());
+            ps.setString(5, docente.getCorreo());
+            ps.setString(6, docente.getContraseña());
+            if (ps.executeUpdate() == 1) {
+                flag = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }}

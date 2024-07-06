@@ -40,5 +40,24 @@ public class AlumnoDao {
         return alumno;
     }
 
-    // Aquí podrías implementar métodos adicionales como insert, update, getAll, etc.
+    public boolean insert(Alumno alumno) {
+        boolean flag = false;
+        String query = "INSERT INTO Alumno (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña, id_grupo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, alumno.getMatricula());
+            ps.setString(2, alumno.getNombre());
+            ps.setString(3, alumno.getApellidoPaterno());
+            ps.setString(4, alumno.getApellidoMaterno());
+            ps.setString(5, alumno.getCorreo());
+            ps.setString(6, alumno.getContraseña());
+            ps.setInt(7, alumno.getIdGrupo());
+            if (ps.executeUpdate() == 1) {
+                flag = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
 }
