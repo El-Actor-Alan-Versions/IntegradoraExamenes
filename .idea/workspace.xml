@@ -11,16 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarUsuarioServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarUsuarioServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/AdministradorDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/AdministradorDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/AlumnoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/AlumnoDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/DocenteDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/DocenteDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/indexDocente.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/indexDocente.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/registrarPersona.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/registrarPersona.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/UsuarioServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/UsuarioServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,6 +246,7 @@
       <workItem from="1720055546217" duration="67000" />
       <workItem from="1720059086187" duration="861000" />
       <workItem from="1720219823082" duration="709000" />
+      <workItem from="1720385150399" duration="336000" />
     </task>
     <servers />
   </component>

@@ -19,7 +19,7 @@ import java.io.IOException;
 public class UsuarioServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String nombreUsuario = req.getParameter("nombre_usuario");
+        String nombreUsuario = req.getParameter("matricula");
         String contra = req.getParameter("contra");
 
         // Validar credenciales para cada tipo de usuario
