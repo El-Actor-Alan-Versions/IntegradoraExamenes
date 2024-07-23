@@ -38,17 +38,17 @@ public class UsuarioServlet extends HttpServlet {
             // Si es administrador, redirigir a vista de administrador
             HttpSession session = req.getSession();
             session.setAttribute("usuario", admin);
-            ruta = "indexAdmin.jsp";
+            ruta = "Admin/indexAdmin.jsp";
         } else if (alumno != null) {
             // Si es alumno, redirigir a vista de alumno
             HttpSession session = req.getSession();
             session.setAttribute("usuario", alumno);
-            ruta = "indexAlumno.jsp";
+            ruta = "Alumno/indexAlumno.jsp";
         } else if (docente != null) {
             // Si es docente, redirigir a vista de docente
             HttpSession session = req.getSession();
             session.setAttribute("usuario", docente);
-            ruta = "indexDocente.jsp";
+            ruta = "Docente/indexDocente.jsp";
         } else {
             // Si no coincide con ningún usuario, mostrar mensaje de error y redirigir a login
             HttpSession session = req.getSession();

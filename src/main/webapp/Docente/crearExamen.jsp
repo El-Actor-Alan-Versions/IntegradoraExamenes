@@ -8,26 +8,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand">Formulario</a>
-    </div>
-</nav>
-
 <div class="container mt-5">
     <h2 class="text-center">Crear Examen</h2>
     <form id="crearExamen" method="POST" action="crearExamen">
+        <!-- Campos del formulario -->
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre del Examen</label>
             <input type="text" class="form-control" id="nombre" name="nombre" required>
         </div>
         <div class="mb-3">
             <label for="fecha_aplicacion" class="form-label">Fecha de Aplicación</label>
-            <input type="date" class="form-control" id="fecha_aplicacion" name="fecha_aplicacion" required>
+            <input type="datetime-local" class="form-control" id="fecha_aplicacion" name="fecha_aplicacion" required>
         </div>
         <div class="mb-3">
             <label for="fecha_cierre" class="form-label">Fecha de Cierre</label>
-            <input type="date" class="form-control" id="fecha_cierre" name="fecha_cierre" required>
+            <input type="datetime-local" class="form-control" id="fecha_cierre" name="fecha_cierre" required>
         </div>
         <div class="mb-3">
             <label for="id_clase" class="form-label">ID de la Clase</label>
@@ -36,7 +31,6 @@
         <button type="submit" class="btn btn-primary m-2">Crear</button>
     </form>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

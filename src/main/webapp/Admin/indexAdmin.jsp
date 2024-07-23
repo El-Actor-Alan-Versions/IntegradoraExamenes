@@ -13,8 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link  rel="stylesheet"  href="css/indexAdmin.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link  rel="stylesheet"  href="../css/indexAdmin.css">
 
 
 </head>
@@ -23,7 +23,7 @@
 <!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <img src="img/iconoRobado.png" width="48" alt="icono">
+        <img src="../img/iconoRobado.png" width="48" alt="icono">
         <br>
         <a class="navbar-brand">Formularios</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,7 @@
             <div class="col-md-6 text-center">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/usuarios.png" class="text-center" width="68" alt="Usuarios">
+                        <img src="../img/usuarios.png" class="text-center" width="68" alt="Usuarios">
                         <h5 class="card-title">Registrar Usuarios</h5>
                         <p class="card-text">Administra los usuarios de la plataforma.</p>
                         <a href="registrarPersona.jsp" class="btn btn-primary rounded-pill">Registrar</a>
@@ -64,7 +64,7 @@
             <div class="col-md-6 text-center">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/grupos.png" class="text-center" width="68" alt="Grupos">
+                        <img src="../img/grupos.png" class="text-center" width="68" alt="Grupos">
                         <h5 class="card-title">Gestionar Grupos</h5>
                         <p class="card-text">Administra los grupos de usuarios.</p>
                         <a href="gestionUsuario.jsp" class="btn btn-primary rounded-pill">Gestionar</a>
