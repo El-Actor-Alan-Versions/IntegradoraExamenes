@@ -133,6 +133,18 @@
                 </div>
             </a>
         </div>
+        <!-- Tarjeta Gestionar Grupos -->
+        <div class="col-md-3 col-sm-6 text-center mb-4">
+            <a href="verGrupos.jsp" class="button">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="../img/mirarCalificaciones.png" class="text-center" width="68">
+                        <h5 class="card-title">Gestionar Profesores</h5>
+                        <p class="card-text">Edita el personal, puedes actualizar su estado.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
         <!-- Tarjeta Gestionar Clases -->
         <div class="col-md-3 col-sm-6 text-center mb-4">
             <a href="" class="button">

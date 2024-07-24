@@ -22,7 +22,7 @@ public class EliminarDocenteServlet extends HttpServlet {
 
         try {
             docenteDao.updateEstado(matricula, nuevoEstado);
-            response.sendRedirect("usuariosRegistrados.jsp"); // Redirige a la página de usuarios registrados
+            response.sendRedirect("docentesRegistrados.jsp"); // Redirige a la página de docentes registrados
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendRedirect("error.jsp"); // Redirige a una página de error

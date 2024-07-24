@@ -45,4 +45,13 @@ public class GrupoDao {
         return grupos;
     }
 
+    public void delete(int idGrupo) throws SQLException {
+        String query = "DELETE FROM Grupo WHERE id_grupo = ?";
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idGrupo);
+            statement.executeUpdate();
+        }
+    }
+
 }

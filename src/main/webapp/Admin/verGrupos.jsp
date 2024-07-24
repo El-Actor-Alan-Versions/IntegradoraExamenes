@@ -1,12 +1,12 @@
-<%@ page import="mx.edu.utez.integradiratjuans.dao.DocenteDao" %>
+<%@ page import="mx.edu.utez.integradiratjuans.dao.GrupoDao" %>
 <%@ page import="java.util.List" %>
-<%@ page import="mx.edu.utez.integradiratjuans.model.Docente" %>
+<%@ page import="mx.edu.utez.integradiratjuans.model.Grupo" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Docentes Registrados</title>
+    <title>Grupos Registrados</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/datatables.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/docente.css">
@@ -23,17 +23,14 @@
 </nav>
 
 <div class="container mt-4">
-    <h2>Docentes Registrados</h2>
-    <button type="button" class="btn btn-info" onclick="location.href='registrarDocente.jsp'">Nuevo docente</button>
+    <h2>Grupos Registrados</h2>
+    <button type="button" class="btn btn-info" onclick="location.href='registrarGrupo.jsp'">Nuevo grupo</button>
     <table id="example" class="table table-striped table-hover" style="width: 100%">
         <thead>
         <tr>
-            <th>Matrícula</th>
-            <th>Nombre</th>
-            <th>Apellido Paterno</th>
-            <th>Apellido Materno</th>
-            <th>Correo</th>
-            <th>Estado</th>
+            <th>ID Grupo</th>
+            <th>Grado Grupo</th>
+            <th>ID Carrera</th>
             <th>Actualizar</th>
             <th>Eliminar</th>
         </tr>
@@ -41,23 +38,20 @@
         <tbody>
         <%
             try {
-                DocenteDao dao = new DocenteDao();
-                List<Docente> lista = dao.getAll();
-                for (Docente d : lista) {
+                GrupoDao dao = new GrupoDao();
+                List<Grupo> lista = dao.getAll();
+                for (Grupo g : lista) {
         %>
         <tr>
-            <td><%= d.getMatricula() %></td>
-            <td><%= d.getNombre() %></td>
-            <td><%= d.getApellidoPaterno() %></td>
-            <td><%= d.getApellidoMaterno() %></td>
-            <td><%= d.getCorreo() %></td>
-            <td><%= d.getEstado() %></td>
+            <td><%= g.getIdGrupo() %></td>
+            <td><%= g.getGradoGrupo() %></td>
+            <td><%= g.getIdCarrera() %></td>
             <td>
-                <a href="actualizarDocente.jsp?matricula=<%= d.getMatricula() %>">Actualizar</a>
+                <a href="actualizarGrupo.jsp?idGrupo=<%= g.getIdGrupo() %>">Actualizar</a>
             </td>
             <td>
-                <form method="post" action="eliminarDocenteServlet">
-                    <input type="hidden" name="matricula" value="<%= d.getMatricula() %>">
+                <form method="post" action="eliminarGrupoServlet">
+                    <input type="hidden" name="idGrupo" value="<%= g.getIdGrupo() %>">
                     <button type="submit" class="btn btn-danger" onclick="return confirmarEliminacion()">Eliminar</button>
                 </form>
             </td>
@@ -79,7 +73,6 @@
 <script src="${pageContext.request.contextPath}/JS/dataTables.bootstrap5.js"></script>
 <script src="${pageContext.request.contextPath}/JS/es-MX.json"></script>
 <script>
-    // Inicializar DataTables en la tabla objetivo
     document.addEventListener('DOMContentLoaded', () => {
         const table = document.getElementById('example');
         new DataTable(table, {
@@ -90,7 +83,7 @@
     });
 
     function confirmarEliminacion() {
-        return confirm('¿Estás seguro de que deseas dar de baja a este docente?');
+        return confirm('¿Estás seguro de que deseas eliminar este grupo?');
     }
 </script>
 </body>
