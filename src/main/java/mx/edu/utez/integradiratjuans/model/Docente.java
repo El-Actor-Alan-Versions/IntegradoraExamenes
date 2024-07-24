@@ -7,17 +7,20 @@ public class Docente {
     private String apellidoMaterno;
     private String correo;
     private String contraseña;
+    private String estado; // Agregado
 
-    public Docente() {
+    public Docente(){
+
     }
 
-    public Docente(String matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contraseña) {
+    public Docente(String matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contraseña, String estado) {
         this.matricula = matricula;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.correo = correo;
         this.contraseña = contraseña;
+        this.estado = estado;
     }
 
     public String getMatricula() {
@@ -66,5 +69,13 @@ public class Docente {
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

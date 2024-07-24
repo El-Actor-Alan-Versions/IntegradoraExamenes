@@ -5,23 +5,24 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import mx.edu.utez.integradiratjuans.dao.UsuarioDao;
+import mx.edu.utez.integradiratjuans.dao.AlumnoDao;
 
 import java.io.IOException;
 
-@WebServlet(name = "UpdateUsuarioEstadoServlet", urlPatterns = {"/updateUsuarioEstado"})
+@WebServlet(name = "UpdateUsuarioEstadoServlet", urlPatterns = {"/Admin/updateUsuarioEstado"})
 public class UpdateUsuarioEstadoServlet extends HttpServlet {
 
-    private UsuarioDao usuarioDao = new UsuarioDao();
+    private AlumnoDao alumnoDao = new AlumnoDao();
 
-
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Obtener el ID del usuario
-        int userId = Integer.parseInt(request.getParameter("id"));
+        // Obtener la matrícula del usuario
+        String matricula = request.getParameter("matricula");
+        String estado = request.getParameter("estado");
 
         // Intentar actualizar el estado del usuario
-        boolean updateSuccess = usuarioDao.updateEstado(userId, false);
+        boolean updateSuccess = alumnoDao.updateEstado(matricula, estado);
 
         if (updateSuccess) {
             request.getSession().setAttribute("mensaje", "Usuario actualizado exitosamente.");

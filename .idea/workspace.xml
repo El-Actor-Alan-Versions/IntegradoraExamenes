@@ -11,21 +11,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/Docente/VerExamenes.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/Docente/indexDocente.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarAlumnoServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/CrearExamenServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/CrearExamenServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarExamenServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarUsuarioServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/UpdateUsuarioEstadoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/UpdateUsuarioEstadoServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/UsuarioServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/UsuarioServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Examen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Examen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/crearExamen.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/crearExamen.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/gestionUsuario.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/gestionUsuario.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/gestionarExamenes.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/indexAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/indexAdmin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/indexDocente.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/registrarPersona.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/registrarPersona.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/AlumnoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/AlumnoDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/DocenteDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/DocenteDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/UsuarioDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Alumno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Alumno.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Docente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Docente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Usuario.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/indexAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/indexAdmin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/registrarPersona.jsp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,8 +33,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jsp File" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -130,6 +128,7 @@
       </method>
     </configuration>
     <configuration name="Tomcat 10.1.8" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.8" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="BROWSER_ID" value="37cae5b9-e8b2-4949-9172-aafa37fbc09c" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="practica3e:war">
@@ -275,7 +274,8 @@
       <workItem from="1720678779612" duration="2154000" />
       <workItem from="1720759315020" duration="41000" />
       <workItem from="1721326858560" duration="788000" />
-      <workItem from="1721683538558" duration="10246000" />
+      <workItem from="1721683538558" duration="12422000" />
+      <workItem from="1721774654392" duration="10057000" />
     </task>
     <servers />
   </component>

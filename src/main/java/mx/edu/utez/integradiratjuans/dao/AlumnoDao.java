@@ -3,61 +3,86 @@ package mx.edu.utez.integradiratjuans.dao;
 import mx.edu.utez.integradiratjuans.model.Alumno;
 import mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AlumnoDao {
 
-    public Alumno getOne(String matricula, String contraseña) {
-        Alumno alumno = null;
-        String query = "SELECT * FROM alumno WHERE matricula = ? AND contraseña = SHA2(?, 256)";
-
-        try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
-
-            ps.setString(1, matricula);
-            ps.setString(2, contraseña);
-
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    alumno = new Alumno();
-                    alumno.setMatricula(rs.getString("matricula"));
-                    alumno.setNombre(rs.getString("nombre"));
-                    alumno.setApellidoPaterno(rs.getString("apellido_paterno"));
-                    alumno.setApellidoMaterno(rs.getString("apellido_materno"));
-                    alumno.setCorreo(rs.getString("correo"));
-                    alumno.setContraseña(rs.getString("contraseña"));
-                    alumno.setIdGrupo(rs.getInt("id_grupo"));
+    public Alumno getOne(String matricula, String contrasena) throws SQLException {
+        String query = "SELECT * FROM Alumno WHERE Matricula = ? AND Contraseña = ?";
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, matricula);
+            statement.setString(2, contrasena); // Cuidado: las contraseñas en texto plano no son seguras
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    Alumno alumno = new Alumno();
+                    alumno.setMatricula(resultSet.getString("Matricula"));
+                    alumno.setNombre(resultSet.getString("Nombre"));
+                    alumno.setApellidoPaterno(resultSet.getString("Apellido_paterno"));
+                    alumno.setApellidoMaterno(resultSet.getString("Apellido_materno"));
+                    alumno.setCorreo(resultSet.getString("Correo"));
+                    alumno.setContraseña(resultSet.getString("Contraseña"));
+                    alumno.setIdGrupo(resultSet.getInt("id_grupo"));
+                    alumno.setEstado(resultSet.getString("estado"));
+                    return alumno;
                 }
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-
-        return alumno;
+        return null;
     }
 
-    public boolean insert(Alumno alumno) {
-        boolean flag = false;
-        String query = "INSERT INTO Alumno (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña, id_grupo) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setString(1, alumno.getMatricula());
-            ps.setString(2, alumno.getNombre());
-            ps.setString(3, alumno.getApellidoPaterno());
-            ps.setString(4, alumno.getApellidoMaterno());
-            ps.setString(5, alumno.getCorreo());
-            ps.setString(6, alumno.getContraseña());
-            ps.setInt(7, alumno.getIdGrupo());
-            if (ps.executeUpdate() == 1) {
-                flag = true;
-            }
+
+    public boolean insert(Alumno alumno) throws SQLException {
+        String query = "INSERT INTO Alumno (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña, id_grupo, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, alumno.getMatricula());
+            statement.setString(2, alumno.getNombre());
+            statement.setString(3, alumno.getApellidoPaterno());
+            statement.setString(4, alumno.getApellidoMaterno());
+            statement.setString(5, alumno.getCorreo());
+            statement.setString(6, alumno.getContraseña());
+            statement.setInt(7, alumno.getIdGrupo());
+            statement.setString(8, alumno.getEstado() != null ? alumno.getEstado() : "activo"); // Valor predeterminado
+            return statement.executeUpdate() > 0;
+        }
+    }
+
+    public boolean updateEstado(String matricula, String estado) {
+        String query = "UPDATE Alumno SET estado = ? WHERE Matricula = ?";
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, estado);
+            statement.setString(2, matricula);
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-        return flag;
+    }
+
+    public List<Alumno> getAll() throws SQLException {
+        String query = "SELECT * FROM Alumno";
+        List<Alumno> alumnos = new ArrayList<>();
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                Alumno alumno = new Alumno();
+                alumno.setMatricula(resultSet.getString("Matricula"));
+                alumno.setNombre(resultSet.getString("Nombre"));
+                alumno.setApellidoPaterno(resultSet.getString("Apellido_paterno"));
+                alumno.setApellidoMaterno(resultSet.getString("Apellido_materno"));
+                alumno.setCorreo(resultSet.getString("Correo"));
+                alumno.setContraseña(resultSet.getString("Contraseña"));
+                alumno.setIdGrupo(resultSet.getInt("id_grupo"));
+                alumno.setEstado(resultSet.getString("estado"));
+                alumnos.add(alumno);
+            }
+        }
+        return alumnos;
     }
 }

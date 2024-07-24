@@ -12,7 +12,7 @@ public class DocenteDao {
 
     public Docente getOne(String matricula, String contraseña) {
         Docente docente = null;
-        String query = "SELECT * FROM docente WHERE matricula = ? AND contraseña = SHA2(?, 256)";
+        String query = "SELECT * FROM Docente WHERE matricula = ? AND contraseña = SHA2(?, 256)";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -29,6 +29,7 @@ public class DocenteDao {
                     docente.setApellidoMaterno(rs.getString("apellido_materno"));
                     docente.setCorreo(rs.getString("correo"));
                     docente.setContraseña(rs.getString("contraseña"));
+                    docente.setEstado(rs.getString("estado")); // Leer el estado
                 }
             }
 
@@ -41,7 +42,7 @@ public class DocenteDao {
 
     public boolean insert(Docente docente) {
         boolean flag = false;
-        String query = "INSERT INTO Docente (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Docente (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, docente.getMatricula());
@@ -50,6 +51,7 @@ public class DocenteDao {
             ps.setString(4, docente.getApellidoMaterno());
             ps.setString(5, docente.getCorreo());
             ps.setString(6, docente.getContraseña());
+            ps.setString(7, docente.getEstado()); // Asegúrate de tener el estado en el modelo Docente
             if (ps.executeUpdate() == 1) {
                 flag = true;
             }
@@ -57,4 +59,7 @@ public class DocenteDao {
             e.printStackTrace();
         }
         return flag;
-    }}
+    }
+
+    // Otros métodos como update, delete...
+}

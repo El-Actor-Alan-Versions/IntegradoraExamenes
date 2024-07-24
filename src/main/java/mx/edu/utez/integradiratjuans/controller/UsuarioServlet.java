@@ -14,45 +14,51 @@ import mx.edu.utez.integradiratjuans.model.Alumno;
 import mx.edu.utez.integradiratjuans.model.Docente;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
-@WebServlet(name="UsuarioServlet", value="/login")
+@WebServlet(name = "UsuarioServlet", value = "/login")
 public class UsuarioServlet extends HttpServlet {
 
+    private final AdministradorDao adminDao = new AdministradorDao();
+    private final AlumnoDao alumnoDao = new AlumnoDao();
+    private final DocenteDao docenteDao = new DocenteDao();
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String nombreUsuario = req.getParameter("matricula");
-        String contra = req.getParameter("contra");
-
-        // Validar credenciales para cada tipo de usuario
-        AdministradorDao adminDao = new AdministradorDao();
-        Administrador admin = adminDao.getOne(nombreUsuario, contra);
-
-        AlumnoDao alumnoDao = new AlumnoDao();
-        Alumno alumno = alumnoDao.getOne(nombreUsuario, contra);
-
-        DocenteDao docenteDao = new DocenteDao();
-        Docente docente = docenteDao.getOne(nombreUsuario, contra);
+        String contrasena = req.getParameter("contra");
 
         String ruta = "index.jsp"; // Página por defecto
 
-        if (admin != null) {
-            // Si es administrador, redirigir a vista de administrador
+        try {
+            // Verificar credenciales para cada tipo de usuario
+            Administrador admin = adminDao.getOne(nombreUsuario, contrasena);
+            Alumno alumno = alumnoDao.getOne(nombreUsuario, contrasena);
+            Docente docente = docenteDao.getOne(nombreUsuario, contrasena);
+
             HttpSession session = req.getSession();
-            session.setAttribute("usuario", admin);
-            ruta = "Admin/indexAdmin.jsp";
-        } else if (alumno != null) {
-            // Si es alumno, redirigir a vista de alumno
-            HttpSession session = req.getSession();
-            session.setAttribute("usuario", alumno);
-            ruta = "Alumno/indexAlumno.jsp";
-        } else if (docente != null) {
-            // Si es docente, redirigir a vista de docente
-            HttpSession session = req.getSession();
-            session.setAttribute("usuario", docente);
-            ruta = "Docente/indexDocente.jsp";
-        } else {
-            // Si no coincide con ningún usuario, mostrar mensaje de error y redirigir a login
-            HttpSession session = req.getSession();
-            session.setAttribute("mensaje", "Credenciales incorrectas");
+
+            if (admin != null) {
+                // Si es administrador, redirigir a vista de administrador
+                session.setAttribute("usuario", admin);
+                ruta = "Admin/indexAdmin.jsp";
+            } else if (alumno != null) {
+                // Si es alumno, redirigir a vista de alumno
+                session.setAttribute("usuario", alumno);
+                ruta = "Alumno/indexAlumno.jsp";
+            } else if (docente != null) {
+                // Si es docente, redirigir a vista de docente
+                session.setAttribute("usuario", docente);
+                ruta = "Docente/indexDocente.jsp";
+            } else {
+                // Si no coincide con ningún usuario, mostrar mensaje de error y redirigir a login
+                session.setAttribute("mensaje", "Credenciales incorrectas");
+                ruta = "login.jsp"; // Redirigir a la página de login
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            req.getSession().setAttribute("mensaje", "Error en la base de datos");
+            ruta = "login.jsp";
         }
 
         resp.sendRedirect(ruta);
