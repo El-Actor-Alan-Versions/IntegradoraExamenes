@@ -3,24 +3,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
-    <title>Docente</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/docente.css">
+    <title>Registro de Usuario</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="profile-button">
-        <img src="../img/Logo-utez%20.png" id="logo" alt="Logo">
-    </div>
-    <div class="d-flex flex-grow-1 justify-content">
-        <p class="navbar-text">Registro Alumnos</p>
-    </div>
-    <img src="../img/miPerfil.png" alt="perfil">
-</nav>
 <div class="container mt-4">
-    <h1 class="mb-4">Registro de Alumno</h1>
-    <form action="registrarAlumno" method="post">
+    <h1 class="mb-4">Registro de Usuario</h1>
+    <form action="registrarDocente" method="post">
         <div class="form-group">
             <label for="matricula">Matrícula:</label>
             <input type="text" class="form-control" id="matricula" name="matricula" required />
@@ -51,18 +40,12 @@
             <input type="password" class="form-control" id="contraseña" name="contraseña" required />
         </div>
 
-        <div class="form-group">
-            <label for="idGrupo">ID Grupo:</label>
-            <input type="number" class="form-control" id="idGrupo" name="idGrupo" required />
-        </div>
 
         <button type="submit" class="btn btn-primary">Registrar</button>
     </form>
 </div>
-
-<!-- Incluir el JS de Bootstrap y dependencias -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

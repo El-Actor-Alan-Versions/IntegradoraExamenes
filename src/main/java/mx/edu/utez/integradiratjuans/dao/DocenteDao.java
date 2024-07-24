@@ -3,63 +3,82 @@ package mx.edu.utez.integradiratjuans.dao;
 import mx.edu.utez.integradiratjuans.model.Docente;
 import mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DocenteDao {
 
-    public Docente getOne(String matricula, String contraseña) {
-        Docente docente = null;
-        String query = "SELECT * FROM Docente WHERE matricula = ? AND contraseña = SHA2(?, 256)";
-
-        try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
-
-            ps.setString(1, matricula);
-            ps.setString(2, contraseña);
-
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    docente = new Docente();
-                    docente.setMatricula(rs.getString("matricula"));
-                    docente.setNombre(rs.getString("nombre"));
-                    docente.setApellidoPaterno(rs.getString("apellido_paterno"));
-                    docente.setApellidoMaterno(rs.getString("apellido_materno"));
-                    docente.setCorreo(rs.getString("correo"));
-                    docente.setContraseña(rs.getString("contraseña"));
-                    docente.setEstado(rs.getString("estado")); // Leer el estado
+    public Docente getOne(String matricula, String contrasena) throws SQLException {
+        String query = "SELECT * FROM Docente WHERE Matricula = ? AND Contraseña = ?";
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, matricula);
+            statement.setString(2, contrasena); // Cuidado: las contraseñas en texto plano no son seguras
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    Docente docente = new Docente();
+                    docente.setMatricula(resultSet.getString("Matricula"));
+                    docente.setNombre(resultSet.getString("Nombre"));
+                    docente.setApellidoPaterno(resultSet.getString("Apellido_paterno"));
+                    docente.setApellidoMaterno(resultSet.getString("Apellido_materno"));
+                    docente.setCorreo(resultSet.getString("Correo"));
+                    docente.setContraseña(resultSet.getString("Contraseña"));
+                    docente.setEstado(resultSet.getString("estado"));
+                    return docente;
                 }
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-
-        return docente;
+        return null;
     }
 
-    public boolean insert(Docente docente) {
-        boolean flag = false;
+    public boolean insert(Docente docente) throws SQLException {
         String query = "INSERT INTO Docente (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setString(1, docente.getMatricula());
-            ps.setString(2, docente.getNombre());
-            ps.setString(3, docente.getApellidoPaterno());
-            ps.setString(4, docente.getApellidoMaterno());
-            ps.setString(5, docente.getCorreo());
-            ps.setString(6, docente.getContraseña());
-            ps.setString(7, docente.getEstado()); // Asegúrate de tener el estado en el modelo Docente
-            if (ps.executeUpdate() == 1) {
-                flag = true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, docente.getMatricula());
+            statement.setString(2, docente.getNombre());
+            statement.setString(3, docente.getApellidoPaterno());
+            statement.setString(4, docente.getApellidoMaterno());
+            statement.setString(5, docente.getCorreo());
+            statement.setString(6, docente.getContraseña());
+            statement.setString(7, docente.getEstado() != null ? docente.getEstado() : "activo"); // Valor predeterminado
+            return statement.executeUpdate() > 0;
         }
-        return flag;
     }
 
-    // Otros métodos como update, delete...
+    public boolean updateEstado(String matricula, String estado) {
+        String query = "UPDATE Docente SET estado = ? WHERE Matricula = ?";
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, estado);
+            statement.setString(2, matricula);
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public List<Docente> getAll() throws SQLException {
+        String query = "SELECT * FROM Docente";
+        List<Docente> docentes = new ArrayList<>();
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                Docente docente = new Docente();
+                docente.setMatricula(resultSet.getString("Matricula"));
+                docente.setNombre(resultSet.getString("Nombre"));
+                docente.setApellidoPaterno(resultSet.getString("Apellido_paterno"));
+                docente.setApellidoMaterno(resultSet.getString("Apellido_materno"));
+                docente.setCorreo(resultSet.getString("Correo"));
+                docente.setContraseña(resultSet.getString("Contraseña"));
+                docente.setEstado(resultSet.getString("estado"));
+                docentes.add(docente);
+            }
+        }
+        return docentes;
+    }
 }

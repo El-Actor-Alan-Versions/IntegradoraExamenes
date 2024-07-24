@@ -3,127 +3,46 @@ package mx.edu.utez.integradiratjuans.dao;
 import mx.edu.utez.integradiratjuans.model.Grupo;
 import mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GrupoDao {
 
-    public Grupo getById(int id) {
-        Grupo grupo = null;
-        String query = "SELECT * FROM Grupo WHERE id_grupo = ?";
-
-        try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
-
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                grupo = new Grupo();
-                grupo.setId_grupo(rs.getInt("id_grupo"));
-                grupo.setGrado_grupo(rs.getString("grado_grupo"));
-                grupo.setId_carrera(rs.getInt("id_carrera"));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return grupo;
-    }
-
-    public List<Grupo> getAll() {
-        List<Grupo> grupos = new ArrayList<>();
+    public List<Grupo> getAll() throws SQLException {
         String query = "SELECT * FROM Grupo";
-
-        try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
-
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
+        List<Grupo> grupos = new ArrayList<>();
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
                 Grupo grupo = new Grupo();
-                grupo.setId_grupo(rs.getInt("id_grupo"));
-                grupo.setGrado_grupo(rs.getString("grado_grupo"));
-                grupo.setId_carrera(rs.getInt("id_carrera"));
+                grupo.setIdGrupo(resultSet.getInt("id_grupo"));
+                grupo.setGradoGrupo(resultSet.getString("Grado_grupo"));
+                grupo.setIdCarrera(resultSet.getInt("id_carrera"));
                 grupos.add(grupo);
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-
         return grupos;
     }
 
-    public boolean insert(Grupo grupo) {
-        boolean inserted = false;
-        String query = "INSERT INTO Grupo (grado_grupo, id_carrera) VALUES (?, ?)";
-
-        try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
-
-            ps.setString(1, grupo.getGrado_grupo());
-            ps.setInt(2, grupo.getId_carrera());
-            int rowsAffected = ps.executeUpdate();
-
-            if (rowsAffected > 0) {
-                inserted = true;
+    public List<Grupo> getGruposByGrado(int gradoId) throws SQLException {
+        String query = "SELECT * FROM Grupo WHERE id_grado = ?";
+        List<Grupo> grupos = new ArrayList<>();
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, gradoId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Grupo grupo = new Grupo();
+                    grupo.setIdGrupo(resultSet.getInt("id_grupo"));
+                    grupo.setGradoGrupo(resultSet.getString("Grado_grupo"));
+                    grupo.setIdCarrera(resultSet.getInt("id_carrera"));
+                    grupos.add(grupo);
+                }
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-
-        return inserted;
+        return grupos;
     }
 
-    public boolean update(Grupo grupo) {
-        boolean updated = false;
-        String query = "UPDATE Grupo SET grado_grupo = ?, id_carrera = ? WHERE id_grupo = ?";
-
-        try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
-
-            ps.setString(1, grupo.getGrado_grupo());
-            ps.setInt(2, grupo.getId_carrera());
-            ps.setInt(3, grupo.getId_grupo());
-            int rowsAffected = ps.executeUpdate();
-
-            if (rowsAffected > 0) {
-                updated = true;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return updated;
-    }
-
-    public boolean delete(int id) {
-        boolean deleted = false;
-        String query = "DELETE FROM Grupo WHERE id_grupo = ?";
-
-        try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
-
-            ps.setInt(1, id);
-            int rowsAffected = ps.executeUpdate();
-
-            if (rowsAffected > 0) {
-                deleted = true;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return deleted;
-    }
 }
-
