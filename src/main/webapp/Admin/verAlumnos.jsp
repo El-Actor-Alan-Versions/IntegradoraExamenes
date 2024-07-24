@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Usuarios Registrados</title>
+    <title>Alumnos Registrados</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/datatables.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/usuarios.css">
@@ -23,16 +23,15 @@
 
 <div class="container mt-4">
     <h2>Alumnos Registrados</h2>
-    <button type="button" class="btn btn-info" onclick="location.href='registarAlumno.jsp'">Nuevo alumno</button>
+    <button type="button" class="btn btn-info" onclick="location.href='registrarAlumno.jsp'">Nuevo alumno</button>
     <table id="example" class="table table-striped table-hover" style="width: 100%">
         <thead>
         <tr>
-            <th>Matricula</th>
+            <th>Matrícula</th>
             <th>Nombre</th>
             <th>Apellido Paterno</th>
             <th>Apellido Materno</th>
             <th>Correo</th>
-            <th>Id Grupo</th>
             <th>Estado</th>
             <th>Actualizar</th>
             <th>Eliminar</th>
@@ -40,29 +39,35 @@
         </thead>
         <tbody>
         <%
-            AlumnoDao dao = new AlumnoDao();
-            List<Alumno> lista = dao.getAll();
-            for (Alumno u : lista) {
+            try {
+                AlumnoDao dao = new AlumnoDao();
+                List<Alumno> lista = dao.getAll();
+                for (Alumno a : lista) {
         %>
         <tr>
-            <td><%= u.getMatricula() %></td>
-            <td><%= u.getNombre() %></td>
-            <td><%= u.getApellidoPaterno() %></td>
-            <td><%= u.getApellidoMaterno() %></td>
-            <td><%= u.getCorreo() %></td>
-            <td><%= u.getIdGrupo() %></td>
-            <td><%= u.getEstado() %></td>
+            <td><%= a.getMatricula() %></td>
+            <td><%= a.getNombre() %></td>
+            <td><%= a.getApellidoPaterno() %></td>
+            <td><%= a.getApellidoMaterno() %></td>
+            <td><%= a.getCorreo() %></td>
+            <td><%= a.getEstado() %></td>
             <td>
-                <a href="actualizarAlumno.jsp?matricula=<%= u.getMatricula() %>">Actualizar</a>
+                <a href="actualizarAlumno.jsp?matricula=<%= a.getMatricula() %>">Actualizar</a>
             </td>
             <td>
                 <form method="post" action="eliminarAlumnoServlet">
-                    <input type="hidden" name="matricula" value="<%= u.getMatricula() %>">
+                    <input type="hidden" name="matricula" value="<%= a.getMatricula() %>">
                     <button type="submit" class="btn btn-danger" onclick="return confirmarEliminacion()">Eliminar</button>
                 </form>
             </td>
         </tr>
-        <% } %>
+        <%
+                }
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+                e.printStackTrace();
+            }
+        %>
         </tbody>
     </table>
 </div>
@@ -84,7 +89,7 @@
     });
 
     function confirmarEliminacion() {
-        return confirm('¿Estás seguro de que deseas eliminar este usuario?');
+        return confirm('¿Estás seguro de que deseas dar de baja a este alumno?');
     }
 </script>
 </body>

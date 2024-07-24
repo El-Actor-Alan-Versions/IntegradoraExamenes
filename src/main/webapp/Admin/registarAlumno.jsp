@@ -51,11 +51,13 @@
         </div>
 
         <div class="form-group">
-            <label for="idGrupo">ID Grupo:</label>
-            <input type="number" class="form-control" id="idGrupo" name="idGrupo" required />
+            <label for="grupo">Grupo:</label>
+            <select id="gruposSelect" class="form-control" name="idGrupo">
+                <option value="">Seleccione...</option>
+            </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Registrar</button>
+        <button type="submit" class="mt-4 btn btn-primary">Registrar</button>
     </form>
 </div>
 
@@ -63,5 +65,22 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('${pageContext.request.contextPath}/GetGruposServlet')
+            .then(response => response.json())
+            .then(data => {
+                const selectElement = document.getElementById('gruposSelect');
+                data.forEach(grupo => {
+                    const option = document.createElement('option');
+                    option.value = grupo.idGrupo;
+                    option.text = grupo.gradoGrupo;
+                    selectElement.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script>
 </body>
 </html>
