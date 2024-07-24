@@ -9,18 +9,17 @@
     <title>Usuarios Registrados</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/datatables.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/docente.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/usuarios.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="profile-button">
-        <img src="${pageContext.request.contextPath}/img/Logo-utez%20.png" id="logo" alt="Logo">
-    </div>
-    <div class="d-flex flex-grow-1 justify-content">
-        <p class="navbar-text">PLATAFORMA DE EXÁMENES</p>
-    </div>
-    <img src="${pageContext.request.contextPath}/img/miPerfil.png" alt="perfil">
-</nav>
+<div id="navbar"></div>
+<script>
+    fetch('navbar.jsp')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar').innerHTML = data;
+        });
+</script>
 
 <div class="container mt-4">
     <h2>Docentes Registrados</h2>

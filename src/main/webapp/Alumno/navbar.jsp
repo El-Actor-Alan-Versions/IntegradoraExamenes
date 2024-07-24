@@ -35,13 +35,7 @@
             color: black;
         }
 
-        .unu {
-            color: black;
-            text-decoration: none;
-            font-family:'PT Sans';
-            font-weight: bold;
-            margin: 0%;
-        }
+
 
         .button {
             position: relative;
@@ -59,6 +53,11 @@
             margin: 0;
             padding: 5px;
             border-radius: 0; /* Sin borde redondeado */
+            color: black;
+            text-decoration: none;
+            font-family:'PT Sans';
+            font-weight: bold;
+            margin: 0%;
         }
 
 

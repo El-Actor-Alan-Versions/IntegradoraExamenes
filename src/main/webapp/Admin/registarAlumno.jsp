@@ -6,18 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
     <title>Docente</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/docente.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/usuarios.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="profile-button">
-        <img src="../img/Logo-utez%20.png" id="logo" alt="Logo">
-    </div>
-    <div class="d-flex flex-grow-1 justify-content">
-        <p class="navbar-text">Registro Alumnos</p>
-    </div>
-    <img src="../img/miPerfil.png" alt="perfil">
-</nav>
+<div id="navbar"></div>
+<script>
+    fetch('navbar.jsp')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar').innerHTML = data;
+        });
+</script>
 <div class="container mt-4">
     <h1 class="mb-4">Registro de Alumno</h1>
     <form action="registrarAlumno" method="post">

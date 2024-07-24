@@ -7,6 +7,14 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div id="navbar"></div>
+<script>
+    fetch('navbar.jsp')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar').innerHTML = data;
+        });
+</script>
 <div class="container mt-4">
     <h1 class="mb-4">Registro de Usuario</h1>
     <form action="registrarDocente" method="post">

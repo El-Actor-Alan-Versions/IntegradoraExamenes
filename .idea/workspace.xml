@@ -11,14 +11,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/DocenteDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/DocenteDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/GrupoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/GrupoDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Docente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Docente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Grupo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Grupo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/indexAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/indexAdmin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/navbar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/navbar.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/registarAlumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/registarAlumno.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/registrarDocente.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/registrarDocente.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verAlumnos.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verAlumnos.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verDocente.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verDocente.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/indexDocente.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/indexDocente.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/docente.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/usuarios.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/img/miPerfil.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +37,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "akuMartinez"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/El-Actor-Alan-Versions/IntegradoraExamenes.git&quot;,
+    &quot;accountId&quot;: &quot;c487161d-63a9-4e39-ad61-93aa90226820&quot;
+  }
+}</component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -72,7 +85,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/walge/IdeaProjects/IntegradoraExamenes/src/main/webapp/img",
+    "last_opened_file_path": "C:/Users/coke_/IdeaProjects/IntegradoraExamenes/src/main/webapp/img",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -83,13 +96,14 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\coke_\IdeaProjects\IntegradoraExamenes\src\main\webapp\img" />
+      <recent name="C:\Users\coke_\IdeaProjects\IntegradoraExamenes\src\main\webapp\Alumno" />
+      <recent name="C:\Users\coke_\IdeaProjects\IntegradoraExamenes\src\main\webapp\Docente" />
       <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\img" />
       <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\css" />
-      <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp" />
-      <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\WEB-INF" />
-      <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\java\mx\edu\utez\integradiratjuans" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\coke_\IdeaProjects\IntegradoraExamenes\src\main\webapp\img" />
       <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\Admin" />
       <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\Docente" />
       <recent name="C:\Users\walge\Downloads\integradoraDemoE\ubuntu\IntegradoraExamenes\src\main\webapp" />
@@ -232,8 +246,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
       </set>
     </attachedChunks>
   </component>
@@ -271,6 +285,7 @@
       <workItem from="1721326858560" duration="788000" />
       <workItem from="1721683538558" duration="12422000" />
       <workItem from="1721774654392" duration="17045000" />
+      <workItem from="1721843204382" duration="5058000" />
     </task>
     <servers />
   </component>
