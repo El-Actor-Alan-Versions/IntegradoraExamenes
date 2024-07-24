@@ -53,19 +53,16 @@ public class DocenteDao {
         }
     }
 
-    public boolean updateEstado(String matricula, String estado) {
-        String query = "UPDATE Docente SET estado = ? WHERE Matricula = ?";
-        try (Connection connection = DatabaseConnectionManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, estado);
-            statement.setString(2, matricula);
-            int rowsAffected = statement.executeUpdate();
-            return rowsAffected > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+    public void updateEstado(String idDocente, String nuevoEstado) throws SQLException {
+        String sql = "UPDATE Docente SET estado = ? WHERE id_docente = ?";
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, nuevoEstado);
+            stmt.setString(2, idDocente);
+            stmt.executeUpdate();
         }
     }
+
 
     public List<Docente> getAll() throws SQLException {
         String query = "SELECT * FROM Docente";

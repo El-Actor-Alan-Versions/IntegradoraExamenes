@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import mx.edu.utez.integradiratjuans.dao.AlumnoDao;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "UpdateUsuarioEstadoServlet", urlPatterns = {"/Admin/updateUsuarioEstado"})
 public class UpdateUsuarioEstadoServlet extends HttpServlet {
@@ -22,7 +23,12 @@ public class UpdateUsuarioEstadoServlet extends HttpServlet {
         String estado = request.getParameter("estado");
 
         // Intentar actualizar el estado del usuario
-        boolean updateSuccess = alumnoDao.updateEstado(matricula, estado);
+        boolean updateSuccess = false;
+        try {
+            alumnoDao.updateEstado(matricula, estado);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         if (updateSuccess) {
             request.getSession().setAttribute("mensaje", "Usuario actualizado exitosamente.");
