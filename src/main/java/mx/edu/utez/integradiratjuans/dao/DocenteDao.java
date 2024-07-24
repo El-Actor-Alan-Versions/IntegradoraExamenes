@@ -10,11 +10,12 @@ import java.util.List;
 public class DocenteDao {
 
     public Docente getOne(String matricula, String contrasena) throws SQLException {
-        String query = "SELECT * FROM Docente WHERE Matricula = ? AND Contraseña = ?";
+        String query = "SELECT * FROM Docente WHERE Matricula = ? AND Contraseña = SHA2(?, 256)";
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, matricula);
-            statement.setString(2, contrasena); // Cuidado: las contraseñas en texto plano no son seguras
+            statement.setString(2, contrasena); // La contraseña será cifrada usando SHA2 en la consulta
+
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     Docente docente = new Docente();
@@ -24,13 +25,18 @@ public class DocenteDao {
                     docente.setApellidoMaterno(resultSet.getString("Apellido_materno"));
                     docente.setCorreo(resultSet.getString("Correo"));
                     docente.setContraseña(resultSet.getString("Contraseña"));
+                    // Asegúrate de tener un método setEstado en la clase Docente si no existe
                     docente.setEstado(resultSet.getString("estado"));
                     return docente;
                 }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
         }
         return null;
     }
+
 
     public boolean insert(Docente docente) throws SQLException {
         String query = "INSERT INTO Docente (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
