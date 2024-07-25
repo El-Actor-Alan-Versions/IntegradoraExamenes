@@ -26,24 +26,34 @@ public class GrupoDao {
         return grupos;
     }
 
-    public List<Grupo> getGruposByGrado(int gradoId) throws SQLException {
-        String query = "SELECT * FROM Grupo WHERE id_grado = ?";
-        List<Grupo> grupos = new ArrayList<>();
+    public void insert(Grupo grupo) throws SQLException {
+        String query = "INSERT INTO Grupo (Grado_grupo, id_carrera) VALUES (?, ?)";
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, gradoId);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    Grupo grupo = new Grupo();
-                    grupo.setIdGrupo(resultSet.getInt("id_grupo"));
-                    grupo.setGradoGrupo(resultSet.getString("Grado_grupo"));
-                    grupo.setIdCarrera(resultSet.getInt("id_carrera"));
-                    grupos.add(grupo);
+            statement.setString(1, grupo.getGradoGrupo());
+            statement.setInt(2, grupo.getIdCarrera());
+            statement.executeUpdate();
+        }
+    }
+
+    public Grupo getById(int idGrupo) throws SQLException {
+        String query = "SELECT * FROM Grupo WHERE id_grupo = ?";
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, idGrupo);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return new Grupo(
+                            rs.getInt("id_grupo"),
+                            rs.getString("grado_grupo"),
+                            rs.getInt("id_carrera")
+                    );
                 }
             }
         }
-        return grupos;
+        return null;
     }
+
 
     public void delete(int idGrupo) throws SQLException {
         String query = "DELETE FROM Grupo WHERE id_grupo = ?";

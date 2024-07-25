@@ -1,32 +1,32 @@
 package mx.edu.utez.integradiratjuans.model;
 
 public class Materia {
-    private int id_materia;
-    private String nombre_materia;
+    private int idMateria;
+    private String nombreMateria;
 
-    public Materia() {
+    // Constructor vacío
+    public Materia() {}
+
+    // Constructor con parámetros
+    public Materia(int idMateria, String nombreMateria) {
+        this.idMateria = idMateria;
+        this.nombreMateria = nombreMateria;
     }
 
-    public Materia(int id_materia, String nombre_materia) {
-        this.id_materia = id_materia;
-        this.nombre_materia = nombre_materia;
+    // Getters y Setters
+    public int getIdMateria() {
+        return idMateria;
     }
 
-    public int getId_materia() {
-        return id_materia;
+    public void setIdMateria(int idMateria) {
+        this.idMateria = idMateria;
     }
 
-    public void setId_materia(int id_materia) {
-        this.id_materia = id_materia;
+    public String getNombreMateria() {
+        return nombreMateria;
     }
 
-    public String getNombre_materia() {
-        return nombre_materia;
-    }
-
-    public void setNombre_materia(String nombre_materia) {
-        this.nombre_materia = nombre_materia;
+    public void setNombreMateria(String nombreMateria) {
+        this.nombreMateria = nombreMateria;
     }
 }
-
-

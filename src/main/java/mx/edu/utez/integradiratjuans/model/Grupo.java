@@ -5,6 +5,15 @@ public class Grupo {
     private String gradoGrupo;
     private int idCarrera;
 
+    public Grupo() {
+
+    }
+    public Grupo(int idGrupo, String gradoGrupo, int idCarrera) {
+        this.idGrupo = idGrupo;
+        this.gradoGrupo = gradoGrupo;
+        this.idCarrera = idCarrera;
+    }
+
     // Getters y setters
     public int getIdGrupo() {
         return idGrupo;

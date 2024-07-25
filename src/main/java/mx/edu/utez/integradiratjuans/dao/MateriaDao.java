@@ -12,41 +12,40 @@ import java.util.List;
 
 public class MateriaDao {
 
-    public Materia getById(int id) {
-        Materia materia = null;
-        String query = "SELECT * FROM Materia WHERE id_materia = ?";
+    // Obtener una materia por ID
 
-        try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
 
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                materia = new Materia();
-                materia.setId_materia(rs.getInt("id_materia"));
-                materia.setNombre_materia(rs.getString("nombre_materia"));
+        public Materia getById(int idMateria) throws SQLException {
+            String query = "SELECT * FROM Materia WHERE id_materia = ?";
+            try (Connection conn = DatabaseConnectionManager.getConnection();
+                 PreparedStatement pstmt = conn.prepareStatement(query)) {
+                pstmt.setInt(1, idMateria);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        return new Materia(
+                                rs.getInt("id_materia"),
+                                rs.getString("Nombre_materia")
+                        );
+                    }
+                }
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return null;
         }
 
-        return materia;
-    }
-
+    // Obtener todas las materias
     public List<Materia> getAll() {
         List<Materia> materias = new ArrayList<>();
         String query = "SELECT * FROM Materia";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 Materia materia = new Materia();
-                materia.setId_materia(rs.getInt("id_materia"));
-                materia.setNombre_materia(rs.getString("nombre_materia"));
+                materia.setIdMateria(rs.getInt("id_materia"));
+                materia.setNombreMateria(rs.getString("Nombre_materia"));
                 materias.add(materia);
             }
 
@@ -57,15 +56,15 @@ public class MateriaDao {
         return materias;
     }
 
-
+    // Insertar una nueva materia
     public boolean insert(Materia materia) {
         boolean inserted = false;
-        String query = "INSERT INTO Materia (nombre_materia) VALUES (?)";
+        String query = "INSERT INTO Materia (Nombre_materia) VALUES (?)";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
 
-            ps.setString(1, materia.getNombre_materia());
+            ps.setString(1, materia.getNombreMateria());
             int rowsAffected = ps.executeUpdate();
 
             if (rowsAffected > 0) {
@@ -79,15 +78,16 @@ public class MateriaDao {
         return inserted;
     }
 
+    // Actualizar una materia existente
     public boolean update(Materia materia) {
         boolean updated = false;
-        String query = "UPDATE Materia SET nombre_materia = ? WHERE id_materia = ?";
+        String query = "UPDATE Materia SET Nombre_materia = ? WHERE id_materia = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
 
-            ps.setString(1, materia.getNombre_materia());
-            ps.setInt(2, materia.getId_materia());
+            ps.setString(1, materia.getNombreMateria());
+            ps.setInt(2, materia.getIdMateria());
             int rowsAffected = ps.executeUpdate();
 
             if (rowsAffected > 0) {
@@ -101,6 +101,7 @@ public class MateriaDao {
         return updated;
     }
 
+    // Eliminar una materia por ID
     public boolean delete(int id) {
         boolean deleted = false;
         String query = "DELETE FROM Materia WHERE id_materia = ?";
@@ -122,4 +123,3 @@ public class MateriaDao {
         return deleted;
     }
 }
-

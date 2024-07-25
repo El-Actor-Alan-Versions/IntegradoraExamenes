@@ -38,6 +38,34 @@ public class DocenteDao {
     }
 
 
+    public Docente getById(String matricula) {
+        Docente docente = null;
+        String query = "SELECT * FROM Docente WHERE matricula = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, matricula);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                docente = new Docente();
+                docente.setMatricula(rs.getString("matricula"));
+                docente.setNombre(rs.getString("nombre"));
+                docente.setApellidoPaterno(rs.getString("apellido_paterno"));
+                docente.setApellidoMaterno(rs.getString("apellido_materno"));
+                docente.setCorreo(rs.getString("correo"));
+                docente.setContraseña(rs.getString("contraseña"));
+                docente.setEstado(rs.getString("estado"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return docente;
+    }
+
     public boolean insert(Docente docente) throws SQLException {
         String query = "INSERT INTO Docente (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = DatabaseConnectionManager.getConnection();
