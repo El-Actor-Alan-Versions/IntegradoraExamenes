@@ -1,31 +1,30 @@
 package mx.edu.utez.integradiratjuans.model;
 
-
 public class Division {
-    private int id_division;
-    private String nombre_division;
+    private int idDivision;
+    private String nombreDivision;
 
     public Division() {
     }
 
-    public Division(int id_division, String nombre_division) {
-        this.id_division = id_division;
-        this.nombre_division = nombre_division;
+    public Division(int idDivision, String nombreDivision) {
+        this.idDivision = idDivision;
+        this.nombreDivision = nombreDivision;
     }
 
-    public int getId_division() {
-        return id_division;
+    public int getIdDivision() {
+        return idDivision;
     }
 
-    public void setId_division(int id_division) {
-        this.id_division = id_division;
+    public void setIdDivision(int idDivision) {
+        this.idDivision = idDivision;
     }
 
-    public String getNombre_division() {
-        return nombre_division;
+    public String getNombreDivision() {
+        return nombreDivision;
     }
 
-    public void setNombre_division(String nombre_division) {
-        this.nombre_division = nombre_division;
+    public void setNombreDivision(String nombreDivision) {
+        this.nombreDivision = nombreDivision;
     }
 }

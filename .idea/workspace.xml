@@ -12,12 +12,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/DocenteDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/DocenteDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/GrupoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/GrupoDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/MateriaDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/MateriaDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Clase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Clase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Grupo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Grupo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Materia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Materia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/DivisionDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/DivisionDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Division.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Division.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/indexAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/indexAdmin.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -270,6 +267,7 @@
       <workItem from="1721326858560" duration="788000" />
       <workItem from="1721683538558" duration="12422000" />
       <workItem from="1721774654392" duration="17045000" />
+      <workItem from="1721871319961" duration="963000" />
     </task>
     <servers />
   </component>

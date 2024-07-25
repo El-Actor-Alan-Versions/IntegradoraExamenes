@@ -139,7 +139,7 @@
                 <div class="card">
                     <div class="card-body">
                         <img src="../img/mirarCalificaciones.png" class="text-center" width="68">
-                        <h5 class="card-title">Gestionar Profesores</h5>
+                        <h5 class="card-title">Gestionar Grupos</h5>
                         <p class="card-text">Edita el personal, puedes actualizar su estado.</p>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
         </div>
         <!-- Tarjeta Gestionar Clases -->
         <div class="col-md-3 col-sm-6 text-center mb-4">
-            <a href="" class="button">
+            <a href="verClases.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
                         <img src="../img/mirarCalificaciones.png" class="text-center" width="68">
@@ -159,7 +159,7 @@
         </div>
         <!-- Tarjeta Gestionar Carreras -->
         <div class="col-md-3 col-sm-6 text-center mb-4">
-            <a href="" class="button">
+            <a href="verCarrearas.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
                         <img src="../img/mirarCalificaciones.png" class="text-center" width="68">
