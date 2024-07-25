@@ -171,7 +171,7 @@
         </div>
         <!-- Tarjeta Gestionar Divisiones -->
         <div class="col-md-3 col-sm-6 text-center mb-4">
-            <a href="" class="button">
+            <a href="verDivisiones.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
                         <img src="../img/mirarCalificaciones.png" class="text-center" width="68">
@@ -183,7 +183,7 @@
         </div>
         <!-- Tarjeta Gestionar Materias -->
         <div class="col-md-3 col-sm-6 text-center mb-4">
-            <a href="" class="button">
+            <a href="verMaterias.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
                         <img src="../img/mirarCalificaciones.png" class="text-center" width="68">
