@@ -10,6 +10,8 @@ public class Alumno {
     private String contraseña;
     private int idGrupo;
     private String estado = "activo"; // Valor predeterminado
+    private String nombreGrupo; // Nuevo campo
+
 
     // Constructor, getters y setters
     public Alumno() {
@@ -39,4 +41,11 @@ public class Alumno {
 
     public String getEstado() { return estado; }
     public void setEstado(String estado) { this.estado = estado; }
+    public String getNombreGrupo() {
+        return nombreGrupo;
+    }
+
+    public void setNombreGrupo(String nombreGrupo) {
+        this.nombreGrupo = nombreGrupo;
+    }
 }

@@ -30,7 +30,7 @@
         <tr>
             <th>ID Grupo</th>
             <th>Grado Grupo</th>
-            <th>ID Carrera</th>
+            <th>Carrera</th> <!-- Cambiado para mostrar el nombre de la carrera -->
             <th>Actualizar</th>
             <th>Eliminar</th>
         </tr>
@@ -45,7 +45,7 @@
         <tr>
             <td><%= g.getIdGrupo() %></td>
             <td><%= g.getGradoGrupo() %></td>
-            <td><%= g.getIdCarrera() %></td>
+            <td><%= g.getNombreCarrera() %></td> <!-- Mostrar el nombre de la carrera -->
             <td>
                 <a href="actualizarGrupo.jsp?idGrupo=<%= g.getIdGrupo() %>">Actualizar</a>
             </td>

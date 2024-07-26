@@ -4,6 +4,8 @@ public class Grupo {
     private int idGrupo;
     private String gradoGrupo;
     private int idCarrera;
+    private String nombreCarrera; // Nuevo campo
+
 
     public Grupo() {
 
@@ -37,5 +39,12 @@ public class Grupo {
 
     public void setIdCarrera(int idCarrera) {
         this.idCarrera = idCarrera;
+    }
+    public String getNombreCarrera() {
+        return nombreCarrera;
+    }
+
+    public void setNombreCarrera(String nombreCarrera) {
+        this.nombreCarrera = nombreCarrera;
     }
 }

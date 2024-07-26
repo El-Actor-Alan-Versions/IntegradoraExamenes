@@ -23,7 +23,7 @@
 
 <div class="container mt-4">
     <h2>Alumnos Registrados</h2>
-    <button type="button" class="btn btn-info" onclick="location.href='registrarAlumno.jsp'">Nuevo alumno</button>
+    <button type="button" class="btn btn-info" onclick="location.href='registarAlumno.jsp'">Nuevo alumno</button>
     <table id="example" class="table table-striped table-hover" style="width: 100%">
         <thead>
         <tr>
@@ -33,6 +33,7 @@
             <th>Apellido Materno</th>
             <th>Correo</th>
             <th>Estado</th>
+            <th>Grupo</th> <!-- Nueva columna para Grupo -->
             <th>Actualizar</th>
             <th>Eliminar</th>
         </tr>
@@ -51,6 +52,7 @@
             <td><%= a.getApellidoMaterno() %></td>
             <td><%= a.getCorreo() %></td>
             <td><%= a.getEstado() %></td>
+            <td><%= a.getNombreGrupo() %></td> <!-- Mostrar el nombre del grupo -->
             <td>
                 <a href="actualizarAlumno.jsp?matricula=<%= a.getMatricula() %>">Actualizar</a>
             </td>

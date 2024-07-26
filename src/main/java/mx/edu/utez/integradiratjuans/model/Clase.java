@@ -5,6 +5,10 @@ public class Clase {
     private int id_grupo;
     private int id_materia;
     private String matricula;
+    private Grupo grupo;
+    private String nombre; // Asegúrate de que este campo exista
+    private String gradoGrupo; // Añadir este campo
+
 
     public Clase() {
 
@@ -48,5 +52,27 @@ public class Clase {
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
+    }
+    public Grupo getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
+    }
+    public String getGradoGrupo() {
+        return gradoGrupo;
+    }
+
+    public void setGradoGrupo(String gradoGrupo) {
+        this.gradoGrupo = gradoGrupo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

@@ -20,12 +20,18 @@
             <th>Nombre</th>
             <th>Fecha de Aplicación</th>
             <th>Fecha de Cierre</th>
-            <th>Clase</th>
+            <th>ID de Clase</th>
         </tr>
         </thead>
         <tbody>
         <%
             List<Examen> examenes = (List<Examen>) request.getAttribute("examenes");
+            if (examenes == null) {
+                System.out.println("<p>No se han recibido exámenes.</p>");
+            } else {
+                System.out.println("<p>Número de exámenes recibidos: " + examenes.size() + "</p>");
+            }
+
             if (examenes != null && !examenes.isEmpty()) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 for (Examen examen : examenes) {

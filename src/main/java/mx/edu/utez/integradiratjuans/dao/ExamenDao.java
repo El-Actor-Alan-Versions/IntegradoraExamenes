@@ -23,17 +23,17 @@ public class ExamenDao {
             return rowsAffected > 0;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Imprime la traza del error
             return false;
         }
     }
 
 
 
+
     public List<Examen> getAll() {
         List<Examen> examenes = new ArrayList<>();
         String query = "SELECT * FROM Examen";
-
         try (Connection con = DatabaseConnectionManager.getConnection();
              Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
@@ -50,8 +50,8 @@ public class ExamenDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return examenes;
     }
+
 
 }

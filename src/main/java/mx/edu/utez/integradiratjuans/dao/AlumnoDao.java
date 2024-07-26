@@ -61,25 +61,33 @@ public class AlumnoDao {
     }
 
 
-    public List<Alumno> getAll() throws SQLException {
-        String query = "SELECT * FROM Alumno";
+    public List<Alumno> getAll() {
         List<Alumno> alumnos = new ArrayList<>();
-        try (Connection connection = DatabaseConnectionManager.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(query)) {
-            while (resultSet.next()) {
+        String query = "SELECT a.*, g.Grado_grupo " +
+                "FROM Alumno a " +
+                "JOIN Grupo g ON a.id_grupo = g.id_grupo";
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
                 Alumno alumno = new Alumno();
-                alumno.setMatricula(resultSet.getString("Matricula"));
-                alumno.setNombre(resultSet.getString("Nombre"));
-                alumno.setApellidoPaterno(resultSet.getString("Apellido_paterno"));
-                alumno.setApellidoMaterno(resultSet.getString("Apellido_materno"));
-                alumno.setCorreo(resultSet.getString("Correo"));
-                alumno.setContraseña(resultSet.getString("Contraseña"));
-                alumno.setIdGrupo(resultSet.getInt("id_grupo"));
-                alumno.setEstado(resultSet.getString("estado"));
+                alumno.setMatricula(rs.getString("Matricula"));
+                alumno.setNombre(rs.getString("Nombre"));
+                alumno.setApellidoPaterno(rs.getString("Apellido_paterno"));
+                alumno.setApellidoMaterno(rs.getString("Apellido_materno"));
+                alumno.setCorreo(rs.getString("Correo"));
+                alumno.setEstado(rs.getString("Estado"));
+                alumno.setNombreGrupo(rs.getString("Grado_grupo")); // Asegúrate de tener este setter en tu modelo Alumno
                 alumnos.add(alumno);
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
         return alumnos;
     }
 }

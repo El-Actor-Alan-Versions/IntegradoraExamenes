@@ -9,22 +9,52 @@ import java.util.List;
 
 public class GrupoDao {
 
-    public List<Grupo> getAll() throws SQLException {
-        String query = "SELECT * FROM Grupo";
-        List<Grupo> grupos = new ArrayList<>();
-        try (Connection connection = DatabaseConnectionManager.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(query)) {
-            while (resultSet.next()) {
-                Grupo grupo = new Grupo();
-                grupo.setIdGrupo(resultSet.getInt("id_grupo"));
-                grupo.setGradoGrupo(resultSet.getString("Grado_grupo"));
-                grupo.setIdCarrera(resultSet.getInt("id_carrera"));
-                grupos.add(grupo);
+        public List<Grupo> getAll() {
+            List<Grupo> grupos = new ArrayList<>();
+            String query = "SELECT g.*, c.Nombre_carrera " +
+                    "FROM Grupo g " +
+                    "JOIN Carrera c ON g.id_carrera = c.id_carrera";
+
+            try (Connection con = DatabaseConnectionManager.getConnection();
+                 PreparedStatement ps = con.prepareStatement(query)) {
+
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    Grupo grupo = new Grupo();
+                    grupo.setIdGrupo(rs.getInt("id_grupo"));
+                    grupo.setGradoGrupo(rs.getString("Grado_grupo"));
+                    grupo.setIdCarrera(rs.getInt("id_carrera"));
+                    grupo.setNombreCarrera(rs.getString("Nombre_carrera")); // Asignar el nombre de la carrera
+                    grupos.add(grupo);
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+
+            return grupos;
         }
-        return grupos;
-    }
+
+        // Método para obtener el id_clase a partir del id_grupo
+        public int getIdClaseByGrupoId(int idGrupo) {
+            String query = "SELECT id_clase FROM Clase WHERE id_grupo = ?";
+            try (Connection con = DatabaseConnectionManager.getConnection();
+                 PreparedStatement pstmt = con.prepareStatement(query)) {
+
+                pstmt.setInt(1, idGrupo);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getInt("id_clase");
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return -1; // Retorna un valor que indique que no se encontró
+        }
+
+
 
     public void insert(Grupo grupo) throws SQLException {
         String query = "INSERT INTO Grupo (Grado_grupo, id_carrera) VALUES (?, ?)";
