@@ -11,6 +11,10 @@ public class Pregunta {
         this.id_examen = id_examen;
     }
 
+    public Pregunta() {
+
+    }
+
     public int getId_pregunta() {
         return id_pregunta;
     }

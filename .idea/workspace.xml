@@ -12,6 +12,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Opciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Opciones.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Pregunta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Pregunta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Respuesta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Respuesta.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +25,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Jsp File" />
+        <option value="CSS File" />
         <option value="Class" />
       </list>
     </option>
@@ -29,6 +33,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;akuMartinez&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/El-Actor-Alan-Versions/IntegradoraExamenes.git&quot;,
+    &quot;accountId&quot;: &quot;c487161d-63a9-4e39-ad61-93aa90226820&quot;
+  }
+}</component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -65,7 +81,8 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/walge/IdeaProjects/IntegradoraExamenes/src/main/webapp/img&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/coke_/IdeaProjects/IntegradoraExamenes&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -119,14 +136,14 @@
       <option name="BROWSER_ID" value="37cae5b9-e8b2-4949-9172-aafa37fbc09c" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="practica3e:war">
-          <settings>
-            <option name="CONTEXT_PATH" value="/practica3e_war" />
-          </settings>
-        </artifact>
         <artifact name="practica3e:war exploded">
           <settings>
             <option name="CONTEXT_PATH" value="/practica3e_war_exploded" />
+          </settings>
+        </artifact>
+        <artifact name="practica3e:war">
+          <settings>
+            <option name="CONTEXT_PATH" value="/practica3e_war" />
           </settings>
         </artifact>
       </deployment>
@@ -205,8 +222,8 @@
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
           <artifact name="Integradira-Tjuans:war" />
-          <artifact name="practica3e:war" />
           <artifact name="practica3e:war exploded" />
+          <artifact name="practica3e:war" />
         </option>
       </method>
     </configuration>
@@ -225,8 +242,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
       </set>
     </attachedChunks>
   </component>
@@ -264,18 +281,31 @@
       <workItem from="1721326858560" duration="788000" />
       <workItem from="1721683538558" duration="12422000" />
       <workItem from="1721774654392" duration="17045000" />
-      <workItem from="1721871319961" duration="5437000" />
-      <workItem from="1721936238230" duration="1671000" />
-      <workItem from="1721937962459" duration="847000" />
-      <workItem from="1721952229314" duration="480000" />
-      <workItem from="1721960530534" duration="2620000" />
-      <workItem from="1722004754976" duration="18788000" />
-      <workItem from="1722054539152" duration="151000" />
-      <workItem from="1722057552894" duration="3000" />
+      <workItem from="1721871837005" duration="23000" />
+      <workItem from="1721874462443" duration="484000" />
+      <workItem from="1721962701482" duration="1880000" />
+      <workItem from="1721977206771" duration="1094000" />
+      <workItem from="1722018638059" duration="1025000" />
+      <workItem from="1722057565959" duration="502000" />
+      <workItem from="1722058074585" duration="6773000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/webapp/Docente/crearExamen.jsp</url>
+          <line>29</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

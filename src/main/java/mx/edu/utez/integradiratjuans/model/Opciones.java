@@ -12,6 +12,10 @@ public class Opciones {
         this.id_pregunta = id_pregunta;
     }
 
+    public Opciones() {
+
+    }
+
     public int getId_opcion() {
         return id_opcion;
     }
