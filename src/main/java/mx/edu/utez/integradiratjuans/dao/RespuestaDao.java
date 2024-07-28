@@ -26,7 +26,7 @@ public class RespuestaDao {
         }
         return flag;
     }
-
+    
      public List<Respuesta> getAll(){
         List<Respuesta> respuestas = new ArrayList<>();
         String query = "SELECT * FROM Respuesta";

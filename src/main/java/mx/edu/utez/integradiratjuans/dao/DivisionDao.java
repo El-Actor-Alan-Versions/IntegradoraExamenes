@@ -74,6 +74,7 @@ public class DivisionDao {
 
         return deleted;
     }
+
     public Division getById(int idDivision) throws SQLException {
         Division division = null;
         String query = "SELECT * FROM Division WHERE id_division = ?";
@@ -96,6 +97,7 @@ public class DivisionDao {
 
         return division;
     }
+
     public boolean update(Division division) {
         boolean updated = false;
         String query = "UPDATE Division SET nombre_division = ? WHERE id_division = ?";
