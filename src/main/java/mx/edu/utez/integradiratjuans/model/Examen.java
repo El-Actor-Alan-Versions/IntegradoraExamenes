@@ -8,17 +8,20 @@ public class Examen {
     private Timestamp fecha_aplicacion;
     private Timestamp fecha_cierre;
     private int id_clase;
+    private String descripcion;
+
 
     public Examen() {
         // Constructor vacío
     }
 
-    public Examen(int id_examen, String nombre, Timestamp fecha_aplicacion, Timestamp fecha_cierre, int id_clase) {
+    public Examen(int id_examen, String nombre, Timestamp fecha_aplicacion, Timestamp fecha_cierre, int id_clase, String descripcion) {
         this.id_examen = id_examen;
         this.nombre = nombre;
         this.fecha_aplicacion = fecha_aplicacion;
         this.fecha_cierre = fecha_cierre;
         this.id_clase = id_clase;
+        this.descripcion = descripcion;
     }
 
     // Getters y Setters
@@ -33,4 +36,11 @@ public class Examen {
     public Timestamp getFecha_aplicacion() { return fecha_aplicacion; }
     public Timestamp getFecha_cierre() { return fecha_cierre; }
     public int getId_clase() { return id_clase; }
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 }

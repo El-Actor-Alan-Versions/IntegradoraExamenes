@@ -37,22 +37,25 @@ public class GrupoDao {
         }
 
         // Método para obtener el id_clase a partir del id_grupo
-        public int getIdClaseByGrupoId(int idGrupo) {
-            String query = "SELECT id_clase FROM Clase WHERE id_grupo = ?";
-            try (Connection con = DatabaseConnectionManager.getConnection();
-                 PreparedStatement pstmt = con.prepareStatement(query)) {
+        public int getIdClaseByGrupoId(int idGrupo) throws SQLException {
+            String sql = "SELECT id_clase FROM Clase WHERE id_grupo = ?";
 
+            try (Connection con = DatabaseConnectionManager.getConnection();
+                 PreparedStatement pstmt = con.prepareStatement(sql)) {
                 pstmt.setInt(1, idGrupo);
-                try (ResultSet rs = pstmt.executeQuery()) {
-                    if (rs.next()) {
-                        return rs.getInt("id_clase");
-                    }
+                ResultSet rs = pstmt.executeQuery();
+
+                if (rs.next()) {
+                    return rs.getInt("id_clase");
+                } else {
+                    return -1; // No se encontró la clase
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
+                throw new SQLException("Error al ejecutar la consulta: " + e.getMessage(), e);
             }
-            return -1; // Retorna un valor que indique que no se encontró
         }
+
 
 
 

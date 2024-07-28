@@ -125,7 +125,7 @@ public class ClaseDao {
         List<Clase> clases = new ArrayList<>();
         String sql = "SELECT Clase.id_clase, Grupo.Grado_grupo " +
                 "FROM Clase " +
-                "INNER JOIN Grupo ON Clase.id_grupo = Grupo.id_grupo " +
+                "JOIN Grupo ON Clase.id_grupo = Grupo.id_grupo " +
                 "WHERE Clase.matricula = ?";
 
         try (Connection conn = DatabaseConnectionManager.getConnection();

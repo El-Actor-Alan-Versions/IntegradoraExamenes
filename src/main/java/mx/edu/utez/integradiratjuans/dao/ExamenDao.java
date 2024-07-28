@@ -9,7 +9,7 @@ import mx.edu.utez.integradiratjuans.model.Examen;
 public class ExamenDao {
 
     public boolean insert(Examen examen) {
-        String query = "INSERT INTO Examen (Nombre, Fecha_aplicacion, Fecha_cierre, id_clase) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO Examen (Nombre, Fecha_aplicacion, Fecha_cierre, id_clase, descripcion) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement pstmt = con.prepareStatement(query)) {
@@ -18,6 +18,7 @@ public class ExamenDao {
             pstmt.setTimestamp(2, examen.getFecha_aplicacion());
             pstmt.setTimestamp(3, examen.getFecha_cierre());
             pstmt.setInt(4, examen.getId_clase());
+            pstmt.setString(5, examen.getDescripcion());
 
             int rowsAffected = pstmt.executeUpdate();
             return rowsAffected > 0;
@@ -27,6 +28,7 @@ public class ExamenDao {
             return false;
         }
     }
+
 
 
 

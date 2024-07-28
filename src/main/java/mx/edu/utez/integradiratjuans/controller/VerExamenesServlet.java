@@ -1,4 +1,4 @@
-package mx.edu.utez.integradiratjuans.servlet;
+package mx.edu.utez.integradiratjuans.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
