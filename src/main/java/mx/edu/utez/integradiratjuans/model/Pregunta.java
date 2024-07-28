@@ -1,29 +1,46 @@
 package mx.edu.utez.integradiratjuans.model;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Pregunta {
-    private String texto;
-    private String tipo;
-    private String respuesta;
-    private List<Opcion> opciones;
 
-    public Pregunta(String texto, String tipo) {
-        this.texto = texto;
-        this.tipo = tipo;
-        this.opciones = new ArrayList<>();
+    private int idPregunta;
+
+    private String pregunta;
+
+    private int idExamen;
+
+
+    public Pregunta() {
     }
 
-    public void addOpcion(Opcion opcion) {
-        this.opciones.add(opcion);
+    public Pregunta(String pregunta, int idExamen) {
+        this.pregunta = pregunta;
+        this.idExamen = idExamen;
     }
 
-    // Getters y setters
-    public String getTexto() { return texto; }
-    public String getTipo() { return tipo; }
-    public String getRespuesta() { return respuesta; }
-    public List<Opcion> getOpciones() { return opciones; }
-    public void setRespuesta(String respuesta) { this.respuesta = respuesta; }
+    public int getIdPregunta() {
+        return idPregunta;
+    }
+
+    public void setIdPregunta(int idPregunta) {
+        this.idPregunta = idPregunta;
+    }
+
+    public String getPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(String pregunta) {
+        this.pregunta = pregunta;
+    }
+
+    public int getIdExamen() {
+        return idExamen;
+    }
+
+    public void setIdExamen(int idExamen) {
+        this.idExamen = idExamen;
+    }
 }
 

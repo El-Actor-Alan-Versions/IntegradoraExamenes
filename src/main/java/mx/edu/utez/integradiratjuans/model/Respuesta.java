@@ -5,6 +5,10 @@ public class Respuesta {
     private String respuesta;
     private int id_pregunta;
 
+    public Respuesta () {
+
+    }
+
     public Respuesta(int id_respuesta, String respuesta, int id_pregunta) {
         this.id_respuesta = id_respuesta;
         this.respuesta = respuesta;

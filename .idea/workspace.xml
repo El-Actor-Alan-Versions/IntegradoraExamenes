@@ -10,18 +10,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/CrearExamenServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/CrearExamenServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/UsuarioServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/UsuarioServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/VerExamenesServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/VerExamenesServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/ClaseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/ClaseDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/GrupoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/GrupoDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Examen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Examen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Pregunta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Pregunta.java" afterDir="false" />
+    <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/VistaPreviaServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/VistaPreviaServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/PreguntaDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/PreguntaDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Pregunta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Preguntas.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Respuesta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Respuesta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/crearExamen.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/crearExamen.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/vistaPrevia.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/vistaPrevia.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,11 +95,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\Docente" />
+      <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\java\mx\edu\utez\integradiratjuans\model" />
+      <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\java\mx\edu\utez\integradiratjuans\dao" />
+      <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\java\mx\edu\utez\integradiratjuans\controller" />
       <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\img" />
-      <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\css" />
-      <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp" />
-      <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\WEB-INF" />
-      <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\java\mx\edu\utez\integradiratjuans" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\Admin" />
@@ -295,7 +290,7 @@
       <workItem from="1722018638059" duration="1025000" />
       <workItem from="1722057565959" duration="502000" />
       <workItem from="1722058074585" duration="6773000" />
-      <workItem from="1722137141273" duration="312000" />
+      <workItem from="1722137141273" duration="1720000" />
     </task>
     <servers />
   </component>
@@ -303,6 +298,7 @@
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:" />
   </component>
 </project>

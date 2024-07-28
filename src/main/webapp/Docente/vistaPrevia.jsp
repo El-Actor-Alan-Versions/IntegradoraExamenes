@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
-<%@ page import="mx.edu.utez.integradiratjuans.model.Pregunta" %>
+<%@ page import="mx.edu.utez.integradiratjuans.model.Preguntas" %>
 <%@ page import="mx.edu.utez.integradiratjuans.model.Opcion" %>
 
 <!DOCTYPE html>
@@ -15,8 +15,8 @@
 <div class="container">
     <h2 class="my-4">Vista Previa de Preguntas</h2>
     <%
-        List<Pregunta> preguntas = (List<Pregunta>) request.getAttribute("preguntas");
-        for (Pregunta pregunta : preguntas) {
+        List<Preguntas> preguntas = (List<Preguntas>) request.getAttribute("preguntas");
+        for (Preguntas pregunta : preguntas) {
     %>
     <div class="card my-3">
         <div class="card-body">

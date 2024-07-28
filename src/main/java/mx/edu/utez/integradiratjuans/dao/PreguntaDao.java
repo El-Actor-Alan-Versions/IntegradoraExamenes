@@ -18,7 +18,7 @@ public class PreguntaDao {
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, pregunta.getPregunta());
-            ps.setInt(2, pregunta.getId_examen());
+            ps.setInt(2, pregunta.getIdExamen());
             if (ps.executeUpdate() == 1) {
                 flag = true;
             }
@@ -41,9 +41,9 @@ public class PreguntaDao {
 
             while (rs.next()) {
                 Pregunta pregunta = new Pregunta();
-                pregunta.setId_pregunta(rs.getInt("id_pregunta"));
+                pregunta.setIdPregunta(rs.getInt("id_pregunta"));
                 pregunta.setPregunta(rs.getString("pregunta"));
-                pregunta.setId_examen(rs.getInt("id_examen"));
+                pregunta.setIdExamen(rs.getInt("id_examen"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

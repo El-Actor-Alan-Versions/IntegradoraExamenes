@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import mx.edu.utez.integradiratjuans.model.Opcion;
-import mx.edu.utez.integradiratjuans.model.Pregunta;
+import mx.edu.utez.integradiratjuans.model.Preguntas;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,13 +18,13 @@ public class VistaPreviaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Pregunta> preguntas = new ArrayList<>();
+        List<Preguntas> preguntas = new ArrayList<>();
 
         int questionIndex = 0;
         while (request.getParameter("questions[" + questionIndex + "].pregunta") != null) {
             String preguntaTexto = request.getParameter("questions[" + questionIndex + "].pregunta");
             String questionType = request.getParameter("questions[" + questionIndex + "].questionType");
-            Pregunta pregunta = new Pregunta(preguntaTexto, questionType);
+            Preguntas pregunta = new Preguntas(preguntaTexto, questionType);
 
             if (questionType.equals("multiple_choice") || questionType.equals("multiple_answers")) {
                 int optionIndex = 1;
