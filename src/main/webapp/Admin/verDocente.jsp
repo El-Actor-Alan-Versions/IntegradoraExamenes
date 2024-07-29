@@ -53,7 +53,8 @@
             <td><%= d.getCorreo() %></td>
             <td><%= d.getEstado() %></td>
             <td>
-                <a href="actualizarDocente.jsp?matricula=<%= d.getMatricula() %>">Actualizar</a>
+
+                <a href="registrarDocente.jsp?matricula=<%= d.getMatricula() %>">Actualizar</a>
             </td>
             <td>
                 <form method="post" action="eliminarDocenteServlet">

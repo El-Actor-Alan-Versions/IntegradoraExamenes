@@ -111,4 +111,31 @@ public class DocenteDao {
         }
         return docentes;
     }
+
+
+    public boolean update(Docente docente)  {
+        boolean update = false;
+        String query = "UPDATE Docente SET Nombre = ?, Apellido_paterno = ?, Apellido_materno = ?, Correo = ?, Contraseña = ? WHERE Matricula = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, docente.getNombre());
+            ps.setString(2, docente.getApellidoPaterno());
+            ps.setString(3, docente.getApellidoMaterno());
+            ps.setString(4, docente.getCorreo());
+            ps.setString(5, docente.getContraseña());
+            ps.setString(6, docente.getMatricula());
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                update = true;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return update;
+    }
+
 }

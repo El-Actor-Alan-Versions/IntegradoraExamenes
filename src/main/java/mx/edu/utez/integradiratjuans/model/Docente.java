@@ -9,6 +9,21 @@ public class Docente {
     private String contraseña;
     private String estado;
 
+
+
+    public Docente () {
+
+    }
+    public Docente(String matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contraseña, String estado) {
+        this.matricula = matricula;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.correo = correo;
+        this.contraseña = contraseña;
+        this.estado = estado;
+    }
+
     // Getters y Setters
     public String getMatricula() {
         return matricula;
