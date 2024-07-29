@@ -1,26 +1,17 @@
 package mx.edu.utez.integradiratjuans.model;
 
 public class Respuesta {
-    private int id_respuesta;
+    private int idRespuesta;
     private String respuesta;
-    private int id_pregunta;
+    private int idPregunta;
 
-    public Respuesta () {
-
+    // Getters and setters
+    public int getIdRespuesta() {
+        return idRespuesta;
     }
 
-    public Respuesta(int id_respuesta, String respuesta, int id_pregunta) {
-        this.id_respuesta = id_respuesta;
-        this.respuesta = respuesta;
-        this.id_pregunta = id_pregunta;
-    }
-
-    public int getId_respuesta() {
-        return id_respuesta;
-    }
-
-    public void setId_respuesta(int id_respuesta) {
-        this.id_respuesta = id_respuesta;
+    public void setIdRespuesta(int idRespuesta) {
+        this.idRespuesta = idRespuesta;
     }
 
     public String getRespuesta() {
@@ -31,11 +22,11 @@ public class Respuesta {
         this.respuesta = respuesta;
     }
 
-    public int getId_pregunta() {
-        return id_pregunta;
+    public int getIdPregunta() {
+        return idPregunta;
     }
 
-    public void setId_pregunta(int id_pregunta) {
-        this.id_pregunta = id_pregunta;
+    public void setIdPregunta(int idPregunta) {
+        this.idPregunta = idPregunta;
     }
 }

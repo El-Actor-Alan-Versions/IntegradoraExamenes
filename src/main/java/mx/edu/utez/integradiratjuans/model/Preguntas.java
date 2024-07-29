@@ -19,6 +19,18 @@ public class Preguntas {
         this.opciones.add(opcion);
     }
 
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
+
+    public void setOpciones(List<Opcion> opciones) {
+        this.opciones = opciones;
+    }
+
     // Getters y setters
     public String getTexto() { return texto; }
     public String getTipo() { return tipo; }

@@ -27,7 +27,7 @@ public class RegistrarGrupoServlet extends HttpServlet {
 
         try {
             grupoDao.insert(grupo);
-            response.sendRedirect("gruposRegistrados.jsp");
+            response.sendRedirect("gruposRegistrado.jsp");
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendRedirect("error.jsp");

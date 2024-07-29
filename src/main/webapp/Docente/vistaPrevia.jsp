@@ -17,16 +17,28 @@
     <%
         List<Preguntas> preguntas = (List<Preguntas>) request.getAttribute("preguntas");
         for (Preguntas pregunta : preguntas) {
+            String tipoPregunta = "";
+            switch (pregunta.getTipo()) {
+                case "multiple_choice":
+                    tipoPregunta = "Opción Múltiple";
+                    break;
+                case "multiple_answers":
+                    tipoPregunta = "Respuestas Múltiples";
+                    break;
+                case "open_ended":
+                    tipoPregunta = "Respuesta Abierta";
+                    break;
+            }
     %>
     <div class="card my-3">
         <div class="card-body">
             <h3 class="card-title"><%= pregunta.getTexto() %></h3>
-            <p class="card-text"><strong>Tipo de Pregunta:</strong> <%= pregunta.getTipo() %></p>
+            <p class="card-text"><strong>Tipo de Pregunta:</strong> <%= tipoPregunta %></p>
             <%
                 if (pregunta.getTipo().equals("multiple_choice") || pregunta.getTipo().equals("multiple_answers")) {
                     for (Opcion opcion : pregunta.getOpciones()) {
             %>
-            <p class="card-text"><%= opcion.getTexto() %> <% if (opcion.isCorrecta()) { %> <span class="badge badge-success">Correcta</span> <% } %></p>
+            <p class="card-text"><%= opcion.getOpcion() %> <% if (opcion.isCorrecta()) { %> <span class="badge badge-success">Correcta</span> <% } %></p>
             <%
                 }
             } else if (pregunta.getTipo().equals("open_ended")) {

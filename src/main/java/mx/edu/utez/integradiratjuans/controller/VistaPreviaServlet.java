@@ -47,3 +47,4 @@ public class VistaPreviaServlet extends HttpServlet {
         request.getRequestDispatcher("vistaPrevia.jsp").forward(request, response);
     }
 }
+

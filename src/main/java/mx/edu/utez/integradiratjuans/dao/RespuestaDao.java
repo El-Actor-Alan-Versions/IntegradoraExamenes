@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RespuestaDao {
-    public boolean insert(Respuesta respuesta){
+    public boolean insert(Respuesta respuesta) {
         boolean flag = false;
-        String query = "INSERT INTO Respuesta (Respueta,id_pregunta) VALUES (?,?)";
+        String query = "INSERT INTO Respuesta (respuesta, id_pregunta) VALUES (?,?)";
         try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)){
-            ps.setString(1,respuesta.getRespuesta());
-            ps.setInt(2,respuesta.getId_pregunta());
+             PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, respuesta.getRespuesta());
+            ps.setInt(2, respuesta.getIdPregunta());
             if (ps.executeUpdate() == 1) {
                 flag = true;
             }
@@ -26,27 +26,26 @@ public class RespuestaDao {
         }
         return flag;
     }
-    
-     public List<Respuesta> getAll(){
+
+    public List<Respuesta> getAll() {
         List<Respuesta> respuestas = new ArrayList<>();
         String query = "SELECT * FROM Respuesta";
 
-         try (Connection con = DatabaseConnectionManager.getConnection();
-              PreparedStatement ps = con.prepareStatement(query)){
-             ResultSet rs = ps.executeQuery();
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
 
-             while (rs.next()) {
-                 Respuesta respuesta = new Respuesta();
-                 respuesta.setId_respuesta(rs.getInt("id_respuesta"));
-                 respuesta.setRespuesta(rs.getString("respuesta"));
-                 respuesta.setId_pregunta(rs.getInt("id_pregunta"));
+            ResultSet rs = ps.executeQuery();
 
-
-             }
-         } catch (SQLException e) {
-             throw new RuntimeException(e);
-         }
-         return respuestas;
-     }
-
+            while (rs.next()) {
+                Respuesta respuesta = new Respuesta();
+                respuesta.setIdRespuesta(rs.getInt("id_respuesta"));
+                respuesta.setRespuesta(rs.getString("respuesta"));
+                respuesta.setIdPregunta(rs.getInt("id_pregunta"));
+                respuestas.add(respuesta);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return respuestas;
+    }
 }
