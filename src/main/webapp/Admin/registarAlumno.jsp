@@ -1,4 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="mx.edu.utez.integradiratjuans.dao.AlumnoDao" %>
+<%@ page import="mx.edu.utez.integradiratjuans.model.Alumno" %>
+
+<%
+    Alumno alumno = null;
+    String action = "insert";
+    String matricula = "";
+
+    String matriculaParam = request.getParameter("matricula");
+    if (matriculaParam != null && !matriculaParam.isEmpty()) {
+        matricula = matriculaParam;
+        action = "update";
+
+        AlumnoDao dao = new AlumnoDao();
+        try {
+            alumno = dao.getById(matricula);
+        } catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,46 +42,45 @@
         });
 </script>
 <div class="container mt-4">
-    <h1 class="mb-4">Registro de Alumno</h1>
-    <form action="registrarAlumno" method="post">
-        <div class="form-group">
-            <label for="matricula">Matrícula:</label>
-            <input type="text" class="form-control" id="matricula" name="matricula" required />
-        </div>
+    <h1 class="mb-4"><%= action.equals("update") ? "Actualizar" : "Registrar" %> Alumno</h1>
+    <form action="<%=action.equals("update") ? "actualizarAlumnoServlet" : "registrarAlumnoServlet"%>" method="post">
+        <% if (action.equals("update")) { %>
+        <input type="hidden" name="matricula" value="<%= alumno.getMatricula() %>">
+        <% } %>
 
         <div class="form-group">
             <label for="nombre">Nombre:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required />
+            <input type="text" class="form-control" id="nombre" name="nombre" value="<%= action.equals("update") ? alumno.getNombre() : ""%>" required />
         </div>
 
         <div class="form-group">
             <label for="apellidoPaterno">Apellido Paterno:</label>
-            <input type="text" class="form-control" id="apellidoPaterno" name="apellidoPaterno" required />
+            <input type="text" class="form-control" id="apellidoPaterno" name="apellidoPaterno" value="<%= action.equals("update") ? alumno.getApellidoPaterno() : ""%>"  required />
         </div>
 
         <div class="form-group">
             <label for="apellidoMaterno">Apellido Materno:</label>
-            <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno" required />
+            <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno" value="<%= action.equals("update") ? alumno.getApellidoMaterno() : ""%>" required />
         </div>
 
         <div class="form-group">
             <label for="correo">Correo:</label>
-            <input type="email" class="form-control" id="correo" name="correo" required />
+            <input type="email" class="form-control" id="correo" name="correo" value="<%= action.equals("update") ? alumno.getCorreo() : ""%>" required />
         </div>
 
         <div class="form-group">
             <label for="contraseña">Contraseña:</label>
-            <input type="password" class="form-control" id="contraseña" name="contraseña" required />
+            <input type="password" class="form-control" id="contraseña" name="contraseña" value="<%= action.equals("update") ? alumno.getContraseña() : ""%>" required />
         </div>
 
         <div class="form-group">
-            <label for="grupo">Grupo:</label>
+            <label for="gruposSelect" >Grupo:</label>
             <select id="gruposSelect" class="form-control" name="idGrupo">
-                <option value="">Seleccione...</option>
+                <option value="<%= action.equals("update") ? alumno.getNombreGrupo() : ""%>">Seleccione...</option>
             </select>
         </div>
 
-        <button type="submit" class="mt-4 btn btn-primary">Registrar</button>
+        <button type="submit" class="mt-4 btn btn-primary"><%=action.equals("update") ? "Actualizar" : "Registrar"%></button>
     </form>
 </div>
 

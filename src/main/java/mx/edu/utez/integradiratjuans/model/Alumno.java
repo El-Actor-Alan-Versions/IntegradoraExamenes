@@ -12,6 +12,17 @@ public class Alumno {
     private String estado = "activo"; // Valor predeterminado
     private String nombreGrupo; // Nuevo campo
 
+    public Alumno(String matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contraseña, int idGrupo, String estado, String nombreGrupo) {
+        this.matricula = matricula;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.correo = correo;
+        this.contraseña = contraseña;
+        this.idGrupo = idGrupo;
+        this.estado = estado;
+        this.nombreGrupo = nombreGrupo;
+    }
 
     // Constructor, getters y setters
     public Alumno() {

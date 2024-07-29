@@ -38,7 +38,7 @@ public class DocenteDao {
     }
 
 
-    public Docente getById(String matricula) {
+public Docente getById(String matricula) {
         Docente docente = null;
         String query = "SELECT * FROM Docente WHERE matricula = ?";
 

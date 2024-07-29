@@ -1,6 +1,7 @@
 package mx.edu.utez.integradiratjuans.dao;
 
 import mx.edu.utez.integradiratjuans.model.Alumno;
+import mx.edu.utez.integradiratjuans.model.Docente;
 import mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;
 
 import java.sql.*;
@@ -90,4 +91,57 @@ public class AlumnoDao {
 
         return alumnos;
     }
+
+    public Alumno getById(String matricula) {
+        Alumno alumno = null;
+        String query = "SELECT * FROM Alumno WHERE matricula = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, matricula);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                alumno = new Alumno();
+                alumno.setMatricula(rs.getString("matricula"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setApellidoPaterno(rs.getString("apellido_paterno"));
+                alumno.setApellidoMaterno(rs.getString("apellido_materno"));
+                alumno.setCorreo(rs.getString("correo"));
+                alumno.setContraseña(rs.getString("contraseña"));
+                alumno.setEstado(rs.getString("estado"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return alumno;
+    }
+    public boolean update(Alumno alumno)  {
+        boolean update = false;
+        String query = "UPDATE Alumno SET Nombre = ?, Apellido_paterno = ?, Apellido_materno = ?, Correo = ?, Contraseña = ? WHERE Matricula = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, alumno.getNombre());
+            ps.setString(2, alumno.getApellidoPaterno());
+            ps.setString(3, alumno.getApellidoMaterno());
+            ps.setString(4, alumno.getCorreo());
+            ps.setString(5, alumno.getContraseña());
+            ps.setString(6, alumno.getMatricula());
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                update = true;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return update;
+    }
+
 }
