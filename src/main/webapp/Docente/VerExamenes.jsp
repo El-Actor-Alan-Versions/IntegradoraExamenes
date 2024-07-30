@@ -1,7 +1,9 @@
-<%@ page import="java.sql.Timestamp" %>
-<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %>
 <%@ page import="mx.edu.utez.integradiratjuans.model.Examen" %>
+<%@ page import="mx.edu.utez.integradiratjuans.model.Clase" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.sql.Timestamp" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,44 +15,81 @@
 <body>
 <div class="container mt-5">
     <h2 class="text-center">Exámenes</h2>
-    <table class="table table-striped table-hover">
+
+    <!-- Formulario de filtro -->
+    <form method="post" action="VerExamenesServlet">
+        <div class="form-group">
+            <label for="id_clase">Clase</label>
+            <select id="id_clase" class="form-control" name="id_clase" required>
+                <option value="">Seleccione...</option>
+                <%
+                    List<Clase> clases = (List<Clase>) session.getAttribute("clases");
+                    if (clases != null) {
+                        for (Clase clase : clases) {
+                %>
+                <option value="<%= clase.getId_clase() %>"><%= clase.getGradoGrupo() %></option>
+                <%
+                    }
+                } else {
+                %>
+                <option value="">No hay clases disponibles</option>
+                <%
+                    }
+                %>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Filtrar</button>
+    </form>
+
+    <!-- Tabla de exámenes -->
+    <table class="table table-striped table-hover mt-4">
         <thead>
         <tr>
             <th>ID</th>
             <th>Nombre</th>
             <th>Fecha de Aplicación</th>
             <th>Fecha de Cierre</th>
-            <th>ID de Clase</th>
+            <th>Grado_Grupo</th>
+            <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
         <%
             List<Examen> examenes = (List<Examen>) request.getAttribute("examenes");
-            if (examenes == null) {
-                System.out.println("<p>No se han recibido exámenes.</p>");
-            } else {
-                System.out.println("<p>Número de exámenes recibidos: " + examenes.size() + "</p>");
-            }
-
             if (examenes != null && !examenes.isEmpty()) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 for (Examen examen : examenes) {
                     Timestamp fechaAplicacion = examen.getFecha_aplicacion();
                     Timestamp fechaCierre = examen.getFecha_cierre();
+                    String gradoGrupo = "N/A";
+                    if (clases != null) {
+                        for (Clase clase : clases) {
+                            if (clase.getId_clase() == examen.getId_clase()) {
+                                gradoGrupo = clase.getGradoGrupo();
+                                break;
+                            }
+                        }
+                    }
         %>
         <tr>
             <td><%= examen.getId_examen() %></td>
             <td><%= examen.getNombre() %></td>
             <td><%= fechaAplicacion != null ? sdf.format(fechaAplicacion) : "N/A" %></td>
             <td><%= fechaCierre != null ? sdf.format(fechaCierre) : "N/A" %></td>
-            <td><%= examen.getId_clase() %></td>
+            <td><%= gradoGrupo %></td>
+            <td>
+                <form action="EditarExamenServlet" method="post" class="d-inline">
+                    <input type="hidden" name="id_examen" value="<%= examen.getId_examen() %>">
+                    <button type="submit" class="btn btn-warning btn-sm">Modificar</button>
+                </form>
+            </td>
         </tr>
         <%
             }
         } else {
         %>
         <tr>
-            <td colspan="5" class="text-center">No hay exámenes disponibles</td>
+            <td colspan="6" class="text-center">No hay exámenes disponibles</td>
         </tr>
         <%
             }

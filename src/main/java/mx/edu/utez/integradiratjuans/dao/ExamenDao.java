@@ -35,28 +35,67 @@ public class ExamenDao {
         return id;
     }
 
-
-
-
-
-    public List<Examen> getAll() {
+    public List<Examen> getExamenesPorClase(int idClase) throws SQLException {
         List<Examen> examenes = new ArrayList<>();
-        String query = "SELECT * FROM Examen";
-        try (Connection con = DatabaseConnectionManager.getConnection();
-             Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
+        String sql = "SELECT * FROM Examen WHERE id_clase = ?";
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idClase);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Examen examen = new Examen();
+                    examen.setId_examen(rs.getInt("id_examen"));
+                    examen.setNombre(rs.getString("nombre"));
+                    examen.setFecha_aplicacion(rs.getTimestamp("fecha_aplicacion"));
+                    examen.setFecha_cierre(rs.getTimestamp("fecha_cierre"));
+                    examen.setId_clase(rs.getInt("id_clase"));
+                    examenes.add(examen);
+                }
+            }
+        }
+        return examenes;
+    }
+    public List<Examen> getExamenesPorProfesor(String matricula) throws SQLException {
+        List<Examen> examenes = new ArrayList<>();
+        String sql = "SELECT * FROM Examen WHERE id_clase IN (SELECT id_clase FROM Clase WHERE matricula = ?)";
+
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, matricula);
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Examen examen = new Examen();
                 examen.setId_examen(rs.getInt("id_examen"));
-                examen.setNombre(rs.getString("Nombre"));
-                examen.setFecha_aplicacion(rs.getTimestamp("Fecha_aplicacion"));
-                examen.setFecha_cierre(rs.getTimestamp("Fecha_cierre"));
+                examen.setNombre(rs.getString("nombre"));
+                examen.setFecha_aplicacion(rs.getTimestamp("fecha_aplicacion"));
+                examen.setFecha_cierre(rs.getTimestamp("fecha_cierre"));
                 examen.setId_clase(rs.getInt("id_clase"));
                 examenes.add(examen);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new SQLException("Error al obtener exámenes por profesor: " + e.getMessage(), e);
+        }
+        return examenes;
+    }
+
+    public List<Examen> getAll() throws SQLException {
+        List<Examen> examenes = new ArrayList<>();
+        String query = "SELECT * FROM Examen";
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = con.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Examen examen = new Examen();
+                examen.setId_examen(rs.getInt("id_examen"));
+                examen.setNombre(rs.getString("nombre"));
+                examen.setFecha_aplicacion(rs.getTimestamp("fecha_aplicacion"));
+                examen.setFecha_cierre(rs.getTimestamp("fecha_cierre"));
+                examen.setId_clase(rs.getInt("id_clase"));
+                examenes.add(examen);
+            }
         }
         return examenes;
     }

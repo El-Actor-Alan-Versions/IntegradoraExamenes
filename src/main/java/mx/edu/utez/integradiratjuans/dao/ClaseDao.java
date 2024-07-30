@@ -14,14 +14,12 @@ import java.util.List;
 public class ClaseDao {
 
 
-    public List<Clase> getAll() {
+    public List<Clase> getAll() throws SQLException {
         List<Clase> clases = new ArrayList<>();
         String query = "SELECT * FROM Clase";
-
         try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
-
-            ResultSet rs = ps.executeQuery();
+             PreparedStatement ps = con.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 Clase clase = new Clase();
@@ -31,11 +29,7 @@ public class ClaseDao {
                 clase.setMatricula(rs.getString("matricula"));
                 clases.add(clase);
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-
         return clases;
     }
 

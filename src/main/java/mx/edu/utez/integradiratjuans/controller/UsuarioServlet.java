@@ -32,6 +32,7 @@ public class UsuarioServlet extends HttpServlet {
         String nombreUsuario = req.getParameter("matricula");
         String contrasena = req.getParameter("contra");
 
+
         String ruta = "index.jsp"; // Página por defecto
 
         try {
@@ -49,7 +50,12 @@ public class UsuarioServlet extends HttpServlet {
             } else if (alumno != null) {
                 // Si es alumno, redirigir a vista de alumno
                 session.setAttribute("usuario", alumno);
+                session.setAttribute("matriculaDocente", alumno.getMatricula()); // Establecer la matrícula del docente en la sesión
+
+                session.setAttribute("usuario", alumno);
                 ruta = "Alumno/indexAlumno.jsp";
+
+
             } else if (docente != null) {
                 // Si es docente, redirigir a vista de docente
                 session.setAttribute("usuario", docente);
