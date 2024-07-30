@@ -32,7 +32,7 @@
             <a href="crearExamen.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/añadirExamen.png" class="text-center" width="68">
+                        <img src="../img/añadirExamen.png" class="text-center" width="68">
                         <h5 class="card-title">Crear Examen</h5>
                         <p class="card-text">Diseña y publica nuevos exámenes fácilmente.</p>
                     </div>

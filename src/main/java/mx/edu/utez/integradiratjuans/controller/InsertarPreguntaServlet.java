@@ -5,63 +5,73 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import mx.edu.utez.integradiratjuans.dao.OpcionesDao;
+import jakarta.servlet.http.HttpSession;
 import mx.edu.utez.integradiratjuans.dao.PreguntaDao;
-import mx.edu.utez.integradiratjuans.dao.RespuestaDao;
+import mx.edu.utez.integradiratjuans.model.Preguntas;
 import mx.edu.utez.integradiratjuans.model.Opcion;
-import mx.edu.utez.integradiratjuans.model.Pregunta;
-import mx.edu.utez.integradiratjuans.model.Respuesta;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-@WebServlet("/insertarPregunta")
+@WebServlet("/Docente/InsertarPreguntaServlet")
 public class InsertarPreguntaServlet extends HttpServlet {
-    private PreguntaDao preguntaDao;
-    private RespuestaDao respuestaDao;
-    private OpcionesDao opcionesDao;
-
-    public InsertarPreguntaServlet() {
-        this.preguntaDao = new PreguntaDao();
-        this.respuestaDao = new RespuestaDao();
-        this.opcionesDao = new OpcionesDao();
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String tipo = request.getParameter("tipoPregunta");
-        String textoPregunta = request.getParameter("textoPregunta");
-        int idExamen = Integer.parseInt(request.getParameter("idExamen"));  // Suponiendo que tienes este valor en el formulario
+        PreguntaDao preguntaDao = new PreguntaDao();
 
-        Pregunta pregunta = new Pregunta();
-        pregunta.setPregunta(textoPregunta);
-        pregunta.setIdExamen(idExamen);
+        // Recuperar el ID del examen desde la sesión
+        HttpSession session = request.getSession();
+        Integer idExamen = (Integer) session.getAttribute("idExamen");
 
-        boolean isPreguntaInserted = preguntaDao.insert(pregunta);
+        if (idExamen == null) {
+            response.sendRedirect("crearExamen.jsp");
+            return;
+        }
 
-        if (isPreguntaInserted) {
-            // Obtener el ID de la última pregunta insertada
-            int idPregunta = pregunta.getIdPregunta();
+        // Crear la lista de preguntas
+        List<Preguntas> preguntas = new ArrayList<>();
+        int index = 0;
 
-            if (tipo.equals("opcion_multiple") || tipo.equals("varias_respuestas")) {
-                String[] opciones = request.getParameterValues("textoOpcion");
-                String[] correctas = request.getParameterValues("opcionCorrecta");
+        while (request.getParameter("questions[" + index + "].pregunta") != null) {
+            String texto = request.getParameter("questions[" + index + "].pregunta");
+            String tipo = request.getParameter("questions[" + index + "].questionType");
+            String respuesta = tipo.equals("abierta") ? request.getParameter("questions[" + index + "].openEndedAnswer") : null;
 
-                for (int i = 0; i < opciones.length; i++) {
-                    Opcion opcion = new Opcion();
-                    opcion.setOpcion(opciones[i]);
-                    opcion.setIdPregunta(idPregunta);
-                    opcion.setCorrecta(correctas != null && correctas[i].equals("on"));
-                    opcionesDao.insert(opcion);
-                }
-            } else if (tipo.equals("respuesta_abierta")) {
-                String textoRespuesta = request.getParameter("textoRespuestaAbierta");
-                Respuesta respuesta = new Respuesta();
-                respuesta.setRespuesta(textoRespuesta);
-                respuesta.setIdPregunta(idPregunta);
-                respuestaDao.insert(respuesta);
+            Preguntas pregunta = new Preguntas(texto, tipo);
+            pregunta.setRespuesta(respuesta);
+            pregunta.setIdExamen(idExamen);
+
+            // Añadir las opciones si las hay
+            int opcionIndex = 1;
+            while (request.getParameter("questions[" + index + "].option" + opcionIndex) != null) {
+                String opcionTexto = request.getParameter("questions[" + index + "].option" + opcionIndex);
+                boolean esCorrecta = "true".equals(request.getParameter("questions[" + index + "].correctOption" + opcionIndex));
+
+                Opcion opcion = new Opcion();
+                opcion.setOpcion(opcionTexto);
+                opcion.setCorrecta(esCorrecta);
+
+                pregunta.addOpcion(opcion);
+                opcionIndex++;
             }
 
-            response.sendRedirect("vistaPrevia.jsp");
+            preguntas.add(pregunta);
+            index++;
+        }
+
+        // Insertar todas las preguntas en la base de datos
+        boolean exito = true;
+        for (Preguntas pregunta : preguntas) {
+            if (!preguntaDao.insertarPregunta(pregunta)) {
+                exito = false;
+                break;
+            }
+        }
+
+        if (exito) {
+            response.sendRedirect("exito.jsp");
         } else {
             response.sendRedirect("error.jsp");
         }

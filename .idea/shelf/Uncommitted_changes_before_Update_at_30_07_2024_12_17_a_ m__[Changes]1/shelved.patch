@@ -1,0 +1,959 @@
+Index: src/main/java/mx/edu/utez/integradiratjuans/controller/InsertarPreguntaServlet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package mx.edu.utez.integradiratjuans.controller;\r\n\r\nimport jakarta.servlet.ServletException;\r\nimport jakarta.servlet.annotation.WebServlet;\r\nimport jakarta.servlet.http.HttpServlet;\r\nimport jakarta.servlet.http.HttpServletRequest;\r\nimport jakarta.servlet.http.HttpServletResponse;\r\nimport mx.edu.utez.integradiratjuans.dao.OpcionesDao;\r\nimport mx.edu.utez.integradiratjuans.dao.PreguntaDao;\r\nimport mx.edu.utez.integradiratjuans.dao.RespuestaDao;\r\nimport mx.edu.utez.integradiratjuans.model.Opcion;\r\nimport mx.edu.utez.integradiratjuans.model.Pregunta;\r\nimport mx.edu.utez.integradiratjuans.model.Respuesta;\r\n\r\nimport java.io.IOException;\r\n\r\n@WebServlet(\"/insertarPregunta\")\r\npublic class InsertarPreguntaServlet extends HttpServlet {\r\n    private PreguntaDao preguntaDao;\r\n    private RespuestaDao respuestaDao;\r\n    private OpcionesDao opcionesDao;\r\n\r\n    public InsertarPreguntaServlet() {\r\n        this.preguntaDao = new PreguntaDao();\r\n        this.respuestaDao = new RespuestaDao();\r\n        this.opcionesDao = new OpcionesDao();\r\n    }\r\n\r\n    @Override\r\n    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {\r\n        String tipo = request.getParameter(\"tipoPregunta\");\r\n        String textoPregunta = request.getParameter(\"textoPregunta\");\r\n        int idExamen = Integer.parseInt(request.getParameter(\"idExamen\"));  // Suponiendo que tienes este valor en el formulario\r\n\r\n        Pregunta pregunta = new Pregunta();\r\n        pregunta.setPregunta(textoPregunta);\r\n        pregunta.setIdExamen(idExamen);\r\n\r\n        boolean isPreguntaInserted = preguntaDao.insert(pregunta);\r\n\r\n        if (isPreguntaInserted) {\r\n            // Obtener el ID de la última pregunta insertada\r\n            int idPregunta = pregunta.getIdPregunta();\r\n\r\n            if (tipo.equals(\"opcion_multiple\") || tipo.equals(\"varias_respuestas\")) {\r\n                String[] opciones = request.getParameterValues(\"textoOpcion\");\r\n                String[] correctas = request.getParameterValues(\"opcionCorrecta\");\r\n\r\n                for (int i = 0; i < opciones.length; i++) {\r\n                    Opcion opcion = new Opcion();\r\n                    opcion.setOpcion(opciones[i]);\r\n                    opcion.setIdPregunta(idPregunta);\r\n                    opcion.setCorrecta(correctas != null && correctas[i].equals(\"on\"));\r\n                    opcionesDao.insert(opcion);\r\n                }\r\n            } else if (tipo.equals(\"respuesta_abierta\")) {\r\n                String textoRespuesta = request.getParameter(\"textoRespuestaAbierta\");\r\n                Respuesta respuesta = new Respuesta();\r\n                respuesta.setRespuesta(textoRespuesta);\r\n                respuesta.setIdPregunta(idPregunta);\r\n                respuestaDao.insert(respuesta);\r\n            }\r\n\r\n            response.sendRedirect(\"vistaPrevia.jsp\");\r\n        } else {\r\n            response.sendRedirect(\"error.jsp\");\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/mx/edu/utez/integradiratjuans/controller/InsertarPreguntaServlet.java b/src/main/java/mx/edu/utez/integradiratjuans/controller/InsertarPreguntaServlet.java
+--- a/src/main/java/mx/edu/utez/integradiratjuans/controller/InsertarPreguntaServlet.java	
++++ b/src/main/java/mx/edu/utez/integradiratjuans/controller/InsertarPreguntaServlet.java	
+@@ -5,63 +5,73 @@
+ import jakarta.servlet.http.HttpServlet;
+ import jakarta.servlet.http.HttpServletRequest;
+ import jakarta.servlet.http.HttpServletResponse;
+-import mx.edu.utez.integradiratjuans.dao.OpcionesDao;
++import jakarta.servlet.http.HttpSession;
+ import mx.edu.utez.integradiratjuans.dao.PreguntaDao;
+-import mx.edu.utez.integradiratjuans.dao.RespuestaDao;
++import mx.edu.utez.integradiratjuans.model.Preguntas;
+ import mx.edu.utez.integradiratjuans.model.Opcion;
+-import mx.edu.utez.integradiratjuans.model.Pregunta;
+-import mx.edu.utez.integradiratjuans.model.Respuesta;
+ 
+ import java.io.IOException;
++import java.util.ArrayList;
++import java.util.List;
+ 
+-@WebServlet("/insertarPregunta")
++@WebServlet("/Docente/InsertarPreguntaServlet")
+ public class InsertarPreguntaServlet extends HttpServlet {
+-    private PreguntaDao preguntaDao;
+-    private RespuestaDao respuestaDao;
+-    private OpcionesDao opcionesDao;
+-
+-    public InsertarPreguntaServlet() {
+-        this.preguntaDao = new PreguntaDao();
+-        this.respuestaDao = new RespuestaDao();
+-        this.opcionesDao = new OpcionesDao();
+-    }
+ 
+     @Override
+     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+-        String tipo = request.getParameter("tipoPregunta");
+-        String textoPregunta = request.getParameter("textoPregunta");
+-        int idExamen = Integer.parseInt(request.getParameter("idExamen"));  // Suponiendo que tienes este valor en el formulario
++        PreguntaDao preguntaDao = new PreguntaDao();
++
++        // Recuperar el ID del examen desde la sesión
++        HttpSession session = request.getSession();
++        Integer idExamen = (Integer) session.getAttribute("idExamen");
++
++        if (idExamen == null) {
++            response.sendRedirect("crearExamen.jsp");
++            return;
++        }
++
++        // Crear la lista de preguntas
++        List<Preguntas> preguntas = new ArrayList<>();
++        int index = 0;
+ 
+-        Pregunta pregunta = new Pregunta();
+-        pregunta.setPregunta(textoPregunta);
+-        pregunta.setIdExamen(idExamen);
++        while (request.getParameter("questions[" + index + "].pregunta") != null) {
++            String texto = request.getParameter("questions[" + index + "].pregunta");
++            String tipo = request.getParameter("questions[" + index + "].questionType");
++            String respuesta = tipo.equals("abierta") ? request.getParameter("questions[" + index + "].openEndedAnswer") : null;
++
++            Preguntas pregunta = new Preguntas(texto, tipo);
++            pregunta.setRespuesta(respuesta);
++            pregunta.setIdExamen(idExamen);
+ 
+-        boolean isPreguntaInserted = preguntaDao.insert(pregunta);
+-
+-        if (isPreguntaInserted) {
+-            // Obtener el ID de la última pregunta insertada
+-            int idPregunta = pregunta.getIdPregunta();
++            // Añadir las opciones si las hay
++            int opcionIndex = 1;
++            while (request.getParameter("questions[" + index + "].option" + opcionIndex) != null) {
++                String opcionTexto = request.getParameter("questions[" + index + "].option" + opcionIndex);
++                boolean esCorrecta = "true".equals(request.getParameter("questions[" + index + "].correctOption" + opcionIndex));
+ 
+-            if (tipo.equals("opcion_multiple") || tipo.equals("varias_respuestas")) {
+-                String[] opciones = request.getParameterValues("textoOpcion");
+-                String[] correctas = request.getParameterValues("opcionCorrecta");
+-
+-                for (int i = 0; i < opciones.length; i++) {
+-                    Opcion opcion = new Opcion();
+-                    opcion.setOpcion(opciones[i]);
+-                    opcion.setIdPregunta(idPregunta);
+-                    opcion.setCorrecta(correctas != null && correctas[i].equals("on"));
+-                    opcionesDao.insert(opcion);
+-                }
+-            } else if (tipo.equals("respuesta_abierta")) {
+-                String textoRespuesta = request.getParameter("textoRespuestaAbierta");
+-                Respuesta respuesta = new Respuesta();
+-                respuesta.setRespuesta(textoRespuesta);
+-                respuesta.setIdPregunta(idPregunta);
+-                respuestaDao.insert(respuesta);
+-            }
++                Opcion opcion = new Opcion();
++                opcion.setOpcion(opcionTexto);
++                opcion.setCorrecta(esCorrecta);
++
++                pregunta.addOpcion(opcion);
++                opcionIndex++;
++            }
++
++            preguntas.add(pregunta);
++            index++;
++        }
+ 
+-            response.sendRedirect("vistaPrevia.jsp");
++        // Insertar todas las preguntas en la base de datos
++        boolean exito = true;
++        for (Preguntas pregunta : preguntas) {
++            if (!preguntaDao.insertarPregunta(pregunta)) {
++                exito = false;
++                break;
++            }
++        }
++
++        if (exito) {
++            response.sendRedirect("exito.jsp");
+         } else {
+             response.sendRedirect("error.jsp");
+         }
+Index: src/main/webapp/Docente/indexDocente.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%--\r\n  Created by IntelliJ IDEA.\r\n  User: walge\r\n  Date: 23/06/2024\r\n  Time: 07:00 p. m.\r\n  To change this template use File | Settings | File Templates.\r\n--%>\r\n<%@ page contentType=\"text/html;charset=UTF-8\" language=\"java\" %>\r\n<!DOCTYPE html>\r\n<html lang=\"es\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <link rel=\"stylesheet\" href=\"${pageContext.request.contextPath}/css/bootstrap.min.css\">\r\n    <title>Docente</title>\r\n    <link rel=\"stylesheet\" href=\"${pageContext.request.contextPath}/css/usuarios.css\">\r\n</head>\r\n<body>\r\n<div id=\"navbar\"></div>\r\n<script>\r\n    fetch('navbar.jsp')\r\n        .then(response => response.text())\r\n        .then(data => {\r\n            document.getElementById('navbar').innerHTML = data;\r\n        });\r\n</script>\r\n\r\n<div class=\"container\">\r\n    <div class=\"row justify-content-center\">\r\n        <div class=\"col-md-4 col-sm-6 text-center mb-4\">\r\n            <!-- aqui va la direccion de la pagina -->\r\n            <a href=\"crearExamen.jsp\" class=\"button\">\r\n                <div class=\"card\">\r\n                    <div class=\"card-body\">\r\n                        <img src=\"img/añadirExamen.png\" class=\"text-center\" width=\"68\">\r\n                        <h5 class=\"card-title\">Crear Examen</h5>\r\n                        <p class=\"card-text\">Diseña y publica nuevos exámenes fácilmente.</p>\r\n                    </div>\r\n                </div>\r\n            </a>\r\n        </div>\r\n        <div class=\"col-md-4 col-sm-6 text-center mb-4\">\r\n            <!-- aqui va la direccion de la pagina -->\r\n            <a href=\"VerExamenes.jsp\" class=\"button\">\r\n                <div class=\"card\">\r\n                    <div class=\"card-body\">\r\n                        <img src=\"img/examenesActivos.png\" class=\"text-center\" width=\"68\">\r\n                        <h5 class=\"card-title\">Examenes Activos</h5>\r\n                        <p class=\"card-text\">Observa que exámenes tienes activos</p>\r\n                    </div>\r\n                </div>\r\n            </a>\r\n        </div>\r\n        <div class=\"col-md-4 col-sm-6 text-center mb-4\">\r\n            <!-- aqui va la direccion de la pagina -->\r\n            <a href=\"editarPerfil.jsp\" class=\"button\">\r\n                <div class=\"card\">\r\n                    <div class=\"card-body\">\r\n                        <img src=\"img/calificaciones 1.png\" class=\"text-center\" width=\"68\">\r\n                        <h5 class=\"card-title\">Gestionar Calificaciones</h5>\r\n                        <p class=\"card-text\">Administra y revisa las calificaciones de los estudiantes.</p>\r\n                    </div>\r\n                </div>\r\n            </a>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<footer>\r\n\r\n</footer>\r\n<script src=\"https://code.jquery.com/jquery-3.2.1.slim.min.js\"></script>\r\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js\"></script>\r\n<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js\"></script>\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/Docente/indexDocente.jsp b/src/main/webapp/Docente/indexDocente.jsp
+--- a/src/main/webapp/Docente/indexDocente.jsp	
++++ b/src/main/webapp/Docente/indexDocente.jsp	
+@@ -32,7 +32,7 @@
+             <a href="crearExamen.jsp" class="button">
+                 <div class="card">
+                     <div class="card-body">
+-                        <img src="img/añadirExamen.png" class="text-center" width="68">
++                        <img src="../img/añadirExamen.png" class="text-center" width="68">
+                         <h5 class="card-title">Crear Examen</h5>
+                         <p class="card-text">Diseña y publica nuevos exámenes fácilmente.</p>
+                     </div>
+Index: src/main/java/mx/edu/utez/integradiratjuans/dao/OpcionesDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package mx.edu.utez.integradiratjuans.dao;\r\n\r\nimport mx.edu.utez.integradiratjuans.model.Opcion;\r\nimport mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;\r\n\r\nimport java.sql.Connection;\r\nimport java.sql.PreparedStatement;\r\nimport java.sql.ResultSet;\r\nimport java.sql.SQLException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class OpcionesDao {\r\n    public boolean insert(Opcion opcion) {\r\n        boolean flag = false;\r\n        String query = \"INSERT INTO Opciones (opcion, id_pregunta, correcta) VALUES (?,?,?)\";\r\n        try (Connection con = DatabaseConnectionManager.getConnection();\r\n             PreparedStatement ps = con.prepareStatement(query)) {\r\n            ps.setString(1, opcion.getOpcion());\r\n            ps.setInt(2, opcion.getIdPregunta());\r\n            ps.setBoolean(3, opcion.isCorrecta());\r\n            if (ps.executeUpdate() == 1) {\r\n                flag = true;\r\n            }\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return flag;\r\n    }\r\n\r\n    public List<Opcion> getAll() {\r\n        List<Opcion> opciones = new ArrayList<>();\r\n        String query = \"SELECT * FROM Opciones\";\r\n\r\n        try (Connection con = DatabaseConnectionManager.getConnection();\r\n             PreparedStatement ps = con.prepareStatement(query)) {\r\n\r\n            ResultSet rs = ps.executeQuery();\r\n\r\n            while (rs.next()) {\r\n                Opcion opcion = new Opcion();\r\n                opcion.setIdOpcion(rs.getInt(\"id_opcion\"));\r\n                opcion.setOpcion(rs.getString(\"opcion\"));\r\n                opcion.setIdPregunta(rs.getInt(\"id_pregunta\"));\r\n                opcion.setCorrecta(rs.getBoolean(\"correcta\"));\r\n                opciones.add(opcion);\r\n            }\r\n        } catch (SQLException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n        return opciones;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/mx/edu/utez/integradiratjuans/dao/OpcionesDao.java b/src/main/java/mx/edu/utez/integradiratjuans/dao/OpcionesDao.java
+--- a/src/main/java/mx/edu/utez/integradiratjuans/dao/OpcionesDao.java	
++++ b/src/main/java/mx/edu/utez/integradiratjuans/dao/OpcionesDao.java	
+@@ -1,6 +1,7 @@
+ package mx.edu.utez.integradiratjuans.dao;
+ 
+ import mx.edu.utez.integradiratjuans.model.Opcion;
++import mx.edu.utez.integradiratjuans.model.Preguntas;
+ import mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;
+ 
+ import java.sql.Connection;
+@@ -11,22 +12,61 @@
+ import java.util.List;
+ 
+ public class OpcionesDao {
+-    public boolean insert(Opcion opcion) {
+-        boolean flag = false;
+-        String query = "INSERT INTO Opciones (opcion, id_pregunta, correcta) VALUES (?,?,?)";
+-        try (Connection con = DatabaseConnectionManager.getConnection();
+-             PreparedStatement ps = con.prepareStatement(query)) {
+-            ps.setString(1, opcion.getOpcion());
+-            ps.setInt(2, opcion.getIdPregunta());
+-            ps.setBoolean(3, opcion.isCorrecta());
+-            if (ps.executeUpdate() == 1) {
+-                flag = true;
++
++
++
++    public void insertarPreguntas(List<Preguntas> preguntas) throws SQLException {
++        String sqlPregunta = "INSERT INTO Pregunta (pregunta, id_examen) VALUES (?, ?)";
++        String sqlOpcion = "INSERT INTO Opciones (opcion, id_pregunta, correcta) VALUES (?, ?, ?)";
++
++        try (Connection connection = DatabaseConnectionManager.getConnection();
++             PreparedStatement stmtPregunta = connection.prepareStatement(sqlPregunta, PreparedStatement.RETURN_GENERATED_KEYS);
++             PreparedStatement stmtOpcion = connection.prepareStatement(sqlOpcion)) {
++
++            for (Preguntas pregunta : preguntas) {
++                // Insertar pregunta
++                stmtPregunta.setString(1, pregunta.getTexto());
++                stmtPregunta.setInt(2, pregunta.getIdExamen());
++
++                int affectedRows = stmtPregunta.executeUpdate();
++                if (affectedRows > 0) {
++                    try (var generatedKeys = stmtPregunta.getGeneratedKeys()) {
++                        if (generatedKeys.next()) {
++                            int idPregunta = generatedKeys.getInt(1);
++                            pregunta.setIdPregunta(idPregunta);
++
++                            // Insertar opciones para la pregunta
++                            for (var opcion : pregunta.getOpciones()) {
++                                stmtOpcion.setString(1, opcion.getOpcion());
++                                stmtOpcion.setInt(2, idPregunta);
++                                stmtOpcion.setBoolean(3, opcion.isCorrecta());
++                                stmtOpcion.addBatch();
++                            }
++                        }
++                    }
++                }
+             }
+-        } catch (SQLException e) {
+-            e.printStackTrace();
++
++            // Ejecutar las inserciones de opciones en batch
++            stmtOpcion.executeBatch();
+         }
+-        return flag;
+     }
++
++    private void insertarOpciones(Preguntas pregunta) throws SQLException {
++        String sql = "INSERT INTO Opciones (opcion, id_pregunta, correcta) VALUES (?, ?, ?)";
++
++        try (Connection connection = DatabaseConnectionManager.getConnection();
++             PreparedStatement statement = connection.prepareStatement(sql)) {
++
++            for (var opcion : pregunta.getOpciones()) {
++                statement.setString(1, opcion.getOpcion());
++                statement.setInt(2, pregunta.getIdPregunta());
++                statement.setBoolean(3, opcion.isCorrecta());
++                statement.addBatch();
++            }
++            statement.executeBatch();
++        }
++    }
+ 
+     public List<Opcion> getAll() {
+         List<Opcion> opciones = new ArrayList<>();
+Index: src/main/java/mx/edu/utez/integradiratjuans/model/Preguntas.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package mx.edu.utez.integradiratjuans.model;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class Preguntas {\r\n    private String texto;\r\n    private String tipo;\r\n    private String respuesta;\r\n    private List<Opcion> opciones;\r\n\r\n    public Preguntas(String texto, String tipo) {\r\n        this.texto = texto;\r\n        this.tipo = tipo;\r\n        this.opciones = new ArrayList<>();\r\n    }\r\n\r\n    public void addOpcion(Opcion opcion) {\r\n        this.opciones.add(opcion);\r\n    }\r\n\r\n    public void setTipo(String tipo) {\r\n        this.tipo = tipo;\r\n    }\r\n\r\n    public void setTexto(String texto) {\r\n        this.texto = texto;\r\n    }\r\n\r\n    public void setOpciones(List<Opcion> opciones) {\r\n        this.opciones = opciones;\r\n    }\r\n\r\n    // Getters y setters\r\n    public String getTexto() { return texto; }\r\n    public String getTipo() { return tipo; }\r\n    public String getRespuesta() { return respuesta; }\r\n    public List<Opcion> getOpciones() { return opciones; }\r\n    public void setRespuesta(String respuesta) { this.respuesta = respuesta; }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/mx/edu/utez/integradiratjuans/model/Preguntas.java b/src/main/java/mx/edu/utez/integradiratjuans/model/Preguntas.java
+--- a/src/main/java/mx/edu/utez/integradiratjuans/model/Preguntas.java	
++++ b/src/main/java/mx/edu/utez/integradiratjuans/model/Preguntas.java	
+@@ -4,38 +4,86 @@
+ import java.util.List;
+ 
+ public class Preguntas {
+-    private String texto;
+-    private String tipo;
+-    private String respuesta;
++
++    private int idPregunta;
++    private String texto; // Antes llamado 'pregunta'
++    private String tipo; // Agregado del modelo 'Preguntas'
++    private String respuesta; // Agregado del modelo 'Preguntas'
++    private int idExamen;
+     private List<Opcion> opciones;
+ 
++    // Constructor vacío
++    public Preguntas() {
++        this.opciones = new ArrayList<>();
++    }
++
++    // Constructor con dos parámetros
+     public Preguntas(String texto, String tipo) {
+         this.texto = texto;
+         this.tipo = tipo;
+         this.opciones = new ArrayList<>();
+     }
+ 
+-    public void addOpcion(Opcion opcion) {
+-        this.opciones.add(opcion);
+-    }
+-
+-    public void setTipo(String tipo) {
++    // Constructor con cuatro parámetros (si decides usarlo)
++    public Preguntas(String texto, String tipo, String respuesta, int idExamen) {
++        this.texto = texto;
+         this.tipo = tipo;
++        this.respuesta = respuesta;
++        this.idExamen = idExamen;
++        this.opciones = new ArrayList<>();
++    }
++
++
++    // Getters y Setters
++    public int getIdPregunta() {
++        return idPregunta;
++    }
++
++    public void setIdPregunta(int idPregunta) {
++        this.idPregunta = idPregunta;
++    }
++
++    public String getTexto() {
++        return texto;
+     }
+ 
+     public void setTexto(String texto) {
+         this.texto = texto;
+     }
+ 
++    public String getTipo() {
++        return tipo;
++    }
++
++    public void setTipo(String tipo) {
++        this.tipo = tipo;
++    }
++
++    public String getRespuesta() {
++        return respuesta;
++    }
++
++    public void setRespuesta(String respuesta) {
++        this.respuesta = respuesta;
++    }
++
++    public int getIdExamen() {
++        return idExamen;
++    }
++
++    public void setIdExamen(int idExamen) {
++        this.idExamen = idExamen;
++    }
++
++    public List<Opcion> getOpciones() {
++        return opciones;
++    }
++
+     public void setOpciones(List<Opcion> opciones) {
+         this.opciones = opciones;
+     }
+ 
+-    // Getters y setters
+-    public String getTexto() { return texto; }
+-    public String getTipo() { return tipo; }
+-    public String getRespuesta() { return respuesta; }
+-    public List<Opcion> getOpciones() { return opciones; }
+-    public void setRespuesta(String respuesta) { this.respuesta = respuesta; }
++    public void addOpcion(Opcion opcion) {
++        this.opciones.add(opcion);
++    }
+ }
+-
+Index: src/main/java/mx/edu/utez/integradiratjuans/controller/VistaPreviaServlet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package mx.edu.utez.integradiratjuans.controller;\r\n\r\nimport jakarta.servlet.ServletException;\r\nimport jakarta.servlet.annotation.WebServlet;\r\nimport jakarta.servlet.http.HttpServlet;\r\nimport jakarta.servlet.http.HttpServletRequest;\r\nimport jakarta.servlet.http.HttpServletResponse;\r\nimport mx.edu.utez.integradiratjuans.model.Opcion;\r\nimport mx.edu.utez.integradiratjuans.model.Preguntas;\r\n\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\n\r\n@WebServlet(\"/Docente/VistaPreviaServlet\")\r\npublic class VistaPreviaServlet extends HttpServlet {\r\n    private static final long serialVersionUID = 1L;\r\n\r\n    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {\r\n        List<Preguntas> preguntas = new ArrayList<>();\r\n\r\n        int questionIndex = 0;\r\n        while (request.getParameter(\"questions[\" + questionIndex + \"].pregunta\") != null) {\r\n            String preguntaTexto = request.getParameter(\"questions[\" + questionIndex + \"].pregunta\");\r\n            String questionType = request.getParameter(\"questions[\" + questionIndex + \"].questionType\");\r\n            Preguntas pregunta = new Preguntas(preguntaTexto, questionType);\r\n\r\n            if (questionType.equals(\"multiple_choice\") || questionType.equals(\"multiple_answers\")) {\r\n                int optionIndex = 1;\r\n                while (request.getParameter(\"questions[\" + questionIndex + \"].option\" + optionIndex) != null) {\r\n                    String opcionTexto = request.getParameter(\"questions[\" + questionIndex + \"].option\" + optionIndex);\r\n                    boolean isCorrect = request.getParameter(\"questions[\" + questionIndex + \"].correctOption\" + optionIndex) != null;\r\n                    pregunta.addOpcion(new Opcion(opcionTexto, isCorrect));\r\n                    optionIndex++;\r\n                }\r\n            } else if (questionType.equals(\"open_ended\")) {\r\n                String respuesta = request.getParameter(\"questions[\" + questionIndex + \"].openEndedAnswer\");\r\n                pregunta.setRespuesta(respuesta);\r\n            }\r\n\r\n            preguntas.add(pregunta);\r\n            questionIndex++;\r\n        }\r\n\r\n        request.setAttribute(\"preguntas\", preguntas);\r\n        request.getRequestDispatcher(\"vistaPrevia.jsp\").forward(request, response);\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/mx/edu/utez/integradiratjuans/controller/VistaPreviaServlet.java b/src/main/java/mx/edu/utez/integradiratjuans/controller/VistaPreviaServlet.java
+--- a/src/main/java/mx/edu/utez/integradiratjuans/controller/VistaPreviaServlet.java	
++++ b/src/main/java/mx/edu/utez/integradiratjuans/controller/VistaPreviaServlet.java	
+@@ -1,10 +1,12 @@
+ package mx.edu.utez.integradiratjuans.controller;
+ 
++import jakarta.servlet.RequestDispatcher;
+ import jakarta.servlet.ServletException;
+ import jakarta.servlet.annotation.WebServlet;
+ import jakarta.servlet.http.HttpServlet;
+ import jakarta.servlet.http.HttpServletRequest;
+ import jakarta.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpSession;
+ import mx.edu.utez.integradiratjuans.model.Opcion;
+ import mx.edu.utez.integradiratjuans.model.Preguntas;
+ 
+@@ -12,31 +14,54 @@
+ import java.util.ArrayList;
+ import java.util.List;
+ 
+-
+ @WebServlet("/Docente/VistaPreviaServlet")
+ public class VistaPreviaServlet extends HttpServlet {
+     private static final long serialVersionUID = 1L;
+ 
++    @Override
+     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+         List<Preguntas> preguntas = new ArrayList<>();
+ 
++        // Recuperar el ID del examen desde la sesión
++        HttpSession session = request.getSession();
++        Integer idExamen = (Integer) session.getAttribute("idExamen");
++
++        if (idExamen == null) {
++            request.setAttribute("errorMessage", "ID del examen no encontrado en la sesión.");
++            request.getRequestDispatcher("error.jsp").forward(request, response);
++            return;
++        }
++
++        request.setAttribute("idExamen", idExamen);
++
+         int questionIndex = 0;
+         while (request.getParameter("questions[" + questionIndex + "].pregunta") != null) {
+             String preguntaTexto = request.getParameter("questions[" + questionIndex + "].pregunta");
+             String questionType = request.getParameter("questions[" + questionIndex + "].questionType");
++
++            if (preguntaTexto == null || questionType == null) {
++                request.setAttribute("errorMessage", "Pregunta o tipo de pregunta no encontrados.");
++                request.getRequestDispatcher("error.jsp").forward(request, response);
++                return;
++            }
++
+             Preguntas pregunta = new Preguntas(preguntaTexto, questionType);
+ 
+-            if (questionType.equals("multiple_choice") || questionType.equals("multiple_answers")) {
++            if ("opcion_multiple".equals(questionType) || "varias_respuestas".equals(questionType)) {
+                 int optionIndex = 1;
+                 while (request.getParameter("questions[" + questionIndex + "].option" + optionIndex) != null) {
+                     String opcionTexto = request.getParameter("questions[" + questionIndex + "].option" + optionIndex);
+-                    boolean isCorrect = request.getParameter("questions[" + questionIndex + "].correctOption" + optionIndex) != null;
+-                    pregunta.addOpcion(new Opcion(opcionTexto, isCorrect));
++                    boolean isCorrect = "true".equals(request.getParameter("questions[" + questionIndex + "].correctOption" + optionIndex));
++                    if (opcionTexto != null) {
++                        pregunta.addOpcion(new Opcion(opcionTexto, isCorrect));
++                    }
+                     optionIndex++;
+                 }
+-            } else if (questionType.equals("open_ended")) {
++            } else if ("abierta".equals(questionType)) {
+                 String respuesta = request.getParameter("questions[" + questionIndex + "].openEndedAnswer");
+-                pregunta.setRespuesta(respuesta);
++                if (respuesta != null) {
++                    pregunta.setRespuesta(respuesta);
++                }
+             }
+ 
+             preguntas.add(pregunta);
+@@ -44,7 +69,7 @@
+         }
+ 
+         request.setAttribute("preguntas", preguntas);
+-        request.getRequestDispatcher("vistaPrevia.jsp").forward(request, response);
++        RequestDispatcher dispatcher = request.getRequestDispatcher("vistaPrevia.jsp");
++        dispatcher.forward(request, response);
+     }
+ }
+-
+Index: src/main/webapp/Docente/vistaPrevia.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\" pageEncoding=\"UTF-8\"%>\r\n<%@ page import=\"java.util.List\" %>\r\n<%@ page import=\"mx.edu.utez.integradiratjuans.model.Preguntas\" %>\r\n<%@ page import=\"mx.edu.utez.integradiratjuans.model.Opcion\" %>\r\n\r\n<!DOCTYPE html>\r\n<html>\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>Vista Previa</title>\r\n    <!-- Bootstrap CSS -->\r\n    <link href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" rel=\"stylesheet\">\r\n</head>\r\n<body>\r\n<div class=\"container\">\r\n    <h2 class=\"my-4\">Vista Previa de Preguntas</h2>\r\n    <%\r\n        List<Preguntas> preguntas = (List<Preguntas>) request.getAttribute(\"preguntas\");\r\n        for (Preguntas pregunta : preguntas) {\r\n            String tipoPregunta = \"\";\r\n            switch (pregunta.getTipo()) {\r\n                case \"multiple_choice\":\r\n                    tipoPregunta = \"Opción Múltiple\";\r\n                    break;\r\n                case \"multiple_answers\":\r\n                    tipoPregunta = \"Respuestas Múltiples\";\r\n                    break;\r\n                case \"open_ended\":\r\n                    tipoPregunta = \"Respuesta Abierta\";\r\n                    break;\r\n            }\r\n    %>\r\n    <div class=\"card my-3\">\r\n        <div class=\"card-body\">\r\n            <h3 class=\"card-title\"><%= pregunta.getTexto() %></h3>\r\n            <p class=\"card-text\"><strong>Tipo de Pregunta:</strong> <%= tipoPregunta %></p>\r\n            <%\r\n                if (pregunta.getTipo().equals(\"multiple_choice\") || pregunta.getTipo().equals(\"multiple_answers\")) {\r\n                    for (Opcion opcion : pregunta.getOpciones()) {\r\n            %>\r\n            <p class=\"card-text\"><%= opcion.getOpcion() %> <% if (opcion.isCorrecta()) { %> <span class=\"badge badge-success\">Correcta</span> <% } %></p>\r\n            <%\r\n                }\r\n            } else if (pregunta.getTipo().equals(\"open_ended\")) {\r\n            %>\r\n            <p class=\"card-text\"><strong>Respuesta:</strong> <%= pregunta.getRespuesta() %></p>\r\n            <%\r\n                }\r\n            %>\r\n        </div>\r\n    </div>\r\n    <%\r\n        }\r\n    %>\r\n</div>\r\n<!-- Bootstrap JS and dependencies -->\r\n<script src=\"https://code.jquery.com/jquery-3.5.1.slim.min.js\"></script>\r\n<script src=\"https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js\"></script>\r\n<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js\"></script>\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/Docente/vistaPrevia.jsp b/src/main/webapp/Docente/vistaPrevia.jsp
+--- a/src/main/webapp/Docente/vistaPrevia.jsp	
++++ b/src/main/webapp/Docente/vistaPrevia.jsp	
+@@ -1,59 +1,89 @@
+-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+-<%@ page import="java.util.List" %>
+ <%@ page import="mx.edu.utez.integradiratjuans.model.Preguntas" %>
+ <%@ page import="mx.edu.utez.integradiratjuans.model.Opcion" %>
+-
++<%@ page import="java.util.List" %>
++<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ <!DOCTYPE html>
+ <html>
+ <head>
+     <meta charset="UTF-8">
+-    <title>Vista Previa</title>
++    <title>Vista Previa de Preguntas</title>
+     <!-- Bootstrap CSS -->
+     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+ </head>
+ <body>
+ <div class="container">
+-    <h2 class="my-4">Vista Previa de Preguntas</h2>
+-    <%
+-        List<Preguntas> preguntas = (List<Preguntas>) request.getAttribute("preguntas");
+-        for (Preguntas pregunta : preguntas) {
+-            String tipoPregunta = "";
+-            switch (pregunta.getTipo()) {
+-                case "multiple_choice":
+-                    tipoPregunta = "Opción Múltiple";
+-                    break;
+-                case "multiple_answers":
+-                    tipoPregunta = "Respuestas Múltiples";
+-                    break;
+-                case "open_ended":
+-                    tipoPregunta = "Respuesta Abierta";
+-                    break;
+-            }
+-    %>
+-    <div class="card my-3">
+-        <div class="card-body">
+-            <h3 class="card-title"><%= pregunta.getTexto() %></h3>
+-            <p class="card-text"><strong>Tipo de Pregunta:</strong> <%= tipoPregunta %></p>
++    <h2>Vista Previa de Preguntas</h2>
++    <form action="InsertarPreguntaServlet" method="post">
++        <%
++            List<Preguntas> preguntas = (List<Preguntas>) request.getAttribute("preguntas");
++            if (preguntas != null && !preguntas.isEmpty()) {
++                for (int i = 0; i < preguntas.size(); i++) {
++                    Preguntas pregunta = preguntas.get(i);
++        %>
++        <div class="border p-3 my-3">
++            <h3>Pregunta <%= (i + 1) %></h3>
++            <p><strong>Pregunta:</strong> <%= pregunta.getTexto() %></p>
++            <p><strong>Tipo de Pregunta:</strong> <%= pregunta.getTipo() %></p>
++            <%
++                if ("opcion_multiple".equals(pregunta.getTipo()) || "varias_respuestas".equals(pregunta.getTipo())) {
++                    List<Opcion> opciones = pregunta.getOpciones();
++                    if (opciones != null && !opciones.isEmpty()) {
++                        for (int j = 0; j < opciones.size(); j++) {
++                            Opcion opcion = opciones.get(j);
++            %>
++            <p>Opción <%= (j + 1) %>: <%= opcion.getOpcion() %> <% if (opcion.isCorrecta()) { %> <strong>(Correcta)</strong> <% } %></p>
++            <%
++                }
++            } else {
++            %>
++            <p>No hay opciones disponibles para esta pregunta.</p>
+             <%
+-                if (pregunta.getTipo().equals("multiple_choice") || pregunta.getTipo().equals("multiple_answers")) {
+-                    for (Opcion opcion : pregunta.getOpciones()) {
++                }
++            } else if ("abierta".equals(pregunta.getTipo())) {
+             %>
+-            <p class="card-text"><%= opcion.getOpcion() %> <% if (opcion.isCorrecta()) { %> <span class="badge badge-success">Correcta</span> <% } %></p>
++            <p><strong>Respuesta:</strong> <%= pregunta.getRespuesta() %></p>
+             <%
+                 }
+-            } else if (pregunta.getTipo().equals("open_ended")) {
+             %>
+-            <p class="card-text"><strong>Respuesta:</strong> <%= pregunta.getRespuesta() %></p>
++            <!-- Campos ocultos para enviar los datos al servlet de inserción -->
++            <input type="hidden" name="questions[<%= i %>].pregunta" value="<%= pregunta.getTexto() %>">
++            <input type="hidden" name="questions[<%= i %>].questionType" value="<%= pregunta.getTipo() %>">
++            <%
++                if ("opcion_multiple".equals(pregunta.getTipo()) || "varias_respuestas".equals(pregunta.getTipo())) {
++                    List<Opcion> opciones = pregunta.getOpciones();
++                    if (opciones != null && !opciones.isEmpty()) {
++                        for (int j = 0; j < opciones.size(); j++) {
++                            Opcion opcion = opciones.get(j);
++            %>
++            <input type="hidden" name="questions[<%= i %>].option<%= (j + 1) %>" value="<%= opcion.getOpcion() %>">
++            <input type="hidden" name="questions[<%= i %>].correctOption<%= (j + 1) %>" value="<%= opcion.isCorrecta() ? "true" : "false" %>">
++            <%
++                }
++            } else {
++            %>
++            <input type="hidden" name="questions[<%= i %>].optionsAvailable" value="false">
++            <%
++                }
++            } else if ("abierta".equals(pregunta.getTipo())) {
++            %>
++            <input type="hidden" name="questions[<%= i %>].openEndedAnswer" value="<%= pregunta.getRespuesta() %>">
+             <%
+                 }
+             %>
+         </div>
+-    </div>
+-    <%
+-        }
+-    %>
++        <%
++            }
++        } else {
++        %>
++        <p>No hay preguntas para mostrar en la vista previa.</p>
++        <%
++            }
++        %>
++        <button type="submit" class="btn btn-success">Guardar Preguntas</button>
++        <a href="crearPreguntas.jsp" class="btn btn-secondary">Editar</a>
++    </form>
+ </div>
+-<!-- Bootstrap JS and dependencies -->
++<!-- Bootstrap JS y dependencias -->
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+Index: src/main/webapp/Docente/crearPreguntas.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\" pageEncoding=\"UTF-8\"%>\r\n<!DOCTYPE html>\r\n<html>\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>Crear Pregunta</title>\r\n    <!-- Bootstrap CSS -->\r\n    <link href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" rel=\"stylesheet\">\r\n    <script>\r\n        function showOptions(questionIndex) {\r\n            var questionType = document.getElementById(\"questionType\" + questionIndex).value;\r\n            var optionsDiv = document.getElementById(\"optionsDiv\" + questionIndex);\r\n            optionsDiv.innerHTML = \"\";\r\n\r\n            if (questionType == \"multiple_choice\" || questionType == \"multiple_answers\") {\r\n                var addOptionBtn = \"<button type='button' class='btn btn-secondary' onclick='addOption(\" + questionIndex + \")'>Agregar Opción</button>\";\r\n                optionsDiv.innerHTML = addOptionBtn;\r\n                addOption(questionIndex);\r\n                addOption(questionIndex);\r\n                addOption(questionIndex);\r\n                addOption(questionIndex);\r\n            } else if (questionType == \"open_ended\") {\r\n                optionsDiv.innerHTML = \"<div class='form-group'><label>Respuesta:</label><input type='text' class='form-control' name='questions[\" + questionIndex + \"].openEndedAnswer' required></div>\";\r\n            }\r\n        }\r\n\r\n        function addOption(questionIndex) {\r\n            var optionsDiv = document.getElementById(\"optionsDiv\" + questionIndex);\r\n            var numOptions = optionsDiv.getElementsByClassName('option').length + 1;\r\n            var newOption = document.createElement('div');\r\n            newOption.className = 'option form-group';\r\n            newOption.innerHTML =\r\n                \"<label>Opción \" + numOptions + \":</label>\" +\r\n                \"<input type='text' class='form-control' name='questions[\" + questionIndex + \"].option\" + numOptions + \"' required>\" +\r\n                \"<div class='form-check'><input type='checkbox' class='form-check-input' name='questions[\" + questionIndex + \"].correctOption\" + numOptions + \"'> Correcta</div>\";\r\n            optionsDiv.insertBefore(newOption, optionsDiv.lastElementChild);\r\n        }\r\n\r\n        function addQuestion() {\r\n            var questionsDiv = document.getElementById(\"questionsDiv\");\r\n            var questionIndex = questionsDiv.getElementsByClassName('question').length;\r\n            var newQuestion = document.createElement('div');\r\n            newQuestion.className = 'question border p-3 my-3';\r\n            newQuestion.innerHTML =\r\n                \"<h3>Pregunta \" + (questionIndex + 1) + \"</h3>\" +\r\n                \"<div class='form-group'><label>Pregunta:</label>\" +\r\n                \"<textarea class='form-control' name='questions[\" + questionIndex + \"].pregunta' required></textarea></div>\" +\r\n                \"<div class='form-group'><label>Tipo de Pregunta:</label>\" +\r\n                \"<select id='questionType\" + questionIndex + \"' class='form-control' name='questions[\" + questionIndex + \"].questionType' onchange='showOptions(\" + questionIndex + \")' required>\" +\r\n                \"<option value=''>Seleccione el tipo de pregunta</option>\" +\r\n                \"<option value='multiple_choice'>Opción Múltiple</option>\" +\r\n                \"<option value='open_ended'>Abierta</option>\" +\r\n                \"<option value='multiple_answers'>Varias Respuestas</option>\" +\r\n                \"</select></div>\" +\r\n                \"<div id='optionsDiv\" + questionIndex + \"'></div>\";\r\n            questionsDiv.appendChild(newQuestion);\r\n        }\r\n\r\n        window.onload = function() {\r\n            addQuestion();\r\n        };\r\n    </script>\r\n</head>\r\n<body>\r\n<div class=\"container\">\r\n    <h2>Crear Pregunta</h2>\r\n    <form action=\"VistaPreviaServlet\" method=\"post\">\r\n        <div id=\"questionsDiv\"></div>\r\n        <button type=\"button\" class=\"btn btn-primary my-3\" onclick=\"addQuestion()\">Agregar Pregunta</button>\r\n        <input type=\"submit\" class=\"btn btn-success\" value=\"Vista Previa\">\r\n    </form>\r\n</div>\r\n<!-- Bootstrap JS and dependencies -->\r\n<script src=\"https://code.jquery.com/jquery-3.5.1.slim.min.js\"></script>\r\n<script src=\"https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js\"></script>\r\n<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js\"></script>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/Docente/crearPreguntas.jsp b/src/main/webapp/Docente/crearPreguntas.jsp
+--- a/src/main/webapp/Docente/crearPreguntas.jsp	
++++ b/src/main/webapp/Docente/crearPreguntas.jsp	
+@@ -7,23 +7,30 @@
+     <!-- Bootstrap CSS -->
+     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+     <script>
++        // Muestra las opciones según el tipo de pregunta seleccionada
+         function showOptions(questionIndex) {
+             var questionType = document.getElementById("questionType" + questionIndex).value;
+             var optionsDiv = document.getElementById("optionsDiv" + questionIndex);
+             optionsDiv.innerHTML = "";
+ 
+-            if (questionType == "multiple_choice" || questionType == "multiple_answers") {
++            if (questionType == "opcion_multiple" || questionType == "varias_respuestas") {
+                 var addOptionBtn = "<button type='button' class='btn btn-secondary' onclick='addOption(" + questionIndex + ")'>Agregar Opción</button>";
+                 optionsDiv.innerHTML = addOptionBtn;
++                // Añadir 4 opciones por defecto
+                 addOption(questionIndex);
+                 addOption(questionIndex);
+                 addOption(questionIndex);
+                 addOption(questionIndex);
+-            } else if (questionType == "open_ended") {
++            } else if (questionType == "abierta") {
+                 optionsDiv.innerHTML = "<div class='form-group'><label>Respuesta:</label><input type='text' class='form-control' name='questions[" + questionIndex + "].openEndedAnswer' required></div>";
++            } else if (questionType == "verdadero_falso") {
++                optionsDiv.innerHTML =
++                    "<div class='form-check'><input type='radio' class='form-check-input' name='questions[" + questionIndex + "].correctOption' value='true' required> Verdadero</div>" +
++                    "<div class='form-check'><input type='radio' class='form-check-input' name='questions[" + questionIndex + "].correctOption' value='false' required> Falso</div>";
+             }
+         }
+ 
++        // Añade una opción nueva para preguntas de opción múltiple
+         function addOption(questionIndex) {
+             var optionsDiv = document.getElementById("optionsDiv" + questionIndex);
+             var numOptions = optionsDiv.getElementsByClassName('option').length + 1;
+@@ -36,6 +43,7 @@
+             optionsDiv.insertBefore(newOption, optionsDiv.lastElementChild);
+         }
+ 
++        // Añade una nueva pregunta al formulario
+         function addQuestion() {
+             var questionsDiv = document.getElementById("questionsDiv");
+             var questionIndex = questionsDiv.getElementsByClassName('question').length;
+@@ -48,14 +56,16 @@
+                 "<div class='form-group'><label>Tipo de Pregunta:</label>" +
+                 "<select id='questionType" + questionIndex + "' class='form-control' name='questions[" + questionIndex + "].questionType' onchange='showOptions(" + questionIndex + ")' required>" +
+                 "<option value=''>Seleccione el tipo de pregunta</option>" +
+-                "<option value='multiple_choice'>Opción Múltiple</option>" +
+-                "<option value='open_ended'>Abierta</option>" +
+-                "<option value='multiple_answers'>Varias Respuestas</option>" +
++                "<option value='opcion_multiple'>Opción Múltiple</option>" +
++                "<option value='abierta'>Abierta</option>" +
++                "<option value='varias_respuestas'>Varias Respuestas</option>" +
++                "<option value='verdadero_falso'>Verdadero/Falso</option>" + // Opción Verdadero/Falso
+                 "</select></div>" +
+                 "<div id='optionsDiv" + questionIndex + "'></div>";
+             questionsDiv.appendChild(newQuestion);
+         }
+ 
++        // Inicializa la primera pregunta cuando la página carga
+         window.onload = function() {
+             addQuestion();
+         };
+@@ -66,13 +76,14 @@
+     <h2>Crear Pregunta</h2>
+     <form action="VistaPreviaServlet" method="post">
+         <div id="questionsDiv"></div>
++
+         <button type="button" class="btn btn-primary my-3" onclick="addQuestion()">Agregar Pregunta</button>
+         <input type="submit" class="btn btn-success" value="Vista Previa">
+     </form>
+ </div>
+-<!-- Bootstrap JS and dependencies -->
++<!-- Bootstrap JS y dependencias -->
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ </body>
+-</html>
+\ No newline at end of file
++</html>
+Index: src/main/java/mx/edu/utez/integradiratjuans/controller/CrearExamenServlet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package mx.edu.utez.integradiratjuans.controller;\r\n\r\nimport mx.edu.utez.integradiratjuans.dao.ExamenDao;\r\nimport mx.edu.utez.integradiratjuans.dao.GrupoDao;\r\nimport mx.edu.utez.integradiratjuans.model.Examen;\r\n\r\nimport jakarta.servlet.ServletException;\r\nimport jakarta.servlet.annotation.WebServlet;\r\nimport jakarta.servlet.http.HttpServlet;\r\nimport jakarta.servlet.http.HttpServletRequest;\r\nimport jakarta.servlet.http.HttpServletResponse;\r\nimport java.io.IOException;\r\nimport java.sql.Timestamp;\r\n\r\n@WebServlet(\"/Docente/CrearExamenServlet\")\r\npublic class CrearExamenServlet extends HttpServlet {\r\n\r\n    @Override\r\n    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {\r\n        // Recuperar los parámetros del formulario\r\n        String nombre = request.getParameter(\"nombre\");\r\n        String descripcion = request.getParameter(\"descripcion\");\r\n        String fechaAplicacionStr = request.getParameter(\"fecha_aplicacion\");\r\n        String fechaCierreStr = request.getParameter(\"fecha_cierre\");\r\n        String idClaseStr = request.getParameter(\"id_clase\");\r\n\r\n        // Validar parámetros\r\n        if (nombre == null || nombre.isEmpty() ||\r\n                descripcion == null || descripcion.isEmpty() ||\r\n                fechaAplicacionStr == null || fechaAplicacionStr.isEmpty() ||\r\n                fechaCierreStr == null || fechaCierreStr.isEmpty() ||\r\n                idClaseStr == null || idClaseStr.isEmpty()) {\r\n            request.setAttribute(\"errorMessage\", \"Todos los campos son obligatorios.\");\r\n            request.getRequestDispatcher(\"crearExamen.jsp\").forward(request, response);\r\n            return;\r\n        }\r\n\r\n        // Convertir las fechas a Timestamp\r\n        Timestamp fechaAplicacion;\r\n        Timestamp fechaCierre;\r\n        int idClase;\r\n\r\n        try {\r\n            fechaAplicacion = Timestamp.valueOf(fechaAplicacionStr.replace(\"T\", \" \") + \":00\");\r\n            fechaCierre = Timestamp.valueOf(fechaCierreStr.replace(\"T\", \" \") + \":00\");\r\n        } catch (IllegalArgumentException e) {\r\n            e.printStackTrace();\r\n            request.setAttribute(\"errorMessage\", \"Formato de fecha inválido.\");\r\n            request.getRequestDispatcher(\"crearExamen.jsp\").forward(request, response);\r\n            return;\r\n        }\r\n\r\n        try {\r\n            idClase = Integer.parseInt(idClaseStr);\r\n        } catch (NumberFormatException e) {\r\n            e.printStackTrace();\r\n            request.setAttribute(\"errorMessage\", \"ID de clase inválido.\");\r\n            request.getRequestDispatcher(\"crearExamen.jsp\").forward(request, response);\r\n            return;\r\n        }\r\n\r\n        // Crear el objeto Examen\r\n        Examen examen = new Examen();\r\n        examen.setNombre(nombre);\r\n        examen.setDescripcion(descripcion);\r\n        examen.setFecha_aplicacion(fechaAplicacion);\r\n        examen.setFecha_cierre(fechaCierre);\r\n        examen.setId_clase(idClase);\r\n\r\n        // Insertar el examen en la base de datos\r\n        ExamenDao examenDao = new ExamenDao();\r\n        boolean success = examenDao.insert(examen);\r\n\r\n        if (success) {\r\n            response.sendRedirect(\"crearPreguntas.jsp\");\r\n        } else {\r\n            request.setAttribute(\"errorMessage\", \"Error al insertar el examen en la base de datos.\");\r\n            request.getRequestDispatcher(\"crearExamen.jsp\").forward(request, response);\r\n        }\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/mx/edu/utez/integradiratjuans/controller/CrearExamenServlet.java b/src/main/java/mx/edu/utez/integradiratjuans/controller/CrearExamenServlet.java
+--- a/src/main/java/mx/edu/utez/integradiratjuans/controller/CrearExamenServlet.java	
++++ b/src/main/java/mx/edu/utez/integradiratjuans/controller/CrearExamenServlet.java	
+@@ -1,7 +1,7 @@
+ package mx.edu.utez.integradiratjuans.controller;
+ 
++import jakarta.servlet.RequestDispatcher;
+ import mx.edu.utez.integradiratjuans.dao.ExamenDao;
+-import mx.edu.utez.integradiratjuans.dao.GrupoDao;
+ import mx.edu.utez.integradiratjuans.model.Examen;
+ 
+ import jakarta.servlet.ServletException;
+@@ -9,9 +9,12 @@
+ import jakarta.servlet.http.HttpServlet;
+ import jakarta.servlet.http.HttpServletRequest;
+ import jakarta.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpSession;
++
+ import java.io.IOException;
+ import java.sql.Timestamp;
+ 
++
+ @WebServlet("/Docente/CrearExamenServlet")
+ public class CrearExamenServlet extends HttpServlet {
+ 
+@@ -69,9 +72,14 @@
+ 
+         // Insertar el examen en la base de datos
+         ExamenDao examenDao = new ExamenDao();
+-        boolean success = examenDao.insert(examen);
++        int idExamen = examenDao.insert(examen);
+ 
+-        if (success) {
++        if (idExamen != 0) {
++            // Establecer el ID del examen en la sesión
++            HttpSession session = request.getSession();
++            session.setAttribute("idExamen", idExamen);
++
++            // Redirigir a la página de creación de preguntas
+             response.sendRedirect("crearPreguntas.jsp");
+         } else {
+             request.setAttribute("errorMessage", "Error al insertar el examen en la base de datos.");
+@@ -79,4 +87,3 @@
+         }
+     }
+ }
+-
+Index: src/main/java/mx/edu/utez/integradiratjuans/dao/PreguntaDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package mx.edu.utez.integradiratjuans.dao;\r\n\r\nimport mx.edu.utez.integradiratjuans.model.Pregunta;\r\nimport mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;\r\n\r\nimport java.sql.Connection;\r\nimport java.sql.PreparedStatement;\r\nimport java.sql.ResultSet;\r\nimport java.sql.SQLException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class PreguntaDao {\r\n\r\n    public boolean insert(Pregunta pregunta) {\r\n        boolean flag = false;\r\n        String query = \"INSERT INTO Pregunta (pregunta, id_examen) VALUES (?,?)\";\r\n        try (Connection con = DatabaseConnectionManager.getConnection();\r\n             PreparedStatement ps = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {\r\n            ps.setString(1, pregunta.getPregunta());\r\n            ps.setInt(2, pregunta.getIdExamen());\r\n            if (ps.executeUpdate() == 1) {\r\n                try (ResultSet generatedKeys = ps.getGeneratedKeys()) {\r\n                    if (generatedKeys.next()) {\r\n                        pregunta.setIdPregunta(generatedKeys.getInt(1));\r\n                    }\r\n                }\r\n                flag = true;\r\n            }\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return flag;\r\n    }\r\n\r\n    public List<Pregunta> getAll() {\r\n        List<Pregunta> preguntas = new ArrayList<>();\r\n        String query = \"SELECT * FROM Pregunta\";\r\n\r\n        try (Connection con = DatabaseConnectionManager.getConnection();\r\n             PreparedStatement ps = con.prepareStatement(query)) {\r\n\r\n            ResultSet rs = ps.executeQuery();\r\n\r\n            while (rs.next()) {\r\n                Pregunta pregunta = new Pregunta();\r\n                pregunta.setIdPregunta(rs.getInt(\"id_pregunta\"));\r\n                pregunta.setPregunta(rs.getString(\"pregunta\"));\r\n                pregunta.setIdExamen(rs.getInt(\"id_examen\"));\r\n                preguntas.add(pregunta);\r\n            }\r\n        } catch (SQLException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n        return preguntas;\r\n    }\r\n\r\n    public int getLastInsertedId() {\r\n        int id = -1;\r\n        String query = \"SELECT LAST_INSERT_ID()\";\r\n\r\n        try (Connection con = DatabaseConnectionManager.getConnection();\r\n             PreparedStatement ps = con.prepareStatement(query);\r\n             ResultSet rs = ps.executeQuery()) {\r\n\r\n            if (rs.next()) {\r\n                id = rs.getInt(1);\r\n            }\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n\r\n        return id;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/mx/edu/utez/integradiratjuans/dao/PreguntaDao.java b/src/main/java/mx/edu/utez/integradiratjuans/dao/PreguntaDao.java
+--- a/src/main/java/mx/edu/utez/integradiratjuans/dao/PreguntaDao.java	
++++ b/src/main/java/mx/edu/utez/integradiratjuans/dao/PreguntaDao.java	
+@@ -1,75 +1,82 @@
+ package mx.edu.utez.integradiratjuans.dao;
+ 
+-import mx.edu.utez.integradiratjuans.model.Pregunta;
++import mx.edu.utez.integradiratjuans.model.Opcion;
++import mx.edu.utez.integradiratjuans.model.Preguntas;
+ import mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;
+ 
+-import java.sql.Connection;
+-import java.sql.PreparedStatement;
+-import java.sql.ResultSet;
+-import java.sql.SQLException;
+-import java.util.ArrayList;
++import java.sql.*;
+ import java.util.List;
+ 
+ public class PreguntaDao {
+ 
+-    public boolean insert(Pregunta pregunta) {
+-        boolean flag = false;
+-        String query = "INSERT INTO Pregunta (pregunta, id_examen) VALUES (?,?)";
+-        try (Connection con = DatabaseConnectionManager.getConnection();
+-             PreparedStatement ps = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+-            ps.setString(1, pregunta.getPregunta());
+-            ps.setInt(2, pregunta.getIdExamen());
+-            if (ps.executeUpdate() == 1) {
+-                try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+-                    if (generatedKeys.next()) {
+-                        pregunta.setIdPregunta(generatedKeys.getInt(1));
++    public boolean insertarPregunta(Preguntas pregunta) {
++        String sqlPregunta = "INSERT INTO Pregunta (pregunta, id_examen) VALUES (?, ?)";
++        String sqlOpcion = "INSERT INTO Opciones (opcion, id_pregunta, correcta) VALUES (?, ?, ?)";
++
++        try (Connection conn = DatabaseConnectionManager.getConnection();
++             PreparedStatement pstmtPregunta = conn.prepareStatement(sqlPregunta, Statement.RETURN_GENERATED_KEYS);
++             PreparedStatement pstmtOpcion = conn.prepareStatement(sqlOpcion)) {
++
++            // Insertar la pregunta
++            pstmtPregunta.setString(1, pregunta.getTexto());
++            pstmtPregunta.setInt(2, pregunta.getIdExamen());
++            int affectedRows = pstmtPregunta.executeUpdate();
++
++            if (affectedRows == 0) {
++                return false;
++            }
++
++            // Obtener el ID generado para la pregunta
++            try (var generatedKeys = pstmtPregunta.getGeneratedKeys()) {
++                if (generatedKeys.next()) {
++                    int idPregunta = generatedKeys.getInt(1);
++                    pregunta.setIdPregunta(idPregunta);
++
++                    // Insertar las opciones
++                    for (Opcion opcion : pregunta.getOpciones()) {
++                        pstmtOpcion.setString(1, opcion.getOpcion());
++                        pstmtOpcion.setInt(2, idPregunta);
++                        pstmtOpcion.setBoolean(3, opcion.isCorrecta());
++                        pstmtOpcion.addBatch();
+                     }
++                    pstmtOpcion.executeBatch();
+                 }
+-                flag = true;
+             }
++            return true;
++
+         } catch (SQLException e) {
+             e.printStackTrace();
++            return false;
+         }
+-        return flag;
+     }
+-
+-    public List<Pregunta> getAll() {
+-        List<Pregunta> preguntas = new ArrayList<>();
+-        String query = "SELECT * FROM Pregunta";
+-
+-        try (Connection con = DatabaseConnectionManager.getConnection();
+-             PreparedStatement ps = con.prepareStatement(query)) {
+-
+-            ResultSet rs = ps.executeQuery();
+-
+-            while (rs.next()) {
+-                Pregunta pregunta = new Pregunta();
+-                pregunta.setIdPregunta(rs.getInt("id_pregunta"));
+-                pregunta.setPregunta(rs.getString("pregunta"));
+-                pregunta.setIdExamen(rs.getInt("id_examen"));
+-                preguntas.add(pregunta);
+-            }
+-        } catch (SQLException e) {
+-            throw new RuntimeException(e);
+-        }
+-        return preguntas;
+-    }
+ 
+     public int getLastInsertedId() {
+         int id = -1;
+         String query = "SELECT LAST_INSERT_ID()";
+-
+         try (Connection con = DatabaseConnectionManager.getConnection();
+              PreparedStatement ps = con.prepareStatement(query);
+              ResultSet rs = ps.executeQuery()) {
+-
+             if (rs.next()) {
+                 id = rs.getInt(1);
+             }
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
+-
+         return id;
+     }
++
++    public int getIdExamen(int idPregunta){
++        int idExamen = -1;
++        String query = "SELECT id_examen FROM Pregunta WHERE idPregunta = ?()";
++        try (Connection con = DatabaseConnectionManager.getConnection();
++             PreparedStatement ps = con.prepareStatement(query);
++             ResultSet rs = ps.executeQuery()) {
++            if (rs.next()) {
++                idExamen = rs.getInt(1);
++            }
++        } catch (SQLException e) {
++            e.printStackTrace();
++        }
++        return idExamen;
++    }
+ }
+Index: src/main/java/mx/edu/utez/integradiratjuans/model/Pregunta.java
+===================================================================
+diff --git a/src/main/java/mx/edu/utez/integradiratjuans/model/Pregunta.java b/src/main/java/mx/edu/utez/integradiratjuans/model/Pregunta.java
+deleted file mode 100644
+--- a/src/main/java/mx/edu/utez/integradiratjuans/model/Pregunta.java	
++++ /dev/null	
+@@ -1,46 +0,0 @@
+-package mx.edu.utez.integradiratjuans.model;
+-
+-
+-
+-public class Pregunta {
+-
+-    private int idPregunta;
+-
+-    private String pregunta;
+-
+-    private int idExamen;
+-
+-
+-    public Pregunta() {
+-    }
+-
+-    public Pregunta(String pregunta, int idExamen) {
+-        this.pregunta = pregunta;
+-        this.idExamen = idExamen;
+-    }
+-
+-    public int getIdPregunta() {
+-        return idPregunta;
+-    }
+-
+-    public void setIdPregunta(int idPregunta) {
+-        this.idPregunta = idPregunta;
+-    }
+-
+-    public String getPregunta() {
+-        return pregunta;
+-    }
+-
+-    public void setPregunta(String pregunta) {
+-        this.pregunta = pregunta;
+-    }
+-
+-    public int getIdExamen() {
+-        return idExamen;
+-    }
+-
+-    public void setIdExamen(int idExamen) {
+-        this.idExamen = idExamen;
+-    }
+-}
+-
+Index: src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package mx.edu.utez.integradiratjuans.dao;\r\n\r\nimport java.sql.*;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;\r\nimport mx.edu.utez.integradiratjuans.model.Examen;\r\n\r\npublic class ExamenDao {\r\n\r\n    public boolean insert(Examen examen) {\r\n        String query = \"INSERT INTO Examen (Nombre, Fecha_aplicacion, Fecha_cierre, id_clase, descripcion) VALUES (?, ?, ?, ?, ?)\";\r\n\r\n        try (Connection con = DatabaseConnectionManager.getConnection();\r\n             PreparedStatement pstmt = con.prepareStatement(query)) {\r\n\r\n            pstmt.setString(1, examen.getNombre());\r\n            pstmt.setTimestamp(2, examen.getFecha_aplicacion());\r\n            pstmt.setTimestamp(3, examen.getFecha_cierre());\r\n            pstmt.setInt(4, examen.getId_clase());\r\n            pstmt.setString(5, examen.getDescripcion());\r\n\r\n            int rowsAffected = pstmt.executeUpdate();\r\n            return rowsAffected > 0;\r\n\r\n        } catch (SQLException e) {\r\n            e.printStackTrace(); // Imprime la traza del error\r\n            return false;\r\n        }\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n    public List<Examen> getAll() {\r\n        List<Examen> examenes = new ArrayList<>();\r\n        String query = \"SELECT * FROM Examen\";\r\n        try (Connection con = DatabaseConnectionManager.getConnection();\r\n             Statement stmt = con.createStatement();\r\n             ResultSet rs = stmt.executeQuery(query)) {\r\n\r\n            while (rs.next()) {\r\n                Examen examen = new Examen();\r\n                examen.setId_examen(rs.getInt(\"id_examen\"));\r\n                examen.setNombre(rs.getString(\"Nombre\"));\r\n                examen.setFecha_aplicacion(rs.getTimestamp(\"Fecha_aplicacion\"));\r\n                examen.setFecha_cierre(rs.getTimestamp(\"Fecha_cierre\"));\r\n                examen.setId_clase(rs.getInt(\"id_clase\"));\r\n                examenes.add(examen);\r\n            }\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return examenes;\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java b/src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java
+--- a/src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java	
++++ b/src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java	
+@@ -8,11 +8,12 @@
+ 
+ public class ExamenDao {
+ 
+-    public boolean insert(Examen examen) {
++    public int insert(Examen examen) {
+         String query = "INSERT INTO Examen (Nombre, Fecha_aplicacion, Fecha_cierre, id_clase, descripcion) VALUES (?, ?, ?, ?, ?)";
++        int id = -1;
+ 
+         try (Connection con = DatabaseConnectionManager.getConnection();
+-             PreparedStatement pstmt = con.prepareStatement(query)) {
++             PreparedStatement pstmt = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+ 
+             pstmt.setString(1, examen.getNombre());
+             pstmt.setTimestamp(2, examen.getFecha_aplicacion());
+@@ -21,12 +22,17 @@
+             pstmt.setString(5, examen.getDescripcion());
+ 
+             int rowsAffected = pstmt.executeUpdate();
+-            return rowsAffected > 0;
++            ResultSet rs = pstmt.getGeneratedKeys();
++
++            if (rs.next()) {
++                id = rs.getInt(1);
++            }
+ 
+         } catch (SQLException e) {
+             e.printStackTrace(); // Imprime la traza del error
+-            return false;
+         }
++
++        return id;
+     }
+ 
+ 

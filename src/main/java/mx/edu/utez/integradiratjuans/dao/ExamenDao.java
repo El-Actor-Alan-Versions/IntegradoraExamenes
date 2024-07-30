@@ -8,11 +8,12 @@ import mx.edu.utez.integradiratjuans.model.Examen;
 
 public class ExamenDao {
 
-    public boolean insert(Examen examen) {
+    public int insert(Examen examen) {
         String query = "INSERT INTO Examen (Nombre, Fecha_aplicacion, Fecha_cierre, id_clase, descripcion) VALUES (?, ?, ?, ?, ?)";
+        int id = -1;
 
         try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement pstmt = con.prepareStatement(query)) {
+             PreparedStatement pstmt = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setString(1, examen.getNombre());
             pstmt.setTimestamp(2, examen.getFecha_aplicacion());
@@ -21,12 +22,17 @@ public class ExamenDao {
             pstmt.setString(5, examen.getDescripcion());
 
             int rowsAffected = pstmt.executeUpdate();
-            return rowsAffected > 0;
+            ResultSet rs = pstmt.getGeneratedKeys();
+
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace(); // Imprime la traza del error
-            return false;
         }
+
+        return id;
     }
 
 

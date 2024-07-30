@@ -7,23 +7,30 @@
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script>
+        // Muestra las opciones según el tipo de pregunta seleccionada
         function showOptions(questionIndex) {
             var questionType = document.getElementById("questionType" + questionIndex).value;
             var optionsDiv = document.getElementById("optionsDiv" + questionIndex);
             optionsDiv.innerHTML = "";
 
-            if (questionType == "multiple_choice" || questionType == "multiple_answers") {
+            if (questionType == "opcion_multiple" || questionType == "varias_respuestas") {
                 var addOptionBtn = "<button type='button' class='btn btn-secondary' onclick='addOption(" + questionIndex + ")'>Agregar Opción</button>";
                 optionsDiv.innerHTML = addOptionBtn;
+                // Añadir 4 opciones por defecto
                 addOption(questionIndex);
                 addOption(questionIndex);
                 addOption(questionIndex);
                 addOption(questionIndex);
-            } else if (questionType == "open_ended") {
+            } else if (questionType == "abierta") {
                 optionsDiv.innerHTML = "<div class='form-group'><label>Respuesta:</label><input type='text' class='form-control' name='questions[" + questionIndex + "].openEndedAnswer' required></div>";
+            } else if (questionType == "verdadero_falso") {
+                optionsDiv.innerHTML =
+                    "<div class='form-check'><input type='radio' class='form-check-input' name='questions[" + questionIndex + "].correctOption' value='true' required> Verdadero</div>" +
+                    "<div class='form-check'><input type='radio' class='form-check-input' name='questions[" + questionIndex + "].correctOption' value='false' required> Falso</div>";
             }
         }
 
+        // Añade una opción nueva para preguntas de opción múltiple
         function addOption(questionIndex) {
             var optionsDiv = document.getElementById("optionsDiv" + questionIndex);
             var numOptions = optionsDiv.getElementsByClassName('option').length + 1;
@@ -36,6 +43,7 @@
             optionsDiv.insertBefore(newOption, optionsDiv.lastElementChild);
         }
 
+        // Añade una nueva pregunta al formulario
         function addQuestion() {
             var questionsDiv = document.getElementById("questionsDiv");
             var questionIndex = questionsDiv.getElementsByClassName('question').length;
@@ -48,14 +56,16 @@
                 "<div class='form-group'><label>Tipo de Pregunta:</label>" +
                 "<select id='questionType" + questionIndex + "' class='form-control' name='questions[" + questionIndex + "].questionType' onchange='showOptions(" + questionIndex + ")' required>" +
                 "<option value=''>Seleccione el tipo de pregunta</option>" +
-                "<option value='multiple_choice'>Opción Múltiple</option>" +
-                "<option value='open_ended'>Abierta</option>" +
-                "<option value='multiple_answers'>Varias Respuestas</option>" +
+                "<option value='opcion_multiple'>Opción Múltiple</option>" +
+                "<option value='abierta'>Abierta</option>" +
+                "<option value='varias_respuestas'>Varias Respuestas</option>" +
+                "<option value='verdadero_falso'>Verdadero/Falso</option>" + // Opción Verdadero/Falso
                 "</select></div>" +
                 "<div id='optionsDiv" + questionIndex + "'></div>";
             questionsDiv.appendChild(newQuestion);
         }
 
+        // Inicializa la primera pregunta cuando la página carga
         window.onload = function() {
             addQuestion();
         };
@@ -66,11 +76,12 @@
     <h2>Crear Pregunta</h2>
     <form action="VistaPreviaServlet" method="post">
         <div id="questionsDiv"></div>
+
         <button type="button" class="btn btn-primary my-3" onclick="addQuestion()">Agregar Pregunta</button>
         <input type="submit" class="btn btn-success" value="Vista Previa">
     </form>
 </div>
-<!-- Bootstrap JS and dependencies -->
+<!-- Bootstrap JS y dependencias -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
