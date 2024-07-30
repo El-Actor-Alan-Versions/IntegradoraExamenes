@@ -28,6 +28,10 @@ public class Alumno {
     public Alumno() {
         // Otros campos inicializados aquí
     }
+
+    public Alumno(String matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String estado, String contraseña, int idGrupo) {
+    }
+
     // Getters y setters
     public String getMatricula() { return matricula; }
     public void setMatricula(String matricula) { this.matricula = matricula; }
@@ -52,6 +56,7 @@ public class Alumno {
 
     public String getEstado() { return estado; }
     public void setEstado(String estado) { this.estado = estado; }
+
     public String getNombreGrupo() {
         return nombreGrupo;
     }

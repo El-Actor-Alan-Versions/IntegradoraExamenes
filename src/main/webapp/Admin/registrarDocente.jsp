@@ -38,9 +38,12 @@
 </script>
 <div class="container mt-4">
     <h1 class="mb-4"><%= action.equals("update") ? "Actualizar" : "Registrar" %> Usuario</h1>
-    <form action="<%=action.equals("update") ? "actualizarDocenteServlet" : "RegistrarDocenteServlet"%>" method="post">
-        <% if (action.equals("update")) { %>
-        <input type="hidden" name="matricula" value="<%= docente.getMatricula() %>">
+    <form action="<%=action.equals("update") ? "actualizarDocenteServlet" : "registrarDocenteServlet"%>" method="post">
+        <% if (!action.equals("update")) { %>
+        <div class="form-group">
+            <label for="matricula">Matrícula:</label>
+            <input type="text" class="form-control" id="matricula" name="matricula" value="<%= matricula %>" required />
+        </div>
         <% } %>
 
         <div class="form-group">
@@ -64,8 +67,7 @@
         </div>
 
         <div class="form-group">
-            <label for="contraseña">Contraseña:</label>
-            <input type="password" class="form-control" id="contraseña" name="contraseña" value="<%= action.equals("update") ? docente.getContraseña() : ""%>" required />
+            <input type="hidden" class="form-control" id="contraseña" name="contraseña" value="<%= action.equals("update") ? docente.getContraseña() : ""%>" required />
         </div>
 
         <button type="submit" class="btn btn-primary"> <%=action.equals("update") ? "Actualizar" : "Registrar"%></button>

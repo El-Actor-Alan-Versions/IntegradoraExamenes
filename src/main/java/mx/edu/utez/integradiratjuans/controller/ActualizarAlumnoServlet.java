@@ -1,5 +1,9 @@
 package mx.edu.utez.integradiratjuans.controller;
 
+import mx.edu.utez.integradiratjuans.dao.AlumnoDao;
+import mx.edu.utez.integradiratjuans.model.Alumno;
+
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,33 +11,31 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import mx.edu.utez.integradiratjuans.dao.AlumnoDao;
 import mx.edu.utez.integradiratjuans.model.Alumno;
-
 import java.io.IOException;
 
-@WebServlet("/Admin/actualizarAlumnoServlet")
+@WebServlet("/ActualizarAlumnoServlet")
 public class ActualizarAlumnoServlet extends HttpServlet {
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String matricula = request.getParameter("matricula");
         String nombre = request.getParameter("nombre");
         String apellidoPaterno = request.getParameter("apellidoPaterno");
         String apellidoMaterno = request.getParameter("apellidoMaterno");
         String correo = request.getParameter("correo");
-        String contraseña = request.getParameter("contraseña");
         String estado = request.getParameter("estado");
+        String contraseña = request.getParameter("contraseña");
         int idGrupo = Integer.parseInt(request.getParameter("idGrupo"));
-        String nombreGrupo = request.getParameter("nombreGrupo");
 
-        Alumno alumno = new Alumno(matricula, nombre, apellidoPaterno, apellidoMaterno, correo, contraseña, idGrupo, estado, nombreGrupo);
-        AlumnoDao alumnoDao = new AlumnoDao();
+        Alumno alumno = new Alumno(matricula, nombre, apellidoPaterno, apellidoMaterno, correo, estado, contraseña, idGrupo);
 
-        boolean update = alumnoDao.update(alumno);
-
-        if (update) {
-            response.sendRedirect("verAlumno.jsp");
-        } else {
-            response.sendRedirect("error.jsp");
+        AlumnoDao dao = new AlumnoDao();
+        try {
+            dao.update(alumno);
+            response.sendRedirect("verAlumnos.jsp?mensaje=Alumno actualizado exitosamente");
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("error.jsp?mensaje=Error al actualizar alumno");
         }
     }
 }
+
+

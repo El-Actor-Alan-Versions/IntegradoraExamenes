@@ -54,7 +54,7 @@
             <td><%= a.getEstado() %></td>
             <td><%= a.getNombreGrupo() %></td> <!-- Mostrar el nombre del grupo -->
             <td>
-                <a href="actualizarAlumno.jsp?matricula=<%= a.getMatricula() %>">Actualizar</a>
+                <a href="registrarAlumno.jsp?matricula=<%= a.getMatricula() %>">Actualizar</a>
             </td>
             <td>
                 <form method="post" action="eliminarAlumnoServlet">

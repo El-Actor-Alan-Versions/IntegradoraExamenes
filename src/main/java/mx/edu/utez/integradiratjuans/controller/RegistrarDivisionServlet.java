@@ -11,7 +11,7 @@ import mx.edu.utez.integradiratjuans.model.Division;
 
 import java.io.IOException;
 
-@WebServlet(name = "RegistrarDivisionServlet", urlPatterns = {"/registrarDivisionServlet"})
+@WebServlet(name = "RegistrarDivisionServlet", urlPatterns = {"/Admin/registrarDivisionServlet"})
 public class RegistrarDivisionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nombreDivision = request.getParameter("nombreDivision");
@@ -23,7 +23,7 @@ public class RegistrarDivisionServlet extends HttpServlet {
         boolean inserted = dao.insert(division);
 
         if (inserted) {
-            response.sendRedirect("divisiones.jsp");
+            response.sendRedirect("verDivisiones.jsp");
         } else {
             response.sendRedirect("error.jsp");
         }

@@ -11,7 +11,7 @@ body{
 
 
 
-#nombre_usuario {
+#matricula {
     border-radius: 50px;
     background-color: #7BCFBD;
     text-align: center;
@@ -19,7 +19,7 @@ body{
     border: none;
     width: 370px;  /* Ancho ajustado */
     height: 48px;  /* Altura ajustada */
-    font-size: 16px; 
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -41,6 +41,14 @@ body{
     font-weight: bold;
     width: 277px;
     height: 44.92px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #7ecf6e;
+    transform: scale(1.05);
 }
 
 
