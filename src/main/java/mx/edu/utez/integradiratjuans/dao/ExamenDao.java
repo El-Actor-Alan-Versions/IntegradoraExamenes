@@ -38,19 +38,21 @@ public class ExamenDao {
     public List<Examen> getExamenesPorClase(int idClase) throws SQLException {
         List<Examen> examenes = new ArrayList<>();
         String sql = "SELECT * FROM Examen WHERE id_clase = ?";
+
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idClase);
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    Examen examen = new Examen();
-                    examen.setId_examen(rs.getInt("id_examen"));
-                    examen.setNombre(rs.getString("nombre"));
-                    examen.setFecha_aplicacion(rs.getTimestamp("fecha_aplicacion"));
-                    examen.setFecha_cierre(rs.getTimestamp("fecha_cierre"));
-                    examen.setId_clase(rs.getInt("id_clase"));
-                    examenes.add(examen);
-                }
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Examen examen = new Examen();
+                examen.setId_examen(rs.getInt("id_examen"));
+                examen.setNombre(rs.getString("Nombre"));
+                examen.setFecha_aplicacion(rs.getTimestamp("Fecha_aplicacion"));
+                examen.setFecha_cierre(rs.getTimestamp("Fecha_cierre"));
+                examen.setId_clase(rs.getInt("id_clase"));
+                examen.setDescripcion(rs.getString("descripcion")); // si la columna existe
+                examenes.add(examen);
             }
         }
         return examenes;

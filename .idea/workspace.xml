@@ -12,17 +12,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarAlumnoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarAlumnoServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/UsuarioServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/UsuarioServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/VerExamenesServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/VerExamenesServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/AlumnoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/AlumnoDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/ClaseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/ClaseDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Alumno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/model/Alumno.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/registarAlumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/registarAlumno.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Alumno/alumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Alumno/indexAlumno.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/VerExamenes.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/VerExamenes.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/indexDocente.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/indexDocente.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Alumno/indexAlumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Alumno/indexAlumno.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,8 +25,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jsp File" />
         <option value="CSS File" />
+        <option value="Jsp File" />
         <option value="Class" />
       </list>
     </option>
@@ -303,7 +296,7 @@
       <workItem from="1722215321709" duration="952000" />
       <workItem from="1722218754282" duration="2822000" />
       <workItem from="1722225908965" duration="10000" />
-      <workItem from="1722349576232" duration="4750000" />
+      <workItem from="1722349576232" duration="10912000" />
     </task>
     <servers />
   </component>

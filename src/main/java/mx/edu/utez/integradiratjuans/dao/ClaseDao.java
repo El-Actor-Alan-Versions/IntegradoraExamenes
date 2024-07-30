@@ -141,6 +141,54 @@ public class ClaseDao {
         return clases;
     }
 
+    public int getGrupoByAlumno(String matricula) throws SQLException {
+        int idGrupo = -1; // Valor predeterminado en caso de no encontrar el grupo
+
+        String sql = "SELECT g.id_grupo FROM Alumno a JOIN Grupo g ON a.id_grupo = g.id_grupo WHERE a.Matricula = ?";
+
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Establecer el parámetro para la matrícula
+            stmt.setString(1, matricula);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // Obtener el id_grupo del ResultSet
+                    idGrupo = rs.getInt("id_grupo");
+                }
+            }
+        }
+
+        return idGrupo;
+    }
+
+
+    public int getClasesByGrupo(int id_grupo) throws SQLException {
+        int idClase = -1; // Valor predeterminado en caso de no encontrar ninguna clase
+        String sql = "SELECT id_clase FROM clase WHERE id_grupo = ?";
+
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Establecer el parámetro para el id_grupo
+            stmt.setInt(1, id_grupo);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                // Si hay resultados, obtener el primer id_clase
+                if (rs.next()) {
+                    idClase = rs.getInt("id_clase");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("Error al ejecutar la consulta: " + e.getMessage(), e);
+        }
+
+        return idClase;
+    }
+
+
 
     public String getGrupoNameByIdClase(int idClase) {
         String grupoName = null;
