@@ -24,7 +24,7 @@ public class ActualizarMateriaServlet extends HttpServlet {
         if(update){
             response.sendRedirect("verMaterias.jsp");
         } else {
-            response.sendRedirect("verMaterias.jsp");
+            response.sendRedirect("error.jsp");
         }
     }
 

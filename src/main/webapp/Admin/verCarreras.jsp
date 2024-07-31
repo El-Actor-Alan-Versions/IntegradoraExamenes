@@ -46,7 +46,7 @@
             <td><%= c.getNombre_carrera() %></td>
             <td><%= c.getId_division() %></td>
             <td>
-                <a href="actualizarCarrera.jsp?id_carrera=<%= c.getId_carrera() %>">Actualizar</a>
+                <a href="registrarCarrera.jsp?id_carrera=<%= c.getId_carrera() %>">Actualizar</a>
             </td>
             <td>
                 <form method="post" action="eliminarCarreraServlet">

@@ -11,18 +11,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:">
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_31_07_2024_12_10_p__m___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_31_07_2024_12_10_p__m___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_31_07_2024_12_10_p__m___Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_31_07_2024_12_10_p__m___Changes_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/ActualizarAlumnoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/ActualizarAlumnoServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarDocenteServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarDocenteServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarMateriaServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarMateriaServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/MateriaDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/MateriaDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/registarAlumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/registarAlumno.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/registrarDivision.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/registrarDivision.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/registrarMateria.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/registrarMateria.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verAlumnos.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verAlumnos.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verDocente.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verDocente.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verMaterias.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verMaterias.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/ActualizarMateriaServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/ActualizarMateriaServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarCarreraServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarCarreraServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/indexAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/indexAdmin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/registrarCarrera.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/registrarCarrera.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verCarrearas.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verCarreras.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -308,6 +304,7 @@
       <workItem from="1722218754282" duration="2822000" />
       <workItem from="1722225908965" duration="10000" />
       <workItem from="1722351206345" duration="5584000" />
+      <workItem from="1722443384439" duration="6752000" />
     </task>
     <servers />
   </component>
@@ -317,5 +314,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:" />
     <option name="LAST_COMMIT_MESSAGE" value="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/webapp/Admin/navbar.jsp</url>
+          <line>116</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

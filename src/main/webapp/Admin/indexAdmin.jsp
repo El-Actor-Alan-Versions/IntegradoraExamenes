@@ -149,7 +149,7 @@
         </div>
         <!-- Tarjeta Gestionar Carreras -->
         <div class="col-md-3 col-sm-6 col-12 text-center mb-4">
-            <a href="verCarrearas.jsp" class="button">
+            <a href="verCarreras.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
                         <img src="../img/mirarCalificaciones.png" class="text-center" width="68">
@@ -185,7 +185,7 @@
         </div>
         <!-- Tarjeta Asignacion de clase -->
         <div class="col-md-3 col-sm-6 col-12 text-center mb-4">
-            <a href="" class="button">
+            <a href="verClases.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
                         <img src="../img/asignacionClases.png" class="text-center" width="68">
