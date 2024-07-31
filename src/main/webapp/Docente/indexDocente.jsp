@@ -41,7 +41,7 @@
         </div>
         <div class="col-md-4 col-sm-6 text-center mb-4">
             <!-- aqui va la direccion de la pagina -->
-            <a href="VerExamenes.jsp" class="button">
+            <a href="VerExamenesServlet" class="button">
                 <div class="card">
                     <div class="card-body">
                         <img src="img/examenesActivos.png" class="text-center" width="68">

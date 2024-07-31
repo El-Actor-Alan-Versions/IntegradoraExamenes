@@ -11,7 +11,8 @@ import java.util.List;
 public class AlumnoDao {
 
     public Alumno getOne(String matricula, String contrasena) throws SQLException {
-        String query = "SELECT * FROM Alumno WHERE Matricula = ? AND Contraseña = ?";
+        String query = "SELECT * FROM Alumno WHERE Matricula = ? AND Contraseña = SHA2(?, 256)";
+                ;
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, matricula);
@@ -36,7 +37,7 @@ public class AlumnoDao {
 
 
     public boolean insert(Alumno alumno) throws SQLException {
-        String query = "INSERT INTO Alumno (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña, id_grupo, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Alumno (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña, id_grupo, estado) VALUES (?, ?, ?, ?, ?, SHA2(?, 256), ?, ?)";
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, alumno.getMatricula());
@@ -44,12 +45,13 @@ public class AlumnoDao {
             statement.setString(3, alumno.getApellidoPaterno());
             statement.setString(4, alumno.getApellidoMaterno());
             statement.setString(5, alumno.getCorreo());
-            statement.setString(6, alumno.getContraseña());
+            statement.setString(6, alumno.getContraseña()); // SHA2 hasheará esta contraseña
             statement.setInt(7, alumno.getIdGrupo());
-            statement.setString(8, alumno.getEstado() != null ? alumno.getEstado() : "activo"); // Valor predeterminado
+            statement.setString(8, alumno.getEstado() != null ? alumno.getEstado() : "activo");
             return statement.executeUpdate() > 0;
         }
     }
+
 
     public void updateEstado(String matricula, String nuevoEstado) throws SQLException {
         String query = "UPDATE Alumno SET Estado = ? WHERE Matricula = ?";

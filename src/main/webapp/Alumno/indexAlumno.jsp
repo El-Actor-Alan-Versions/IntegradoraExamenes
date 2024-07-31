@@ -30,7 +30,7 @@
     <div class="row justify-content-center">
         <div class="col-md-4 col-sm-6 text-center mb-4">
             <!-- aqui va la direccion de la pagina -->
-            <a href="" class="button">
+            <a href="VerExamenesAlumnoServlet" class="button">
                 <div class="card">
                     <div class="card-body">
                         <img src="../img/examenesDisponibles.png" class="text-center" width="68">

@@ -25,12 +25,13 @@ public class UsuarioServlet extends HttpServlet {
     private final AdministradorDao adminDao = new AdministradorDao();
     private final AlumnoDao alumnoDao = new AlumnoDao();
     private final DocenteDao docenteDao = new DocenteDao();
-    private final ClaseDao claseDao = new ClaseDao(); // Asegúrate de importar ClaseDao
+    private final ClaseDao claseDao = new ClaseDao();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String nombreUsuario = req.getParameter("matricula");
         String contrasena = req.getParameter("contra");
+
 
         String ruta = "index.jsp"; // Página por defecto
 
@@ -49,7 +50,15 @@ public class UsuarioServlet extends HttpServlet {
             } else if (alumno != null) {
                 // Si es alumno, redirigir a vista de alumno
                 session.setAttribute("usuario", alumno);
+                session.setAttribute("matriculaAlumno", alumno.getMatricula()); // Establecer la matrícula del alumno en la sesión
+
+
+                int idGrupo = claseDao.getGrupoByAlumno(alumno.getMatricula());
+                int idClase = claseDao.getClasesByGrupo(idGrupo);
+                session.setAttribute("clase", idClase);
                 ruta = "Alumno/indexAlumno.jsp";
+
+
             } else if (docente != null) {
                 // Si es docente, redirigir a vista de docente
                 session.setAttribute("usuario", docente);

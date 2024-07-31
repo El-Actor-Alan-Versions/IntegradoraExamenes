@@ -23,6 +23,17 @@ public class Alumno {
         this.estado = estado;
         this.nombreGrupo = nombreGrupo;
     }
+    //Constructor para los inserts xd
+    public Alumno(String matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contraseña, int idGrupo, String estado) {
+        this.matricula = matricula;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.correo = correo;
+        this.contraseña = contraseña;
+        this.idGrupo = idGrupo;
+        this.estado = estado;
+    }
 
     // Constructor, getters y setters
     public Alumno() {

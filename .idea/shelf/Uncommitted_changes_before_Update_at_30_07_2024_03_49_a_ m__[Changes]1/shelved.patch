@@ -1,0 +1,407 @@
+Index: src/main/webapp/Docente/VerExamenes.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ page import=\"java.sql.Timestamp\" %>\r\n<%@ page import=\"java.text.SimpleDateFormat\" %>\r\n<%@ page import=\"java.util.List\" %>\r\n<%@ page import=\"mx.edu.utez.integradiratjuans.model.Examen\" %>\r\n<!DOCTYPE html>\r\n<html lang=\"es\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Ver Exámenes</title>\r\n    <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\">\r\n</head>\r\n<body>\r\n<div class=\"container mt-5\">\r\n    <h2 class=\"text-center\">Exámenes</h2>\r\n    <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n        <tr>\r\n            <th>ID</th>\r\n            <th>Nombre</th>\r\n            <th>Fecha de Aplicación</th>\r\n            <th>Fecha de Cierre</th>\r\n            <th>ID de Clase</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <%\r\n            List<Examen> examenes = (List<Examen>) request.getAttribute(\"examenes\");\r\n            if (examenes == null) {\r\n                System.out.println(\"<p>No se han recibido exámenes.</p>\");\r\n            } else {\r\n                System.out.println(\"<p>Número de exámenes recibidos: \" + examenes.size() + \"</p>\");\r\n            }\r\n\r\n            if (examenes != null && !examenes.isEmpty()) {\r\n                SimpleDateFormat sdf = new SimpleDateFormat(\"yyyy-MM-dd HH:mm:ss\");\r\n                for (Examen examen : examenes) {\r\n                    Timestamp fechaAplicacion = examen.getFecha_aplicacion();\r\n                    Timestamp fechaCierre = examen.getFecha_cierre();\r\n        %>\r\n        <tr>\r\n            <td><%= examen.getId_examen() %></td>\r\n            <td><%= examen.getNombre() %></td>\r\n            <td><%= fechaAplicacion != null ? sdf.format(fechaAplicacion) : \"N/A\" %></td>\r\n            <td><%= fechaCierre != null ? sdf.format(fechaCierre) : \"N/A\" %></td>\r\n            <td><%= examen.getId_clase() %></td>\r\n        </tr>\r\n        <%\r\n            }\r\n        } else {\r\n        %>\r\n        <tr>\r\n            <td colspan=\"5\" class=\"text-center\">No hay exámenes disponibles</td>\r\n        </tr>\r\n        <%\r\n            }\r\n        %>\r\n        </tbody>\r\n    </table>\r\n</div>\r\n\r\n<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script>\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/Docente/VerExamenes.jsp b/src/main/webapp/Docente/VerExamenes.jsp
+--- a/src/main/webapp/Docente/VerExamenes.jsp	
++++ b/src/main/webapp/Docente/VerExamenes.jsp	
+@@ -1,7 +1,9 @@
+-<%@ page import="java.sql.Timestamp" %>
+-<%@ page import="java.text.SimpleDateFormat" %>
+ <%@ page import="java.util.List" %>
+ <%@ page import="mx.edu.utez.integradiratjuans.model.Examen" %>
++<%@ page import="mx.edu.utez.integradiratjuans.model.Clase" %>
++<%@ page import="java.text.SimpleDateFormat" %>
++<%@ page import="java.sql.Timestamp" %>
++<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+ <!DOCTYPE html>
+ <html lang="es">
+ <head>
+@@ -13,44 +15,81 @@
+ <body>
+ <div class="container mt-5">
+     <h2 class="text-center">Exámenes</h2>
+-    <table class="table table-striped table-hover">
++
++    <!-- Formulario de filtro -->
++    <form method="post" action="VerExamenesServlet">
++        <div class="form-group">
++            <label for="id_clase">Clase</label>
++            <select id="id_clase" class="form-control" name="id_clase" required>
++                <option value="">Seleccione...</option>
++                <%
++                    List<Clase> clases = (List<Clase>) session.getAttribute("clases");
++                    if (clases != null) {
++                        for (Clase clase : clases) {
++                %>
++                <option value="<%= clase.getId_clase() %>"><%= clase.getGradoGrupo() %></option>
++                <%
++                    }
++                } else {
++                %>
++                <option value="">No hay clases disponibles</option>
++                <%
++                    }
++                %>
++            </select>
++        </div>
++        <button type="submit" class="btn btn-primary mt-3">Filtrar</button>
++    </form>
++
++    <!-- Tabla de exámenes -->
++    <table class="table table-striped table-hover mt-4">
+         <thead>
+         <tr>
+             <th>ID</th>
+             <th>Nombre</th>
+             <th>Fecha de Aplicación</th>
+             <th>Fecha de Cierre</th>
+-            <th>ID de Clase</th>
++            <th>Grado_Grupo</th>
++            <th>Acciones</th>
+         </tr>
+         </thead>
+         <tbody>
+         <%
+             List<Examen> examenes = (List<Examen>) request.getAttribute("examenes");
+-            if (examenes == null) {
+-                System.out.println("<p>No se han recibido exámenes.</p>");
+-            } else {
+-                System.out.println("<p>Número de exámenes recibidos: " + examenes.size() + "</p>");
+-            }
+-
+             if (examenes != null && !examenes.isEmpty()) {
+                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                 for (Examen examen : examenes) {
+                     Timestamp fechaAplicacion = examen.getFecha_aplicacion();
+                     Timestamp fechaCierre = examen.getFecha_cierre();
++                    String gradoGrupo = "N/A";
++                    if (clases != null) {
++                        for (Clase clase : clases) {
++                            if (clase.getId_clase() == examen.getId_clase()) {
++                                gradoGrupo = clase.getGradoGrupo();
++                                break;
++                            }
++                        }
++                    }
+         %>
+         <tr>
+             <td><%= examen.getId_examen() %></td>
+             <td><%= examen.getNombre() %></td>
+             <td><%= fechaAplicacion != null ? sdf.format(fechaAplicacion) : "N/A" %></td>
+             <td><%= fechaCierre != null ? sdf.format(fechaCierre) : "N/A" %></td>
+-            <td><%= examen.getId_clase() %></td>
++            <td><%= gradoGrupo %></td>
++            <td>
++                <form action="EditarExamenServlet" method="post" class="d-inline">
++                    <input type="hidden" name="id_examen" value="<%= examen.getId_examen() %>">
++                    <button type="submit" class="btn btn-warning btn-sm">Modificar</button>
++                </form>
++            </td>
+         </tr>
+         <%
+             }
+         } else {
+         %>
+         <tr>
+-            <td colspan="5" class="text-center">No hay exámenes disponibles</td>
++            <td colspan="6" class="text-center">No hay exámenes disponibles</td>
+         </tr>
+         <%
+             }
+Index: src/main/java/mx/edu/utez/integradiratjuans/controller/VerExamenesServlet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package mx.edu.utez.integradiratjuans.controller;\r\n\r\nimport jakarta.servlet.ServletException;\r\nimport jakarta.servlet.annotation.WebServlet;\r\nimport jakarta.servlet.http.HttpServlet;\r\nimport jakarta.servlet.http.HttpServletRequest;\r\nimport jakarta.servlet.http.HttpServletResponse;\r\nimport mx.edu.utez.integradiratjuans.dao.ExamenDao;\r\nimport mx.edu.utez.integradiratjuans.dao.ClaseDao;\r\nimport mx.edu.utez.integradiratjuans.model.Examen;\r\nimport mx.edu.utez.integradiratjuans.model.Clase;\r\n\r\n\r\nimport java.io.IOException;\r\nimport java.sql.SQLException;\r\nimport java.util.HashMap;\r\nimport java.util.List;\r\nimport java.util.Map;\r\n\r\n@WebServlet(\"/Docente/VerExamenesServlet\")\r\npublic class VerExamenesServlet extends HttpServlet {\r\n\r\n    @Override\r\n    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {\r\n        ExamenDao examenDao = new ExamenDao();\r\n        ClaseDao claseDao = new ClaseDao();\r\n        try {\r\n            List<Examen> examenes = examenDao.getAll();\r\n            Map<Integer, String> clasesMap = new HashMap<>();\r\n\r\n            // Llenar el mapa de clases\r\n            for (Examen examen : examenes) {\r\n                if (!clasesMap.containsKey(examen.getId_clase())) {\r\n                    Clase clase = claseDao.getById(examen.getId_clase());\r\n                    if (clase != null) {\r\n                        clasesMap.put(clase.getId_clase(), clase.getNombre());\r\n                    }\r\n                }\r\n            }\r\n\r\n            request.setAttribute(\"examenes\", examenes);\r\n            request.setAttribute(\"clasesMap\", clasesMap);\r\n            request.getRequestDispatcher(\"verExamenes.jsp\").forward(request, response);\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n            request.setAttribute(\"errorMessage\", \"Error al recuperar los exámenes.\");\r\n            request.getRequestDispatcher(\"error.jsp\").forward(request, response);\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/mx/edu/utez/integradiratjuans/controller/VerExamenesServlet.java b/src/main/java/mx/edu/utez/integradiratjuans/controller/VerExamenesServlet.java
+--- a/src/main/java/mx/edu/utez/integradiratjuans/controller/VerExamenesServlet.java	
++++ b/src/main/java/mx/edu/utez/integradiratjuans/controller/VerExamenesServlet.java	
+@@ -5,46 +5,116 @@
+ import jakarta.servlet.http.HttpServlet;
+ import jakarta.servlet.http.HttpServletRequest;
+ import jakarta.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpSession;
+ import mx.edu.utez.integradiratjuans.dao.ExamenDao;
+ import mx.edu.utez.integradiratjuans.dao.ClaseDao;
+ import mx.edu.utez.integradiratjuans.model.Examen;
+ import mx.edu.utez.integradiratjuans.model.Clase;
+ 
+-
+ import java.io.IOException;
+ import java.sql.SQLException;
+-import java.util.HashMap;
++import java.sql.Timestamp;
++import java.util.ArrayList;
+ import java.util.List;
+-import java.util.Map;
+ 
+ @WebServlet("/Docente/VerExamenesServlet")
+ public class VerExamenesServlet extends HttpServlet {
+ 
+     @Override
+     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
++        // Obtener la matrícula del docente desde la sesión
++        String matricula = (String) request.getSession().getAttribute("matriculaDocente");
++
++        ExamenDao examenDao = new ExamenDao();
++        ClaseDao claseDao = new ClaseDao();
++
++        // Verifica si la matrícula es null y maneja el caso
++        if (matricula == null) {
++            request.setAttribute("error", "No se pudo obtener la matrícula del docente.");
++            request.getRequestDispatcher("error.jsp").forward(request, response);
++            return;
++        }
++
++        try {
++            // Obtener todas las clases del docente
++            List<Clase> clases = claseDao.getClasesByDocente(matricula);
++            request.getSession().setAttribute("clases", clases);
++
++            // Obtener todos los exámenes
++            List<Examen> todosExamenes = examenDao.getAll();
++            Timestamp ahora = new Timestamp(System.currentTimeMillis());
++
++            // Filtrar exámenes que no han caducado
++            List<Examen> examenesVigentes = new ArrayList<>();
++            for (Examen examen : todosExamenes) {
++                Timestamp fechaCierre = examen.getFecha_cierre();
++
++                boolean esNoCaducado = fechaCierre == null || fechaCierre.after(ahora);
++
++                if (esNoCaducado) {
++                    examenesVigentes.add(examen);
++                }
++            }
++
++            request.setAttribute("examenes", examenesVigentes);
++        } catch (Exception e) {
++            e.printStackTrace();
++            request.setAttribute("error", "Se produjo un error al recuperar los exámenes.");
++            request.getRequestDispatcher("error.jsp").forward(request, response);
++            return;
++        }
++
++        request.getRequestDispatcher("VerExamenes.jsp").forward(request, response);
++    }
++
++    @Override
++    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
++        // Obtener la matrícula del docente desde la sesión
++        String matricula = (String) request.getSession().getAttribute("matriculaDocente");
++
+         ExamenDao examenDao = new ExamenDao();
+         ClaseDao claseDao = new ClaseDao();
++
++        // Verifica si la matrícula es null y maneja el caso
++        if (matricula == null) {
++            request.setAttribute("error", "No se pudo obtener la matrícula del docente.");
++            request.getRequestDispatcher("error.jsp").forward(request, response);
++            return;
++        }
++
+         try {
+-            List<Examen> examenes = examenDao.getAll();
+-            Map<Integer, String> clasesMap = new HashMap<>();
++            List<Clase> clases = claseDao.getClasesByDocente(matricula);
++            request.getSession().setAttribute("clases", clases);
++
++            // Obtener el parámetro id_clase del request (si existe)
++            String idClaseParam = request.getParameter("id_clase");
++            Integer idClase = (idClaseParam != null && !idClaseParam.isEmpty()) ? Integer.parseInt(idClaseParam) : null;
+ 
+-            // Llenar el mapa de clases
+-            for (Examen examen : examenes) {
+-                if (!clasesMap.containsKey(examen.getId_clase())) {
+-                    Clase clase = claseDao.getById(examen.getId_clase());
+-                    if (clase != null) {
+-                        clasesMap.put(clase.getId_clase(), clase.getNombre());
+-                    }
++            // Obtener todos los exámenes
++            List<Examen> todosExamenes = examenDao.getAll();
++            Timestamp ahora = new Timestamp(System.currentTimeMillis());
++
++            // Filtrar exámenes que no han caducado y por id_clase (si se ha especificado)
++            List<Examen> examenesVigentes = new ArrayList<>();
++            for (Examen examen : todosExamenes) {
++                Timestamp fechaCierre = examen.getFecha_cierre();
++
++                boolean esNoCaducado = fechaCierre == null || fechaCierre.after(ahora);
++                boolean coincideConClase = idClase == null || idClase.equals(examen.getId_clase());
++
++                if (esNoCaducado && coincideConClase) {
++                    examenesVigentes.add(examen);
+                 }
+             }
+ 
+-            request.setAttribute("examenes", examenes);
+-            request.setAttribute("clasesMap", clasesMap);
+-            request.getRequestDispatcher("verExamenes.jsp").forward(request, response);
+-        } catch (SQLException e) {
++            request.setAttribute("examenes", examenesVigentes);
++        } catch (Exception e) {
+             e.printStackTrace();
+-            request.setAttribute("errorMessage", "Error al recuperar los exámenes.");
++            request.setAttribute("error", "Se produjo un error al filtrar los exámenes.");
+             request.getRequestDispatcher("error.jsp").forward(request, response);
++            return;
+         }
++
++        request.getRequestDispatcher("VerExamenes.jsp").forward(request, response);
+     }
+ }
+Index: src/main/webapp/Docente/indexDocente.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%--\r\n  Created by IntelliJ IDEA.\r\n  User: walge\r\n  Date: 23/06/2024\r\n  Time: 07:00 p. m.\r\n  To change this template use File | Settings | File Templates.\r\n--%>\r\n<%@ page contentType=\"text/html;charset=UTF-8\" language=\"java\" %>\r\n<!DOCTYPE html>\r\n<html lang=\"es\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <link rel=\"stylesheet\" href=\"${pageContext.request.contextPath}/css/bootstrap.min.css\">\r\n    <title>Docente</title>\r\n    <link rel=\"stylesheet\" href=\"${pageContext.request.contextPath}/css/usuarios.css\">\r\n</head>\r\n<body>\r\n<div id=\"navbar\"></div>\r\n<script>\r\n    fetch('navbar.jsp')\r\n        .then(response => response.text())\r\n        .then(data => {\r\n            document.getElementById('navbar').innerHTML = data;\r\n        });\r\n</script>\r\n\r\n<div class=\"container\">\r\n    <div class=\"row justify-content-center\">\r\n        <div class=\"col-md-4 col-sm-6 text-center mb-4\">\r\n            <!-- aqui va la direccion de la pagina -->\r\n            <a href=\"crearExamen.jsp\" class=\"button\">\r\n                <div class=\"card\">\r\n                    <div class=\"card-body\">\r\n                        <img src=\"../img/añadirExamen.png\" class=\"text-center\" width=\"68\">\r\n                        <h5 class=\"card-title\">Crear Examen</h5>\r\n                        <p class=\"card-text\">Diseña y publica nuevos exámenes fácilmente.</p>\r\n                    </div>\r\n                </div>\r\n            </a>\r\n        </div>\r\n        <div class=\"col-md-4 col-sm-6 text-center mb-4\">\r\n            <!-- aqui va la direccion de la pagina -->\r\n            <a href=\"VerExamenes.jsp\" class=\"button\">\r\n                <div class=\"card\">\r\n                    <div class=\"card-body\">\r\n                        <img src=\"img/examenesActivos.png\" class=\"text-center\" width=\"68\">\r\n                        <h5 class=\"card-title\">Examenes Activos</h5>\r\n                        <p class=\"card-text\">Observa que exámenes tienes activos</p>\r\n                    </div>\r\n                </div>\r\n            </a>\r\n        </div>\r\n        <div class=\"col-md-4 col-sm-6 text-center mb-4\">\r\n            <!-- aqui va la direccion de la pagina -->\r\n            <a href=\"editarPerfil.jsp\" class=\"button\">\r\n                <div class=\"card\">\r\n                    <div class=\"card-body\">\r\n                        <img src=\"img/calificaciones 1.png\" class=\"text-center\" width=\"68\">\r\n                        <h5 class=\"card-title\">Gestionar Calificaciones</h5>\r\n                        <p class=\"card-text\">Administra y revisa las calificaciones de los estudiantes.</p>\r\n                    </div>\r\n                </div>\r\n            </a>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<footer>\r\n\r\n</footer>\r\n<script src=\"https://code.jquery.com/jquery-3.2.1.slim.min.js\"></script>\r\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js\"></script>\r\n<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js\"></script>\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/Docente/indexDocente.jsp b/src/main/webapp/Docente/indexDocente.jsp
+--- a/src/main/webapp/Docente/indexDocente.jsp	
++++ b/src/main/webapp/Docente/indexDocente.jsp	
+@@ -41,7 +41,7 @@
+         </div>
+         <div class="col-md-4 col-sm-6 text-center mb-4">
+             <!-- aqui va la direccion de la pagina -->
+-            <a href="VerExamenes.jsp" class="button">
++            <a href="VerExamenesServlet" class="button">
+                 <div class="card">
+                     <div class="card-body">
+                         <img src="img/examenesActivos.png" class="text-center" width="68">
+Index: src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package mx.edu.utez.integradiratjuans.dao;\r\n\r\nimport java.sql.*;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;\r\nimport mx.edu.utez.integradiratjuans.model.Examen;\r\n\r\npublic class ExamenDao {\r\n\r\n    public int insert(Examen examen) {\r\n        String query = \"INSERT INTO Examen (Nombre, Fecha_aplicacion, Fecha_cierre, id_clase, descripcion) VALUES (?, ?, ?, ?, ?)\";\r\n        int id = -1;\r\n\r\n        try (Connection con = DatabaseConnectionManager.getConnection();\r\n             PreparedStatement pstmt = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {\r\n\r\n            pstmt.setString(1, examen.getNombre());\r\n            pstmt.setTimestamp(2, examen.getFecha_aplicacion());\r\n            pstmt.setTimestamp(3, examen.getFecha_cierre());\r\n            pstmt.setInt(4, examen.getId_clase());\r\n            pstmt.setString(5, examen.getDescripcion());\r\n\r\n            int rowsAffected = pstmt.executeUpdate();\r\n            ResultSet rs = pstmt.getGeneratedKeys();\r\n\r\n            if (rs.next()) {\r\n                id = rs.getInt(1);\r\n            }\r\n\r\n        } catch (SQLException e) {\r\n            e.printStackTrace(); // Imprime la traza del error\r\n        }\r\n\r\n        return id;\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n    public List<Examen> getAll() {\r\n        List<Examen> examenes = new ArrayList<>();\r\n        String query = \"SELECT * FROM Examen\";\r\n        try (Connection con = DatabaseConnectionManager.getConnection();\r\n             Statement stmt = con.createStatement();\r\n             ResultSet rs = stmt.executeQuery(query)) {\r\n\r\n            while (rs.next()) {\r\n                Examen examen = new Examen();\r\n                examen.setId_examen(rs.getInt(\"id_examen\"));\r\n                examen.setNombre(rs.getString(\"Nombre\"));\r\n                examen.setFecha_aplicacion(rs.getTimestamp(\"Fecha_aplicacion\"));\r\n                examen.setFecha_cierre(rs.getTimestamp(\"Fecha_cierre\"));\r\n                examen.setId_clase(rs.getInt(\"id_clase\"));\r\n                examenes.add(examen);\r\n            }\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return examenes;\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java b/src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java
+--- a/src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java	
++++ b/src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java	
+@@ -35,28 +35,67 @@
+         return id;
+     }
+ 
+-
+-
+-
+-
+-    public List<Examen> getAll() {
++    public List<Examen> getExamenesPorClase(int idClase) throws SQLException {
+         List<Examen> examenes = new ArrayList<>();
+-        String query = "SELECT * FROM Examen";
+-        try (Connection con = DatabaseConnectionManager.getConnection();
+-             Statement stmt = con.createStatement();
+-             ResultSet rs = stmt.executeQuery(query)) {
++        String sql = "SELECT * FROM Examen WHERE id_clase = ?";
++        try (Connection conn = DatabaseConnectionManager.getConnection();
++             PreparedStatement stmt = conn.prepareStatement(sql)) {
++            stmt.setInt(1, idClase);
++            try (ResultSet rs = stmt.executeQuery()) {
++                while (rs.next()) {
++                    Examen examen = new Examen();
++                    examen.setId_examen(rs.getInt("id_examen"));
++                    examen.setNombre(rs.getString("nombre"));
++                    examen.setFecha_aplicacion(rs.getTimestamp("fecha_aplicacion"));
++                    examen.setFecha_cierre(rs.getTimestamp("fecha_cierre"));
++                    examen.setId_clase(rs.getInt("id_clase"));
++                    examenes.add(examen);
++                }
++            }
++        }
++        return examenes;
++    }
++    public List<Examen> getExamenesPorProfesor(String matricula) throws SQLException {
++        List<Examen> examenes = new ArrayList<>();
++        String sql = "SELECT * FROM Examen WHERE id_clase IN (SELECT id_clase FROM Clase WHERE matricula = ?)";
++
++        try (Connection conn = DatabaseConnectionManager.getConnection();
++             PreparedStatement stmt = conn.prepareStatement(sql)) {
++            stmt.setString(1, matricula);
++            ResultSet rs = stmt.executeQuery();
+ 
+             while (rs.next()) {
+                 Examen examen = new Examen();
+                 examen.setId_examen(rs.getInt("id_examen"));
+-                examen.setNombre(rs.getString("Nombre"));
+-                examen.setFecha_aplicacion(rs.getTimestamp("Fecha_aplicacion"));
+-                examen.setFecha_cierre(rs.getTimestamp("Fecha_cierre"));
++                examen.setNombre(rs.getString("nombre"));
++                examen.setFecha_aplicacion(rs.getTimestamp("fecha_aplicacion"));
++                examen.setFecha_cierre(rs.getTimestamp("fecha_cierre"));
+                 examen.setId_clase(rs.getInt("id_clase"));
+                 examenes.add(examen);
+             }
+         } catch (SQLException e) {
+             e.printStackTrace();
++            throw new SQLException("Error al obtener exámenes por profesor: " + e.getMessage(), e);
++        }
++        return examenes;
++    }
++
++    public List<Examen> getAll() throws SQLException {
++        List<Examen> examenes = new ArrayList<>();
++        String query = "SELECT * FROM Examen";
++        try (Connection con = DatabaseConnectionManager.getConnection();
++             PreparedStatement stmt = con.prepareStatement(query);
++             ResultSet rs = stmt.executeQuery()) {
++
++            while (rs.next()) {
++                Examen examen = new Examen();
++                examen.setId_examen(rs.getInt("id_examen"));
++                examen.setNombre(rs.getString("nombre"));
++                examen.setFecha_aplicacion(rs.getTimestamp("fecha_aplicacion"));
++                examen.setFecha_cierre(rs.getTimestamp("fecha_cierre"));
++                examen.setId_clase(rs.getInt("id_clase"));
++                examenes.add(examen);
++            }
+         }
+         return examenes;
+     }
+Index: src/main/java/mx/edu/utez/integradiratjuans/dao/ClaseDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package mx.edu.utez.integradiratjuans.dao;\r\n\r\nimport mx.edu.utez.integradiratjuans.model.Clase;\r\nimport mx.edu.utez.integradiratjuans.model.Grupo;\r\nimport mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;\r\n\r\nimport java.sql.Connection;\r\nimport java.sql.PreparedStatement;\r\nimport java.sql.ResultSet;\r\nimport java.sql.SQLException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class ClaseDao {\r\n\r\n\r\n    public List<Clase> getAll() {\r\n        List<Clase> clases = new ArrayList<>();\r\n        String query = \"SELECT * FROM Clase\";\r\n\r\n        try (Connection con = DatabaseConnectionManager.getConnection();\r\n             PreparedStatement ps = con.prepareStatement(query)) {\r\n\r\n            ResultSet rs = ps.executeQuery();\r\n\r\n            while (rs.next()) {\r\n                Clase clase = new Clase();\r\n                clase.setId_clase(rs.getInt(\"id_clase\"));\r\n                clase.setId_grupo(rs.getInt(\"id_grupo\"));\r\n                clase.setId_materia(rs.getInt(\"id_materia\"));\r\n                clase.setMatricula(rs.getString(\"matricula\"));\r\n                clases.add(clase);\r\n            }\r\n\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n\r\n        return clases;\r\n    }\r\n\r\n    public Clase getById(int idClase) throws SQLException {\r\n        String query = \"SELECT * FROM Clase WHERE id_clase = ?\";\r\n        try (Connection conn = DatabaseConnectionManager.getConnection();\r\n             PreparedStatement pstmt = conn.prepareStatement(query)) {\r\n            pstmt.setInt(1, idClase);\r\n            try (ResultSet rs = pstmt.executeQuery()) {\r\n                if (rs.next()) {\r\n                    return new Clase(\r\n                            rs.getInt(\"id_clase\"),\r\n                            rs.getInt(\"id_grupo\"),\r\n                            rs.getInt(\"id_materia\"),\r\n                            rs.getString(\"matricula\")\r\n                    );\r\n                }\r\n            }\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public void insert(Clase clase) {\r\n        String query = \"INSERT INTO Clase (id_grupo, id_materia, matricula) VALUES (?, ?, ?)\";\r\n\r\n        try (Connection con = DatabaseConnectionManager.getConnection();\r\n             PreparedStatement ps = con.prepareStatement(query)) {\r\n\r\n            ps.setInt(1, clase.getId_grupo());\r\n            ps.setInt(2, clase.getId_materia());\r\n            ps.setString(3, clase.getMatricula());\r\n\r\n            ps.executeUpdate();\r\n\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    public boolean update(Clase clase) {\r\n        boolean updated = false;\r\n        String query = \"UPDATE Clase SET id_grupo = ?, id_materia = ?, matricula = ? WHERE id_clase = ?\";\r\n\r\n        try (Connection con = DatabaseConnectionManager.getConnection();\r\n             PreparedStatement ps = con.prepareStatement(query)) {\r\n\r\n            ps.setInt(1, clase.getId_grupo());\r\n            ps.setInt(2, clase.getId_materia());\r\n            ps.setString(3, clase.getMatricula());\r\n            ps.setInt(4, clase.getId_clase());\r\n            int rowsAffected = ps.executeUpdate();\r\n\r\n            if (rowsAffected > 0) {\r\n                updated = true;\r\n            }\r\n\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n\r\n        return updated;\r\n    }\r\n\r\n    public boolean delete(int id) {\r\n        boolean deleted = false;\r\n        String query = \"DELETE FROM Clase WHERE id_clase = ?\";\r\n\r\n        try (Connection con = DatabaseConnectionManager.getConnection();\r\n             PreparedStatement ps = con.prepareStatement(query)) {\r\n\r\n            ps.setInt(1, id);\r\n            int rowsAffected = ps.executeUpdate();\r\n\r\n            if (rowsAffected > 0) {\r\n                deleted = true;\r\n            }\r\n\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n\r\n        return deleted;\r\n    }\r\n\r\n\r\n    public List<Clase> getClasesByDocente(String matricula) throws SQLException {\r\n        List<Clase> clases = new ArrayList<>();\r\n        String sql = \"SELECT Clase.id_clase, Grupo.Grado_grupo \" +\r\n                \"FROM Clase \" +\r\n                \"JOIN Grupo ON Clase.id_grupo = Grupo.id_grupo \" +\r\n                \"WHERE Clase.matricula = ?\";\r\n\r\n        try (Connection conn = DatabaseConnectionManager.getConnection();\r\n             PreparedStatement stmt = conn.prepareStatement(sql)) {\r\n            stmt.setString(1, matricula);\r\n            ResultSet rs = stmt.executeQuery();\r\n\r\n            while (rs.next()) {\r\n                Clase clase = new Clase();\r\n                clase.setId_clase(rs.getInt(\"id_clase\"));\r\n                clase.setGradoGrupo(rs.getString(\"Grado_grupo\"));\r\n                clases.add(clase);\r\n            }\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n            throw new SQLException(\"Error al ejecutar la consulta: \" + e.getMessage(), e);\r\n        }\r\n\r\n        return clases;\r\n    }\r\n\r\n\r\n    public String getGrupoNameByIdClase(int idClase) {\r\n        String grupoName = null;\r\n        String query = \"SELECT g.Grado_grupo FROM Clase c JOIN Grupo g ON c.id_grupo = g.id_grupo WHERE c.id_clase = ?\";\r\n\r\n        try (Connection con = DatabaseConnectionManager.getConnection();\r\n             PreparedStatement pstmt = con.prepareStatement(query)) {\r\n\r\n            pstmt.setInt(1, idClase);\r\n            try (ResultSet rs = pstmt.executeQuery()) {\r\n                if (rs.next()) {\r\n                    grupoName = rs.getString(\"Grado_grupo\");\r\n                }\r\n            }\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return grupoName;\r\n    }\r\n\r\n}\r\n\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/mx/edu/utez/integradiratjuans/dao/ClaseDao.java b/src/main/java/mx/edu/utez/integradiratjuans/dao/ClaseDao.java
+--- a/src/main/java/mx/edu/utez/integradiratjuans/dao/ClaseDao.java	
++++ b/src/main/java/mx/edu/utez/integradiratjuans/dao/ClaseDao.java	
+@@ -14,14 +14,12 @@
+ public class ClaseDao {
+ 
+ 
+-    public List<Clase> getAll() {
++    public List<Clase> getAll() throws SQLException {
+         List<Clase> clases = new ArrayList<>();
+         String query = "SELECT * FROM Clase";
+-
+         try (Connection con = DatabaseConnectionManager.getConnection();
+-             PreparedStatement ps = con.prepareStatement(query)) {
+-
+-            ResultSet rs = ps.executeQuery();
++             PreparedStatement ps = con.prepareStatement(query);
++             ResultSet rs = ps.executeQuery()) {
+ 
+             while (rs.next()) {
+                 Clase clase = new Clase();
+@@ -31,11 +29,7 @@
+                 clase.setMatricula(rs.getString("matricula"));
+                 clases.add(clase);
+             }
+-
+-        } catch (SQLException e) {
+-            e.printStackTrace();
+         }
+-
+         return clases;
+     }
+ 
