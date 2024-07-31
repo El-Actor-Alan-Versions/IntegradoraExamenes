@@ -37,7 +37,6 @@
             align-items: center;
             background-color: #EEEEEE;
             width: 100%;
-            height: 100%;
             margin: 0;
             padding: 0;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
@@ -45,44 +44,37 @@
 
         .card {
             background: #B8DDC0;
-            height: 80%;
+            max-width: 1367px;
+            margin: 0 auto;
         }
 
         .header-card {
-            margin-outside: 20px;
             background-color: #CDFFF4;
             padding: 15px;
             border-radius: 8px;
             display: flex;
             align-items: center;
             width: 80%;
-            margin-bottom: 10px;
-            margin-left: 10%;
-            margin-top: 10px;
+            margin: 10px auto;
         }
 
         .card-body {
             padding: 30px 13%;
             text-align: center;
             background: white;
-            border-bottom: 20px;
-            width: 100%;
-            max-width: 700px;
             border-radius: 15px;
-            margin-bottom: 20px;
-            margin-left: 18%;
+            margin: 20px auto;
+            width: 70%;
+            box-sizing: border-box;
         }
 
         .label-input-group {
             display: flex;
             align-items: center;
-            margin-right:20px;
             margin-bottom: 15px;
             width: 100%;
             max-width: 600px;
         }
-
-
 
         h1, h2 {
             text-align: center;
@@ -115,15 +107,42 @@
             padding: 5px;
             margin-top: 20px;
             font-weight: 700;
-            display: inline-block;
-            margin-bottom: 20px;
+            display: block;
+            margin: 20px auto;
         }
 
-        .btn-right {
-            margin-left: auto;
-            margin-right: 100px;
+        @media (max-width: 768px) {
+            .header-card, .card-body {
+                width: 95%;
+                padding: 20px 5%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .header-card {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: center;
+            }
+
+            .label-input-group {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
+
+            label {
+                width: 100%;
+                text-align: left;
+                margin-bottom: 5px;
+            }
+
+            input.form-control, select.form-control {
+                width: 100%;
+            }
         }
     </style>
+
 </head>
 <body>
 <div id="navbar"></div>
@@ -148,7 +167,7 @@
                 <% } %>
                 <div class="label-input-group">
                     <label for="nombreDivision" class="form-label">Nombre de la División</label>
-                    <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" value="<%= action.equals("update") ? division.getNombreDivision() : "" %>" required>
+                    <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" placeholder="Ingrese el nombre de la division"  value="<%= action.equals("update") ? division.getNombreDivision() : "" %>" required>
                 </div>
                 <button type="submit" class="btn btn-right"><%= action.equals("update") ? "Actualizar" : "Registrar" %></button>
             </form>

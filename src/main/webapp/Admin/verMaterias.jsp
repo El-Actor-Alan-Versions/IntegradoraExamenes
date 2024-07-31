@@ -29,6 +29,7 @@
         <tr>
             <th>ID</th>
             <th>Nombre de Materia</th>
+            <th>Actualizar</th> <!-- Añadido el encabezado para la columna de actualización -->
             <th>Eliminar</th>
         </tr>
         </thead>
@@ -42,6 +43,9 @@
         <tr>
             <td><%= m.getIdMateria() %></td>
             <td><%= m.getNombreMateria() %></td>
+            <td>
+                <a href="registrarMateria.jsp?idMateria=<%=m.getIdMateria() %>">Actualizar</a>
+            </td>
             <td>
                 <form method="post" action="eliminarMateriaServlet">
                     <input type="hidden" name="idMateria" value="<%= m.getIdMateria() %>">

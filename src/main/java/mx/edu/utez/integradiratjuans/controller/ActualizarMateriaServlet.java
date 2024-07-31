@@ -1,5 +1,6 @@
 package mx.edu.utez.integradiratjuans.controller;
 
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,29 +9,23 @@ import jakarta.servlet.http.HttpServletResponse;
 import mx.edu.utez.integradiratjuans.dao.MateriaDao;
 import mx.edu.utez.integradiratjuans.model.Materia;
 
-
 import java.io.IOException;
-
-@WebServlet("/Admin/registrarMateriaServlet")
-public class RegistrarMateriaServlet extends HttpServlet {
-    @Override
+@WebServlet(name = "ActualizarMateriaServlet", urlPatterns = {"/Admin/ActualizarMateriaServlet"})
+public class ActualizarMateriaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Obtener los parámetros del formulario
+        int idMateria = Integer.parseInt(request.getParameter("idMateria"));
         String nombreMateria = request.getParameter("nombreMateria");
 
-        // Crear un objeto Materia
-        Materia materia = new Materia();
-        materia.setNombreMateria(nombreMateria);
+        Materia materia = new Materia(idMateria, nombreMateria);
+        MateriaDao dao = new MateriaDao();
 
-        // Insertar la materia en la base de datos
-        MateriaDao materiaDao = new MateriaDao();
-        boolean resultado = materiaDao.insert(materia);
+        boolean update = dao.update(materia);
 
-        // Redirigir según el resultado de la operación
-        if (resultado) {
+        if(update){
             response.sendRedirect("verMaterias.jsp");
         } else {
-            response.sendRedirect("error.jsp");
+            response.sendRedirect("verMaterias.jsp");
         }
     }
+
 }

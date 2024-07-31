@@ -11,7 +11,7 @@ import mx.edu.utez.integradiratjuans.model.Docente;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/Admin/registrarDocente")
+@WebServlet("/Admin/registrarDocenteServlet")
 public class RegistrarDocenteServlet extends HttpServlet {
 
     private final DocenteDao docenteDao = new DocenteDao();

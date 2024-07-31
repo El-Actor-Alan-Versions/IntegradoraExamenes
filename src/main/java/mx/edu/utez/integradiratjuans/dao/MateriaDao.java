@@ -16,20 +16,22 @@ public class MateriaDao {
 
 
         public Materia getById(int idMateria) throws SQLException {
+             Materia materia = null;
             String query = "SELECT * FROM Materia WHERE id_materia = ?";
             try (Connection conn = DatabaseConnectionManager.getConnection();
                  PreparedStatement pstmt = conn.prepareStatement(query)) {
                 pstmt.setInt(1, idMateria);
                 try (ResultSet rs = pstmt.executeQuery()) {
                     if (rs.next()) {
-                        return new Materia(
-                                rs.getInt("id_materia"),
-                                rs.getString("Nombre_materia")
-                        );
+                        materia = new Materia();
+                        materia.setIdMateria(rs.getInt("id_materia"));
+                        materia.setNombreMateria(rs.getString("nombre_materia"));
                     }
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            return null;
+            return materia;
         }
 
     // Obtener todas las materias

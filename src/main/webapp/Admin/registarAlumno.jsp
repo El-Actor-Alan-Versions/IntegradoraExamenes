@@ -51,7 +51,7 @@
             <label for="matriculaInsert">Matrícula:</label>
             <input type="text" class="form-control" id="matriculaInsert" name="matriculaInsert" required />
         </div>
-        <% } else if (action.equals("update")) { %>
+        <% } else if (!action.equals("update")) { %>
         <div class="form-group">
             <label for="matricula">Matrícula:</label>
             <input type="text" class="form-control" id="matricula" name="matricula" value="<%= matricula %>" readonly />
@@ -74,7 +74,7 @@
             <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno" value="<%= action.equals("update") ? alumno.getApellidoMaterno() : ""%>" required />
         </div>
 
-        <% if (action.equals("update")) { %>
+        <% if (!action.equals("update")) { %>
         <div class="form-group">
             <label for="contraseña">Contraseña:</label>
             <input type="password" class="form-control" id="contraseña" name="contraseña" required />
