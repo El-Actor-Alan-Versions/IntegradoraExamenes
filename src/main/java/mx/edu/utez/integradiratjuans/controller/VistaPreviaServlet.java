@@ -47,17 +47,28 @@ public class VistaPreviaServlet extends HttpServlet {
 
             Preguntas pregunta = new Preguntas(preguntaTexto, questionType);
 
+            // Manejo de opciones y verificación de respuestas correctas
             if ("opcion_multiple".equals(questionType) || "varias_respuestas".equals(questionType)) {
                 int optionIndex = 1;
-                while (request.getParameter("questions[" + questionIndex + "].option" + optionIndex) != null) {
+                while (true) {
                     String opcionTexto = request.getParameter("questions[" + questionIndex + "].option" + optionIndex);
-                    boolean isCorrect = "true".equals(request.getParameter("questions[" + questionIndex + "].correctOption" + optionIndex));
-                    if (opcionTexto != null) {
-                        pregunta.addOpcion(new Opcion(opcionTexto, isCorrect));
+                    if (opcionTexto == null) {
+                        break; // Termina el bucle si ya no hay más opciones
                     }
+
+                    // Obtener el valor del checkbox para determinar si es la respuesta correcta
+                    String isCorrectParam = request.getParameter("questions[" + questionIndex + "].correctOption" + optionIndex);
+                    boolean isCorrect = "on".equals(isCorrectParam); // Comparar con "on" o cualquier otro valor esperado
+
+                    // Imprimir para depuración
+                    System.out.println("Valor del checkbox (correctOption" + optionIndex + "): " + isCorrectParam);
+                    System.out.println("Es correcta: " + isCorrect);
+
+                    pregunta.addOpcion(new Opcion(opcionTexto, isCorrect));
                     optionIndex++;
                 }
-            } else if ("abierta".equals(questionType)) {
+            }
+            else if ("abierta".equals(questionType)) {
                 String respuesta = request.getParameter("questions[" + questionIndex + "].openEndedAnswer");
                 if (respuesta != null) {
                     pregunta.setRespuesta(respuesta);

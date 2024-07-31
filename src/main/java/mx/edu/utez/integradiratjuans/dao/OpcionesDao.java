@@ -13,8 +13,7 @@ import java.util.List;
 
 public class OpcionesDao {
 
-
-
+    // Método para insertar preguntas y opciones
     public void insertarPreguntas(List<Preguntas> preguntas) throws SQLException {
         String sqlPregunta = "INSERT INTO Pregunta (pregunta, id_examen) VALUES (?, ?)";
         String sqlOpcion = "INSERT INTO Opciones (opcion, id_pregunta, correcta) VALUES (?, ?, ?)";
@@ -52,22 +51,35 @@ public class OpcionesDao {
         }
     }
 
-    private void insertarOpciones(Preguntas pregunta) throws SQLException {
-        String sql = "INSERT INTO Opciones (opcion, id_pregunta, correcta) VALUES (?, ?, ?)";
+    // Método para obtener opciones por ID de pregunta
+    public List<Opcion> obtenerOpcionesPorPregunta(int idPregunta) {
+        List<Opcion> opciones = new ArrayList<>();
+        String query = "SELECT id_opcion, opcion, id_pregunta, correcta FROM Opciones WHERE id_pregunta = ?";
+
+        System.out.println("Ejecutando consulta: " + query + " con ID de pregunta: " + idPregunta);
 
         try (Connection connection = DatabaseConnectionManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+             PreparedStatement ps = connection.prepareStatement(query)) {
 
-            for (var opcion : pregunta.getOpciones()) {
-                statement.setString(1, opcion.getOpcion());
-                statement.setInt(2, pregunta.getIdPregunta());
-                statement.setBoolean(3, opcion.isCorrecta());
-                statement.addBatch();
+            ps.setInt(1, idPregunta);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Opcion opcion = new Opcion();
+                opcion.setIdOpcion(rs.getInt("id_opcion"));
+                opcion.setOpcion(rs.getString("opcion"));
+                opcion.setIdPregunta(rs.getInt("id_pregunta"));
+                opcion.setCorrecta(rs.getBoolean("correcta"));
+                opciones.add(opcion);
             }
-            statement.executeBatch();
+            System.out.println("Opciones obtenidas para la pregunta ID " + idPregunta + ": " + opciones.size());
+        } catch (SQLException e) {
+            System.err.println("Error obteniendo opciones: " + e.getMessage());
         }
+        return opciones;
     }
 
+    // Método para obtener todas las opciones
     public List<Opcion> getAll() {
         List<Opcion> opciones = new ArrayList<>();
         String query = "SELECT * FROM Opciones";

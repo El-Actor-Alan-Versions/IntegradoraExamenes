@@ -39,7 +39,7 @@
             newOption.innerHTML =
                 "<label>Opción " + numOptions + ":</label>" +
                 "<input type='text' class='form-control' name='questions[" + questionIndex + "].option" + numOptions + "' required>" +
-                "<div class='form-check'><input type='checkbox' class='form-check-input' name='questions[" + questionIndex + "].correctOption" + numOptions + "'> Correcta</div>";
+                "<div class='form-check'><input type='checkbox'  class='form-check-input' name='questions[" + questionIndex + "].correctOption" + numOptions + "'> Correcta</div>";
             optionsDiv.insertBefore(newOption, optionsDiv.lastElementChild);
         }
 

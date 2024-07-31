@@ -59,7 +59,7 @@
             <td><%= fechaCierre != null ? sdf.format(fechaCierre) : "N/A" %></td>
             <td><%= gradoGrupo %></td>
             <td>
-                <form action="IniciarExamenServlet" method="post" class="d-inline">
+                <form action="CargarExamen" method="post" class="d-inline">
                     <input type="hidden" name="id_examen" value="<%= examen.getId_examen() %>">
                     <button type="submit" class="btn btn-success btn-sm">Iniciar</button>
                 </form>

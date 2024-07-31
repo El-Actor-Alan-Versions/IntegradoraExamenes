@@ -5,12 +5,13 @@ import mx.edu.utez.integradiratjuans.model.Preguntas;
 import mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PreguntaDao {
 
     public boolean insertarPregunta(Preguntas pregunta) {
-        String sqlPregunta = "INSERT INTO Pregunta (pregunta, id_examen) VALUES (?, ?)";
+        String sqlPregunta = "INSERT INTO Pregunta (pregunta, id_examen, tipo_pregunta) VALUES (?, ?, ?)";
         String sqlOpcion = "INSERT INTO Opciones (opcion, id_pregunta, correcta) VALUES (?, ?, ?)";
 
         try (Connection conn = DatabaseConnectionManager.getConnection();
@@ -20,6 +21,7 @@ public class PreguntaDao {
             // Insertar la pregunta
             pstmtPregunta.setString(1, pregunta.getTexto());
             pstmtPregunta.setInt(2, pregunta.getIdExamen());
+            pstmtPregunta.setString(3, pregunta.getTipo());
             int affectedRows = pstmtPregunta.executeUpdate();
 
             if (affectedRows == 0) {
@@ -48,6 +50,30 @@ public class PreguntaDao {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public List<Preguntas> obtenerPreguntasPorExamen(int idExamen) {
+        List<Preguntas> preguntas = new ArrayList<>();
+        String query = "SELECT id_pregunta, pregunta, tipo_pregunta FROM Pregunta WHERE id_examen = ?";
+
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, idExamen);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Preguntas pregunta = new Preguntas();
+                pregunta.setIdPregunta(rs.getInt("id_pregunta"));
+                pregunta.setTexto(rs.getString("pregunta"));
+                pregunta.setTipo(rs.getString("tipo_pregunta"));
+                preguntas.add(pregunta);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return preguntas;
     }
 
     public int getLastInsertedId() {
