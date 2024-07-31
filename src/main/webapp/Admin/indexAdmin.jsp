@@ -27,7 +27,6 @@
         }
 
         .card {
-            right: 10px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -41,8 +40,7 @@
             border: 2px solid black;
             background-color: #CDFFF4;
             text-align: center;
-            width: 100%;
-            height: 220px;
+            height: 250px;
             margin: 10px;
         }
 
@@ -67,7 +65,7 @@
             font-family: 'PT Sans';
             font-weight: bold;
             color: black;
-            margin-bottom: 20px;
+            margin-bottom: 50px;
         }
 
         .container {
@@ -75,13 +73,8 @@
             margin-top: 20px;
             border-radius: 15px;
             max-width: 98%;
-            width: 1367px;
+            width: 100%;
             height: auto;
-        }
-
-        .col-md-3 {
-            max-width: 25%;
-            flex: 0 0 25%;
         }
 
         .button {
@@ -91,10 +84,6 @@
 
         footer {
             margin-top: 15px;
-        }
-
-        .invisible-card {
-            visibility: hidden;
         }
     </style>
 </head>
@@ -107,10 +96,11 @@
             document.getElementById('navbar').innerHTML = data;
         });
 </script>
+
 <div class="container">
     <div class="row justify-content-center">
         <!-- Tarjeta Gestionar Alumnos -->
-        <div class="col-md-3 col-sm-6 text-center mb-4">
+        <div class="col-md-3 col-sm-6 col-12 text-center mb-4">
             <a href="verAlumnos.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
@@ -122,7 +112,7 @@
             </a>
         </div>
         <!-- Tarjeta Gestionar Profesores -->
-        <div class="col-md-3 col-sm-6 text-center mb-4">
+        <div class="col-md-3 col-sm-6 col-12 text-center mb-4">
             <a href="verDocente.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
@@ -134,7 +124,7 @@
             </a>
         </div>
         <!-- Tarjeta Gestionar Grupos -->
-        <div class="col-md-3 col-sm-6 text-center mb-4">
+        <div class="col-md-3 col-sm-6 col-12 text-center mb-4">
             <a href="verGrupos.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
@@ -146,7 +136,7 @@
             </a>
         </div>
         <!-- Tarjeta Gestionar Clases -->
-        <div class="col-md-3 col-sm-6 text-center mb-4">
+        <div class="col-md-3 col-sm-6 col-12 text-center mb-4">
             <a href="verClases.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
@@ -158,7 +148,7 @@
             </a>
         </div>
         <!-- Tarjeta Gestionar Carreras -->
-        <div class="col-md-3 col-sm-6 text-center mb-4">
+        <div class="col-md-3 col-sm-6 col-12 text-center mb-4">
             <a href="verCarrearas.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
@@ -170,7 +160,7 @@
             </a>
         </div>
         <!-- Tarjeta Gestionar Divisiones -->
-        <div class="col-md-3 col-sm-6 text-center mb-4">
+        <div class="col-md-3 col-sm-6 col-12 text-center mb-4">
             <a href="verDivisiones.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
@@ -182,7 +172,7 @@
             </a>
         </div>
         <!-- Tarjeta Gestionar Materias -->
-        <div class="col-md-3 col-sm-6 text-center mb-4">
+        <div class="col-md-3 col-sm-6 col-12 text-center mb-4">
             <a href="verMaterias.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
@@ -194,24 +184,13 @@
             </a>
         </div>
         <!-- Tarjeta Asignacion de clase -->
-        <div class="col-md-3 col-sm-6 text-center mb-4">
+        <div class="col-md-3 col-sm-6 col-12 text-center mb-4">
             <a href="" class="button">
                 <div class="card">
                     <div class="card-body">
                         <img src="../img/asignacionClases.png" class="text-center" width="68">
                         <h5 class="card-title">Asignación de clase</h5>
                         <p class="card-text">Si ya tienes la encuesta, crea una nueva clase.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <!-- Tarjeta Invisible -->
-        <div class="col-md-3 col-sm-6 text-center mb-4 invisible-card">
-            <a href="" class="button">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Invisible Card</h5>
-                        <p class="card-text">This card is invisible.</p>
                     </div>
                 </div>
             </a>

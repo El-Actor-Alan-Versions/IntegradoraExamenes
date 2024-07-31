@@ -67,7 +67,7 @@
         </div>
 
         <div class="form-group">
-            <input type="hidden" class="form-control" id="contraseña" name="contraseña" value="<%= action.equals("update") ? docente.getContraseña() : ""%>" required />
+            <input type="password" class="form-control" id="contraseña" name="contraseña" value="<%= action.equals("update") ? docente.getContraseña() : ""%>" required />
         </div>
 
         <button type="submit" class="btn btn-primary"> <%=action.equals("update") ? "Actualizar" : "Registrar"%></button>
