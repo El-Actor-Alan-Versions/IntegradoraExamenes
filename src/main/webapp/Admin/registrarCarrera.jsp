@@ -7,16 +7,16 @@
 <%
     Carrera carrera = null;
     String action = "insert";
-    int  idCarrera = 0;
+    int  id_carrera = 0;
 
-    String idCarreraParam = request.getParameter("idCarrera");
+    String idCarreraParam = request.getParameter("id_carrera");
     if (idCarreraParam != null && !idCarreraParam.isEmpty()) {
-        idCarrera = Integer.parseInt(idCarreraParam);
+        id_carrera = Integer.parseInt(idCarreraParam);
         action = "update";
 
         CarreraDao dao = new CarreraDao();
         try{
-            carrera = dao.getById(idCarrera);
+            carrera = dao.getById(id_carrera);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
@@ -167,15 +167,15 @@
         <div class="card-body">
             <form action="<%= action.equals("update") ? "actualizarCarrreraServlet" : "registrarCarreraServlet"%>" method="post">
                 <% if (action.equals("update")){ %>
-                <input type="hidden" name="idCarrera" value="<%= carrera.getId_carrera()%>">
+                <input type="hidden" name="id_carrera" value="<%= carrera.getId_carrera()%>">
                 <% } %>
                 <div class="label-input-group">
-                    <label for="nombreCarrera" class="form-label">Nombre de la Carrera:</label>
-                    <input type="text" class="form-control" id="nombreCarrera" name="nombreCarrera" value="<%= action.equals("update") ? carrera.getNombre_carrera() : ""%>" required>
+                    <label for="nombre_carrera" class="form-label">Nombre de la Carrera:</label>
+                    <input type="text" class="form-control" id="nombre_carrera" name="nombre_carrera" value="<%= action.equals("update") ? carrera.getNombre_carrera() : ""%>" required>
                 </div>
                 <div class="label-input-group">
-                    <%--@declare id="iddivision"--%><label for="idDivision" class="form-label">División:</label>
-                    <select id="divisionesSelect" class="form-control" name="idDivision"  required>
+                    <%--@declare id="id_division"--%><label for="id_division" class="form-label">División:</label>
+                    <select id="divisionesSelect" class="form-control" name="id_division"  required>
                         <option value="">Seleccione...</option>
                         <%
                             DivisionDao divisionDao = new DivisionDao();

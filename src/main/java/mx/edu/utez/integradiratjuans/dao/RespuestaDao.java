@@ -13,11 +13,12 @@ import java.util.List;
 public class RespuestaDao {
     public boolean insert(Respuesta respuesta) {
         boolean flag = false;
-        String query = "INSERT INTO Respuesta (respuesta, id_pregunta) VALUES (?,?)";
+        String query = "INSERT INTO Respuesta (respuesta, acierto, id_pregunta) VALUES (?,?)";
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, respuesta.getRespuesta());
-            ps.setInt(2, respuesta.getIdPregunta());
+            ps.setInt(2, respuesta.getAcierto());
+            ps.setInt(3, respuesta.getIdPregunta());
             if (ps.executeUpdate() == 1) {
                 flag = true;
             }
@@ -40,6 +41,7 @@ public class RespuestaDao {
                 Respuesta respuesta = new Respuesta();
                 respuesta.setIdRespuesta(rs.getInt("id_respuesta"));
                 respuesta.setRespuesta(rs.getString("respuesta"));
+                respuesta.setAcierto(rs.getInt( "acierto"));
                 respuesta.setIdPregunta(rs.getInt("id_pregunta"));
                 respuestas.add(respuesta);
             }

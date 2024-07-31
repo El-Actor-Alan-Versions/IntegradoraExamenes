@@ -16,16 +16,17 @@ public class RegistrarCarreraServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int idCarrera = Integer.parseInt(request.getParameter("idCarrera"));
-        String nombre_carrera = request.getParameter("nombreCarrera"); // Cambio de nombre aquí
-        int idDivision = Integer.parseInt(request.getParameter("idDivision"));
+        String nombre_carrera = request.getParameter("nombre_carrera"); // Cambio de nombre aquí
+        Integer id_division = Integer.parseInt(request.getParameter("id_division"));
 
 
+        Carrera carrera = new Carrera();
+        carrera.setNombre_carrera(nombre_carrera);
+        carrera.setId_division(id_division);
 
-        Carrera carrera = new Carrera(idCarrera, nombre_carrera, idDivision);
+
         CarreraDao dao = new CarreraDao();
-
-        boolean update = dao.update(carrera);
+        boolean update = dao.insert(carrera);
 
         if (update) {
             response.sendRedirect("verCarreras.jsp");

@@ -77,7 +77,7 @@
         <% if (!action.equals("update")) { %>
         <div class="form-group">
             <label for="contraseña">Contraseña:</label>
-            <input type="password" class="form-control" id="contraseña" name="contraseña" required />
+            <input type="hidden" class="form-control" id="contraseña" name="contraseña" required />
         </div>
         <% } %>
 

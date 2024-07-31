@@ -16,7 +16,7 @@ public class ActualizarCarreraServlet extends HttpServlet{
     protected void  doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id_carrera = Integer.parseInt(request.getParameter("id_carrera"));
         String nombre_carrera = request.getParameter("nombre_carrera");
-        int idDivision = Integer.parseInt(request.getParameter("idDivision"));
+        int idDivision = Integer.parseInt(request.getParameter("id_division"));
 
         Carrera carrera = new Carrera(id_carrera, nombre_carrera, idDivision);
         CarreraDao dao = new CarreraDao();

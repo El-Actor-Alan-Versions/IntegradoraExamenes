@@ -1,0 +1,125 @@
+Index: src/main/java/mx/edu/utez/integradiratjuans/dao/RespuestaDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package mx.edu.utez.integradiratjuans.dao;\r\n\r\nimport mx.edu.utez.integradiratjuans.model.Respuesta;\r\nimport mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;\r\n\r\nimport java.sql.Connection;\r\nimport java.sql.PreparedStatement;\r\nimport java.sql.ResultSet;\r\nimport java.sql.SQLException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class RespuestaDao {\r\n    public boolean insert(Respuesta respuesta) {\r\n        boolean flag = false;\r\n        String query = \"INSERT INTO Respuesta (respuesta, id_pregunta) VALUES (?,?)\";\r\n        try (Connection con = DatabaseConnectionManager.getConnection();\r\n             PreparedStatement ps = con.prepareStatement(query)) {\r\n            ps.setString(1, respuesta.getRespuesta());\r\n            ps.setInt(2, respuesta.getIdPregunta());\r\n            if (ps.executeUpdate() == 1) {\r\n                flag = true;\r\n            }\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return flag;\r\n    }\r\n\r\n    public List<Respuesta> getAll() {\r\n        List<Respuesta> respuestas = new ArrayList<>();\r\n        String query = \"SELECT * FROM Respuesta\";\r\n\r\n        try (Connection con = DatabaseConnectionManager.getConnection();\r\n             PreparedStatement ps = con.prepareStatement(query)) {\r\n\r\n            ResultSet rs = ps.executeQuery();\r\n\r\n            while (rs.next()) {\r\n                Respuesta respuesta = new Respuesta();\r\n                respuesta.setIdRespuesta(rs.getInt(\"id_respuesta\"));\r\n                respuesta.setRespuesta(rs.getString(\"respuesta\"));\r\n                respuesta.setIdPregunta(rs.getInt(\"id_pregunta\"));\r\n                respuestas.add(respuesta);\r\n            }\r\n        } catch (SQLException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n        return respuestas;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/mx/edu/utez/integradiratjuans/dao/RespuestaDao.java b/src/main/java/mx/edu/utez/integradiratjuans/dao/RespuestaDao.java
+--- a/src/main/java/mx/edu/utez/integradiratjuans/dao/RespuestaDao.java	
++++ b/src/main/java/mx/edu/utez/integradiratjuans/dao/RespuestaDao.java	
+@@ -13,11 +13,12 @@
+ public class RespuestaDao {
+     public boolean insert(Respuesta respuesta) {
+         boolean flag = false;
+-        String query = "INSERT INTO Respuesta (respuesta, id_pregunta) VALUES (?,?)";
++        String query = "INSERT INTO Respuesta (respuesta, acierto, id_pregunta) VALUES (?,?)";
+         try (Connection con = DatabaseConnectionManager.getConnection();
+              PreparedStatement ps = con.prepareStatement(query)) {
+             ps.setString(1, respuesta.getRespuesta());
+-            ps.setInt(2, respuesta.getIdPregunta());
++            ps.setInt(2, respuesta.getAcierto());
++            ps.setInt(3, respuesta.getIdPregunta());
+             if (ps.executeUpdate() == 1) {
+                 flag = true;
+             }
+@@ -40,6 +41,7 @@
+                 Respuesta respuesta = new Respuesta();
+                 respuesta.setIdRespuesta(rs.getInt("id_respuesta"));
+                 respuesta.setRespuesta(rs.getString("respuesta"));
++                respuesta.setAcierto(rs.getInt( "acierto"));
+                 respuesta.setIdPregunta(rs.getInt("id_pregunta"));
+                 respuestas.add(respuesta);
+             }
+Index: src/main/java/mx/edu/utez/integradiratjuans/model/Respuesta.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package mx.edu.utez.integradiratjuans.model;\r\n\r\npublic class Respuesta {\r\n    private int idRespuesta;\r\n    private String respuesta;\r\n    private int idPregunta;\r\n\r\n    // Getters and setters\r\n    public int getIdRespuesta() {\r\n        return idRespuesta;\r\n    }\r\n\r\n    public void setIdRespuesta(int idRespuesta) {\r\n        this.idRespuesta = idRespuesta;\r\n    }\r\n\r\n    public String getRespuesta() {\r\n        return respuesta;\r\n    }\r\n\r\n    public void setRespuesta(String respuesta) {\r\n        this.respuesta = respuesta;\r\n    }\r\n\r\n    public int getIdPregunta() {\r\n        return idPregunta;\r\n    }\r\n\r\n    public void setIdPregunta(int idPregunta) {\r\n        this.idPregunta = idPregunta;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/mx/edu/utez/integradiratjuans/model/Respuesta.java b/src/main/java/mx/edu/utez/integradiratjuans/model/Respuesta.java
+--- a/src/main/java/mx/edu/utez/integradiratjuans/model/Respuesta.java	
++++ b/src/main/java/mx/edu/utez/integradiratjuans/model/Respuesta.java	
+@@ -3,9 +3,29 @@
+ public class Respuesta {
+     private int idRespuesta;
+     private String respuesta;
++    private int acierto;
+     private int idPregunta;
+ 
++    public Respuesta(int idRespuesta, String respuesta, int acierto, int idPregunta) {
++        this.idRespuesta = idRespuesta;
++        this.respuesta = respuesta;
++        this.acierto = acierto;
++        this.idPregunta = idPregunta;
++    }
++
++    public Respuesta() {
++
++    }
++
+     // Getters and setters
++    public int getAcierto() {
++        return acierto;
++    }
++
++    public void setAcierto(int acierto) {
++        this.acierto = acierto;
++    }
++
+     public int getIdRespuesta() {
+         return idRespuesta;
+     }
+Index: src/main/java/mx/edu/utez/integradiratjuans/controller/VistaExamenesAlumnoServlet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package mx.edu.utez.integradiratjuans.controller;\r\n\r\nimport jakarta.servlet.ServletException;\r\nimport jakarta.servlet.annotation.WebServlet;\r\nimport jakarta.servlet.http.HttpServlet;\r\nimport jakarta.servlet.http.HttpServletRequest;\r\nimport jakarta.servlet.http.HttpServletResponse;\r\nimport mx.edu.utez.integradiratjuans.dao.ClaseDao;\r\nimport mx.edu.utez.integradiratjuans.dao.ExamenDao;\r\nimport mx.edu.utez.integradiratjuans.model.Clase;\r\nimport mx.edu.utez.integradiratjuans.model.Examen;\r\n\r\nimport java.io.IOException;\r\nimport java.sql.Timestamp;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\n\r\n\r\n@WebServlet(\"/Alumno/VerExamenesAlumnoServlet\")\r\npublic class VistaExamenesAlumnoServlet extends HttpServlet {\r\n\r\n    @Override\r\n    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {\r\n        // Obtener el ID de la clase desde la sesión\r\n        int idClase = (Integer) request.getSession().getAttribute(\"clase\");\r\n        System.out.println(idClase);\r\n        // Verifica si el ID de clase es válido\r\n        if (idClase <= 0) {\r\n            request.setAttribute(\"error\", \"No se pudo obtener un ID de clase válido.\");\r\n            request.getRequestDispatcher(\"error.jsp\").forward(request, response);\r\n            return;\r\n        }\r\n\r\n        ExamenDao examenDao = new ExamenDao();\r\n\r\n        try {\r\n            // Obtener todos los exámenes\r\n            List<Examen> todosExamenes = examenDao.getExamenesPorClase(idClase);\r\n            Timestamp ahora = new Timestamp(System.currentTimeMillis());\r\n\r\n            // Filtrar exámenes que no han caducado\r\n            List<Examen> examenesVigentes = new ArrayList<>();\r\n            for (Examen examen : todosExamenes) {\r\n                Timestamp fechaCierre = examen.getFecha_cierre();\r\n                if (fechaCierre == null || fechaCierre.after(ahora)) {\r\n                    examenesVigentes.add(examen);\r\n                }\r\n            }\r\n\r\n            // Establecer los exámenes vigentes como atributo de solicitud\r\n            request.setAttribute(\"examenes\", examenesVigentes);\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n            request.setAttribute(\"error\", \"Se produjo un error al recuperar los exámenes.\");\r\n            request.getRequestDispatcher(\"error.jsp\").forward(request, response);\r\n            return;\r\n        }\r\n\r\n        // Redirigir a la página JSP para mostrar los exámenes\r\n        request.getRequestDispatcher(\"verExamenes.jsp\").forward(request, response);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/mx/edu/utez/integradiratjuans/controller/VistaExamenesAlumnoServlet.java b/src/main/java/mx/edu/utez/integradiratjuans/controller/VistaExamenesAlumnoServlet.java
+--- a/src/main/java/mx/edu/utez/integradiratjuans/controller/VistaExamenesAlumnoServlet.java	
++++ b/src/main/java/mx/edu/utez/integradiratjuans/controller/VistaExamenesAlumnoServlet.java	
+@@ -24,7 +24,6 @@
+     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+         // Obtener el ID de la clase desde la sesión
+         int idClase = (Integer) request.getSession().getAttribute("clase");
+-        System.out.println(idClase);
+         // Verifica si el ID de clase es válido
+         if (idClase <= 0) {
+             request.setAttribute("error", "No se pudo obtener un ID de clase válido.");
+Index: src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarPreguntasServlet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarPreguntasServlet.java b/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarPreguntasServlet.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarPreguntasServlet.java	
+@@ -0,0 +1,24 @@
++package mx.edu.utez.integradiratjuans.controller;
++
++import jakarta.servlet.ServletException;
++import jakarta.servlet.annotation.WebServlet;
++import jakarta.servlet.http.HttpServlet;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
++import mx.edu.utez.integradiratjuans.model.Preguntas;
++
++import java.io.IOException;
++import java.util.ArrayList;
++import java.util.List;
++
++@WebServlet("/EnviarRespuestas")
++public class RegistrarPreguntasServlet extends HttpServlet {
++    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
++        // Lista de preguntas (podrías haberla obtenido de la base de datos o del contexto)
++        List<Preguntas> preguntas = new ArrayList<>();
++
++
++
++        // Resto de la lógica para manejar las respuestas
++    }
++}

@@ -3,9 +3,29 @@ package mx.edu.utez.integradiratjuans.model;
 public class Respuesta {
     private int idRespuesta;
     private String respuesta;
+    private int acierto;
     private int idPregunta;
 
+    public Respuesta(int idRespuesta, String respuesta, int acierto, int idPregunta) {
+        this.idRespuesta = idRespuesta;
+        this.respuesta = respuesta;
+        this.acierto = acierto;
+        this.idPregunta = idPregunta;
+    }
+
+    public Respuesta() {
+
+    }
+
     // Getters and setters
+    public int getAcierto() {
+        return acierto;
+    }
+
+    public void setAcierto(int acierto) {
+        this.acierto = acierto;
+    }
+
     public int getIdRespuesta() {
         return idRespuesta;
     }

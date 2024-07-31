@@ -64,7 +64,7 @@
             <td><%= materia.getNombreMateria() %></td>
             <td><%= docente.getNombre() %> <%= docente.getApellidoPaterno() %> <%= docente.getApellidoMaterno() %></td>
             <td>
-                <a href="actualizarClase.jsp?idClase=<%= c.getId_clase() %>">Actualizar</a>
+                <a href="registrarClase.jsp?idClase=<%= c.getId_clase() %>">Actualizar</a>
             </td>
             <td>
                 <form method="post" action="eliminarClaseServlet">

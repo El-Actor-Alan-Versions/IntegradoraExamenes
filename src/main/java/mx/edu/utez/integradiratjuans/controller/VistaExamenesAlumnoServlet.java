@@ -24,7 +24,6 @@ public class VistaExamenesAlumnoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtener el ID de la clase desde la sesión
         int idClase = (Integer) request.getSession().getAttribute("clase");
-        System.out.println(idClase);
         // Verifica si el ID de clase es válido
         if (idClase <= 0) {
             request.setAttribute("error", "No se pudo obtener un ID de clase válido.");
