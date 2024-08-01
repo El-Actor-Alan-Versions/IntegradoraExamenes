@@ -7,7 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import mx.edu.utez.integradiratjuans.dao.RespuestaDao;
+import mx.edu.utez.integradiratjuans.dao.OpcionesDao;
 import mx.edu.utez.integradiratjuans.model.Respuesta;
+import mx.edu.utez.integradiratjuans.model.Preguntas;
 
 import java.io.IOException;
 import java.util.*;
@@ -28,14 +30,28 @@ public class RegistrarPreguntasServlet extends HttpServlet {
 
         RespuestaDao respuestaDao = new RespuestaDao();
         Map<Integer, List<String>> respuestas = new HashMap<>();
-
-        // Recoger todas las respuestas enviadas por el usuario
         for (Integer idPregunta : idPreguntas) {
             List<String> respuestasPregunta = new ArrayList<>();
-            String[] respuestaIds = request.getParameterValues("pregunta_" + idPregunta);
-            if (respuestaIds != null) {
-                respuestasPregunta.addAll(Arrays.asList(respuestaIds));
+
+            // Obtener respuestas para preguntas de opción múltiple
+            String[] respuestaIdsOpcional = request.getParameterValues("pregunta_" + idPregunta);
+            if (respuestaIdsOpcional != null) {
+                respuestasPregunta.addAll(Arrays.asList(respuestaIdsOpcional));
             }
+
+            // Obtener respuestas para preguntas de varias respuestas
+            for (String respuestaId : request.getParameterMap().keySet()) {
+                if (respuestaId.startsWith("pregunta_" + idPregunta + "_")) {
+                    respuestasPregunta.add(request.getParameter(respuestaId));
+                }
+            }
+
+            // Para preguntas abiertas
+            String respuestaAbierta = request.getParameter("pregunta_" + idPregunta);
+            if (respuestaAbierta != null) {
+                respuestasPregunta.add(respuestaAbierta);
+            }
+
             respuestas.put(idPregunta, respuestasPregunta);
         }
 
@@ -45,19 +61,19 @@ public class RegistrarPreguntasServlet extends HttpServlet {
 
             if (respuestasUsuario == null || respuestasUsuario.isEmpty()) {
                 System.out.println("No se recibieron respuestas para la pregunta: " + idPregunta);
-                continue; // Pasar a la siguiente pregunta si no hay respuestas
+                continue;
             }
 
             // Obtener las opciones correctas desde la base de datos
             List<String> opcionesCorrectas = respuestaDao.CompararRespuestas(idPregunta);
 
-            if (opcionesCorrectas.isEmpty()) {
+            if (opcionesCorrectas == null || opcionesCorrectas.isEmpty()) {
                 System.out.println("No se encontraron opciones correctas para la pregunta: " + idPregunta);
-                continue; // Pasar a la siguiente pregunta si no hay opción correcta
+                continue;
             }
 
             // Verificar si alguna de las respuestas enviadas es correcta
-            boolean esCorrecto = respuestasUsuario.stream().anyMatch(opcionesCorrectas::contains);
+            boolean esCorrecto = opcionesCorrectas.equals(respuestasUsuario);
 
             // Insertar la respuesta en la base de datos
             Respuesta respuesta = new Respuesta();
@@ -73,4 +89,6 @@ public class RegistrarPreguntasServlet extends HttpServlet {
         // Redirigir a una página de éxito o mostrar un mensaje
         response.sendRedirect("resultado.jsp");
     }
+
 }
+

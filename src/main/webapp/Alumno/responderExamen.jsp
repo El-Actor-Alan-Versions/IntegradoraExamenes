@@ -25,7 +25,7 @@
 <div class="container mt-4">
     <h1 class="mb-4">Responder Examen</h1>
 
-    <form action="EnviarRespuestas" method="post">
+    <form action="CalificarExamen" method="post">
         <%
             List<Preguntas> preguntas = (List<Preguntas>) request.getAttribute("preguntas");
             if (preguntas != null && !preguntas.isEmpty()) {

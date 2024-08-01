@@ -1,5 +1,6 @@
 package mx.edu.utez.integradiratjuans.dao;
 
+import mx.edu.utez.integradiratjuans.model.Preguntas;
 import mx.edu.utez.integradiratjuans.model.Respuesta;
 import mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;
 
@@ -29,6 +30,30 @@ public class RespuestaDao {
         return flag;
     }
 
+    public Preguntas obtenerPreguntaPorId(int idPregunta) {
+        Preguntas pregunta = null;
+        String sql = "SELECT id_pregunta, pregunta, tipo_pregunta FROM Pregunta WHERE id_pregunta = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, idPregunta);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                pregunta = new Preguntas();
+                pregunta.setIdPregunta(rs.getInt("id_pregunta"));
+                pregunta.setTexto(rs.getString("pregunta"));
+                pregunta.setTipo(rs.getString("tipo_pregunta"));
+                // Si hay más atributos, también deberías configurarlos aquí
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return pregunta;
+    }
+
+
     public List<String> CompararRespuestas(int idPregunta) {
         List<String> opcionesCorrectas = new ArrayList<>();
         String sql = "SELECT id_opcion FROM opciones WHERE id_pregunta = ? AND correcta = 1";
@@ -44,4 +69,5 @@ public class RespuestaDao {
         }
         return opcionesCorrectas;
     }
+
 }

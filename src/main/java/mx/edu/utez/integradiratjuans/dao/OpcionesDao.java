@@ -79,6 +79,24 @@ public class OpcionesDao {
         return opciones;
     }
 
+    public List<Opcion> getOpcionesPorPregunta(int idPregunta) throws SQLException {
+        List<Opcion> opciones = new ArrayList<>();
+        String sql = "SELECT id_opcion, opcion, correcta FROM Opciones WHERE id_pregunta = ?";
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, idPregunta);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Opcion opcion = new Opcion();
+                opcion.setIdOpcion(rs.getInt("id_opcion"));
+                opcion.setOpcion(rs.getString("opcion"));
+                opcion.setCorrecta(rs.getBoolean("correcta"));
+                opciones.add(opcion);
+            }
+        }
+        return opciones;
+    }
+
     // Método para obtener todas las opciones
     public List<Opcion> getAll() {
         List<Opcion> opciones = new ArrayList<>();
