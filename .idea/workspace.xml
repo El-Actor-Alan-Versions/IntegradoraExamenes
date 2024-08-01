@@ -12,10 +12,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarDocenteServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarDocenteServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/indexAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/indexAdmin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/registarAlumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/registarAlumno.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/registrarDocente.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/registrarDocente.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +22,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Jsp File" />
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -144,14 +140,14 @@
       <option name="BROWSER_ID" value="37cae5b9-e8b2-4949-9172-aafa37fbc09c" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="practica3e:war exploded">
-          <settings>
-            <option name="CONTEXT_PATH" value="/practica3e_war_exploded" />
-          </settings>
-        </artifact>
         <artifact name="practica3e:war">
           <settings>
             <option name="CONTEXT_PATH" value="/practica3e_war" />
+          </settings>
+        </artifact>
+        <artifact name="practica3e:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/practica3e_war_exploded" />
           </settings>
         </artifact>
       </deployment>
@@ -229,8 +225,8 @@
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="practica3e:war exploded" />
           <artifact name="practica3e:war" />
+          <artifact name="practica3e:war exploded" />
         </option>
       </method>
     </configuration>
@@ -308,7 +304,6 @@
       <workItem from="1722466713375" duration="3591000" />
       <workItem from="1722474867828" duration="820000" />
       <workItem from="1722492397775" duration="3095000" />
-      <workItem from="1722528055665" duration="6957000" />
     </task>
     <servers />
   </component>

@@ -76,19 +76,44 @@ public class PreguntaDao {
         return preguntas;
     }
 
-    public int getLastInsertedId() {
-        int id = -1;
-        String query = "SELECT LAST_INSERT_ID()";
-        try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+    public String getRespuestaCorrecta(int idPregunta) throws SQLException {
+        String sql = "SELECT respuesta_correcta FROM Pregunta WHERE id_pregunta = ?";
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, idPregunta);
+            ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                id = rs.getInt(1);
+                return rs.getString("respuesta_correcta");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return id;
+        return null;
+    }
+
+    public List<String> getRespuestasCorrectas(int idPregunta) throws SQLException {
+        List<String> respuestasCorrectas = new ArrayList<>();
+        String sql = "SELECT id_opcion FROM OpcionesCorrectas WHERE id_pregunta = ?";
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, idPregunta);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                respuestasCorrectas.add(rs.getString("id_opcion"));
+            }
+        }
+        return respuestasCorrectas;
+    }
+
+    public double getPuntajePregunta(int idPregunta) throws SQLException {
+        String sql = "SELECT puntaje FROM Pregunta WHERE id_pregunta = ?";
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, idPregunta);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble("puntaje");
+            }
+        }
+        return 0;
     }
 
     public int getIdExamen(int idPregunta){

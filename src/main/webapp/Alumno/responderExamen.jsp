@@ -26,6 +26,7 @@
     <h1 class="mb-4">Responder Examen</h1>
 
     <form action="EnviarRespuestas" method="post">
+        <input type="hidden" name="id_examen" value="${idExamen}">
         <%
             List<Preguntas> preguntas = (List<Preguntas>) request.getAttribute("preguntas");
             if (preguntas != null && !preguntas.isEmpty()) {

@@ -14,20 +14,20 @@ import java.util.List;
 public class RespuestaDao {
 
     public boolean insert(Respuesta respuesta) {
-        boolean flag = false;
-        String query = "INSERT INTO Respuesta (acierto, id_pregunta) VALUES (?, ?)";
+        String sql = "INSERT INTO respuesta (id_pregunta, acierto, matricula_estudiante) VALUES (?, ?, ?)";
         try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setInt(1, respuesta.getAcierto());
-            ps.setInt(2, respuesta.getIdPregunta());
-            if (ps.executeUpdate() == 1) {
-                flag = true;
-            }
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, respuesta.getIdPregunta());
+            stmt.setInt(2, respuesta.getAcierto());
+            stmt.setString(3, respuesta.getMatriculaEstudiante()); // Establece el valor de matrícula
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-        return flag;
     }
+
 
     public List<String> CompararRespuestas(int idPregunta) {
         List<String> opcionesCorrectas = new ArrayList<>();
