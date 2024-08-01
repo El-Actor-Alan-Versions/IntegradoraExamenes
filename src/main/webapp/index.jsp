@@ -64,34 +64,34 @@
 <footer class="container">
 </footer>
 <script>
-    document.getElementById('loginButton').addEventListener('submit', function(event) {
+    document.getElementById('formularioInsano').addEventListener('submit', function(event) {
         event.preventDefault();
         const matricula = document.getElementById('matricula').value;
         const contra = document.getElementById('contra').value;
         if (matricula === 'matricula' && contra === 'contra') {
             // Inicio de sesión exitoso
             Swal.fire({
-                html: '<b class= "titulo">¡Inicio de sesión exitoso!</b>',
+                html: '<b class="titulo">¡Inicio de sesión exitoso!</b>',
                 icon: 'success',
                 width: '40%',
                 padding: '4rem',
-                customClass:
-                    {
-                        popup: 'popup-class'
-                    }
+                customClass: {
+                    popup: 'popup-class'
+                }
             });
         } else {
             // Inicio de sesión fallido
             Swal.fire({
-                html: '<b class= "titulo">¡Inicio de sesión fallido!</b>',
+                html: '<b class="titulo">¡Inicio de sesión fallido!</b>',
                 icon: 'error',
                 width: '40%',
                 padding: '4rem',
-                customClass:
-                    {
-                        popup: 'popup-class'
-                    }
+                customClass: {
+                    popup: 'popup-class'
+                }
             });
+        }
+    });
 </script>
 <script src="js/sweetAlert.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
