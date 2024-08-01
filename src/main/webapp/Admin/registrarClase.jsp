@@ -12,7 +12,6 @@
     Clase clase = null;
     String action = "insert";
     int id_clase = 0;
-    //XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
     // Si se pasa un idDivision en la URL, cargamos los datos para actualización
     String idClaseParam = request.getParameter("id_clase");
     if (idClaseParam != null && !idClaseParam.isEmpty()) {
@@ -151,27 +150,29 @@
     }
 </style>
 <body>
-<nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="profile-button">
-        <img src="${pageContext.request.contextPath}/img/Logo-utez%20.png" id="logo" alt="Logo">
-    </div>
-    <div class="d-flex flex-grow-1 justify-content">
-        <p class="navbar-text">PLATAFORMA DE EXÁMENES</p>
-    </div>
-    <img src="${pageContext.request.contextPath}/img/miPerfil.png" alt="perfil">
-</nav>
+<div id="navbar"></div>
+<script>
+    fetch('navbar.jsp')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar').innerHTML = data;
+        });
+</script>
 
 <div class="container mt-4">
     <div class="card">
-        <div class="card-header">
+        <div class="header-card">
             <img src="../img/crear.png" width="68px">
             <h2 class="text-center"><%= action.equals("update") ? "Actualizar" : "Registrar" %> Clase</h2>
         </div>
         <div class="card-body">
             <form action="<%= action.equals("update") ? "actualizarClaseServlet" : "registrarClaseServlet"%>" method="post">
-                <div class="form-group">
-                    <label for="idGrupo">Grupo:</label>
-                    <select id="gruposSelect" class="form-control" name="idGrupo">
+                <% if (action.equals("update")){ %>
+                <input type="hidden" name="id_clase" value="<%= clase.getId_clase()%>">
+                <% } %>
+                <div class="label-input-group">
+                    <label for="id_grupo">Grupo:</label>
+                    <select id="id_grupo" class="form-control" name="id_grupo" required>
                         <option value="">Seleccione...</option>
                         <%
                             GrupoDao grupoDao = new GrupoDao();
@@ -185,9 +186,9 @@
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label for="idMateria">Materia:</label>
-                    <select id="materiasSelect" class="form-control" name="idMateria">
+                <div class="label-input-group">
+                    <label for="id_materia">Materia:</label>
+                    <select id="id_materia" class="form-control" name="id_materia" required>
                         <option value="">Seleccione...</option>
                         <%
                             MateriaDao materiaDao = new MateriaDao();
@@ -201,9 +202,9 @@
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label for="idDocente">Docente:</label>
-                    <select id="docentesSelect" class="form-control" name="idDocente">
+                <div class="label-input-group">
+                    <label for="matricula">Docente:</label>
+                    <select id="matricula" class="form-control" name="matricula" required>
                         <option value="">Seleccione...</option>
                         <%
                             DocenteDao docenteDao = new DocenteDao();
@@ -217,7 +218,7 @@
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Registrar Clase</button>
+                <button type="submit" class="btn btn-right"><%= action.equals("update") ? "Actualizar" : "Registrar" %></button>
             </form>
         </div>
     </div>

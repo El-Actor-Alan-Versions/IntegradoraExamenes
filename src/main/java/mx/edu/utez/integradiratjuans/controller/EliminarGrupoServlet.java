@@ -21,7 +21,7 @@ public class EliminarGrupoServlet extends HttpServlet {
 
         try {
             grupoDao.delete(idGrupo);  // Asumiendo que tienes un método delete en GrupoDao
-            response.sendRedirect("gruposRegistrados.jsp");
+            response.sendRedirect("verGrupos.jsp");
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendRedirect("error.jsp");

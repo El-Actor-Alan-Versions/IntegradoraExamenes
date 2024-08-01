@@ -1,6 +1,7 @@
 package mx.edu.utez.integradiratjuans.dao;
 
 import mx.edu.utez.integradiratjuans.model.Grupo;
+import mx.edu.utez.integradiratjuans.model.Materia;
 import mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;
 
 import java.sql.*;
@@ -59,15 +60,51 @@ public class GrupoDao {
 
 
 
-    public void insert(Grupo grupo) throws SQLException {
+    public boolean insert(Grupo grupo){
+        boolean inserted = false;
         String query = "INSERT INTO Grupo (Grado_grupo, id_carrera) VALUES (?, ?)";
+
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
+
             statement.setString(1, grupo.getGradoGrupo());
             statement.setInt(2, grupo.getIdCarrera());
-            statement.executeUpdate();
+            int rowsAffected = statement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                inserted = true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        return inserted;
     }
+
+    public boolean update(Grupo grupo) {
+        boolean updated = false;
+        String query = "UPDATE Grupo SET Grado_grupo = ?, id_carrera = ? WHERE id_grupo = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, grupo.getGradoGrupo());
+            ps.setInt(2, grupo.getIdCarrera());
+            ps.setInt(3, grupo.getIdGrupo());
+            int rowsAffected = ps.executeUpdate();
+
+            if (rowsAffected > 0) {
+                updated = true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return updated;
+    }
+
 
     public Grupo getById(int idGrupo) throws SQLException {
         String query = "SELECT * FROM Grupo WHERE id_grupo = ?";

@@ -23,7 +23,7 @@ public class EliminarDivisionServlet extends HttpServlet {
 
         // Redirigir según el resultado de la operación
         if (resultado) {
-            response.sendRedirect("exito.jsp");
+            response.sendRedirect("verDivisiones.jsp");
         } else {
             response.sendRedirect("error.jsp");
         }

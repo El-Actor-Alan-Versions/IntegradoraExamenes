@@ -12,16 +12,14 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/docente.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="profile-button">
-        <img src="${pageContext.request.contextPath}/img/Logo-utez%20.png" id="logo" alt="Logo">
-    </div>
-    <div class="d-flex flex-grow-1 justify-content">
-        <p class="navbar-text">PLATAFORMA DE EXÁMENES</p>
-    </div>
-    <img src="${pageContext.request.contextPath}/img/miPerfil.png" alt="perfil">
-</nav>
-
+<div id="navbar"></div>
+<script>
+    fetch('navbar.jsp')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar').innerHTML = data;
+        });
+</script>
 <div class="container mt-4">
     <h2>Grupos Registrados</h2>
     <button type="button" class="btn btn-info" onclick="location.href='registrarGrupo.jsp'">Nuevo grupo</button>
@@ -47,7 +45,7 @@
             <td><%= g.getGradoGrupo() %></td>
             <td><%= g.getNombreCarrera() %></td> <!-- Mostrar el nombre de la carrera -->
             <td>
-                <a href="actualizarGrupo.jsp?idGrupo=<%= g.getIdGrupo() %>">Actualizar</a>
+                <a href="registrarGrupo.jsp?idGrupo=<%= g.getIdGrupo() %>">Actualizar</a>
             </td>
             <td>
                 <form method="post" action="eliminarGrupoServlet">

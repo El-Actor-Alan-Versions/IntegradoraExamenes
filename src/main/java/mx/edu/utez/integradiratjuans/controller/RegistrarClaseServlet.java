@@ -20,9 +20,9 @@ public class RegistrarClaseServlet extends HttpServlet {
 
         try {
             // Obtener parámetros del formulario
-            int idGrupo = Integer.parseInt(request.getParameter("idGrupo"));
-            int idMateria = Integer.parseInt(request.getParameter("idMateria"));
-            String idDocente = request.getParameter("idDocente");
+            int idGrupo = Integer.parseInt(request.getParameter("id_grupo"));
+            int idMateria = Integer.parseInt(request.getParameter("id_materia"));
+            String idDocente = request.getParameter("matricula");
 
             // Crear el objeto Clase
             Clase clase = new Clase();
@@ -37,7 +37,7 @@ public class RegistrarClaseServlet extends HttpServlet {
             claseDao.insert(clase);
 
             // Redirigir a una página de éxito
-            response.sendRedirect("exito.jsp");
+            response.sendRedirect("verClases.jsp");
 
         } catch (Exception e) {
             e.printStackTrace();

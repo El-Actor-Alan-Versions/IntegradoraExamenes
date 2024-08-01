@@ -23,7 +23,7 @@ public class EliminarMateriaServlet extends HttpServlet {
 
         // Redirigir según el resultado de la operación
         if (resultado) {
-            response.sendRedirect("exito.jsp");
+            response.sendRedirect("verMaterias.jsp");
         } else {
             response.sendRedirect("error.jsp");
         }

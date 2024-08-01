@@ -11,7 +11,7 @@
     <div class="alert alert-danger">
         <p><%= request.getAttribute("errorMessage") %></p>
     </div>
-    <a href="index.jsp" class="btn btn-primary">Volver</a>
+    <a href="indexAdmin.jsp" class="btn btn-primary">Volver</a>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

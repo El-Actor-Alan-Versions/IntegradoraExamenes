@@ -20,7 +20,7 @@ public class EliminarCarreraServlet extends HttpServlet {
         boolean isDeleted = carreraDao.delete(idCarrera);
 
         if (isDeleted) {
-            response.sendRedirect("carrerasRegistradas.jsp");
+            response.sendRedirect("verCarreras.jsp");
         } else {
             response.sendRedirect("error.jsp");
         }
