@@ -9,7 +9,7 @@ import mx.edu.utez.integradiratjuans.model.Examen;
 public class ExamenDao {
 
     public int insert(Examen examen) {
-        String query = "INSERT INTO Examen (Nombre, Fecha_aplicacion, Fecha_cierre, id_clase, descripcion) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Examen (Nombre, Fecha_aplicacion, Fecha_cierre, id_clase, descripcion, estado) VALUES (?, ?, ?, ?, ?, ?)";
         int id = -1;
 
         try (Connection con = DatabaseConnectionManager.getConnection();
@@ -20,6 +20,7 @@ public class ExamenDao {
             pstmt.setTimestamp(3, examen.getFecha_cierre());
             pstmt.setInt(4, examen.getId_clase());
             pstmt.setString(5, examen.getDescripcion());
+            pstmt.setBoolean(6, examen.isEstado());
 
             int rowsAffected = pstmt.executeUpdate();
             ResultSet rs = pstmt.getGeneratedKeys();
@@ -37,7 +38,7 @@ public class ExamenDao {
 
     public List<Examen> getExamenesPorClase(int idClase) throws SQLException {
         List<Examen> examenes = new ArrayList<>();
-        String sql = "SELECT * FROM Examen WHERE id_clase = ?";
+        String sql = "SELECT * FROM Examen WHERE id_clase = ? and estado = false";
 
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -80,6 +81,30 @@ public class ExamenDao {
             throw new SQLException("Error al obtener exámenes por profesor: " + e.getMessage(), e);
         }
         return examenes;
+    }
+
+    public boolean updateEstadoExamen(int idExamen) {
+        boolean flag = false;
+        String query = "UPDATE Examen SET estado = true WHERE id_examen = ?";
+
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Establecer el parámetro de la consulta
+            preparedStatement.setInt(1, idExamen);
+
+            // Ejecutar la actualización
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            // Verificar si alguna fila fue afectada
+            if (rowsAffected > 0) {
+                flag = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Puedes manejar la excepción de una manera más apropiada en tu aplicación
+        }
+
+        return flag;
     }
 
     public List<Examen> getAll() throws SQLException {

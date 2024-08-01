@@ -9,6 +9,7 @@ public class Examen {
     private Timestamp fecha_cierre;
     private int id_clase;
     private String descripcion;
+    private boolean estado = false;
 
 
     public Examen() {
@@ -25,6 +26,15 @@ public class Examen {
     }
 
     // Getters y Setters
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     public void setId_examen(int id_examen) { this.id_examen = id_examen; }
     public void setNombre(String nombre) { this.nombre = nombre; }
     public void setFecha_aplicacion(Timestamp fecha_aplicacion) { this.fecha_aplicacion = fecha_aplicacion; }

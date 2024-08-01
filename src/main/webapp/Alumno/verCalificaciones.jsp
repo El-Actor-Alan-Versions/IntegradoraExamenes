@@ -60,6 +60,7 @@
     </table>
 </div>
 
+
 <script src="${pageContext.request.contextPath}/JS/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>
 <script src="${pageContext.request.contextPath}/JS/datatables.js"></script>
@@ -76,5 +77,9 @@
         });
     });
 </script>
+<div class="text-center">
+    <a href="indexAlumno.jsp" class="btn btn-primary mt-5">Regresar a Inicio</a>
+</div>
+
 </body>
 </html>

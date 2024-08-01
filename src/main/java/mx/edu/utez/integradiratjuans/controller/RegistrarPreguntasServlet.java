@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import mx.edu.utez.integradiratjuans.dao.CalificacionDao;
+import mx.edu.utez.integradiratjuans.dao.ExamenDao;
 import mx.edu.utez.integradiratjuans.dao.RespuestaDao;
 import mx.edu.utez.integradiratjuans.model.Calificacion;
 import mx.edu.utez.integradiratjuans.model.Respuesta;
@@ -24,9 +25,7 @@ public class RegistrarPreguntasServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String matriculaAlumno = (String) session.getAttribute("matriculaAlumno");
         Integer idExamen = Integer.parseInt(request.getParameter("id_examen"));
-        System.out.println("Id de examen = " + idExamen);
         List<Integer> idPreguntas = (List<Integer>) session.getAttribute("idPreguntas");
-
 
         if (idPreguntas == null || matriculaAlumno == null || idExamen == null) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "No se encontraron datos necesarios en la sesión.");
@@ -70,7 +69,7 @@ public class RegistrarPreguntasServlet extends HttpServlet {
             Respuesta respuesta = new Respuesta();
             respuesta.setIdPregunta(idPregunta);
             respuesta.setAcierto(esCorrecto ? 1 : 0);
-                respuesta.setMatriculaEstudiante(matriculaAlumno); // Agregar matrícula del estudiante
+            respuesta.setMatriculaEstudiante(matriculaAlumno); // Agregar matrícula del estudiante
             boolean insertado = respuestaDao.insert(respuesta);
 
             if (insertado) {
@@ -97,7 +96,17 @@ public class RegistrarPreguntasServlet extends HttpServlet {
             System.out.println("Fallo al insertar la calificación para el examen: " + idExamen);
         }
 
+        // Actualizar el estado del examen
+        ExamenDao examenDao = new ExamenDao();
+        boolean estadoActualizado = examenDao.updateEstadoExamen(idExamen);
+
+        if (estadoActualizado) {
+            System.out.println("Estado del examen actualizado correctamente.");
+        } else {
+            System.out.println("Fallo al actualizar el estado del examen.");
+        }
+
         // Redirigir a una página de éxito o mostrar un mensaje
-        response.sendRedirect("resultado.jsp");
+        response.sendRedirect("verCalificaciones.jsp");
     }
 }
