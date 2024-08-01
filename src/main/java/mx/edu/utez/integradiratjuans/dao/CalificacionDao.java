@@ -3,99 +3,98 @@ package mx.edu.utez.integradiratjuans.dao;
 import mx.edu.utez.integradiratjuans.model.Calificacion;
 import mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CalificacionDao {
-    private Connection connection;
 
-
-
-    public void guardarCalificacion(Calificacion calificacion) throws SQLException {
-        String sql = "INSERT INTO Calificaciones (matricula_alumno, id_examen, calificacion, fecha) VALUES (?, ?, ?, NOW())";
-
+    public boolean insert(Calificacion calificacion) {
+        String sql = "INSERT INTO calificaciones (matricula_alumno, id_examen, calificacion, fecha) VALUES (?, ?, ?, ?)";
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, calificacion.getMatriculaAlumno());
             statement.setInt(2, calificacion.getIdExamen());
             statement.setDouble(3, calificacion.getCalificacion());
-            statement.executeUpdate();
+            statement.setTimestamp(4, calificacion.getFecha());
+            return statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
-    // Método para insertar una calificación
-    public void insertarCalificacion(Calificacion calificacion) throws SQLException {
-        String query = "INSERT INTO Calificaciones (matricula_alumno, id_examen, calificacion, fecha) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, calificacion.getMatriculaAlumno());
-            stmt.setInt(2, calificacion.getIdExamen());
-            stmt.setDouble(3, calificacion.getCalificacion());
-            stmt.setTimestamp(4, calificacion.getFecha());
-            stmt.executeUpdate();
-        }
-    }
-
-    // Método para obtener una calificación por ID
-    public Calificacion obtenerCalificacionPorId(int idCalificacion) throws SQLException {
-        String query = "SELECT * FROM Calificaciones WHERE id_calificacion = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(1, idCalificacion);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return new Calificacion(
-                            rs.getInt("id_calificacion"),
-                            rs.getString("matricula_alumno"),
-                            rs.getInt("id_examen"),
-                            rs.getDouble("calificacion"),
-                            rs.getTimestamp("fecha")
-                    );
+    public Calificacion get(int idCalificacion) {
+        String sql = "SELECT * FROM calificaciones WHERE id_calificacion = ?";
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, idCalificacion);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    Calificacion calificacion = new Calificacion();
+                    calificacion.setIdCalificacion(resultSet.getInt("id_calificacion"));
+                    calificacion.setMatriculaAlumno(resultSet.getString("matricula_alumno"));
+                    calificacion.setIdExamen(resultSet.getInt("id_examen"));
+                    calificacion.setCalificacion(resultSet.getDouble("calificacion"));
+                    calificacion.setFecha(resultSet.getTimestamp("fecha"));
+                    return calificacion;
                 }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }
 
-    // Método para obtener todas las calificaciones para un examen específico
-    public List<Calificacion> obtenerCalificacionesPorExamen(int idExamen) throws SQLException {
+    public List<Calificacion> getAll() {
         List<Calificacion> calificaciones = new ArrayList<>();
-        String query = "SELECT * FROM Calificaciones WHERE id_examen = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(1, idExamen);
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    calificaciones.add(new Calificacion(
-                            rs.getInt("id_calificacion"),
-                            rs.getString("matricula_alumno"),
-                            rs.getInt("id_examen"),
-                            rs.getDouble("calificacion"),
-                            rs.getTimestamp("fecha")
-                    ));
-                }
+        String sql = "SELECT * FROM calificaciones";
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                Calificacion calificacion = new Calificacion();
+                calificacion.setIdCalificacion(resultSet.getInt("id_calificacion"));
+                calificacion.setMatriculaAlumno(resultSet.getString("matricula_alumno"));
+                calificacion.setIdExamen(resultSet.getInt("id_examen"));
+                calificacion.setCalificacion(resultSet.getDouble("calificacion"));
+                calificacion.setFecha(resultSet.getTimestamp("fecha"));
+                calificaciones.add(calificacion);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return calificaciones;
     }
 
-    // Método para actualizar una calificación
-    public void actualizarCalificacion(Calificacion calificacion) throws SQLException {
-        String query = "UPDATE Calificaciones SET matricula_alumno = ?, id_examen = ?, calificacion = ?, fecha = ? WHERE id_calificacion = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, calificacion.getMatriculaAlumno());
-            stmt.setInt(2, calificacion.getIdExamen());
-            stmt.setDouble(3, calificacion.getCalificacion());
-            stmt.setTimestamp(4, calificacion.getFecha());
-            stmt.setInt(5, calificacion.getIdCalificacion());
-            stmt.executeUpdate();
+    public boolean update(Calificacion calificacion) {
+        String sql = "UPDATE calificaciones SET matricula_alumno = ?, id_examen = ?, calificacion = ?, fecha = ? WHERE id_calificacion = ?";
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, calificacion.getMatriculaAlumno());
+            statement.setInt(2, calificacion.getIdExamen());
+            statement.setDouble(3, calificacion.getCalificacion());
+            statement.setTimestamp(4, calificacion.getFecha());
+            statement.setInt(5, calificacion.getIdCalificacion());
+            return statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
-    // Método para eliminar una calificación por ID
-    public void eliminarCalificacion(int idCalificacion) throws SQLException {
-        String query = "DELETE FROM Calificaciones WHERE id_calificacion = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(1, idCalificacion);
-            stmt.executeUpdate();
+    public boolean delete(int idCalificacion) {
+        String sql = "DELETE FROM calificaciones WHERE id_calificacion = ?";
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, idCalificacion);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

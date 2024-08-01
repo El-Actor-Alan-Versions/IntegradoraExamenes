@@ -1,6 +1,5 @@
 package mx.edu.utez.integradiratjuans.dao;
 
-import mx.edu.utez.integradiratjuans.model.Preguntas;
 import mx.edu.utez.integradiratjuans.model.Respuesta;
 import mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;
 
@@ -15,42 +14,18 @@ import java.util.List;
 public class RespuestaDao {
 
     public boolean insert(Respuesta respuesta) {
-        boolean flag = false;
-        String query = "INSERT INTO Respuesta (acierto, id_pregunta) VALUES (?, ?)";
-        try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setInt(1, respuesta.getAcierto());
-            ps.setInt(2, respuesta.getIdPregunta());
-            if (ps.executeUpdate() == 1) {
-                flag = true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return flag;
-    }
-
-    public Preguntas obtenerPreguntaPorId(int idPregunta) {
-        Preguntas pregunta = null;
-        String sql = "SELECT id_pregunta, pregunta, tipo_pregunta FROM Pregunta WHERE id_pregunta = ?";
-
+        String sql = "INSERT INTO respuesta (id_pregunta, acierto, matricula_estudiante) VALUES (?, ?, ?)";
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
-            stmt.setInt(1, idPregunta);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                pregunta = new Preguntas();
-                pregunta.setIdPregunta(rs.getInt("id_pregunta"));
-                pregunta.setTexto(rs.getString("pregunta"));
-                pregunta.setTipo(rs.getString("tipo_pregunta"));
-                // Si hay más atributos, también deberías configurarlos aquí
-            }
+            stmt.setInt(1, respuesta.getIdPregunta());
+            stmt.setInt(2, respuesta.getAcierto());
+            stmt.setString(3, respuesta.getMatriculaEstudiante()); // Establece el valor de matrícula
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-
-        return pregunta;
     }
 
 
@@ -69,5 +44,4 @@ public class RespuestaDao {
         }
         return opcionesCorrectas;
     }
-
 }

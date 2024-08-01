@@ -4,17 +4,29 @@ public class Respuesta {
     private int idRespuesta;
     private int acierto;
     private int idPregunta;
+    private String matriculaEstudiante;
 
-    public Respuesta(int idRespuesta, int acierto, int idPregunta) {
+    public Respuesta(int idRespuesta, int acierto, int idPregunta,  String matriculaEstudiante) {
         this.idRespuesta = idRespuesta;
         this.acierto = acierto;
         this.idPregunta = idPregunta;
+        this.matriculaEstudiante = matriculaEstudiante;
     }
+
 
     public Respuesta() {
     }
 
     // Getters and setters
+
+    public String getMatriculaEstudiante() {
+        return matriculaEstudiante;
+    }
+
+    public void setMatriculaEstudiante(String matriculaEstudiante) {
+        this.matriculaEstudiante = matriculaEstudiante;
+    }
+
     public int getAcierto() {
         return acierto;
     }

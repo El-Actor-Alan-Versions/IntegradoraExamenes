@@ -1,5 +1,6 @@
 package mx.edu.utez.integradiratjuans.model;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class Calificacion {
@@ -9,25 +10,17 @@ public class Calificacion {
     private double calificacion;
     private Timestamp fecha;
 
-    // Constructor por defecto
-    public Calificacion() {}
-
-    // Constructor con parámetros
-    public Calificacion(int idCalificacion, String matriculaAlumno, int idExamen, double calificacion, Timestamp fecha) {
-        this.idCalificacion = idCalificacion;
+    public Calificacion(String matriculaAlumno, int idExamen, double calificacion, Timestamp fecha) {
         this.matriculaAlumno = matriculaAlumno;
         this.idExamen = idExamen;
         this.calificacion = calificacion;
         this.fecha = fecha;
     }
 
-    public Calificacion(String matriculaAlumno, int idExamen, double calificacion) {
-        this.matriculaAlumno = matriculaAlumno;
-        this.idExamen = idExamen;
-        this.calificacion = calificacion;
+    public Calificacion() {
+
     }
 
-    // Getters y Setters
     public int getIdCalificacion() {
         return idCalificacion;
     }
@@ -35,6 +28,7 @@ public class Calificacion {
     public void setIdCalificacion(int idCalificacion) {
         this.idCalificacion = idCalificacion;
     }
+// Getters y setters
 
     public String getMatriculaAlumno() {
         return matriculaAlumno;
@@ -66,16 +60,5 @@ public class Calificacion {
 
     public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
-    }
-
-    @Override
-    public String toString() {
-        return "Calificacion{" +
-                "idCalificacion=" + idCalificacion +
-                ", matriculaAlumno='" + matriculaAlumno + '\'' +
-                ", idExamen=" + idExamen +
-                ", calificacion=" + calificacion +
-                ", fecha=" + fecha +
-                '}';
     }
 }
