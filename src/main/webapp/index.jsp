@@ -49,8 +49,9 @@
                 <div class="container si justify-content-between">
                     <a href="#" class="forgot-password ">¿Has olvidado tu contraseña?</a>
                 </div>
+
                 <div class="form-floating mt-3">
-                    <button type="submit" class="btn rounded-pill">INICIAR SESIÓN</button>
+                    <button type="submit" class="btn rounded-pill" id="loginButton"> INICIAR SESIÓN</button>
                 </div>
             </form>
         </div>
@@ -62,7 +63,37 @@
 
 <footer class="container">
 </footer>
-
+<script>
+    document.getElementById('formularioInsano').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const matricula = document.getElementById('matricula').value;
+        const contra = document.getElementById('contra').value;
+        if (matricula === 'matricula' && contra === 'contra') {
+            // Inicio de sesión exitoso
+            Swal.fire({
+                html: '<b class="titulo">¡Inicio de sesión exitoso!</b>',
+                icon: 'success',
+                width: '40%',
+                padding: '4rem',
+                customClass: {
+                    popup: 'popup-class'
+                }
+            });
+        } else {
+            // Inicio de sesión fallido
+            Swal.fire({
+                html: '<b class="titulo">¡Inicio de sesión fallido!</b>',
+                icon: 'error',
+                width: '40%',
+                padding: '4rem',
+                customClass: {
+                    popup: 'popup-class'
+                }
+            });
+        }
+    });
+</script>
+<script src="js/sweetAlert.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
