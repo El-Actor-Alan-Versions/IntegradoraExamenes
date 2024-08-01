@@ -70,7 +70,7 @@ public class RegistrarPreguntasServlet extends HttpServlet {
             Respuesta respuesta = new Respuesta();
             respuesta.setIdPregunta(idPregunta);
             respuesta.setAcierto(esCorrecto ? 1 : 0);
-            respuesta.setMatriculaEstudiante(matriculaAlumno); // Agregar matrícula del estudiante
+                respuesta.setMatriculaEstudiante(matriculaAlumno); // Agregar matrícula del estudiante
             boolean insertado = respuestaDao.insert(respuesta);
 
             if (insertado) {
