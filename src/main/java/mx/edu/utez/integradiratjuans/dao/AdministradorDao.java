@@ -1,12 +1,12 @@
 package mx.edu.utez.integradiratjuans.dao;
 
 import mx.edu.utez.integradiratjuans.model.Administrador;
+import mx.edu.utez.integradiratjuans.model.Docente;
 import mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdministradorDao {
 
@@ -36,6 +36,53 @@ public class AdministradorDao {
             e.printStackTrace();
         }
 
+        return administrador;
+    }
+
+    public Administrador getById(String matricula) {
+        Administrador administrador = null;
+        String query = "SELECT * FROM administrador WHERE matricula = ?";
+
+        try(Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, matricula);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                administrador = new Administrador();
+                administrador.setMatricula(rs.getString("matricula"));
+                administrador.setNombre(rs.getString("nombre"));
+                administrador.setApellidoPaterno(rs.getString("apellido_paterno"));
+                administrador.setApellidoMaterno(rs.getString("apellido_materno"));
+                administrador.setCorreo(rs.getString("correo"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return administrador;
+}
+
+
+
+
+    public List<Administrador> getAll() throws SQLException {
+        String query = "SELECT * FROM Administrador";
+        List<Administrador> administrador = new ArrayList<>();
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                Administrador admin = new Administrador();
+                admin.setMatricula(resultSet.getString("Matricula"));
+                admin.setNombre(resultSet.getString("Nombre"));
+                admin.setApellidoPaterno(resultSet.getString("Apellido_paterno"));
+                admin.setApellidoMaterno(resultSet.getString("Apellido_materno"));
+                admin.setCorreo(resultSet.getString("Correo"));
+                admin.setContraseña(resultSet.getString("Contraseña"));
+                administrador.add(admin);
+            }
+        }
         return administrador;
     }
 

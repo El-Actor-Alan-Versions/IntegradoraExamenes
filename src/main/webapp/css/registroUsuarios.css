@@ -1,15 +1,10 @@
-
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-
-
-body{
-    font-family: 'PT Sans';
+body {
+    font-family: 'PT Sans', sans-serif;
     font-weight: bold;
     font-size: 24px;
 }
-
-
 
 .form-control {
     border-radius: 50px;
@@ -21,10 +16,8 @@ body{
     height: 48px;  /* Altura ajustada */
     font-size: 16px;
     font-weight: bold;
+    margin-bottom: 15px;  /* Añadir margen inferior */
 }
-
-
-
 
 .btn {
     background-color: #9EEB92;
@@ -41,17 +34,8 @@ body{
     transform: scale(1.05);
 }
 
-
 .profile-icon {
     width: 174px;
     height: auto;
     margin-bottom: 20px;
 }
-
-
-
-
-
-
-
-

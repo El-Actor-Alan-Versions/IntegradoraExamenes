@@ -44,34 +44,34 @@
         });
 </script>
 <div class="container">
-    <div class="form text-center d-flex justify-content-center align-items-center vh-100">
+    <div class="d-flex justify-content-center align-items-center vh-100">
         <div class="text-center">
-            <form  class="form border-0 text-center" action="<%=action.equals("update") ? "ActualizarAlumnoServlet" : "RegistrarAlumnoServlet"%>" method="post">
+            <form class="border-0 text-center" action="<%= action.equals("update") ? "ActualizarAlumnoServlet" : "RegistrarAlumnoServlet"%>" method="post">
                 <img src="../IMG2/login.png" alt="profile icon" class="profile-icon" width="174px">
                 <h1><%= action.equals("update") ? "Actualizar" : "Registrar" %> Alumno</h1>
                 <% if (action.equals("insert")) { %>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="matricula" name="matricula" placeholder="Matricula" value="<%= action.equals("update") ? alumno.getMatricula(): "" %>" required />
+                <div class="form-group mb-3">
+                    <input type="text" class="form-control" id="matricula" name="matricula" placeholder="Matricula" value="<%= action.equals("update") ? alumno.getMatricula() : "" %>" required />
                 </div>
                 <% } %>
                 <div class="form-group mb-3">
-                    <input type="text" class="form-control rounded-pill text-center" placeholder="Nombre" id="nombre" name="nombre" value="<%= action.equals("update") ? alumno.getNombre() : ""%>" required />
+                    <input type="text" class="form-control rounded-pill text-center" placeholder="Nombre" id="nombre" name="nombre" value="<%= action.equals("update") ? alumno.getNombre() : "" %>" required />
                 </div>
 
                 <div class="form-group mb-3">
-                    <input type="text" class="form-control rounded-pill text-center" id="apellidoPaterno"  placeholder="Apellido paterno" name="apellidoPaterno" value="<%= action.equals("update") ? alumno.getApellidoPaterno() : ""%>" required />
+                    <input type="text" class="form-control rounded-pill text-center" id="apellidoPaterno" placeholder="Apellido paterno" name="apellidoPaterno" value="<%= action.equals("update") ? alumno.getApellidoPaterno() : "" %>" required />
                 </div>
 
                 <div class="form-group mb-3">
-                    <input type="text" class="form-control rounded-pill text-center" id="apellidoMaterno" placeholder="Apellido materno" name="apellidoMaterno" value="<%= action.equals("update") ? alumno.getApellidoMaterno() : ""%>" required />
+                    <input type="text" class="form-control rounded-pill text-center" id="apellidoMaterno" placeholder="Apellido materno" name="apellidoMaterno" value="<%= action.equals("update") ? alumno.getApellidoMaterno() : "" %>" required />
                 </div>
 
                 <div class="form-group mb-3">
-                    <input type="hidden" class="form-control" id="correo" name="correo" value="<%= action.equals("update") ? alumno.getCorreo() : ""%>" required />
+                    <input type="hidden" class="form-control" id="correo" name="correo" value="<%= action.equals("update") ? alumno.getCorreo() : "" %>" required />
                 </div>
 
                 <% if (action.equals("update")) { %>
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <label for="contraseña">Contraseña:</label>
                     <input type="hidden" class="form-control" id="contraseña" name="contraseña" required />
                 </div>
@@ -92,7 +92,7 @@
                     </select>
                 </div>
                 <div class="form-floating mt-3">
-                    <button type="submit"  class="btn rounded-pill"> <%=action.equals("update") ? "Actualizar" : "Registrar"%></button>
+                    <button type="submit" class="btn rounded-pill"> <%= action.equals("update") ? "Actualizar" : "Registrar" %></button>
                 </div>
             </form>
         </div>
