@@ -12,7 +12,7 @@
     Clase clase = null;
     String action = "insert";
     int id_clase = 0;
-
+    //XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
     // Si se pasa un idDivision en la URL, cargamos los datos para actualización
     String idClaseParam = request.getParameter("id_clase");
     if (idClaseParam != null && !idClaseParam.isEmpty()) {
