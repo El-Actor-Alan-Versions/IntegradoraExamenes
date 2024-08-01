@@ -49,6 +49,35 @@ public class CalificacionDao {
         return null;
     }
 
+    public List<Calificacion> getCalificacionesConNombreExamen(String matricula) {
+        List<Calificacion> calificaciones = new ArrayList<>();
+        String sql = "SELECT c.id_calificacion, c.matricula_alumno, e.nombre, c.calificacion, c.fecha " +
+                "FROM calificaciones c " +
+                "JOIN examen e ON c.id_examen = e.id_examen " +
+                "WHERE c.matricula_alumno = ?"; // Filtra por matrícula del alumno
+
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, matricula); // Establecer el valor del parámetro
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Calificacion calificacion = new Calificacion();
+                    calificacion.setIdCalificacion(resultSet.getInt("id_calificacion"));
+                    calificacion.setMatriculaAlumno(resultSet.getString("matricula_alumno"));
+                    calificacion.setCalificacion(resultSet.getDouble("calificacion"));
+                    calificacion.setFecha(resultSet.getTimestamp("fecha"));
+                    calificacion.setNombreExamen(resultSet.getString("nombre")); // Obtener el nombre del examen
+                    calificaciones.add(calificacion);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return calificaciones;
+    }
+
+
+
     public List<Calificacion> getAll() {
         List<Calificacion> calificaciones = new ArrayList<>();
         String sql = "SELECT * FROM calificaciones";
