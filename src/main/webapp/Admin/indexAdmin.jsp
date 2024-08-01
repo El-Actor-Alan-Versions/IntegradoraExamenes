@@ -1,10 +1,10 @@
-<%--
+<!--
   Created by IntelliJ IDEA.
-  User: walge
+  User: esqui
   Date: 23/06/2024
   Time: 07:00 p. m.
   To change this template use File | Settings | File Templates.
---%>
+-->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -189,8 +189,8 @@
                 <div class="card">
                     <div class="card-body">
                         <img src="../img/asignacionClases.png" class="text-center" width="68">
-                        <h5 class="card-title">Asignación de clase</h5>
-                        <p class="card-text">Si ya tienes la encuesta, crea una nueva clase.</p>
+                        <h5 class="card-title">Gestionar Administradores</h5>
+                        <p class="card-text">Registro, eliminación y actualización de los datos de los administradores</p>
                     </div>
                 </div>
             </a>

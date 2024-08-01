@@ -32,7 +32,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
     <title><%= action.equals("update") ? "Actualizar" : "Registrar" %> Alumno</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/usuarios.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/registroUsuarios.css">
 </head>
 <body>
 <div id="navbar"></div>
@@ -43,62 +43,60 @@
             document.getElementById('navbar').innerHTML = data;
         });
 </script>
-<div class="container mt-4">
-    <h1 class="mb-4"><%= action.equals("update") ? "Actualizar" : "Registrar" %> Alumno</h1>
-    <form action="<%=action.equals("update") ? "ActualizarAlumnoServlet" : "RegistrarAlumnoServlet"%>" method="post">
-        <% if (action.equals("insert")) { %>
-        <div class="form-group">
-            <label for="matriculaInsert">Matrícula:</label>
-            <input type="text" class="form-control" id="matriculaInsert" name="matriculaInsert" required />
-        </div>
-        <% } else if (!action.equals("update")) { %>
-        <div class="form-group">
-            <label for="matricula">Matrícula:</label>
-            <input type="text" class="form-control" id="matricula" name="matricula" value="<%= matricula %>" readonly />
-        </div>
-        <% } %>
+<div class="container">
+    <div class="form text-center d-flex justify-content-center align-items-center vh-100">
+        <div class="text-center">
+            <form  class="form border-0 text-center" action="<%=action.equals("update") ? "ActualizarAlumnoServlet" : "RegistrarAlumnoServlet"%>" method="post">
+                <img src="../IMG2/login.png" alt="profile icon" class="profile-icon" width="174px">
+                <h1><%= action.equals("update") ? "Actualizar" : "Registrar" %> Alumno</h1>
+                <% if (action.equals("insert")) { %>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="matricula" name="matricula" placeholder="Matricula" value="<%= action.equals("update") ? alumno.getMatricula(): "" %>" required />
+                </div>
+                <% } %>
+                <div class="form-group mb-3">
+                    <input type="text" class="form-control rounded-pill text-center" placeholder="Nombre" id="nombre" name="nombre" value="<%= action.equals("update") ? alumno.getNombre() : ""%>" required />
+                </div>
 
+                <div class="form-group mb-3">
+                    <input type="text" class="form-control rounded-pill text-center" id="apellidoPaterno"  placeholder="Apellido paterno" name="apellidoPaterno" value="<%= action.equals("update") ? alumno.getApellidoPaterno() : ""%>" required />
+                </div>
 
-        <div class="form-group">
-            <label for="nombre">Nombre:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" value="<%= action.equals("update") ? alumno.getNombre() : ""%>" required />
+                <div class="form-group mb-3">
+                    <input type="text" class="form-control rounded-pill text-center" id="apellidoMaterno" placeholder="Apellido materno" name="apellidoMaterno" value="<%= action.equals("update") ? alumno.getApellidoMaterno() : ""%>" required />
+                </div>
+
+                <div class="form-group mb-3">
+                    <input type="hidden" class="form-control" id="correo" name="correo" value="<%= action.equals("update") ? alumno.getCorreo() : ""%>" required />
+                </div>
+
+                <% if (action.equals("update")) { %>
+                <div class="form-group">
+                    <label for="contraseña">Contraseña:</label>
+                    <input type="hidden" class="form-control" id="contraseña" name="contraseña" required />
+                </div>
+                <% } %>
+
+                <div class="form-group mb-3">
+                    <select id="gruposSelect" class="form-control" name="idGrupo">
+                        <option value="">Seleccione...</option>
+                        <%
+                            GrupoDao grupoDao = new GrupoDao();
+                            List<Grupo> grupos = grupoDao.getAll();
+                            for (Grupo grupo : grupos) {
+                        %>
+                        <option value="<%= grupo.getIdGrupo() %>" <%= action.equals("update") && grupo.getIdGrupo() == alumno.getIdGrupo() ? "selected" : "" %>><%= grupo.getGradoGrupo() %></option>
+                        <%
+                            }
+                        %>
+                    </select>
+                </div>
+                <div class="form-floating mt-3">
+                    <button type="submit"  class="btn rounded-pill"> <%=action.equals("update") ? "Actualizar" : "Registrar"%></button>
+                </div>
+            </form>
         </div>
-
-        <div class="form-group">
-            <label for="apellidoPaterno">Apellido Paterno:</label>
-            <input type="text" class="form-control" id="apellidoPaterno" name="apellidoPaterno" value="<%= action.equals("update") ? alumno.getApellidoPaterno() : ""%>" required />
-        </div>
-
-        <div class="form-group">
-            <label for="apellidoMaterno">Apellido Materno:</label>
-            <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno" value="<%= action.equals("update") ? alumno.getApellidoMaterno() : ""%>" required />
-        </div>
-
-        <% if (!action.equals("update")) { %>
-        <div class="form-group">
-            <label for="contraseña">Contraseña:</label>
-            <input type="hidden" class="form-control" id="contraseña" name="contraseña" required />
-        </div>
-        <% } %>
-
-        <div class="form-group">
-            <label for="gruposSelect">Grupo:</label>
-            <select id="gruposSelect" class="form-control" name="idGrupo">
-                <option value="">Seleccione...</option>
-                <%
-                    GrupoDao grupoDao = new GrupoDao();
-                    List<Grupo> grupos = grupoDao.getAll();
-                    for (Grupo grupo : grupos) {
-                %>
-                <option value="<%= grupo.getIdGrupo() %>" <%= action.equals("update") && grupo.getIdGrupo() == alumno.getIdGrupo() ? "selected" : "" %>><%= grupo.getGradoGrupo() %></option>
-                <%
-                    }
-                %>
-            </select>
-        </div>
-
-        <button type="submit" class="mt-4 btn btn-primary"><%= action.equals("update") ? "Actualizar" : "Registrar" %></button>
-    </form>
+    </div>
 </div>
 
 <!-- Incluir el JS de Bootstrap y dependencias -->

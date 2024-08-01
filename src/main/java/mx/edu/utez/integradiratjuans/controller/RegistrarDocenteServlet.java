@@ -37,7 +37,7 @@ public class RegistrarDocenteServlet extends HttpServlet {
 
         try {
             docenteDao.insert(docente);
-            response.sendRedirect("exito.jsp");
+            response.sendRedirect("verDocente.jsp");
         } catch (SQLException e) {
             e.printStackTrace(); // Para debugging en la consola del servidor
             request.setAttribute("errorMessage", "Error al registrar el docente: " + e.getMessage());
