@@ -10,15 +10,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class RespuestaDao {
+
     public boolean insert(Respuesta respuesta) {
         boolean flag = false;
-        String query = "INSERT INTO Respuesta (respuesta, acierto, id_pregunta) VALUES (?,?)";
+        String query = "INSERT INTO Respuesta (acierto, id_pregunta) VALUES (?, ?)";
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setString(1, respuesta.getRespuesta());
-            ps.setInt(2, respuesta.getAcierto());
-            ps.setInt(3, respuesta.getIdPregunta());
+            ps.setInt(1, respuesta.getAcierto());
+            ps.setInt(2, respuesta.getIdPregunta());
             if (ps.executeUpdate() == 1) {
                 flag = true;
             }
@@ -28,26 +29,19 @@ public class RespuestaDao {
         return flag;
     }
 
-    public List<Respuesta> getAll() {
-        List<Respuesta> respuestas = new ArrayList<>();
-        String query = "SELECT * FROM Respuesta";
-
+    public List<String> CompararRespuestas(int idPregunta) {
+        List<String> opcionesCorrectas = new ArrayList<>();
+        String sql = "SELECT id_opcion FROM opciones WHERE id_pregunta = ? AND correcta = 1";
         try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
-
-            ResultSet rs = ps.executeQuery();
-
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, idPregunta);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Respuesta respuesta = new Respuesta();
-                respuesta.setIdRespuesta(rs.getInt("id_respuesta"));
-                respuesta.setRespuesta(rs.getString("respuesta"));
-                respuesta.setAcierto(rs.getInt( "acierto"));
-                respuesta.setIdPregunta(rs.getInt("id_pregunta"));
-                respuestas.add(respuesta);
+                opcionesCorrectas.add(rs.getString("id_opcion"));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-        return respuestas;
+        return opcionesCorrectas;
     }
 }
