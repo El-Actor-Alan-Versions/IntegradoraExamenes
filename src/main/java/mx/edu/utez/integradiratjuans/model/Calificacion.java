@@ -7,8 +7,11 @@ public class Calificacion {
     private int idCalificacion;
     private String matriculaAlumno;
     private int idExamen;
+
+
     private double calificacion;
     private Timestamp fecha;
+    private String nombreExamen;
 
     public Calificacion(String matriculaAlumno, int idExamen, double calificacion, Timestamp fecha) {
         this.matriculaAlumno = matriculaAlumno;
@@ -19,6 +22,16 @@ public class Calificacion {
 
     public Calificacion() {
 
+    }
+
+
+
+    public String getNombreExamen() {
+        return nombreExamen;
+    }
+
+    public void setNombreExamen(String nombreExamen) {
+        this.nombreExamen = nombreExamen;
     }
 
     public int getIdCalificacion() {
