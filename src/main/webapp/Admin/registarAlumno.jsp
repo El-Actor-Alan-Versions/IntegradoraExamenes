@@ -51,13 +51,11 @@
                 <h1><%= action.equals("update") ? "Actualizar" : "Registrar" %> Alumno</h1>
                 <% if (action.equals("insert")) { %>
                 <div class="form-group">
-                    <label for="matriculaInsert">Matrícula:</label>
-                    <input type="text" class="form-control" id="matriculaInsert" name="matriculaInsert" required />
+                    <input type="text" placeholder="Matricula" class="form-control" id="matriculaInsert" name="matriculaInsert" required />
                 </div>
                 <% } else if (action.equals("update")) { %>
                 <div class="form-group">
-                    <label for="matricula">Matrícula:</label>
-                    <input type="text" class="form-control" id="matricula" name="matricula" value="<%= matricula %>" readonly />
+                    <input type="hidden" class="form-control" id="matricula" name="matricula" value="<%= matricula %>" readonly />
                 </div>
                 <% } %>
                 <div class="form-group mb-3">
