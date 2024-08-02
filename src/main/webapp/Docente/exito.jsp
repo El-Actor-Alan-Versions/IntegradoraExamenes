@@ -11,7 +11,7 @@
     <div class="alert alert-success" role="alert">
         El examen ha sido creado exitosamente.
     </div>
-    <a href="crearExamen.jsp" class="btn btn-primary">Volver</a>
+    <a href="indexDocente.jsp" class="btn btn-primary">Volver</a>
 </div>
 </body>
 </html>

@@ -19,8 +19,8 @@ public class RegistrarAlumnoServlet extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String apellidoPaterno = request.getParameter("apellidoPaterno");
         String apellidoMaterno = request.getParameter("apellidoMaterno");
-        String correo = request.getParameter("correo");
-        String estado = "Activo"; // Asignar valor por defecto o desde el formulario si es necesario
+        String correo;
+        String estado; // Asignar valor por defecto o desde el formulario si es necesario
         String contraseña = request.getParameter("matriculaInsert");
         String idGrupoStr = request.getParameter("idGrupo");
 

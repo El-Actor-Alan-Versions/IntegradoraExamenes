@@ -50,8 +50,14 @@
                 <img src="../IMG2/login.png" alt="profile icon" class="profile-icon" width="174px">
                 <h1><%= action.equals("update") ? "Actualizar" : "Registrar" %> Alumno</h1>
                 <% if (action.equals("insert")) { %>
-                <div class="form-group mb-3">
-                    <input type="text" class="form-control" id="matricula" name="matricula" placeholder="Matricula" value="<%= action.equals("update") ? alumno.getMatricula() : "" %>" required />
+                <div class="form-group">
+                    <label for="matriculaInsert">Matrícula:</label>
+                    <input type="text" class="form-control" id="matriculaInsert" name="matriculaInsert" required />
+                </div>
+                <% } else if (action.equals("update")) { %>
+                <div class="form-group">
+                    <label for="matricula">Matrícula:</label>
+                    <input type="text" class="form-control" id="matricula" name="matricula" value="<%= matricula %>" readonly />
                 </div>
                 <% } %>
                 <div class="form-group mb-3">

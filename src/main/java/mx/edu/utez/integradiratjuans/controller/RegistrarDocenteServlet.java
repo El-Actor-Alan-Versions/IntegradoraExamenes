@@ -22,9 +22,9 @@ public class RegistrarDocenteServlet extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String apellidoPaterno = request.getParameter("apellidoPaterno");
         String apellidoMaterno = request.getParameter("apellidoMaterno");
-        String correo = request.getParameter("correo");
-        String contraseña = request.getParameter("contraseña");
-        String estado = request.getParameter("estado");
+        String correo = matricula + "@utez.edu.mx";
+        String contraseña = matricula;
+        String estado = "Activo";
 
         Docente docente = new Docente();
         docente.setMatricula(matricula);

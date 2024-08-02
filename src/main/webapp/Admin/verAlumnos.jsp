@@ -94,5 +94,8 @@
         return confirm('¿Estás seguro de que deseas dar de baja a este alumno?');
     }
 </script>
+<div class="text-center">
+    <a href="indexAdmin.jsp" class="btn btn-primary mt-5">Regresar a Inicio</a>
+</div>
 </body>
 </html>

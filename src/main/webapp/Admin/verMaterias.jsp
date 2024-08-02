@@ -83,7 +83,7 @@
             justify-content: center; /* Centrar horizontalmente */
             width: 90%;
             margin-top: 10px;
-            margin-left: 5%
+            margin-left: 5%;
             gap: 15px;
         }
 
@@ -210,5 +210,8 @@
         alert('Cambios confirmados');
     }
 </script>
+<div class="text-center">
+    <a href="indexAdmin.jsp" class="btn btn-primary mt-5">Regresar a Inicio</a>
+</div>
 </body>
 </html>
