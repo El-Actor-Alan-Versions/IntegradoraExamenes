@@ -9,7 +9,7 @@
     <title>Carreras Registradas</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/datatables.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/usuarios.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vistas.css">
 </head>
 <body>
 <div id="navbar"></div>
@@ -21,49 +21,57 @@
         });
 </script>
 
-<div class="container mt-4">
-    <h2>Carreras Registradas</h2>
-    <button type="button" class="btn btn-info" onclick="location.href='registrarCarrera.jsp'">Nueva carrera</button>
-    <table id="example" class="table table-striped table-hover" style="width: 100%">
-        <thead>
-        <tr>
-            <th>ID Carrera</th>
-            <th>Nombre de la Carrera</th>
-            <th>ID División</th>
-            <th>Actualizar</th>
-            <th>Eliminar</th>
-        </tr>
-        </thead>
-        <tbody>
-        <%
-            try {
-                CarreraDao dao = new CarreraDao();
-                List<Carrera> lista = dao.getAll();
-                for (Carrera c : lista) {
-        %>
-        <tr>
-            <td><%= c.getId_carrera() %></td>
-            <td><%= c.getNombre_carrera() %></td>
-            <td><%= c.getId_division() %></td>
-            <td>
-                <a href="registrarCarrera.jsp?id_carrera=<%= c.getId_carrera() %>">Actualizar</a>
-            </td>
-            <td>
-                <form method="post" action="eliminarCarreraServlet">
-                    <input type="hidden" name="id_carrera" value="<%= c.getId_carrera() %>">
-                    <button type="submit" class="btn btn-danger" onclick="return confirmarEliminacion()">Eliminar</button>
-                </form>
-            </td>
-        </tr>
-        <%
-                }
-            } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
-                e.printStackTrace();
-            }
-        %>
-        </tbody>
-    </table>
+<div class="container">
+    <div class="card">
+        <div class="header-card">
+            <img src="../img/calificaciones.png" width="68">
+            <h2>Gestión de carreras</h2>
+            <button type="button" class="btn btn-new" onclick="location.href='registrarCarrera.jsp'">Nueva carrera</button>
+            <button type="button" class="btn btn-conf" onclick="location.href='indexAdmin.jsp'">Volver</button>
+        </div>
+        <div class="card-body">
+            <table id="example" class="table table-custom">
+                <thead>
+                <tr>
+                    <th>ID Carrera</th>
+                    <th>Nombre de la Carrera</th>
+                    <th>ID División</th>
+                    <th>Actualizar</th>
+                    <th>Eliminar</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%
+                    try {
+                        CarreraDao dao = new CarreraDao();
+                        List<Carrera> lista = dao.getAll();
+                        for (Carrera c : lista) {
+                %>
+                <tr>
+                    <td><%= c.getId_carrera() %></td>
+                    <td><%= c.getNombre_carrera() %></td>
+                    <td><%= c.getId_division() %></td>
+                    <td>
+                        <a href="registrarCarrera.jsp?id_carrera=<%= c.getId_carrera() %>" class="btn btn-act">Modificar</a>
+                    </td>
+                    <td>
+                        <form method="post" action="eliminarCarreraServlet">
+                            <input type="hidden" name="id_carrera" value="<%= c.getId_carrera() %>">
+                            <button type="submit" class="btn btn-del" onclick="return confirmarEliminacion()">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                <%
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                        e.printStackTrace();
+                    }
+                %>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <script src="${pageContext.request.contextPath}/JS/jquery-3.7.0.js"></script>

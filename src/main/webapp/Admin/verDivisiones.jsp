@@ -9,7 +9,7 @@
     <title>Divisiones Registradas</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/datatables.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/usuarios.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/vistas.css">
 </head>
 <body>
 <div id="navbar"></div>
@@ -21,47 +21,55 @@
         });
 </script>
 
-<div class="container mt-4">
-    <h2>Divisiones Registradas</h2>
-    <button type="button" class="btn btn-info" onclick="location.href='registrarDivision.jsp'">Nueva División</button>
-    <table id="example" class="table table-striped table-hover" style="width: 100%">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre de División</th>
-            <th>Actualizar</th>
-            <th>Eliminar</th>
-        </tr>
-        </thead>
-        <tbody>
-        <%
-            try {
-                DivisionDao dao = new DivisionDao();
-                List<Division> lista = dao.getAll();
-                for (Division d : lista) {
-        %>
-        <tr>
-            <td><%= d.getIdDivision() %></td>
-            <td><%= d.getNombreDivision() %></td>
-            <td>
-                <a href="registrarDivision.jsp?idDivision=<%= d.getIdDivision() %>" class="btn btn-warning">Actualizar</a>
-            </td>
-            <td>
-                <form method="post" action="eliminarDivisionServlet" onsubmit="return confirmarEliminacion()">
-                    <input type="hidden" name="idDivision" value="<%= d.getIdDivision() %>">
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                </form>
-            </td>
-        </tr>
-        <%
-                }
-            } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
-                e.printStackTrace();
-            }
-        %>
-        </tbody>
-    </table>
+<div class="container">
+    <div class="card">
+        <div class="header-card">
+            <img src="../img/calificaciones.png" width="68">
+            <h2>Gestión de divisiones</h2>
+            <button type="button" class="btn btn-new" onclick="location.href='registrarDivision.jsp'">Nueva División</button>
+            <button type="button" class="btn btn-conf" onclick="location.href='indexAdmin.jsp'">Volver</button>
+        </div>
+        <div class="card-body">
+            <table id="example" class="table table-custom">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre de División</th>
+                    <th>Actualizar</th>
+                    <th>Eliminar</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%
+                    try {
+                        DivisionDao dao = new DivisionDao();
+                        List<Division> lista = dao.getAll();
+                        for (Division d : lista) {
+                %>
+                <tr>
+                    <td><%= d.getIdDivision() %></td>
+                    <td><%= d.getNombreDivision() %></td>
+                    <td>
+                        <a href="registrarDivision.jsp?idDivision=<%= d.getIdDivision() %>" class="btn btn-act">Modificar</a>
+                    </td>
+                    <td>
+                        <form method="post" action="eliminarDivisionServlet">
+                            <input type="hidden" name="idDivision" value="<%= d.getIdDivision() %>">
+                            <button type="submit" class="btn btn-del" onclick="return confirmarEliminacion()">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                <%
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                        e.printStackTrace();
+                    }
+                %>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <script src="${pageContext.request.contextPath}/JS/jquery-3.7.0.js"></script>

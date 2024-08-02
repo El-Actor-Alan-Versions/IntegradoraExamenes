@@ -141,7 +141,7 @@
             <img src="../img/calificaciones.png" width="68">
             <h2>Gestión de materias</h2>
             <button type="button" class="btn btn-new" onclick="location.href='registrarMateria.jsp'">Nueva Materia</button>
-            <button type="button" class="btn btn-conf" onclick="location.href='indexAdmin.jsp'">Confirmar</button>
+            <button type="button" class="btn btn-conf" onclick="location.href='indexAdmin.jsp'">Volver</button>
         </div>
         <div class="card-body">
             <table id="example" class="table table-custom">
@@ -210,8 +210,5 @@
         alert('Cambios confirmados');
     }
 </script>
-<div class="text-center">
-    <a href="indexAdmin.jsp" class="btn btn-primary mt-5">Regresar a Inicio</a>
-</div>
 </body>
 </html>

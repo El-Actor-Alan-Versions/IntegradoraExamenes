@@ -12,10 +12,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarAlumnoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarAlumnoServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarDocenteServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarDocenteServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/DocenteDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/DocenteDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/registarAlumno.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/registarAlumno.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verAdmin.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verAlumnos.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verAlumnos.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verCarreras.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verCarreras.jsp" afterDir="false" />
@@ -24,7 +20,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verDocente.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verDocente.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verGrupos.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verGrupos.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verMaterias.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verMaterias.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/exito.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/exito.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,8 +253,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
       </set>
     </attachedChunks>
   </component>
@@ -320,6 +315,7 @@
       <workItem from="1722544558670" duration="10365000" />
       <workItem from="1722556565300" duration="884000" />
       <workItem from="1722570633911" duration="344000" />
+      <workItem from="1722618305223" duration="1037000" />
     </task>
     <servers />
   </component>

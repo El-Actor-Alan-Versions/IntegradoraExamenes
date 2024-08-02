@@ -9,7 +9,7 @@
     <title>Grupos Registrados</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/datatables.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/docente.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vistas.css">
 </head>
 <body>
 <div id="navbar"></div>
@@ -20,72 +20,56 @@
             document.getElementById('navbar').innerHTML = data;
         });
 </script>
-<div class="container mt-4">
-    <h2>Grupos Registrados</h2>
-    <button type="button" class="btn btn-info" onclick="location.href='registrarGrupo.jsp'">Nuevo grupo</button>
-    <table id="example" class="table table-striped table-hover" style="width: 100%">
-        <thead>
-        <tr>
-            <th>ID Grupo</th>
-            <th>Grado Grupo</th>
-            <th>Carrera</th> <!-- Cambiado para mostrar el nombre de la carrera -->
-            <th>Actualizar</th>
-            <th>Eliminar</th>
-        </tr>
-        </thead>
-        <tbody>
-        <%
-            try {
-                GrupoDao dao = new GrupoDao();
-                List<Grupo> lista = dao.getAll();
-                for (Grupo g : lista) {
-        %>
-        <tr>
-            <td><%= g.getIdGrupo() %></td>
-            <td><%= g.getGradoGrupo() %></td>
-            <td><%= g.getNombreCarrera() %></td> <!-- Mostrar el nombre de la carrera -->
-            <td>
-                <a href="registrarGrupo.jsp?idGrupo=<%= g.getIdGrupo() %>">Actualizar</a>
-            </td>
-            <td>
-                <form method="post" action="eliminarGrupoServlet">
-                    <input type="hidden" name="idGrupo" value="<%= g.getIdGrupo() %>">
-                    <button type="submit" class="btn btn-danger" onclick="return confirmarEliminacion()">Eliminar</button>
-                </form>
-            </td>
-        </tr>
-        <%
-                }
-            } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
-                e.printStackTrace();
-            }
-        %>
-        </tbody>
-    </table>
-</div>
 
-<script src="${pageContext.request.contextPath}/JS/jquery-3.7.0.js"></script>
-<script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>
-<script src="${pageContext.request.contextPath}/JS/datatables.js"></script>
-<script src="${pageContext.request.contextPath}/JS/dataTables.bootstrap5.js"></script>
-<script src="${pageContext.request.contextPath}/JS/es-MX.json"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const table = document.getElementById('example');
-        new DataTable(table, {
-            language: {
-                url: '${pageContext.request.contextPath}/JS/es-MX.json'
-            }
-        });
-    });
-
-    function confirmarEliminacion() {
-        return confirm('¿Estás seguro de que deseas eliminar este grupo?');
-    }
-</script>
-<div class="text-center">
-    <a href="indexAdmin.jsp" class="btn btn-primary mt-5">Regresar a Inicio</a>
+<div class="container">
+    <div class="card">
+        <div class="header-card">
+            <img src="../img/calificaciones.png" width="68">
+            <h2>Gestión de grupos</h2>
+            <button type="button" class="btn btn-new" onclick="location.href='registrarGrupo.jsp'">Nuevo grupo</button>
+            <button type="button" class="btn btn-conf" onclick="location.href='indexAdmin.jsp'">Volver</button>
+        </div>
+        <div class="card-body">
+            <table id="example" class="table table-custom">
+                <thead>
+                <tr>
+                    <th>ID Grupo</th>
+                    <th>Grado Grupo</th>
+                    <th>Carrera</th>
+                    <th>Actualizar</th>
+                    <th>Eliminar</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%
+                    try {
+                        GrupoDao dao = new GrupoDao();
+                        List<Grupo> lista = dao.getAll();
+                        for (Grupo g : lista) {
+                %>
+                <tr>
+                    <td><%= g.getIdGrupo() %></td>
+                    <td><%= g.getGradoGrupo() %></td>
+                    <td><%= g.getNombreCarrera() %></td>
+                    <td>
+                        <a href="registrarGrupo.jsp?idGrupo=<%= g.getIdGrupo() %>" class="btn btn-act">Modificar</a>
+                    </td>
+                    <td>
+                        <form method="post" action="eliminarGrupoServlet">
+                            <input type="hidden" name="idGrupo" value="<%= g.getIdGrupo() %>">
+                            <button type="submit" class="btn btn-del" onclick="return confirmarEliminacion()">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                <%
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                        e.printStackTrace();
+                    }
+                %>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-</body>
-</html>
