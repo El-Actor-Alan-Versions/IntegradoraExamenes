@@ -123,7 +123,7 @@ public class AlumnoDao {
     }
     public boolean update(Alumno alumno)  {
         boolean update = false;
-        String query = "UPDATE Alumno SET Nombre = ?, Apellido_paterno = ?, Apellido_materno = ?, Correo = ?, Contraseña = ? WHERE Matricula = ?";
+        String query = "UPDATE Alumno SET Nombre = ?, Apellido_paterno = ?, Apellido_materno = ?, Correo = ?, Contraseña = ?, Id_grupo = ? WHERE Matricula = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -133,7 +133,8 @@ public class AlumnoDao {
             ps.setString(3, alumno.getApellidoMaterno());
             ps.setString(4, alumno.getCorreo());
             ps.setString(5, alumno.getContraseña());
-            ps.setString(6, alumno.getMatricula());
+            ps.setInt(6,alumno.getIdGrupo());
+            ps.setString(7, alumno.getMatricula());
             int rowsAffected = ps.executeUpdate();
 
             if (rowsAffected > 0) {

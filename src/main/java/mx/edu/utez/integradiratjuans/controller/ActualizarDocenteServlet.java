@@ -23,9 +23,24 @@ public class ActualizarDocenteServlet extends HttpServlet {
         String apellidoMaterno = request.getParameter("apellidoMaterno");
         String correo = request.getParameter("correo");
         String contraseña = request.getParameter("contraseña");
-        String estado = request.getParameter("estado");
 
-        Docente docente = new Docente(matricula, nombre, apellidoPaterno, apellidoMaterno, correo, contraseña, estado);
+        Docente docente = new Docente();
+        docente.setMatricula(matricula);
+        docente.setNombre(nombre);
+        docente.setApellidoPaterno(apellidoPaterno);
+        docente.setApellidoMaterno(apellidoMaterno);
+        docente.setCorreo(correo);
+        docente.setContraseña(contraseña);
+
+
+        System.out.println(matricula);
+        System.out.println(nombre);
+        System.out.println(apellidoPaterno);
+        System.out.println(apellidoMaterno);
+        System.out.println(correo);
+        System.out.println(contraseña);
+
+
         DocenteDao docenteDao = new DocenteDao();
 
         boolean update = docenteDao.update(docente);

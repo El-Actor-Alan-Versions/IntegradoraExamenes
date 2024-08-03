@@ -43,9 +43,9 @@
             <form  class="form border-0 text-center" action="<%=action.equals("update") ? "actualizarDocenteServlet" : "registrarDocenteServlet"%>" method="post">
                 <img src="../IMG2/login.png" alt="profile icon" class="profile-icon" width="174px">
                 <h1><%= action.equals("update") ? "Actualizar" : "Registrar" %> Docente</h1>
-                <% if (!action.equals("update")) { %>
+                <% if (action.equals("update")) { %>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="matricula" name="matricula" placeholder="Matricula" value="<%= action.equals("update") ? docente.getMatricula(): "" %>" required />
+                    <input type="hidden" class="form-control" id="matricula" name="matricula" placeholder="Matricula" value="<%= action.equals("update") ? docente.getMatricula(): "" %>" required />
                 </div>
                 <% } %>
                 <div class="form-group mb-3">

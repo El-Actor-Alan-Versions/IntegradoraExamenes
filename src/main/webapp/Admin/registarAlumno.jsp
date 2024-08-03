@@ -55,7 +55,7 @@
                 </div>
                 <% } else if (action.equals("update")) { %>
                 <div class="form-group">
-                    <input type="hidden" class="form-control" id="matricula" name="matricula" value="<%= matricula %>" readonly />
+                    <input type="hidden" class="form-control" id="matricula" name="matricula" value="<%= alumno.getMatricula()  %>" readonly />
                 </div>
                 <% } %>
                 <div class="form-group mb-3">
@@ -76,20 +76,19 @@
 
                 <% if (action.equals("update")) { %>
                 <div class="form-group mb-3">
-                    <label for="contraseña">Contraseña:</label>
-                    <input type="hidden" class="form-control" id="contraseña" name="contraseña" required />
+                    <input type="hidden" class="form-control" id="contraseña" name="contraseña" value="<%= action.equals("update") ? alumno.getContraseña() : ""%>" required />
                 </div>
                 <% } %>
 
                 <div class="form-group mb-3">
-                    <select id="gruposSelect" class="form-control" name="idGrupo">
+                    <select id="gruposSelect" class="form-control" name="idGrupo" required>
                         <option value="">Seleccione...</option>
                         <%
                             GrupoDao grupoDao = new GrupoDao();
                             List<Grupo> grupos = grupoDao.getAll();
                             for (Grupo grupo : grupos) {
                         %>
-                        <option value="<%= grupo.getIdGrupo() %>" <%= action.equals("update") && grupo.getIdGrupo() == alumno.getIdGrupo() ? "selected" : "" %>><%= grupo.getGradoGrupo() %></option>
+                        <option  value="<%= grupo.getIdGrupo() %>" <%= action.equals("update") && grupo.getIdGrupo() == alumno.getIdGrupo() ? "selected" : "" %>><%= grupo.getGradoGrupo() %></option>
                         <%
                             }
                         %>

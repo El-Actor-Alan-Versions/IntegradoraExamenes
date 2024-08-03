@@ -18,11 +18,20 @@ public class ActualizarAlumnoServlet extends HttpServlet {
         String apellidoPaterno = request.getParameter("apellidoPaterno");
         String apellidoMaterno = request.getParameter("apellidoMaterno");
         String correo = request.getParameter("correo");
-        String estado = request.getParameter("estado");
         String contraseña = request.getParameter("contraseña");
         int idGrupo = Integer.parseInt(request.getParameter("idGrupo"));
 
-        Alumno alumno = new Alumno(matricula, nombre, apellidoPaterno, apellidoMaterno, correo, estado, contraseña, idGrupo);
+
+
+        Alumno alumno = new Alumno();
+        alumno.setMatricula(matricula);
+        alumno.setNombre(nombre);
+        alumno.setApellidoMaterno(apellidoMaterno);
+        alumno.setApellidoPaterno(apellidoPaterno);
+        alumno.setCorreo(correo);
+        alumno.setContraseña(contraseña);
+        alumno.setIdGrupo(idGrupo);
+
         AlumnoDao dao = new AlumnoDao();
 
         boolean update = dao.update(alumno);

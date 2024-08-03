@@ -26,7 +26,7 @@
         <div class="header-card">
             <img src="../img/crear.png" width="68">
             <h2>Gestión de Alumnos</h2>
-            <button type="button" class="btn btn-new" onclick="location.href='registrarAlumno.jsp'">Nuevo alumno</button>
+            <button type="button" class="btn btn-new" onclick="location.href='registarAlumno.jsp'">Nuevo alumno</button>
             <button type="button" class="btn btn-conf" onclick="location.href='indexAdmin.jsp'">Volver</button>
         </div>
         <div class="card-body">
@@ -60,7 +60,7 @@
                     <td><%= a.getEstado() %></td>
                     <td><%= a.getNombreGrupo() %></td>
                     <td>
-                        <a href="registrarAlumno.jsp?matricula=<%= a.getMatricula() %>" class="btn btn-act">Actualizar</a>
+                        <a href="registarAlumno.jsp?matricula=<%= a.getMatricula() %>" class="btn btn-act">Actualizar</a>
                     </td>
                     <td>
                         <form method="post" action="eliminarAlumnoServlet">

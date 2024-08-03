@@ -32,7 +32,7 @@
             <a href="crearExamen.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
-                        <img src="../img/añadirExamen.png" class="text-center" width="68">
+                        <img src="../img/crear.png" class="text-center" width="68">
                         <h5 class="card-title">Crear Examen</h5>
                         <p class="card-text">Diseña y publica nuevos exámenes fácilmente.</p>
                     </div>
@@ -44,7 +44,7 @@
             <a href="VerExamenesServlet" class="button">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/examenesActivos.png" class="text-center" width="68">
+                        <img src="../img/examenesDisponibles.png" class="text-center" width="68">
                         <h5 class="card-title">Examenes Activos</h5>
                         <p class="card-text">Observa que exámenes tienes activos</p>
                     </div>
@@ -56,7 +56,7 @@
             <a href="editarPerfil.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
-                        <img src="img/calificaciones 1.png" class="text-center" width="68">
+                        <img src="../img/calificaciones.png" class="text-center" width="68">
                         <h5 class="card-title">Gestionar Calificaciones</h5>
                         <p class="card-text">Administra y revisa las calificaciones de los estudiantes.</p>
                     </div>

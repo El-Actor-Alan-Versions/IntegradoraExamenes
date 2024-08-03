@@ -41,7 +41,7 @@ body {
 }
 
 .table-custom {
-    padding: 30px 13%;
+    padding: 30px 50%;
     text-align: center;
     background: white;
     border-radius: 15px;
@@ -52,14 +52,16 @@ body {
     border-collapse: collapse
 }
 
-.table-custom th{
+
+.table-custom th, .table-custom td {
     border: 2px solid black; /* Ajusta el grosor y el color del borde */
     padding: 10px; /* Ajusta el relleno interno de las celdas */
-}
+    white-space: nowrap; /* Evita que el contenido se divida en múltiples líneas */
+ }
 
-.table-custom td {
-    border: 2px solid black;
-    padding: 10px;
+
+.column-actualizar, .column-eliminar {
+    min-width: 150px; /* Ajusta el valor según lo necesario */
 }
 
 .header-card {
@@ -98,20 +100,46 @@ body {
     font-weight: 800;
     width: 150px;
     border-radius: 18px;
-}
-.btn-act{
-    background: #FED8D8;
-    font-weight: 700;
-    width: 80%;
-    border-radius: 22px;
-}
-.btn-del{
-    background: #DD5151;
-    font-weight: 800;
-    width: 80%;
-    border-radius: 22px;
+    white-space: nowrap;
 }
 
-.btns{
-    width: 90%;
-}
+
+    .btn-act, .btn-del {
+        width: 150px; /* Ajusta el valor según sea necesario */
+        border-radius: 22px;
+        white-space: nowrap; /* Evita que el texto se divida */
+    }
+
+    .btn-act {
+        background: #FED8D8;
+        font-weight: 700;
+    }
+
+    .btn-del {
+        background: #DD5151;
+        font-weight: 800;
+    }
+
+    .column-actualizar, .column-eliminar {
+        min-width: 150px; /* Ajusta el valor según lo necesario */
+        width: 150px; /* Asegura que la columna mantenga su ancho */
+    }
+
+    @media (max-width: 600px) {
+        .header-card {
+            flex-direction: column; /* Cambia la dirección a columna para móviles */
+            align-items: center; /* Centra los elementos en la dirección de la columna */
+            text-align: center;
+        }
+
+        .header-card img, .header-card h2, .btn-new, .btn-conf {
+            margin: 5px 0; /* Añade margen vertical para separación */
+            width: auto; /* Permite que el ancho sea automático */
+        }
+
+        .btn-new, .btn-conf {
+            width: 100%; /* Hace que los botones ocupen el ancho completo */
+            max-width: 200px; /* Añade un ancho máximo */
+        }
+
+    }
