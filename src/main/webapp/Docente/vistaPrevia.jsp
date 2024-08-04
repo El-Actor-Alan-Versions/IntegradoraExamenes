@@ -43,6 +43,21 @@
             %>
             <p><strong>Respuesta:</strong> <%= pregunta.getRespuesta() %></p>
             <%
+            } else if ("verdadero_falso".equals(pregunta.getTipo())) {
+                // Asumimos que solo hay dos opciones: Verdadero y Falso
+                List<Opcion> opciones = pregunta.getOpciones();
+                if (opciones != null && !opciones.isEmpty()) {
+                    Opcion opcionVerdadero = opciones.get(0); // Primera opción es Verdadero
+                    Opcion opcionFalso = opciones.get(1); // Segunda opción es Falso
+            %>
+            <p>Opción Verdadero: <%= opcionVerdadero.isCorrecta() ? "<strong>Correcta</strong>" : "" %></p>
+            <p>Opción Falso: <%= opcionFalso.isCorrecta() ? "<strong>Correcta</strong>" : "" %></p>
+            <%
+            } else {
+            %>
+            <p>No hay opciones disponibles para esta pregunta.</p>
+            <%
+                    }
                 }
             %>
             <!-- Campos ocultos para enviar los datos al servlet de inserción -->
@@ -58,16 +73,22 @@
             <input type="hidden" name="questions[<%= i %>].option<%= (j + 1) %>" value="<%= opcion.getOpcion() %>">
             <input type="hidden" name="questions[<%= i %>].correctOption<%= (j + 1) %>" value="<%= opcion.isCorrecta() ? "true" : "false" %>">
             <%
-                }
-            } else {
-            %>
-            <input type="hidden" name="questions[<%= i %>].optionsAvailable" value="false">
-            <%
+                    }
                 }
             } else if ("abierta".equals(pregunta.getTipo())) {
             %>
             <input type="hidden" name="questions[<%= i %>].openEndedAnswer" value="<%= pregunta.getRespuesta() %>">
             <%
+            } else if ("verdadero_falso".equals(pregunta.getTipo())) {
+                // Campos ocultos para opciones de verdadero/falso
+                List<Opcion> opciones = pregunta.getOpciones();
+                if (opciones != null && !opciones.isEmpty()) {
+                    Opcion opcionVerdadero = opciones.get(0); // Primera opción es Verdadero
+                    Opcion opcionFalso = opciones.get(1); // Segunda opción es Falso
+            %>
+            <input type="hidden" name="questions[<%= i %>].correctOption" value="<%= opcionVerdadero.isCorrecta() ? "true" : "false" %>">
+            <%
+                    }
                 }
             %>
         </div>

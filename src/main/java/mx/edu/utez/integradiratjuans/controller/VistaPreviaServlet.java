@@ -67,11 +67,16 @@ public class VistaPreviaServlet extends HttpServlet {
                     pregunta.addOpcion(new Opcion(opcionTexto, isCorrect));
                     optionIndex++;
                 }
-            }
-            else if ("abierta".equals(questionType)) {
+            } else if ("abierta".equals(questionType)) {
                 String respuesta = request.getParameter("questions[" + questionIndex + "].openEndedAnswer");
                 if (respuesta != null) {
                     pregunta.setRespuesta(respuesta);
+                }
+            } else if ("verdadero_falso".equals(questionType)) {
+                String correctAnswer = request.getParameter("questions[" + questionIndex + "].correctOption");
+                if (correctAnswer != null) {
+                    pregunta.addOpcion(new Opcion("Verdadero", "true".equals(correctAnswer)));
+                    pregunta.addOpcion(new Opcion("Falso", "false".equals(correctAnswer)));
                 }
             }
 
@@ -83,4 +88,5 @@ public class VistaPreviaServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("vistaPrevia.jsp");
         dispatcher.forward(request, response);
     }
+
 }
