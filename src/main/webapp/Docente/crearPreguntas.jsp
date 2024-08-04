@@ -72,6 +72,14 @@
     </script>
 </head>
 <body>
+<div id="navbar"></div>
+<script>
+    fetch('navbar.jsp')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar').innerHTML = data;
+        });
+</script>
 <div class="container">
     <h2>Crear Pregunta</h2>
     <form action="VistaPreviaServlet" method="post">

@@ -70,7 +70,7 @@
 
                 <% if (action.equals("insert")) { %>
                 <div class="form-group mb-3">
-                    <input type="password" class="form-control rounded-pill text-center" id="contraseña" placeholder="Contraseña" name="contraseña" required />
+                    <input type="hidden" class="form-control rounded-pill text-center" id="contraseña" placeholder="Contraseña" name="contraseña" required />
                 </div>
                 <% } %>
 
