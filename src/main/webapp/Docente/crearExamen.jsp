@@ -8,49 +8,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Examen</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/crearExamen.css">
+
 </head>
 <body>
+
+<div id="navbar"></div>
+<script>
+    fetch('navbar.jsp')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar').innerHTML = data;
+        });
+</script>
 <div class="container">
-    <h2>Crear Examen</h2>
-    <form action="CrearExamenServlet" method="post">
-        <div class="form-group">
-            <label for="nombre">Nombre del Examen</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required>
+    <div class="card-custom mt-5">
+        <div class="card-title">
+            <p class="text-center">CREACIÓN DE EXÁMEN</p>
         </div>
-        <div class="form-group">
-            <label for="descripcion">Descripción</label>
-            <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+        <div class="card-body">
+            <form action="CrearExamenServlet" method="post">
+                <div class="label-input-group">
+                    <label for="nombre" class="form-label">Nombre del Examen</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                </div>
+                <div class="label-input-group">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea class="form-control" id="descripcion" name="descripcion"  required></textarea>
+                </div>
+                <div class="label-input-group">
+                    <label for="fecha_aplicacion" class="form-label">Fecha de Aplicación</label>
+                    <input type="datetime-local" class="form-control" id="fecha_aplicacion" name="fecha_aplicacion" required>
+                </div>
+                <div class="label-input-group">
+                    <label for="fecha_cierre" class="form-label">Fecha de Cierre</label>
+                    <input type="datetime-local" class="form-control" id="fecha_cierre" name="fecha_cierre" required>
+                </div>
+                <div class="label-input-group">
+                    <label for="id_clase" class="form-label">Clase</label>
+                    <select id="id_clase" class="form-control" name="id_clase" required>
+                        <option value="">Seleccione...</option>
+                        <%
+                            List<Clase> clases = (List<Clase>) session.getAttribute("clases");
+                            if (clases != null) {
+                                for (Clase clase : clases) {
+                        %>
+                        <option value="<%= clase.getId_clase() %>"><%= clase.getGradoGrupo() %></option>
+                        <%
+                            }
+                        } else {
+                        %>
+                        <option value="">No hay clases disponibles</option>
+                        <%
+                            }
+                        %>
+                    </select>
+                </div>
+                <button type="submit" class="btn  btn-right">Crear Examen</button>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="fecha_aplicacion">Fecha de Aplicación</label>
-            <input type="datetime-local" class="form-control" id="fecha_aplicacion" name="fecha_aplicacion" required>
-        </div>
-        <div class="form-group">
-            <label for="fecha_cierre">Fecha de Cierre</label>
-            <input type="datetime-local" class="form-control" id="fecha_cierre" name="fecha_cierre" required>
-        </div>
-        <div class="form-group">
-            <label for="id_clase">Clase</label>
-            <select id="id_clase" class="form-control" name="id_clase" required>
-                <option value="">Seleccione...</option>
-                <%
-                    List<Clase> clases = (List<Clase>) session.getAttribute("clases");
-                    if (clases != null) {
-                        for (Clase clase : clases) {
-                %>
-                <option value="<%= clase.getId_clase() %>"><%= clase.getGradoGrupo() %></option>
-                <%
-                    }
-                } else {
-                %>
-                <option value="">No hay clases disponibles</option>
-                <%
-                    }
-                %>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Crear Examen</button>
-    </form>
+    </div>
 </div>
 <script src="path/to/jquery.min.js"></script>
 <script src="path/to/bootstrap.min.js"></script>
