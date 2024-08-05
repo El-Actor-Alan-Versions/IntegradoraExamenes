@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import mx.edu.utez.integradiratjuans.dao.PreguntaDao;
 import mx.edu.utez.integradiratjuans.dao.OpcionesDao;
 import mx.edu.utez.integradiratjuans.model.Preguntas;
+import mx.edu.utez.integradiratjuans.model.Opcion;
 import mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;
 
 import java.io.IOException;
@@ -77,9 +78,23 @@ public class CalificarExamenServlet extends HttpServlet {
 
             switch (tipoPregunta) {
                 case "opcion_multiple":
-                case "verdaderoFalso":
-                    String respuestaCorrectaOpcion = preguntaDao.getRespuestaCorrecta(pregunta.getIdPregunta());
-                    if (respuestaAlumno.equals(respuestaCorrectaOpcion)) {
+                    List<Opcion> opciones = opcionDao.getOpcionesPorPregunta(pregunta.getIdPregunta());
+                    String respuestaCorrectaOM = preguntaDao.getRespuestaCorrecta(pregunta.getIdPregunta());
+
+                    if (respuestaCorrectaOM != null && respuestaAlumno.equals(respuestaCorrectaOM)) {
+                        respuestaCorrecta = true;
+                    }
+                    break;
+
+                case "verdadero_falso":
+
+                    String respuestaCorrectaVF = preguntaDao.getRespuestaCorrecta(pregunta.getIdPregunta()).toLowerCase();
+                    System.out.println(respuestaCorrectaVF);
+                    // Convertir la respuesta del alumno a minúsculas para comparación
+                    String respuestaAlumnoVF = respuestaAlumno != null ? respuestaAlumno.toLowerCase() : "";
+
+                    // Comparar la respuesta del alumno con la respuesta correcta
+                    if (respuestaCorrectaVF.equals(respuestaAlumnoVF)) {
                         respuestaCorrecta = true;
                     }
                     break;

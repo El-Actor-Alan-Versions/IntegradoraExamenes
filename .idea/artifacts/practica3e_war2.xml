@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="practica3e:war2">
+    <output-path>$PROJECT_DIR$/out/artifacts/practica3e_war2</output-path>
+    <root id="archive" name="practica3e_war.war">
+      <element id="artifact" artifact-name="practica3e:war exploded" />
+    </root>
+  </artifact>
+</component>

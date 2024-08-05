@@ -40,15 +40,6 @@
             <div class="card-body">
                 <%
                     String tipoPregunta = pregunta.getTipo();
-                    // Depuración
-                    System.out.println("Pregunta ID: " + pregunta.getIdPregunta());
-                    System.out.println("Tipo de pregunta: " + tipoPregunta);
-                    if (opciones != null) {
-                        System.out.println("Número de opciones para la pregunta ID " + pregunta.getIdPregunta() + ": " + opciones.size());
-                    } else {
-                        System.out.println("No hay opciones disponibles.");
-                    }
-
                     if ("opcion_multiple".equals(tipoPregunta)) {
                         for (Opcion opcion : opciones) {
                 %>
@@ -74,22 +65,24 @@
                 } else if ("abierta".equals(tipoPregunta)) {
                 %>
                 <div class="form-group">
-                    <label for="pregunta_<%= pregunta.getIdPregunta() %>">
-                    </label>
                     <input type="text" class="form-control" id="pregunta_<%= pregunta.getIdPregunta() %>" name="pregunta_<%= pregunta.getIdPregunta() %>" placeholder="Escribe tu respuesta aquí...">
                 </div>
                 <%
-                } else if ("verdaderoFalso".equals(tipoPregunta)) {
-                    for (Opcion opcion : opciones) {
+                } else if ("verdadero_falso".equals(tipoPregunta)) {
                 %>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="pregunta_<%= pregunta.getIdPregunta() %>" value="<%= opcion.getIdOpcion() %>">
+                    <input class="form-check-input" type="radio" name="pregunta_<%= pregunta.getIdPregunta() %>" value="Verdadero">
                     <label class="form-check-label">
-                        <%= opcion.getOpcion() %>
+                        Verdadero
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="pregunta_<%= pregunta.getIdPregunta() %>" value="Falso">
+                    <label class="form-check-label">
+                        Falso
                     </label>
                 </div>
                 <%
-                        }
                     }
                 %>
             </div>
