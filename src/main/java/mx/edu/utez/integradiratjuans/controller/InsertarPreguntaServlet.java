@@ -71,10 +71,10 @@ public class InsertarPreguntaServlet extends HttpServlet {
 
                 pregunta.addOpcion(opcionVerdadero);
                 pregunta.addOpcion(opcionFalso);
-                System.out.println("correctOption1: " + request.getParameter("questions[" + index + "].correctOption1"));
+               /* System.out.println("correctOption1: " + request.getParameter("questions[" + index + "].correctOption1"));
                 System.out.println("correctOption2: " + request.getParameter("questions[" + index + "].correctOption2"));
                 System.out.println("opcionVerdadero.isCorrecta(): " + opcionVerdadero.isCorrecta());
-                System.out.println("opcionFalso.isCorrecta(): " + opcionFalso.isCorrecta());
+                System.out.println("opcionFalso.isCorrecta(): " + opcionFalso.isCorrecta());*/
 
             }
 

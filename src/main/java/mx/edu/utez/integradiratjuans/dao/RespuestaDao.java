@@ -31,17 +31,18 @@ public class RespuestaDao {
 
     public List<String> CompararRespuestas(int idPregunta) {
         List<String> opcionesCorrectas = new ArrayList<>();
-        String sql = "SELECT id_opcion FROM opciones WHERE id_pregunta = ? AND correcta = 1";
+        String sql = "SELECT opcion FROM opciones WHERE id_pregunta = ? AND correcta = 1;";
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, idPregunta);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                opcionesCorrectas.add(rs.getString("id_opcion"));
+                opcionesCorrectas.add(rs.getString("opcion")); // Corregido para obtener la columna "opcion"
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return opcionesCorrectas;
     }
+
 }

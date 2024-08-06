@@ -11,10 +11,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_07_2024_03_49_a__m___Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_07_2024_03_49_a_ m__[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_07_2024_12_17_a__m___Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_07_2024_12_17_a_ m__[Changes]1/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/CalificarExamenServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/CalificarExamenServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/InsertarPreguntaServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/InsertarPreguntaServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarPreguntasServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarPreguntasServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/ExamenDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/RespuestaDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/RespuestaDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/Alumno/responderExamen.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Alumno/responderExamen.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/vistaPrevia.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/vistaPrevia.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +91,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/walge/IdeaProjects/IntegradoraExamenes/src/main/webapp/Docente&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/walge/IdeaProjects/IntegradoraExamenes&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -99,11 +106,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes" />
       <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\Docente" />
       <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\java\mx\edu\utez\integradiratjuans\model" />
       <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\java\mx\edu\utez\integradiratjuans\dao" />
       <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\java\mx\edu\utez\integradiratjuans\controller" />
-      <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\img" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\coke_\IdeaProjects\IntegradoraExamenes\src\main\webapp\img" />
@@ -324,6 +331,10 @@
       <workItem from="1722892910583" duration="1085000" />
       <workItem from="1722896477842" duration="71000" />
       <workItem from="1722896570415" duration="1048000" />
+      <workItem from="1722899778595" duration="1104000" />
+      <workItem from="1722922082702" duration="2826000" />
+      <workItem from="1722952660317" duration="2641000" />
+      <workItem from="1722962145863" duration="5539000" />
     </task>
     <servers />
   </component>

@@ -44,7 +44,7 @@
                         for (Opcion opcion : opciones) {
                 %>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="pregunta_<%= pregunta.getIdPregunta() %>" value="<%= opcion.getIdOpcion() %>">
+                    <input class="form-check-input" type="radio" name="pregunta_<%= pregunta.getIdPregunta() %>" value="<%= opcion.getOpcion() %>">
                     <label class="form-check-label">
                         <%= opcion.getOpcion() %>
                     </label>
@@ -55,7 +55,7 @@
                     for (Opcion opcion : opciones) {
                 %>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="pregunta_<%= pregunta.getIdPregunta() %>_<%= opcion.getIdOpcion() %>" value="<%= opcion.getIdOpcion() %>">
+                    <input class="form-check-input" type="checkbox" name="pregunta_<%= pregunta.getIdPregunta() %>_<%= opcion.getOpcion() %>" value="<%= opcion.getOpcion() %>">
                     <label class="form-check-label">
                         <%= opcion.getOpcion() %>
                     </label>
@@ -71,14 +71,14 @@
                 } else if ("verdadero_falso".equals(tipoPregunta)) {
                 %>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="pregunta_<%= pregunta.getIdPregunta() %>" value="Verdadero">
-                    <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="pregunta_<%= pregunta.getIdPregunta() %>" value="Verdadero" id="verdadero_<%= pregunta.getIdPregunta() %>">
+                    <label class="form-check-label" for="verdadero_<%= pregunta.getIdPregunta() %>">
                         Verdadero
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="pregunta_<%= pregunta.getIdPregunta() %>" value="Falso">
-                    <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="pregunta_<%= pregunta.getIdPregunta() %>" value="Falso" id="falso_<%= pregunta.getIdPregunta() %>">
+                    <label class="form-check-label" for="falso_<%= pregunta.getIdPregunta() %>">
                         Falso
                     </label>
                 </div>
