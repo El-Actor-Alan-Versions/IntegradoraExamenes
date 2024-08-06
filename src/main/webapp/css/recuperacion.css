@@ -11,7 +11,7 @@ body{
 
 
 
-#matricula {
+#email{
     border-radius: 50px;
     background-color: #7BCFBD;
     text-align: center;
@@ -24,17 +24,6 @@ body{
 }
 
 
-#contra{
-    border-radius: 50px;
-    background-color: #7BCFBD;
-    text-align: center;
-    color: black;
-    border: none;
-    width: 370px;
-    height: 48px;
-    font-size: 16px;
-    font-weight: bold;
-}
 
 .btn {
     background-color: #9EEB92;
@@ -50,6 +39,7 @@ body{
     background-color: #7ecf6e;
     transform: scale(1.05);
 }
+
 
 
 .profile-icon {
@@ -119,7 +109,6 @@ header{
     height: auto;
     z-index: -1;
 }
-
 
 
 
