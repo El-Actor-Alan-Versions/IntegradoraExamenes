@@ -47,7 +47,7 @@
                     <input type="password" required class="form-control rounded-pill text-center" name="contra" id="contra" placeholder="CONTRASEÑA">
                 </div>
                 <div class="container si justify-content-between">
-                    <a href="#" class="forgot-password ">¿Has olvidado tu contraseña?</a>
+                    <a href="/practica3e_war/recuperacion.jsp" class="forgot-password ">¿Has olvidado tu contraseña?</a>
                 </div>
 
                 <div class="form-floating mt-3">

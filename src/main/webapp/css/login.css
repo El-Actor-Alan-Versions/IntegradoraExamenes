@@ -87,6 +87,7 @@ header{
     align-items: center;
 }
 .forgot-password {
+    right: 60px;
     color: rgba(128, 128, 128, 0.5);
     text-decoration: none;
 }

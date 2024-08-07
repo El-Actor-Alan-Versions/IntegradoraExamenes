@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import mx.edu.utez.integradiratjuans.dao.PreguntaDao;
 import mx.edu.utez.integradiratjuans.dao.OpcionesDao;
 import mx.edu.utez.integradiratjuans.model.Preguntas;
+import mx.edu.utez.integradiratjuans.model.Opcion;
 import mx.edu.utez.integradiratjuans.utils.DatabaseConnectionManager;
 
 import java.io.IOException;
@@ -17,38 +18,41 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
+
 @WebServlet("/Alumno/CalificarExamen")
 public class CalificarExamenServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        double calificacion = 0;
         try {
-            double calificacion = 0;
-
-            // Obtén las preguntas del examen desde el request
-            @SuppressWarnings("unchecked")
             List<Preguntas> preguntas = (List<Preguntas>) request.getAttribute("preguntas");
 
             if (preguntas == null || preguntas.isEmpty()) {
-                throw new ServletException("No se encontraron preguntas para calificar.");
+                response.sendRedirect("error.jsp?msg=No se encontraron preguntas para calificar.");
+                return;
             }
 
-            // Obtén el ID del examen y la matrícula del alumno desde la sesión
-            int idExamen = (int) request.getSession().getAttribute("idExamen");
+            Integer idExamen = (Integer) request.getSession().getAttribute("idExamen");
             String matriculaAlumno = (String) request.getSession().getAttribute("matriculaAlumno");
 
-            // Conectar a la base de datos
+            if (idExamen == null || matriculaAlumno == null) {
+                response.sendRedirect("error.jsp?msg=ID de examen o matrícula de alumno no válidos.");
+                return;
+            }
+            System.out.println("coneccion aun no hecha");
+
             try (Connection connection = DatabaseConnectionManager.getConnection()) {
                 PreguntaDao preguntaDao = new PreguntaDao();
                 OpcionesDao opcionDao = new OpcionesDao();
 
-                // Califica el examen basado en las respuestas proporcionadas
+                System.out.println("coneccion exitosa");
+
                 calificacion = calificarExamen(request, preguntas, preguntaDao, opcionDao);
 
-                // Guarda la calificación en la base de datos
                 guardarCalificacion(matriculaAlumno, idExamen, calificacion, connection);
 
-                response.sendRedirect("exito.jsp"); // Redirige a la página de éxito
+                response.sendRedirect("exito.jsp");
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -57,19 +61,23 @@ public class CalificarExamenServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("error.jsp"); // Redirige a la página de error
+            response.sendRedirect("error.jsp?msg=Ocurrió un error inesperado.");
         }
     }
 
     private double calificarExamen(HttpServletRequest request, List<Preguntas> preguntas, PreguntaDao preguntaDao, OpcionesDao opcionDao) throws SQLException {
         double calificacion = 0;
+        System.out.println("Número de preguntas: " + preguntas.size());
 
         for (Preguntas pregunta : preguntas) {
             String tipoPregunta = pregunta.getTipo();
             String idPregunta = "pregunta_" + pregunta.getIdPregunta();
-            String respuestaAlumno = request.getParameter(idPregunta);
+            String[] respuestasAlumno = request.getParameterValues(idPregunta);
+            System.out.println("Tipo de pregunta: " + tipoPregunta);
+            System.out.println("ID Pregunta: " + idPregunta);
+            System.out.println("Respuestas del alumno: " + Arrays.toString(respuestasAlumno));
 
-            if (respuestaAlumno == null) {
+            if (respuestasAlumno == null || respuestasAlumno.length == 0) {
                 continue;
             }
 
@@ -77,27 +85,29 @@ public class CalificarExamenServlet extends HttpServlet {
 
             switch (tipoPregunta) {
                 case "opcion_multiple":
-                case "verdaderoFalso":
-                    String respuestaCorrectaOpcion = preguntaDao.getRespuestaCorrecta(pregunta.getIdPregunta());
-                    if (respuestaAlumno.equals(respuestaCorrectaOpcion)) {
+                    String respuestaCorrectaOM = preguntaDao.getRespuestaCorrecta(pregunta.getIdPregunta());
+                    if (respuestaCorrectaOM != null && Arrays.asList(respuestasAlumno).contains(respuestaCorrectaOM)) {
+                        respuestaCorrecta = true;
+                    }
+                    break;
+
+                case "verdadero_falso":
+                    String respuestaCorrectaVF = preguntaDao.getRespuestaCorrecta(pregunta.getIdPregunta()).toLowerCase();
+                    if (respuestaCorrectaVF != null && Arrays.asList(respuestasAlumno).contains(respuestaCorrectaVF)) {
                         respuestaCorrecta = true;
                     }
                     break;
 
                 case "varias_respuestas":
                     List<String> respuestasCorrectas = preguntaDao.getRespuestasCorrectas(pregunta.getIdPregunta());
-                    String[] respuestasAlumno = request.getParameterValues(idPregunta);
-
-                    if (respuestasAlumno != null) {
-                        List<String> respuestasAlumnoList = Arrays.asList(respuestasAlumno);
-                        if (respuestasAlumnoList.containsAll(respuestasCorrectas) && respuestasCorrectas.containsAll(respuestasAlumnoList)) {
-                            respuestaCorrecta = true;
-                        }
+                    List<String> respuestasAlumnoList = Arrays.asList(respuestasAlumno);
+                    if (respuestasAlumnoList.containsAll(respuestasCorrectas) && respuestasCorrectas.containsAll(respuestasAlumnoList)) {
+                        respuestaCorrecta = true;
                     }
                     break;
 
                 case "abierta":
-                    // Lógica para preguntas abiertas (aún no implementada)
+                    // Implementar lógica para preguntas abiertas si es necesario
                     break;
             }
 
@@ -108,6 +118,7 @@ public class CalificarExamenServlet extends HttpServlet {
 
         return calificacion;
     }
+
 
     private void guardarCalificacion(String matriculaAlumno, int idExamen, double calificacion, Connection connection) throws SQLException {
         String sql = "INSERT INTO Calificaciones (matricula_alumno, id_examen, calificacion) VALUES (?, ?, ?)";

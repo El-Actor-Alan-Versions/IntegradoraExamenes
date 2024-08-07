@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.*;
 
+
 @WebServlet("/Alumno/EnviarRespuestas")
 public class RegistrarPreguntasServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -58,12 +59,22 @@ public class RegistrarPreguntasServlet extends HttpServlet {
             // Obtener las opciones correctas desde la base de datos
             List<String> opcionesCorrectas = respuestaDao.CompararRespuestas(idPregunta);
 
-            if (opcionesCorrectas.isEmpty()) {
-                continue; // Pasar a la siguiente pregunta si no hay opción correcta
-            }
+            // Imprimir información en consola
+            System.out.println("Pregunta ID: " + idPregunta);
+            System.out.println("Respuestas correctas: " + opcionesCorrectas);
+            System.out.println("Respuestas del usuario: " + respuestasUsuario);
 
-            // Verificar si alguna de las respuestas enviadas es correcta
-            boolean esCorrecto = respuestasUsuario.stream().anyMatch(opcionesCorrectas::contains);
+            boolean esCorrecto = false;
+
+            if ("verdadero_falso".equalsIgnoreCase(opcionesCorrectas.get(0))) {
+                // Comparar para verdadero/falso
+                if (respuestasUsuario.contains(opcionesCorrectas.get(0))) {
+                    esCorrecto = true;
+                }
+            } else {
+                // Comparar respuestas múltiples
+                esCorrecto = respuestasUsuario.containsAll(opcionesCorrectas);
+            }
 
             // Insertar la respuesta en la base de datos
             Respuesta respuesta = new Respuesta();
@@ -106,7 +117,7 @@ public class RegistrarPreguntasServlet extends HttpServlet {
             System.out.println("Fallo al actualizar el estado del examen.");
         }
 
-        // Redirigir a una página de éxito o mostrar un mensaje
+        // Redirigir a una página de éxito
         response.sendRedirect("verCalificaciones.jsp");
     }
 }

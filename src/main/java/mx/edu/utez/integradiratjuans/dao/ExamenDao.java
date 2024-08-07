@@ -38,7 +38,7 @@ public class ExamenDao {
 
     public List<Examen> getExamenesPorClase(int idClase) throws SQLException {
         List<Examen> examenes = new ArrayList<>();
-        String sql = "SELECT * FROM Examen WHERE id_clase = ? and estado = false";
+        String sql = "SELECT * FROM Examen WHERE id_clase = ?";
 
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

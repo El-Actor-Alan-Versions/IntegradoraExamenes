@@ -1,4 +1,4 @@
-|<%@ page import="mx.edu.utez.integradiratjuans.model.Preguntas" %>
+<%@ page import="mx.edu.utez.integradiratjuans.model.Preguntas" %>
 <%@ page import="mx.edu.utez.integradiratjuans.model.Opcion" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -86,7 +86,10 @@
                     Opcion opcionVerdadero = opciones.get(0); // Primera opción es Verdadero
                     Opcion opcionFalso = opciones.get(1); // Segunda opción es Falso
             %>
-            <input type="hidden" name="questions[<%= i %>].correctOption" value="<%= opcionVerdadero.isCorrecta() ? "true" : "false" %>">
+            <input type="hidden" name="questions[<%= i %>].option1" value="Verdadero">
+            <input type="hidden" name="questions[<%= i %>].correctOption1" value="<%= opcionVerdadero.isCorrecta() ? "true" : "false" %>">
+            <input type="hidden" name="questions[<%= i %>].option2" value="Falso">
+            <input type="hidden" name="questions[<%= i %>].correctOption2" value="<%= opcionFalso.isCorrecta() ? "true" : "false" %>">
             <%
                     }
                 }

@@ -40,20 +40,11 @@
             <div class="card-body">
                 <%
                     String tipoPregunta = pregunta.getTipo();
-                    // Depuración
-                    System.out.println("Pregunta ID: " + pregunta.getIdPregunta());
-                    System.out.println("Tipo de pregunta: " + tipoPregunta);
-                    if (opciones != null) {
-                        System.out.println("Número de opciones para la pregunta ID " + pregunta.getIdPregunta() + ": " + opciones.size());
-                    } else {
-                        System.out.println("No hay opciones disponibles.");
-                    }
-
                     if ("opcion_multiple".equals(tipoPregunta)) {
                         for (Opcion opcion : opciones) {
                 %>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="pregunta_<%= pregunta.getIdPregunta() %>" value="<%= opcion.getIdOpcion() %>">
+                    <input class="form-check-input" type="radio" name="pregunta_<%= pregunta.getIdPregunta() %>" value="<%= opcion.getOpcion() %>">
                     <label class="form-check-label">
                         <%= opcion.getOpcion() %>
                     </label>
@@ -64,7 +55,7 @@
                     for (Opcion opcion : opciones) {
                 %>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="pregunta_<%= pregunta.getIdPregunta() %>_<%= opcion.getIdOpcion() %>" value="<%= opcion.getIdOpcion() %>">
+                    <input class="form-check-input" type="checkbox" name="pregunta_<%= pregunta.getIdPregunta() %>_<%= opcion.getOpcion() %>" value="<%= opcion.getOpcion() %>">
                     <label class="form-check-label">
                         <%= opcion.getOpcion() %>
                     </label>
@@ -74,22 +65,24 @@
                 } else if ("abierta".equals(tipoPregunta)) {
                 %>
                 <div class="form-group">
-                    <label for="pregunta_<%= pregunta.getIdPregunta() %>">
-                    </label>
                     <input type="text" class="form-control" id="pregunta_<%= pregunta.getIdPregunta() %>" name="pregunta_<%= pregunta.getIdPregunta() %>" placeholder="Escribe tu respuesta aquí...">
                 </div>
                 <%
-                } else if ("verdaderoFalso".equals(tipoPregunta)) {
-                    for (Opcion opcion : opciones) {
+                } else if ("verdadero_falso".equals(tipoPregunta)) {
                 %>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="pregunta_<%= pregunta.getIdPregunta() %>" value="<%= opcion.getIdOpcion() %>">
-                    <label class="form-check-label">
-                        <%= opcion.getOpcion() %>
+                    <input class="form-check-input" type="radio" name="pregunta_<%= pregunta.getIdPregunta() %>" value="Verdadero" id="verdadero_<%= pregunta.getIdPregunta() %>">
+                    <label class="form-check-label" for="verdadero_<%= pregunta.getIdPregunta() %>">
+                        Verdadero
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="pregunta_<%= pregunta.getIdPregunta() %>" value="Falso" id="falso_<%= pregunta.getIdPregunta() %>">
+                    <label class="form-check-label" for="falso_<%= pregunta.getIdPregunta() %>">
+                        Falso
                     </label>
                 </div>
                 <%
-                        }
                     }
                 %>
             </div>
