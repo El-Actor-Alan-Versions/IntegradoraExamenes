@@ -11,13 +11,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_07_2024_03_49_a__m___Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_07_2024_03_49_a_ m__[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_07_2024_12_17_a__m___Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_07_2024_12_17_a_ m__[Changes]1/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/EliminarDocenteServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/EliminarDocenteServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/registrarAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/registrarAdmin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/registrarDocente.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/registrarDocente.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/crearExamen.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/crearExamen.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/VerExamenes.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/VerExamenes.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/crearPreguntas.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/crearPreguntas.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/vistaPrevia.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/vistaPrevia.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/crearExamen.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/crearExamen.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/vistas.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/vistas.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +99,8 @@
     &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;service.view.auto.scroll.from.source&quot;: &quot;true&quot;,
+    &quot;service.view.auto.scroll.to.source&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -323,7 +327,25 @@
       <workItem from="1722664462093" duration="357000" />
       <workItem from="1722721596731" duration="3360000" />
       <workItem from="1722733562389" duration="2790000" />
+      <workItem from="1722787028103" duration="1285000" />
+      <workItem from="1722813124691" duration="1125000" />
+      <workItem from="1722875858173" duration="1147000" />
+      <workItem from="1722888452284" duration="1812000" />
+      <workItem from="1722893740926" duration="663000" />
+      <workItem from="1722896393476" duration="679000" />
+      <workItem from="1722915041485" duration="16648000" />
+      <workItem from="1722957287685" duration="10824000" />
+      <workItem from="1722973655436" duration="3793000" />
     </task>
+    <task id="LOCAL-00001" summary="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:">
+      <option name="closed" value="true" />
+      <created>1722787246312</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1722787246312</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

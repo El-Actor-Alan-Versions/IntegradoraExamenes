@@ -143,3 +143,7 @@ body {
         }
 
     }
+
+    .container-custom{
+        width: 100%;
+    }
