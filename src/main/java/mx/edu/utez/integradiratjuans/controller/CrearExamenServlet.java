@@ -1,19 +1,19 @@
 package mx.edu.utez.integradiratjuans.controller;
 
-import jakarta.servlet.RequestDispatcher;
-import mx.edu.utez.integradiratjuans.dao.ExamenDao;
-import mx.edu.utez.integradiratjuans.model.Examen;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import mx.edu.utez.integradiratjuans.dao.*;
+import mx.edu.utez.integradiratjuans.model.Examen;
+import mx.edu.utez.integradiratjuans.model.ExamenAlumno;
+import mx.edu.utez.integradiratjuans.model.Grupo;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-
+import java.util.List;
 
 @WebServlet("/Docente/CrearExamenServlet")
 public class CrearExamenServlet extends HttpServlet {
@@ -78,6 +78,25 @@ public class CrearExamenServlet extends HttpServlet {
             // Establecer el ID del examen en la sesión
             HttpSession session = request.getSession();
             session.setAttribute("idExamen", idExamen);
+
+
+
+
+
+            // Recuperar las matrículas de los alumnos del grupo correspondiente
+            ClaseDao claseDao = new ClaseDao();
+            int idGrupo = claseDao.getIdGrupoByIdClase(idClase);
+            AlumnoDao alumnoDao = new AlumnoDao();
+            List<String> matriculas = alumnoDao.obtenerMatriculasPorIdGrupo(idGrupo);
+
+            // Insertar la relación entre el examen y los alumnos
+            ExamenAlumnoDao examenAlumnoDao = new ExamenAlumnoDao();
+            for (String matricula : matriculas) {
+                ExamenAlumno examenAlumno = new ExamenAlumno();
+                examenAlumno.setIdExamen(idExamen);
+                examenAlumno.setMatriculaAlumno(matricula);
+                examenAlumnoDao.insert(examenAlumno);
+            }
 
             // Redirigir a la página de creación de preguntas
             response.sendRedirect("crearPreguntas.jsp");

@@ -147,4 +147,25 @@ public class AlumnoDao {
         return update;
     }
 
+    public List<String> obtenerMatriculasPorIdGrupo(int idGrupo) {
+        List<String> matriculas = new ArrayList<>();
+        String sql = "SELECT matricula FROM alumno WHERE id_grupo = ?";
+
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, idGrupo);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                matriculas.add(resultSet.getString("matricula"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return matriculas;
+    }
+
 }

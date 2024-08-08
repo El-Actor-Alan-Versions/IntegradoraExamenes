@@ -37,11 +37,19 @@ public class InsertarPreguntaServlet extends HttpServlet {
         while (request.getParameter("questions[" + index + "].pregunta") != null) {
             String texto = request.getParameter("questions[" + index + "].pregunta");
             String tipo = request.getParameter("questions[" + index + "].questionType");
-            String respuesta = tipo.equals("abierta") ? request.getParameter("questions[" + index + "].openEndedAnswer") : null;
 
+            // Inicializar la pregunta con su texto y tipo
             Preguntas pregunta = new Preguntas(texto, tipo);
-            pregunta.setRespuesta(respuesta);
             pregunta.setIdExamen(idExamen);
+
+            // Manejo de preguntas de tipo abierta
+            if ("abierta".equals(tipo)) {
+                String respuesta = request.getParameter("questions[" + index + "].openEndedAnswer");
+                Opcion opcion = new Opcion();
+                opcion.setOpcion(respuesta);
+                opcion.setCorrecta(true); // En preguntas abiertas, se asume que la respuesta es siempre correcta
+                pregunta.addOpcion(opcion);
+            }
 
             // Manejo de opciones para preguntas de opción múltiple y varias respuestas
             if ("opcion_multiple".equals(tipo) || "varias_respuestas".equals(tipo)) {
@@ -71,14 +79,7 @@ public class InsertarPreguntaServlet extends HttpServlet {
 
                 pregunta.addOpcion(opcionVerdadero);
                 pregunta.addOpcion(opcionFalso);
-               /* System.out.println("correctOption1: " + request.getParameter("questions[" + index + "].correctOption1"));
-                System.out.println("correctOption2: " + request.getParameter("questions[" + index + "].correctOption2"));
-                System.out.println("opcionVerdadero.isCorrecta(): " + opcionVerdadero.isCorrecta());
-                System.out.println("opcionFalso.isCorrecta(): " + opcionFalso.isCorrecta());*/
-
             }
-
-
 
             preguntas.add(pregunta);
             index++;

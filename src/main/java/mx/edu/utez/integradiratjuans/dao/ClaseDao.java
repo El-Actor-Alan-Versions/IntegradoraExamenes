@@ -141,6 +141,31 @@ public class ClaseDao {
         return clases;
     }
 
+    public int getIdGrupoByIdClase(int idClase) {
+        int idGrupo = -1; // Valor por defecto si no se encuentra el grupo
+
+        String query = "SELECT id_grupo FROM clase WHERE id_clase = ?";
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Asignar el parámetro al PreparedStatement
+            preparedStatement.setInt(1, idClase);
+
+            // Ejecutar la consulta y obtener el resultado
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    idGrupo = resultSet.getInt("id_grupo");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Manejar errores según sea necesario
+        }
+
+        return idGrupo;
+    }
+
     public int getGrupoByAlumno(String matricula) throws SQLException {
         int idGrupo = -1; // Valor predeterminado en caso de no encontrar el grupo
 

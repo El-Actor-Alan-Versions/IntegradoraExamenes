@@ -37,6 +37,28 @@ public class GrupoDao {
             return grupos;
         }
 
+    public List<Integer> obtenerIdGruposPorMatricula(String matricula) {
+        List<Integer> idGrupos = new ArrayList<>();
+        String sql = "SELECT g.id_grupo FROM grupo g JOIN clase c ON c.id_grupo = g.id_grupo WHERE c.matricula = ?";
+
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, matricula);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                idGrupos.add(resultSet.getInt("id_grupo"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return idGrupos;
+    }
+
+
         // Método para obtener el id_clase a partir del id_grupo
         public int getIdClaseByGrupoId(int idGrupo) throws SQLException {
             String sql = "SELECT id_clase FROM Clase WHERE id_grupo = ?";
