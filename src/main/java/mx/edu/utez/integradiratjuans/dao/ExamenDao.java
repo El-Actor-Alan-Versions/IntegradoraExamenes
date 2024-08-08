@@ -36,6 +36,25 @@ public class ExamenDao {
         return id;
     }
 
+    public String obtenerNombreExamenPorId(int idExamen) throws SQLException {
+        String nombreExamen = null;
+
+        String sql = "SELECT nombre FROM examen WHERE id_examen = ?";
+
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, idExamen);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    nombreExamen = rs.getString("nombre");
+                }
+            }
+        }
+        return nombreExamen;
+    }
+
     public List<Examen> getExamenesPorClase(int idClase) throws SQLException {
         List<Examen> examenes = new ArrayList<>();
         String sql = "SELECT * FROM Examen WHERE id_clase = ?";

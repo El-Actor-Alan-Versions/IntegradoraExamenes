@@ -78,6 +78,34 @@ public class CalificacionDao {
 
 
 
+    public List<Calificacion> obtenerCalificacionesPorDocente(String matriculaDocente) throws SQLException {
+        List<Calificacion> calificaciones = new ArrayList<>();
+
+        String sql = "SELECT cal.* FROM calificaciones cal " +
+                "JOIN alumno a ON cal.matricula_alumno = a.matricula " +
+                "JOIN clase c ON c.id_grupo = a.id_grupo " +
+                "WHERE c.matricula = ?";
+
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, matriculaDocente);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Calificacion calificacion = new Calificacion();
+                    calificacion.setIdCalificacion(rs.getInt("id_calificacion"));
+                    calificacion.setMatriculaAlumno(rs.getString("matricula_alumno"));
+                    calificacion.setIdExamen(rs.getInt("id_examen"));
+                    calificacion.setCalificacion(rs.getInt("calificacion"));
+                    calificacion.setFecha(rs.getTimestamp("fecha"));
+                    calificaciones.add(calificacion);
+                }
+            }
+        }
+        return calificaciones;
+    }
+
     public List<Calificacion> getAll() {
         List<Calificacion> calificaciones = new ArrayList<>();
         String sql = "SELECT * FROM calificaciones";
