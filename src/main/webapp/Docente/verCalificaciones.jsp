@@ -3,6 +3,7 @@
 <%@ page import="mx.edu.utez.integradiratjuans.dao.CalificacionDao" %>
 <%@ page import="mx.edu.utez.integradiratjuans.dao.ExamenDao" %>
 <%@ page session="true" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
