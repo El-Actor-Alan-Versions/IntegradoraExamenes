@@ -25,12 +25,17 @@ public class CalificarPreguntasAbiertasServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int examenId = Integer.parseInt(request.getParameter("id_examen"));
         String matriculaEstudiante = request.getParameter("matricula_estudiante");
+        System.out.println("Depuración - Examen ID: " + examenId);
+        System.out.println("Depuración - Matrícula Estudiante: " + matriculaEstudiante);
+
         PreguntaDao preguntaDao = new PreguntaDao();
         OpcionesDao opcionesDao = new OpcionesDao();
         RespuestaDao respuestaDao = new RespuestaDao();
 
         // Obtener preguntas
         List<Preguntas> preguntas = preguntaDao.getPreguntasPorExamen(examenId);
+        System.out.println("Depuración - Preguntas obtenidas: " + preguntas.size());
+
         Map<Integer, List<Opcion>> opcionesPorPregunta = new HashMap<>();
 
         // Obtener opciones para cada pregunta
@@ -39,32 +44,27 @@ public class CalificarPreguntasAbiertasServlet extends HttpServlet {
             try {
                 opciones = opcionesDao.getOpcionesPorPregunta(pregunta.getIdPregunta());
             } catch (SQLException e) {
+                e.printStackTrace();
                 throw new RuntimeException(e);
             }
+            System.out.println("Depuración - Opciones para pregunta " + pregunta.getIdPregunta() + ": " + opciones.size());
             opcionesPorPregunta.put(pregunta.getIdPregunta(), opciones);
-        }
-
-        // Obtener respuestas correctas
-        Map<Integer, Opcion> respuestasCorrectas = new HashMap<>();
-        for (Preguntas pregunta : preguntas) {
-            Opcion correcta = null;
-            try {
-                correcta = opcionesDao.getRespuestaCorrecta(pregunta.getIdPregunta());
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            respuestasCorrectas.put(pregunta.getIdPregunta(), correcta);
         }
 
         // Obtener respuestas del alumno
         Map<Integer, Respuesta> respuestasAlumno = respuestaDao.getRespuestasPorExamenYEstudiante(examenId, matriculaEstudiante);
+        System.out.println("Depuración - Respuestas del alumno: " + respuestasAlumno.size());
+
+        for (Map.Entry<Integer, Respuesta> entry : respuestasAlumno.entrySet()) {
+            System.out.println("Depuración - Pregunta ID: " + entry.getKey() + ", Respuesta: " + entry.getValue().getRespuesta());
+        }
 
         // Pasar datos a la JSP
         request.setAttribute("preguntas", preguntas);
         request.setAttribute("opcionesPorPregunta", opcionesPorPregunta);
-        request.setAttribute("respuestasCorrectas", respuestasCorrectas);
         request.setAttribute("respuestasAlumno", respuestasAlumno);
         request.getRequestDispatcher("/Docente/calificarExamen.jsp").forward(request, response);
     }
 
 }
+

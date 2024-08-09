@@ -49,7 +49,7 @@
                 <form action="calificarExamen" method="get">
                     <input type="hidden" name="id_examen" id="id_examen" value="<%= calificacion.getIdExamen() %>">
                     <input type="hidden" name="idCalificacion" value="<%= calificacion.getIdCalificacion() %>">
-                    <input type="hidden" name="matricula" value="<%= calificacion.getMatriculaAlumno() %>">
+                    <input type="hidden" name="matricula_estudiante" value="<%= calificacion.getMatriculaAlumno() %>">
                     <button type="submit" class="btn btn-primary">Calificar</button>
                 </form>
             </td>

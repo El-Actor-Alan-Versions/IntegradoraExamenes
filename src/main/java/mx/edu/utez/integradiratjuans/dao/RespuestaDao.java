@@ -16,12 +16,13 @@ import java.util.Map;
 public class RespuestaDao {
 
     public boolean insert(Respuesta respuesta) {
-        String sql = "INSERT INTO respuesta (id_pregunta, acierto, matricula_estudiante) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO respuesta (id_pregunta, acierto, matricula_estudiante, respuesta) VALUES (?, ?, ?, ?)";
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, respuesta.getIdPregunta());
             stmt.setInt(2, respuesta.getAcierto());
-            stmt.setString(3, respuesta.getMatriculaEstudiante()); // Establece el valor de matrícula
+            stmt.setString(3, respuesta.getMatriculaEstudiante());
+            stmt.setString(4, respuesta.getRespuesta()); // Guardar la respuesta seleccionada
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {
@@ -82,7 +83,7 @@ public class RespuestaDao {
 
     public Map<Integer, Respuesta> getRespuestasPorExamenYEstudiante(int idExamen, String matriculaEstudiante) {
         Map<Integer, Respuesta> respuestasMap = new HashMap<>();
-        String sql = "SELECT r.id_respuesta, r.id_pregunta, r.acierto " +
+        String sql = "SELECT r.id_respuesta, r.respuesta, r.id_pregunta " +
                 "FROM respuesta r " +
                 "JOIN pregunta p ON r.id_pregunta = p.id_pregunta " +
                 "WHERE p.id_examen = ? AND r.matricula_estudiante = ?";
@@ -98,8 +99,7 @@ public class RespuestaDao {
                 Respuesta respuesta = new Respuesta();
                 respuesta.setIdRespuesta(rs.getInt("id_respuesta"));
                 respuesta.setIdPregunta(rs.getInt("id_pregunta"));
-                respuesta.setAcierto(rs.getInt("acierto"));
-                respuesta.setMatriculaEstudiante(matriculaEstudiante); // Establece la matrícula del estudiante
+                respuesta.setRespuesta(rs.getString("respuesta")); // Asume que este es el campo correcto para la respuesta
 
                 // Añade la respuesta al mapa usando el ID de la pregunta como clave
                 respuestasMap.put(respuesta.getIdPregunta(), respuesta);
@@ -111,6 +111,7 @@ public class RespuestaDao {
 
         return respuestasMap;
     }
+
 
 
 
