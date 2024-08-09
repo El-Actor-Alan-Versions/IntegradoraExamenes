@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: walge
-  Date: 23/07/2024
-  Time: 09:15 p. m.
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -108,24 +100,36 @@
                 padding: 2%;
             }
         }
+
+        .dropdown{
+            background-color: transparent;
+            background: transparent;
+            border: transparent;
+        }
     </style>
 </head>
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="profile-button">
-        <img src="../img/Logo-utez.png" id="logo">
-    </div>
+    <a href="indexAlumno.jsp" target="_blank" class="profile-button">
+        <img src="../img/Logo-utez.png" id="logo" alt="Logo UTEZ">
+    </a>
     <div class="d-flex flex-grow-1 justify-content">
         <p class="navbar-text">PLATAFORMA DE EXÁMENES</p>
     </div>
     <a href="" class="button">
         <img src="../img/miPerfil.png" alt="perfil">
-        <p class="unu text-center">Mi Perfil</p>
-
     </a>
 
-
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Mi perfil
+        </button>
+        <div class=" dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a></li>
+            <a class="dropdown-item" href="#">(PENDIENTE)</a>
+        </div>
+    </div>
 </nav>
 </body>
 </html>

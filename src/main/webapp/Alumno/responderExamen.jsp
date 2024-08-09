@@ -10,54 +10,102 @@
     <!-- Enlace a Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        <style>
 
         @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
         body {
             font-family: 'PT Sans';
-            color: rgb(17, 16, 16);
             justify-content: center;
             align-items: center;
-            background-color: #EEEEEE;
+            background: #EEEEEE;
             width: 100%;
-            margin: 0;
-            padding: 0;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            height: 100%;
 
         }
-        .card-header {
-            background: #97e3d2;
-            justify-content: center;
-            border-top-left-radius: 22px;
-            border-top-right-radius: 22px;  
+        .header-card{
+            background-color: #97E3D2;
+            display: flex;
+            width: 100%;
+            height: 12px;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
         }
-        .form-check {
-            margin-bottom: 10px;
+        .title-prg{
+            font-size: 32px;
+            font-weight: 500;
         }
-        .form-group {
-            margin-top: 10px;
+
+        /* Todas las cards */
+        .card{
+            margin: auto;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 20px;
+            max-width: 482px;
+
         }
+
+        #card-preguntas{
+            background-color: transparent;
+            border-color: transparent ;
+            box-shadow: none;
+
+        }
+
+        .container{
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .btn-enivar{
+            background: #97E3D2 ;
+            border-radius: 20px;
+            font-weight: 500;
+            margin-left: 50%;
+        }
+
+        #card-title{
+            margin-top: 20px;
+        }
+    </style>
+
     </style>
 </head>
 <body>
-<div class="container mt-4">
-    <div class="card-header">
-        <h1 class="mb-4">Responder Examen</h1>
+<div id="navbar"></div>
+<script>
+    fetch('navbar.jsp')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar').innerHTML = data;
+        });
+</script>
+<div class="container">
+    <div id="card-title" class="card">
+        <div class="header-card"></div>
+        <div class="card-body">
+            <div class="card-text"></div>
+            <p class="title-prg">Responder Examen</p>
+        </div>
     </div>
-    <div class="card-body">
-        <form action="EnviarRespuestas" method="post">
-            <input type="hidden" name="id_examen" value="${idExamen}">
-            <%
-                List<Preguntas> preguntas = (List<Preguntas>) request.getAttribute("preguntas");
-                if (preguntas != null && !preguntas.isEmpty()) {
-                    for (Preguntas pregunta : preguntas) {
-                        List<Opcion> opciones = pregunta.getOpciones();
-            %>
-            <div class="card mb-3">
-                <div class="card-header">
-                    <%= pregunta.getTexto() %>
-                </div>
-                <div class="card-body">
+    <form action="EnviarRespuestas" method="post">
+        <input type="hidden" name="id_examen" value="${idExamen}">
+
+        <% List<Preguntas> preguntas = (List<Preguntas>) request.getAttribute("preguntas");
+            if (preguntas != null && !preguntas.isEmpty()) {
+                for (Preguntas pregunta : preguntas) {
+                    List<Opcion> opciones = pregunta.getOpciones();
+        %>
+
+        <!-- Card para cada pregunta -->
+        <div class="card">
+            <div class="header-card"></div>
+            <div class="card-body">
+                <p class="input"><%= pregunta.getTexto() %></p>
+                <div class="card-text">
                     <%
                         String tipoPregunta = pregunta.getTipo();
                         if ("opcion_multiple".equals(tipoPregunta)) {
@@ -107,24 +155,15 @@
                     %>
                 </div>
             </div>
-            <%
-                }
-            } else {
-            %>
-            <div class="alert alert-warning" role="alert">
-                No hay preguntas disponibles para este examen.
-            </div>
-            <%
-                }
-            %>
-            <button type="submit" class="btn btn-primary">Enviar Respuestas</button>
-        </form>
-    </div>
-</div>
+        </div>
+        <% } } else { %>
+        <div class="alert alert-warning" role="alert">
+            No hay preguntas disponibles para este examen.
+        </div>
+        <% } %>
 
-<!-- Enlace a Bootstrap JS y dependencias (opcional) -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <button type="submit" class="btn btn-enivar">Enviar Respuestas</button>
+    </form>
+</div>
 </body>
 </html>

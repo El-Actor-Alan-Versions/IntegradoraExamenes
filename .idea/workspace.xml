@@ -12,10 +12,12 @@
   <component name="ChangeListManager">
     <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/CalificarPreguntasAbiertasServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/CalificarPreguntasAbiertasServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarPreguntasServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/RegistrarPreguntasServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/RespuestaDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/RespuestaDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/calificarExamen.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/calificarExamen.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/navbar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/navbar.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Alumno/navbar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Alumno/navbar.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Alumno/responderExamen.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Alumno/responderExamen.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Alumno/verCalificaciones.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Alumno/verCalificaciones.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Alumno/verExamenes.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Alumno/verExamenes.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/navbar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/navbar.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/verCalificaciones.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/verCalificaciones.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,10 +113,11 @@
       <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\img" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\coke_\IdeaProjects\IntegradoraExamenes\src\main\webapp\Alumno" />
+      <recent name="C:\Users\coke_\IdeaProjects\IntegradoraExamenes\src\main\webapp\Docente" />
       <recent name="C:\Users\coke_\IdeaProjects\IntegradoraExamenes\src\main\webapp\img" />
       <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\Admin" />
       <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\Docente" />
-      <recent name="C:\Users\walge\Downloads\integradoraDemoE\ubuntu\IntegradoraExamenes\src\main\webapp" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 10.1.8">
@@ -382,16 +385,5 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:" />
     <option name="LAST_COMMIT_MESSAGE" value="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/webapp/Admin/navbar.jsp</url>
-          <line>116</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

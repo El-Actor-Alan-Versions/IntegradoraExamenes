@@ -4,13 +4,13 @@
 <%@ page import="jakarta.mail.Session" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calificaciones</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/datatables.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/usuarios.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vistas.css">
 </head>
 <body>
 <div id="navbar"></div>
@@ -22,64 +22,54 @@
         });
 </script>
 
-<div class="container mt-4">
-    <h2>Calificaciones</h2>
-    <table id="example" class="table table-striped table-hover" style="width: 100%">
-        <thead>
-        <tr>
-            <th>ID Calificación</th>
-            <th>Matrícula Alumno</th>
-            <th>Nombre Examen</th>
-            <th>Calificación</th>
-            <th>Fecha</th>
-        </tr>
-        </thead>
-        <tbody>
-        <%
-            String matriculaAlumno = (String) session.getAttribute("matriculaAlumno");
-            try {
-                CalificacionDao dao = new CalificacionDao();
-                List<Calificacion> calificaciones = dao.getCalificacionesConNombreExamen(matriculaAlumno);
-                for (Calificacion c : calificaciones) {
-        %>
-        <tr>
-            <td><%= c.getIdCalificacion() %></td>
-            <td><%= c.getMatriculaAlumno() %></td>
-            <td><%= c.getNombreExamen() %></td>
-            <td><%= c.getCalificacion() %></td>
-            <td><%= c.getFecha() %></td>
-        </tr>
-        <%
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("Error: " + e.getMessage());
-            }
-        %>
-        </tbody>
-    </table>
+<div class="container">
+    <div class="card">
+        <div class="header-card">
+            <img src="../img/calificaciones.png" width="68">
+            <h2>Calificaciones</h2>
+            <button type="button" class="btn btn-conf" onclick="location.href='indexAlumno.jsp'">Regresar a Inicio</button>
+        </div>
+        <div class="card-body">
+            <table class="table table-custom">
+                <thead class="thead-dark">
+                <tr>
+                    <th>ID Calificación</th>
+                    <th>Matrícula Alumno</th>
+                    <th>Nombre Examen</th>
+                    <th>Calificación</th>
+                    <th>Fecha</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%
+                    String matriculaAlumno = (String) session.getAttribute("matriculaAlumno");
+                    try {
+                        CalificacionDao dao = new CalificacionDao();
+                        List<Calificacion> calificaciones = dao.getCalificacionesConNombreExamen(matriculaAlumno);
+                        for (Calificacion c : calificaciones) {
+                %>
+                <tr>
+                    <td><%= c.getIdCalificacion() %></td>
+                    <td><%= c.getMatriculaAlumno() %></td>
+                    <td><%= c.getNombreExamen() %></td>
+                    <td><%= c.getCalificacion() %></td>
+                    <td><%= c.getFecha() %></td>
+                </tr>
+                <%
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println("Error: " + e.getMessage());
+                    }
+                %>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
-
-<script src="${pageContext.request.contextPath}/JS/jquery-3.7.0.js"></script>
-<script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>
-<script src="${pageContext.request.contextPath}/JS/datatables.js"></script>
-<script src="${pageContext.request.contextPath}/JS/dataTables.bootstrap5.js"></script>
-<script src="${pageContext.request.contextPath}/JS/es-MX.json"></script>
-<script>
-    // Inicializar DataTables en la tabla objetivo
-    document.addEventListener('DOMContentLoaded', () => {
-        const table = document.getElementById('example');
-        new DataTable(table, {
-            language: {
-                url: '${pageContext.request.contextPath}/JS/es-MX.json'
-            }
-        });
-    });
-</script>
-<div class="text-center">
-    <a href="indexAlumno.jsp" class="btn btn-primary mt-5">Regresar a Inicio</a>
-</div>
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
