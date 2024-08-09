@@ -7,7 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import mx.edu.utez.integradiratjuans.dao.CalificacionDao;
-import mx.edu.utez.integradiratjuans.dao.ExamenDao;
+import mx.edu.utez.integradiratjuans.dao.ExamenDao;          // DAO para manejar el estado del examen
+import mx.edu.utez.integradiratjuans.dao.ExamenAlumnoDao;    // DAO para manejar el estado de realizado
 import mx.edu.utez.integradiratjuans.dao.RespuestaDao;
 import mx.edu.utez.integradiratjuans.model.Calificacion;
 import mx.edu.utez.integradiratjuans.model.Respuesta;
@@ -35,6 +36,9 @@ public class RegistrarPreguntasServlet extends HttpServlet {
 
         RespuestaDao respuestaDao = new RespuestaDao();
         CalificacionDao calificacionDao = new CalificacionDao();
+        ExamenDao examenDao = new ExamenDao();  // DAO para manejar el estado del examen
+        ExamenAlumnoDao examenAlumnoDao = new ExamenAlumnoDao();  // DAO para manejar el estado de realizado
+
         Map<Integer, List<String>> respuestas = new HashMap<>();
         int totalRespuestas = 0;
         int respuestasCorrectas = 0;
@@ -59,11 +63,6 @@ public class RegistrarPreguntasServlet extends HttpServlet {
             // Obtener las opciones correctas desde la base de datos
             List<String> opcionesCorrectas = respuestaDao.CompararRespuestas(idPregunta);
 
-            // Imprimir información en consola
-            System.out.println("Pregunta ID: " + idPregunta);
-            System.out.println("Respuestas correctas: " + opcionesCorrectas);
-            System.out.println("Respuestas del usuario: " + respuestasUsuario);
-
             boolean esCorrecto = false;
 
             if ("verdadero_falso".equalsIgnoreCase(opcionesCorrectas.get(0))) {
@@ -81,7 +80,6 @@ public class RegistrarPreguntasServlet extends HttpServlet {
             respuesta.setIdPregunta(idPregunta);
             respuesta.setAcierto(esCorrecto ? 1 : 0);
             respuesta.setMatriculaEstudiante(matriculaAlumno); // Agregar matrícula del estudiante
-            // Asegurarte de guardar también la respuesta que envió el usuario
             String respuestaTexto = String.join(", ", respuestasUsuario); // Unir respuestas si es más de una
             respuesta.setRespuesta(respuestaTexto);
 
@@ -111,14 +109,22 @@ public class RegistrarPreguntasServlet extends HttpServlet {
             System.out.println("Fallo al insertar la calificación para el examen: " + idExamen);
         }
 
-        // Actualizar el estado del examen
-        ExamenDao examenDao = new ExamenDao();
-        boolean estadoActualizado = examenDao.updateEstadoExamen(idExamen);
+        // 1. Actualizar el estado del examen en la primera tabla (por ejemplo, de "en curso" a "finalizado")
+        boolean estadoExamenActualizado = examenDao.updateEstadoExamen(idExamen);  // Implementa este método en ExamenDao
 
-        if (estadoActualizado) {
-            System.out.println("Estado del examen actualizado correctamente.");
+        if (estadoExamenActualizado) {
+            System.out.println("Estado del examen actualizado correctamente en la primera tabla.");
         } else {
-            System.out.println("Fallo al actualizar el estado del examen.");
+            System.out.println("Fallo al actualizar el estado del examen en la primera tabla.");
+        }
+
+        // 2. Actualizar el estado de "realizado" en la segunda tabla
+        boolean estadoRealizadoActualizado = examenAlumnoDao.actualizarEstadoRealizado(idExamen, matriculaAlumno);
+
+        if (estadoRealizadoActualizado) {
+            System.out.println("Estado de 'realizado' actualizado correctamente en la segunda tabla.");
+        } else {
+            System.out.println("Fallo al actualizar el estado de 'realizado' en la segunda tabla.");
         }
 
         // Redirigir a una página de éxito

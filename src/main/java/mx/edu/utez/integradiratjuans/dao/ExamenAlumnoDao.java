@@ -34,5 +34,24 @@ public class ExamenAlumnoDao {
         return flag;
     }
 
+    public boolean actualizarEstadoRealizado(int idExamen, String matriculaAlumno) {
+        String sql = "UPDATE examen_alumno SET realizado = 1 WHERE id_examen = ? AND matricula_alumno = ?";
+
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setInt(1, idExamen);
+            stmt.setString(2, matriculaAlumno);
+
+            int rowsUpdated = stmt.executeUpdate();
+
+            return rowsUpdated > 0; // Devuelve true si se actualizó al menos una fila
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Devuelve false si ocurre un error
+        }
+    }
+
 
 }
