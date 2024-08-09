@@ -116,18 +116,55 @@ public class PreguntaDao {
         return 0;
     }
 
-    public int getIdExamen(int idPregunta){
-        int idExamen = -1;
-        String query = "SELECT id_examen FROM Pregunta WHERE idPregunta = ?()";
-        try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
-            if (rs.next()) {
-                idExamen = rs.getInt(1);
+    // Método para obtener preguntas por ID de examen
+    public List<Preguntas> getPreguntasByIdExamen(int idExamen) {
+        List<Preguntas> preguntas = new ArrayList<>();
+        String sql = "SELECT * FROM pregunta WHERE id_examen = ?";
+
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idExamen);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Preguntas pregunta = new Preguntas();
+                    pregunta.setIdPregunta(rs.getInt("id_pregunta"));
+                    pregunta.setTexto(rs.getString("pregunta"));
+                    pregunta.setIdExamen(rs.getInt("id_examen"));
+                    // Asigna otros campos según el esquema de tu tabla Pregunta
+                    preguntas.add(pregunta);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return idExamen;
+
+        return preguntas;
+    }
+
+    public List<Preguntas> getPreguntasPorExamen(int examenId) {
+        List<Preguntas> preguntas = new ArrayList<>();
+        String query = "SELECT id_pregunta, pregunta, tipo_pregunta FROM Pregunta WHERE id_examen = ?";
+
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, examenId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Preguntas pregunta = new Preguntas();
+                pregunta.setIdPregunta(rs.getInt("id_pregunta"));
+                pregunta.setTexto(rs.getString("pregunta"));
+                pregunta.setTipo(rs.getString("tipo_pregunta"));
+                // Asignar el ID del examen a la pregunta
+                pregunta.setIdExamen(examenId);
+                preguntas.add(pregunta);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return preguntas;
     }
 }

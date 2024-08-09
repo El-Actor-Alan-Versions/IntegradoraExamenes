@@ -120,4 +120,49 @@ public class OpcionesDao {
         }
         return opciones;
     }
+
+    // Método para obtener opciones por ID de pregunta
+    public List<Opcion> getOpcionesByIdPregunta(int idPregunta) {
+        List<Opcion> opciones = new ArrayList<>();
+        String sql = "SELECT * FROM opciones WHERE id_pregunta = ?";
+
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idPregunta);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Opcion opcion = new Opcion();
+                    opcion.setIdOpcion(rs.getInt("id_opcion"));
+                    opcion.setOpcion(rs.getString("opcion"));
+                    opcion.setIdPregunta(rs.getInt("id_pregunta"));
+                    opcion.setCorrecta(rs.getBoolean("correcta")); // Suponiendo que "correcta" es un BOOLEAN en la base de datos
+                    opciones.add(opcion);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return opciones;
+    }
+    public Opcion getRespuestaCorrecta(int idPregunta) throws SQLException {
+        String sql = "SELECT id_opcion, opcion, correcta FROM Opciones WHERE id_pregunta = ? AND correcta = true";
+        Opcion opcionCorrecta = null;
+
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, idPregunta);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                opcionCorrecta = new Opcion();
+                opcionCorrecta.setIdOpcion(rs.getInt("id_opcion"));
+                opcionCorrecta.setOpcion(rs.getString("opcion"));
+                opcionCorrecta.setCorrecta(rs.getBoolean("correcta"));
+            }
+        }
+
+        return opcionCorrecta;
+    }
 }

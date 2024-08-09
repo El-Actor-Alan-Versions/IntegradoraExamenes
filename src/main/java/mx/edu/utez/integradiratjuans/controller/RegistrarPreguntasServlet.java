@@ -81,6 +81,10 @@ public class RegistrarPreguntasServlet extends HttpServlet {
             respuesta.setIdPregunta(idPregunta);
             respuesta.setAcierto(esCorrecto ? 1 : 0);
             respuesta.setMatriculaEstudiante(matriculaAlumno); // Agregar matrícula del estudiante
+            // Asegurarte de guardar también la respuesta que envió el usuario
+            String respuestaTexto = String.join(", ", respuestasUsuario); // Unir respuestas si es más de una
+            respuesta.setRespuesta(respuestaTexto);
+
             boolean insertado = respuestaDao.insert(respuesta);
 
             if (insertado) {

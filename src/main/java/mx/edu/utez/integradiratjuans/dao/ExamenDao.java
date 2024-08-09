@@ -77,30 +77,43 @@ public class ExamenDao {
         }
         return examenes;
     }
-    public List<Examen> getExamenesPorProfesor(String matricula) throws SQLException {
+    public List<Examen> getExamenesNoRealizadosPorAlumno(int idClase, String matriculaAlumno) {
         List<Examen> examenes = new ArrayList<>();
-        String sql = "SELECT * FROM Examen WHERE id_clase IN (SELECT id_clase FROM Clase WHERE matricula = ?)";
+        String query = "SELECT e.* FROM Examen e " +
+                "JOIN examen_alumno ea ON e.id_examen = ea.id_examen " +
+                "WHERE e.id_clase = ? " +
+                "AND ea.realizado = false " +
+                "AND ea.matricula_alumno = ?";
 
-        try (Connection conn = DatabaseConnectionManager.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, matricula);
-            ResultSet rs = stmt.executeQuery();
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            while (rs.next()) {
-                Examen examen = new Examen();
-                examen.setId_examen(rs.getInt("id_examen"));
-                examen.setNombre(rs.getString("nombre"));
-                examen.setFecha_aplicacion(rs.getTimestamp("fecha_aplicacion"));
-                examen.setFecha_cierre(rs.getTimestamp("fecha_cierre"));
-                examen.setId_clase(rs.getInt("id_clase"));
-                examenes.add(examen);
+            // Asignar los parámetros al PreparedStatement
+            preparedStatement.setInt(1, idClase);
+            preparedStatement.setString(2, matriculaAlumno);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Examen examen = new Examen();
+                    examen.setId_examen(resultSet.getInt("id_examen"));
+                    examen.setNombre(resultSet.getString("nombre"));
+                    examen.setDescripcion(resultSet.getString("descripcion"));
+                    examen.setFecha_aplicacion(resultSet.getTimestamp("fecha_aplicacion"));
+                    examen.setFecha_cierre(resultSet.getTimestamp("fecha_cierre"));
+                    examen.setId_clase(resultSet.getInt("id_clase"));
+
+                    examenes.add(examen);
+                }
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("Error al obtener exámenes por profesor: " + e.getMessage(), e);
+            // Manejar errores según sea necesario
         }
+
         return examenes;
     }
+
 
     public boolean updateEstadoExamen(int idExamen) {
         boolean flag = false;
