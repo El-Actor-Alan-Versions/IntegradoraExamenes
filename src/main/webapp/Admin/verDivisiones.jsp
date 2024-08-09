@@ -20,7 +20,6 @@
             document.getElementById('navbar').innerHTML = data;
         });
 </script>
-
 <div class="container">
     <div class="card">
         <div class="header-card">
@@ -92,8 +91,5 @@
         return confirm('¿Estás seguro de que deseas eliminar esta división?');
     }
 </script>
-<div class="text-center">
-    <a href="indexAdmin.jsp" class="btn btn-primary mt-5">Regresar a Inicio</a>
-</div>
 </body>
 </html>

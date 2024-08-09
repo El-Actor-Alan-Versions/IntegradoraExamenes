@@ -29,93 +29,120 @@
 
     .container {
         background: #b8eac2;
-        font-family: 'PT Sans', sans-serif;
         width: 100%;
         align-items: center;
-        margin-top: 20px; /* Margen superior añadido */
+        margin-top: 20px;
+        padding: 20px 0;
     }
 
-    .card{
+    .card {
         width: 100%;
-        height: 100%;
         background: none;
         border: none;
         align-items: center;
         margin-top: 10px;
     }
 
-    .card-body{
-        background: white;
-        width: 80%;
-        overflow-x: auto;
-        border-radius: 20px;
-        margin-top: 20px;
+    .title{
+        font-size: 28px;
+        font-weight: 500;
     }
 
-    .header-card{
+    .header-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         width: 90%;
         background: #CDFFF4;
         margin-top: 15px;
         border-radius: 10px;
+        padding: 10px 20px;
+    }
+
+    .title {
+        font-size: 24px;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    form {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+        margin-right: 10%;
+    }
+
+    .label-input-group {
+        margin-right: 10px;
+        font-weight: bold;
+    }
+
+    .form-select {
+        border-radius: 25px;
+        background-color: #6fb5a4;
+        padding: 5px 10px;
+        margin-right: 10px;
+        max-width: 600px;
+        width: 100%;
+
+    }
+
+    .btn-filtrar {
+        background-color: #9EEB92;
+        border-radius: 50px;
+        color: black;
+        padding: 5px 20px;
+        font-weight: 700;
+    }
+
+
+    .card-body {
+        background: white;
+        width: 80%;
+        overflow-x: auto;
+        border-radius: 20px;
+        margin: 20px auto;
+        padding: 20px;
     }
 
     .table-custom {
-        padding: 30px 50%;
-        text-align: center;
+        width: 90%;
+        margin: 20px auto;
         background: white;
         border-radius: 15px;
-        margin: 20px auto;
-        width: 90%;
-        height: auto;
-        background: white;
         border-collapse: collapse;
-        margin-left: 20%;
-    }
-
-    h2{
-        margin-left: 20px;
-    }
-
-    .form-select{
-        width: 300px;
-        font-weight: 600;
-        border-radius: 25px;
-        box-sizing: border-box;
-        max-width: 50%;
-        background-color:#85C5B7;
         text-align: center;
     }
 
-    .input-group{
-        border-radius: 10px;
-        margin-left: 30px;
+    .table-custom th, .table-custom td {
+        padding: 10px;
+        border: 1px solid #ddd;
     }
 
-    .label-input-group{
-        display: flex;
-        align-items: center;
-        margin-bottom: 15px;
-        width: 100%;
-        max-width: 600px;
-    }
-
-    label {
-        font-family: 'PT Sans';
+    .table-custom th {
+        background-color: #85C5B7;
         font-weight: bold;
-        border-radius: 25px;
-        width: 230px;
-        text-align: right;
-        margin-right: 10px;
     }
 
-    .btn-filtrar{
-        border-radius: 20px;
-        margin-left: 5%;
-        margin-top: 10px;
-        width: 10%;
-        font-weight: 600;
-        background: #b7f3c4;
+    .table-custom tbody tr:hover {
+        background-color: #f1f1f1;
     }
+
+    .btn-del {
+        background-color: #FF6B6B;
+        border-radius: 20px;
+        padding: 5px 10px;
+        font-weight: 700;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
 </style>
 </head>
 <body>
@@ -130,35 +157,28 @@
 <div class="container ">
     <div class="card">
         <div class="header-card">
-            <h2 >Exámenes</h2>
-            <div class="container-custom">
-                <form method="post" action="VerExamenesServlet">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <label for="id_clase" class="label-input-group">Clase</label>
-                            <select id="id_clase" class="form-select" name="id_clase" required>
-                                <option value="">Seleccione...</option>
-                                <%
-                                    List<Clase> clases = (List<Clase>) session.getAttribute("clases");
-                                    if (clases != null) {
-                                        for (Clase clase : clases) {
-                                %>
-                                <option value="<%= clase.getId_clase() %>"><%= clase.getGradoGrupo() %></option>
-                                <%
-                                    }
-                                } else {
-                                %>
-                                <option value="">No hay clases disponibles</option>
-                                <%
-                                    }
-                                %>
-                            </select>
-                        </div>
-                        </div>
-                    <button type="submit" class="btn btn-filtrar ">Filtrar</button>
-                </form>
-
-            </div>
+            <p class="title">Exámenes Disponibles</p>
+            <form method="post" action="VerExamenesServlet">
+                    <label for="id_clase" class="label-input-group">Clase</label>
+                    <select id="id_clase" class="form-select" name="id_clase" required>
+                        <option value="">Seleccione...</option>
+                        <%
+                            List<Clase> clases = (List<Clase>) session.getAttribute("clases");
+                            if (clases != null) {
+                                for (Clase clase : clases) {
+                        %>
+                        <option value="<%= clase.getId_clase() %>"><%= clase.getGradoGrupo() %></option>
+                        <%
+                            }
+                        } else {
+                        %>
+                        <option value="">No hay clases disponibles</option>
+                        <%
+                            }
+                        %>
+                    </select>
+                <button type="submit" class="btn btn-filtrar ">Filtrar</button>
+            </form>
         </div>
     </div>
     <!-- Tabla de exámenes -->

@@ -65,16 +65,16 @@ body {
 }
 
 .header-card {
-    background-color: #CDFFF4;
-    padding: 15px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centrar horizontalmente */
-    width: 90%;
-    margin-top: 10px;
-    margin-left: 5%;
-    gap: 15px;
+        background-color: #CDFFF4;
+        padding: 15px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Centrar horizontalmente */
+        width: 90%;
+        margin-top: 10px;
+        margin-left: 5%;
+        gap: 15px;
 }
 
 

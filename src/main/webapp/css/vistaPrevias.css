@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+body {
+    font-family: 'PT Sans';
+    color: rgb(17, 16, 16);
+    justify-content: center;
+    align-items: center;
+    background-color: #EEEEEE;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+
+}
+
+.card-custom {
+    background-color: white;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    max-width: 1000px;
+    border-radius: 22px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.header-card {
+    background-color: #97e3d2;
+    margin: 0;
+    padding: 0;
+    height: 60px;
+    font-size: 23px;
+    font-weight: 400;
+    display: block;
+    align-items: center;
+    text-align: center;
+    line-height: 60px;
+    justify-content: center;
+    border-top-left-radius: 22px;
+    border-top-right-radius: 22px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.card-body {
+    padding-top: 30px;
+    padding-left: 13%;
+    text-align: start;
+}
+
+.border {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    margin-right: 5%;
+}
+
+
+.h3{
+    font-weight: 500;
+}
+
+
+
+.input {
+    margin-left: 10px;
+    padding-left: 10px; /* Espacio dentro del input */
+    flex: 1;
+    background: transparent; /* Fondo transparente para que no tenga color de fondo */
+    border: none; /* Sin borde para eliminar cualquier borde por defecto */
+    border-bottom: 2px solid #000; /* Añadir una línea en la parte inferior */
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 25px;
+    height: 40px; /* Ajusta la altura del input */
+    color: black; /* Color del texto */
+    outline: none; /* Evita que aparezca un borde de enfoque predeterminado */
+}
+
+.opcion-container {
+    display: flex;
+    align-items: center;
+    height: 40px; /* Ajusta la altura si es necesario */
+    padding: 10px; /* Espacio alrededor del contenido */
+    background-color: #909090; /* Fondo del grupo */
+    border-radius: 5%; /* Bordes redondeados */
+}
+
+.bullet {
+    width: 12px;
+    height: 12px;
+    background-color: #D3D3D3;
+    border-radius: 50%;
+    margin-right: 10px; /* Espacio entre el círculo y el texto */
+}
+
+.opcion-text {
+    margin: 0;
+    font-size: 16px;
+    color: black; /* Color del texto */
+    margin-left: 10px; /* Margen adicional a la izquierda del texto */
+}
+
+.opcion-text {
+    margin: 0;
+    font-size: 16px; /* Ajusta según sea necesario */
+    color: #111010; /* Color del texto */
+}
+
+
+.btn-grd{
+    background: #B8DDC0;
+    border-radius: 20px;
+    font-weight: 550;
+    align-items: start;
+
+}
+
+.btn-edi{
+    background: #CDFFF4;
+    border-radius: 20px;
+    font-weight: 550;
+    max-width: 150px;
+    width: 100%;
+    margin-left: 5%;
+}
+
+

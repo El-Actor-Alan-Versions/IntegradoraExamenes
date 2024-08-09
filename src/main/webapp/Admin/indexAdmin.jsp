@@ -12,80 +12,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/indexAdmin.css">
+
     <title>Admin</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
-        body {
-            font-family: 'PT Sans';
-            font-weight: bold;
-            color: black;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .card {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background-color: #fff;
-            transition: transform 0.2s;
-            border: 2px solid black;
-            background-color: #CDFFF4;
-            text-align: center;
-            height: 250px;
-            margin: 10px;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            cursor: pointer;
-        }
-
-        .card img {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 10px;
-        }
-
-        h5 {
-            font-family: 'PT Sans';
-            font-weight: bold;
-            color: black;
-        }
-
-        .card-text {
-            font-family: 'PT Sans';
-            font-weight: bold;
-            color: black;
-            margin-bottom: 50px;
-        }
-
-        .container {
-            background-color: #CDFFF4;
-            margin-top: 20px;
-            border-radius: 15px;
-            max-width: 98%;
-            width: 100%;
-            height: auto;
-        }
-
-        .button {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        footer {
-            margin-top: 15px;
-        }
-    </style>
 </head>
 <body>
 <div id="navbar"></div>

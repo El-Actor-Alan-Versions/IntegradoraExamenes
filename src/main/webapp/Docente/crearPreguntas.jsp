@@ -1,165 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Crear Pregunta</title>
     <!-- Bootstrap CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
-        body {
-            font-family: 'PT Sans';
-            color: rgb(17, 16, 16);
-            justify-content: center;
-            align-items: center;
-            background-color: #EEEEEE;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-
-        }
-
-        .header-card{
-            text-align: start;
-            margin-left: 40px;
-            margin-top: 20px;
-            max-width: 90%;
-            height: 30%;
-            border-radius: 15px;
-            background: #B8DDC0;
-
-        }
-
-
-        .card{
-            background: #F6FFFD;
-            margin-top: 10px;
-        }
-        /* Preguntas y respuestas abierta */
-        .input-group {
-            display: flex;
-            align-items: center; /* Alinea verticalmente el label y el input */
-            background: #EDEDED;
-            border-radius: 20px;
-            width: 100%;
-            border: 1px solid transparent;
-            margin-top: 25px;
-        }
-
-        .form-label {
-            font-weight: 500;
-            margin-left: 10px; /* Espacio entre el label y el input */
-            margin-top: 8px;
-
-        }
-
-        .optionsDiv{
-            align-items: center;
-            margin-left: 20px;
-        }
-
-        .form-input {
-            flex: 1; /* Toma el espacio restante */
-            border: none;
-            background: #EDEDED;
-            outline: none; /* Quitar el borde de enfoque del campo de texto */
-            font-weight: 500;
-        }
-
-        .input-group:focus-within {
-            border: 1px solid black;
-        }
-
-        .title-prg{
-            font-weight: 500;
-            font-size: 26px;
-            margin-top: 10px;
-            margin-left: 15px;
-        }
-
-        /*
-       Tipo de pregunta
-         */
-        .title{
-            margin-left: 2px;
-            font-weight: 500;
-            margin-top: 15px;
-        }
-
-
-        .form-group{
-            margin-left: 10px;
-        }
-        .form-control{
-            background: #EDEDED;
-            border-radius: 15px;
-            font-weight: 500;
-        }
-
-        /*options */
-        .optionsDiv {
-            margin-left: 20px;
-        }
-
-        .btn-si{
-            display: flex;
-            align-items: center;
-            background-color: #9EEB92;
-            border-radius: 50px;
-            width: 170px;
-            color: black;
-            padding: 5px;
-            margin-top: 20px;
-            font-weight: 500;
-            display: inline-block;
-            margin-bottom: 20px;
-            margin-left: 60px;
-        }
-
-
-
-        .option-input-group input[type="text"] {
-            margin-left: 10px;
-            flex-grow: 1;
-            background: #EDEDED ;
-            width: 650px;
-            margin-left: 5%;
-            max-width: 100%;
-        }
-
-        .form-check-input {
-            accent-color: #81e6d3; /* Cambia el color de la selección */
-            width: 15px; /* Ajusta el tamaño    del botón */
-            height: 15px; /* Ajusta el tamaño del botón */
-            margin-top: 5px;
-            margin-bottom: 10px;
-            margin-right: 10px;
-        }
-
-        /* botones */
-        .btn-agr{
-            background: #B8DDC0;
-            border-radius: 20px;
-            font-weight: 500;
-            align-items: start;
-        }
-
-        .btn-vista{
-            background: #CDFFF4;
-            border-radius: 20px;
-            font-weight: 500;
-            max-width: 150px;
-            width: 100%;
-            margin-left: 5%;
-        }
-
-
-
-
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/crearPreguntas.css">
     <script>
         function showOptions(questionIndex) {
             var questionType = document.getElementById("questionType" + questionIndex).value;
@@ -200,14 +49,14 @@
             var questionsDiv = document.getElementById("questionsDiv");
             var questionIndex = questionsDiv.getElementsByClassName('question').length;
             var newQuestion = document.createElement('div');
-            newQuestion.className = 'question border p-3 my-3';
+            newQuestion.className = 'question  p-3 my-3';
             newQuestion.innerHTML =
                 "<div class='input-group'>" +
                 "<label class='form-label'>Pregunta " + (questionIndex + 1) + ":</label>" +
                 "<input type='text' class='form-input' name='questions[" + questionIndex + "].pregunta' required>" +
-                    "</div>" +
+                "</div>" +
                 "<div class='form-group'>" +
-                "<label class='title'>Tipo de Pregunta:</label>" +
+                "<label class='title'></label>" +
                 "<select id='questionType" + questionIndex + "' class='form-control' name='questions[" + questionIndex + "].questionType' onchange='showOptions(" + questionIndex + ")' required>" +
                 "<option value=''>Seleccione el tipo de pregunta</option>" +
                 "<option value='opcion_multiple'>Opción Múltiple</option>" +
@@ -225,6 +74,165 @@
             addQuestion();
         };
     </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+        body{
+            font-family: 'PT Sans';
+            justify-content: center;
+            align-items: center;
+            background: #EEEEEE;
+            width: 100%;
+            height: 100%;
+        }
+
+        .container{
+            margin-top: 20px;
+        }
+
+        /* Titulo */
+        .header-card{
+            background-color: #97E3D2;
+            display: flex;
+            width: 100%;
+            height: 12px;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+
+        .title-prg{
+            font-size: 32px;
+            font-weight: 500;
+        }
+
+        /* Todas las cards */
+        .card{
+            margin: auto;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            width: 100%;
+            max-width: 700px;
+            margin-bottom: 20px;
+        }
+        /* Botones */
+        .btn-agr{
+            border-radius: 20px;
+            font-weight: 530;
+            width: 150px; /* Tamaño fijo */
+            padding: 0.5em;
+            box-sizing: border-box;
+        }
+
+        .btn-si{
+            border-radius: 20px;
+            font-weight: 530;
+            width: 150px; /* Tamaño fijo */
+            padding: 0.5em;
+            box-sizing: border-box;
+            background-color: #97e6d4;
+        }
+
+        .btn-vista {
+            border-radius: 20px;
+            font-weight: 530;
+            width: 150px; /* Tamaño fijo */
+            padding: 0.5em;
+            box-sizing: border-box;
+        }
+
+        .btn-agr {
+            background-color: #85C5B7;
+        }
+
+        .btn-vista {
+            background-color: #BAF1B4;
+        }
+
+        @media (max-width: 768px) {
+            .btn-agr{
+                margin-left: 20px;
+                width: 150px;
+            }
+            .btn-vista {
+                width: 150px;
+            }
+            .btn-si{
+                margin-left: 20px;
+                width: 120px;
+            }
+        }
+
+
+        footer{
+            height: 20%;
+        }
+
+        /* Cards restantes */
+        .body{
+            width: 100%;
+        }
+
+
+
+        .bord-label{
+            margin-top: 40px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .form-label {
+            margin-right: 10px;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+
+        .form-input {
+            flex-grow: 1;
+            border: none;
+            border-bottom: 2px solid #ccc;
+            outline: none;
+            font-size: 16px;
+        }
+        /* Efecto de la linea */
+        .form-input:focus {
+            border-bottom-color: #6200EE;
+        }
+
+        /* select */
+        .form-control{
+            border-radius: 6px;
+            color: gray;
+            font-weight: 600;
+        }
+
+        select{
+            border-radius: 6px;
+            color: gray;
+            font-weight: 600;
+            background-color: #fff; /* Asegúrate de que el fondo sea blanco */
+            background-image: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="none" stroke="%23222" stroke-width="2" d="M5 7l5 5 5-5"/></svg>'); /* Flecha personalizada */
+            background-repeat: no-repeat;
+            background-position: right 10px center; /* Posición de la flecha */
+            background-size: 12px 12px; /* Tamaño de la flecha */
+            padding-right: 30px; /* Espacio para la flecha */
+            appearance: none; /* Elimina el estilo predeterminado del navegador */
+            -webkit-appearance: none; /* Para Safari */
+            -moz-appearance: none; /* Para Firefox */
+        }
+
+        option{
+            font-family: 'PT Sans';
+            font-weight: 800;
+        }
+
+
+
+    </style>
 </head>
 <body>
 <div id="navbar"></div>
@@ -237,18 +245,28 @@
 </script>
 <div class="container">
     <div class="card">
-        <div class="header-card">
-            <p class="title-prg">Crear Preguntas</p>
-        </div>
+        <div class="header-card"></div>
         <div class="card-body">
-            <form action="VistaPreviaServlet" method="post">
-                <div id="questionsDiv"></div>
-                <button type="button" class="btn btn-agr my-3" onclick="addQuestion()">Agregar Pregunta</button>
-                <input type="submit" class="btn btn-vista" value="Vista Previa">
-            </form>
+            <div class="card-text"></div>
+            <p class="title-prg ">Crear Preguntas</p>
+            <!-- <img src="../img/crearExamen.png" width="68" alt="si"> -->
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="card-text">
+                <form action="VistaPreviaServlet" method="post">
+                    <div id="questionsDiv" class="body"></div>
+                    <button type="button" class="btn btn-agr " onclick="addQuestion()">Agregar Pregunta</button>
+                    <input type="submit" class="btn btn-vista" value="Vista Previa">
+                </form>
+            </div>
         </div>
     </div>
 </div>
+<footer>
+    <br>
+</footer>
 <!-- Bootstrap JS y dependencias -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
