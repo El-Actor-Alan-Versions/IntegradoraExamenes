@@ -154,4 +154,54 @@ public class CalificacionDao {
             return false;
         }
     }
+
+
+
+    // Actualiza la calificación, o inserta una nueva si no existe
+    public void actualizarCalificacion(int idExamen, String matricula, int idPregunta, int idOpcion, String respuesta) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            // Obtener la conexión desde el gestor de conexiones
+            connection = DatabaseConnectionManager.getConnection();
+
+            // Primero intenta actualizar la calificación existente
+            String updateSQL = "UPDATE calificaciones SET calificacion = ? WHERE id_examen = ? AND matricula_alumno = ?";
+            preparedStatement = connection.prepareStatement(updateSQL);
+
+            // Ejemplo de cálculo de la calificación (ajústalo a tu lógica)
+            double calificacion = calcularCalificacion(idExamen, matricula, idPregunta, idOpcion, respuesta);
+            preparedStatement.setDouble(1, calificacion);
+            preparedStatement.setInt(2, idExamen);
+            preparedStatement.setString(3, matricula);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            // Si no se actualizó ninguna fila, inserta una nueva calificación
+            if (rowsAffected == 0) {
+                String insertSQL = "INSERT INTO calificaciones (matricula_alumno, id_examen, calificacion, fecha) VALUES (?, ?, ?, NOW())";
+                try (PreparedStatement insertStatement = connection.prepareStatement(insertSQL)) {
+                    insertStatement.setString(1, matricula);
+                    insertStatement.setInt(2, idExamen);
+                    insertStatement.setDouble(3, calificacion);
+                    insertStatement.executeUpdate();
+                }
+            }
+        } finally {
+            // Asegúrate de cerrar los recursos
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+    }
+
+    // Método para calcular la calificación, ajusta la lógica según sea necesario
+    private double calcularCalificacion(int idExamen, String matricula, int idPregunta, int idOpcion, String respuesta) {
+        // Implementa la lógica para calcular la calificación
+        return 10.0; // Ejemplo de calificación, cámbialo según tu lógica
+    }
 }

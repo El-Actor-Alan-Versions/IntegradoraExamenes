@@ -3,6 +3,7 @@ package mx.edu.utez.integradiratjuans.model;
 public class Respuesta {
     private int idRespuesta;
     private int acierto;
+    private String respuesta; // El texto de la respuesta proporcionada por el alumno
     private int idPregunta;
     private String matriculaEstudiante;
 
@@ -18,6 +19,14 @@ public class Respuesta {
     }
 
     // Getters and setters
+
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
+    }
 
     public String getMatriculaEstudiante() {
         return matriculaEstudiante;
