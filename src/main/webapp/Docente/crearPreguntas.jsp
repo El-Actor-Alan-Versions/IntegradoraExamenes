@@ -133,34 +133,16 @@
             background-color: #97e6d4;
         }
 
-        .btn-vista {
-            border-radius: 20px;
-            font-weight: 530;
-            width: 150px; /* Tamaño fijo */
-            padding: 0.5em;
-            box-sizing: border-box;
-        }
 
-        .btn-agr {
-            background-color: #85C5B7;
-        }
 
-        .btn-vista {
-            background-color: #BAF1B4;
-        }
+
 
         @media (max-width: 768px) {
-            .btn-agr{
+            .btn{
                 margin-left: 20px;
-                width: 150px;
+                width: 34px;
             }
-            .btn-vista {
-                width: 150px;
-            }
-            .btn-si{
-                margin-left: 20px;
-                width: 120px;
-            }
+
         }
 
 
@@ -230,6 +212,14 @@
             font-weight: 800;
         }
 
+        .no-outline:focus {
+            outline: none;
+        }
+
+        .btn:focus {
+            outline: none;
+        }
+
 
 
     </style>
@@ -257,8 +247,13 @@
             <div class="card-text">
                 <form action="VistaPreviaServlet" method="post">
                     <div id="questionsDiv" class="body"></div>
-                    <button type="button" class="btn btn-agr " onclick="addQuestion()">Agregar Pregunta</button>
-                    <input type="submit" class="btn btn-vista" value="Vista Previa">
+                    <a type="button" title="Añadir pregunta" class="btn no-outline" onclick="addQuestion()">
+                        <img src="../img/añadirPreg.png" alt="añadir" width="32">
+                    </a>
+                    <button type="submit" class="btn no-outline">
+                        <img src="../img/vistaPrevia.png" alt="vista" width="32">
+                    </button>
+
                 </form>
             </div>
         </div>
