@@ -1,7 +1,6 @@
 <%@ page import="mx.edu.utez.integradiratjuans.dao.CalificacionDao" %>
 <%@ page import="mx.edu.utez.integradiratjuans.model.Calificacion" %>
 <%@ page import="java.util.List" %>
-<%@ page import="jakarta.mail.Session" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -11,6 +10,20 @@
     <title>Calificaciones</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vistas.css">
+    <style>
+        .calificacion-verde {
+            color: green;
+            font-weight: bold;
+        }
+        .calificacion-amarillo {
+            color: gold;
+            font-weight: bold;
+        }
+        .calificacion-rojo {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 <div id="navbar"></div>
@@ -47,12 +60,21 @@
                         CalificacionDao dao = new CalificacionDao();
                         List<Calificacion> calificaciones = dao.getCalificacionesConNombreExamen(matriculaAlumno);
                         for (Calificacion c : calificaciones) {
+                            double calificacion = c.getCalificacion();
+                            String colorClass = "";
+                            if (calificacion >= 80) {
+                                colorClass = "calificacion-verde";
+                            } else if (calificacion >= 51) {
+                                colorClass = "calificacion-amarillo";
+                            } else {
+                                colorClass = "calificacion-rojo";
+                            }
                 %>
                 <tr>
                     <td><%= c.getIdCalificacion() %></td>
                     <td><%= c.getMatriculaAlumno() %></td>
                     <td><%= c.getNombreExamen() %></td>
-                    <td><%= c.getCalificacion() %></td>
+                    <td class="<%= colorClass %>"><%= calificacion %></td>
                     <td><%= c.getFecha() %></td>
                 </tr>
                 <%

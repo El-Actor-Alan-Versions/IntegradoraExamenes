@@ -55,6 +55,28 @@ public class ExamenDao {
         return nombreExamen;
     }
 
+    public String obtenerDescripcionExamenPorId(int idExamen) {
+        String descripcion = null; // Corregir el nombre de la variable a "descripcion"
+
+        String sql = "SELECT descripcion FROM examen WHERE id_examen = ?"; // Corregir el nombre de la columna en la consulta SQL
+
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, idExamen);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    descripcion = rs.getString("descripcion"); // Corregir el nombre de la columna en la recuperación del resultado
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Manejar las excepciones adecuadamente
+        }
+
+        return descripcion;
+    }
+
+
+
     public List<Examen> getExamenesPorClase(int idClase) throws SQLException {
         List<Examen> examenes = new ArrayList<>();
         String sql = "SELECT * FROM Examen WHERE id_clase = ?";
@@ -82,7 +104,6 @@ public class ExamenDao {
         String query = "SELECT e.* FROM Examen e " +
                 "JOIN examen_alumno ea ON e.id_examen = ea.id_examen " +
                 "WHERE e.id_clase = ? " +
-                "AND ea.realizado = false " +
                 "AND ea.matricula_alumno = ?";
 
         try (Connection connection = DatabaseConnectionManager.getConnection();

@@ -31,6 +31,27 @@ public class RespuestaDao {
         }
     }
 
+    // Método para obtener las respuestas correctas para una pregunta específica
+    public List<String> obtenerOpcionesCorrectas(int idPregunta) {
+        List<String> opcionesCorrectas = new ArrayList<>();
+        String query = "SELECT opcion FROM opciones WHERE id_pregunta = ? AND correcta = 1";
+
+        try (Connection connection = DatabaseConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idPregunta);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    opcionesCorrectas.add(resultSet.getString("opcion"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return opcionesCorrectas;
+    }
+
+
 
     public List<String> CompararRespuestas(int idPregunta) {
         List<String> opcionesCorrectas = new ArrayList<>();
