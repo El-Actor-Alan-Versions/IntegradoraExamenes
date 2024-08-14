@@ -167,8 +167,10 @@
                     <td><%= calificacion.getCalificacion() %></td>
                     <td><%= calificacion.getFecha() %></td>
                     <td>
-                        <form action="CalificarServlet" method="get">
-                            <input type="hidden" name="idCalificacion" value="<%= calificacion.getIdCalificacion() %>">
+                        <form action="calificarExamen" method="get">
+                            <input type="hidden" name="id_examen" value="<%= calificacion.getIdExamen() %>">
+                            <% System.out.println(calificacion.getIdExamen()); %>
+                            <input type="hidden" name="matricula_estudiante" value="<%= calificacion.getMatriculaAlumno() %>">
                             <button type="submit" class="btn btn-cal">Calificar</button>
                         </form>
                     </td>

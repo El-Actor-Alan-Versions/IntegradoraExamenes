@@ -53,7 +53,7 @@
             height: 20%;
         }
 
-        . btn-grd{
+        . btn-guardar{
             border-radius: 20px;
             font-weight: 530;
             width: 150px;
@@ -70,7 +70,7 @@
             box-sizing: border-box;
         }
 
-        .btn-grd {
+        .btn-guardar {
             background-color: #85C5B7;
         }
 
@@ -79,7 +79,7 @@
         }
 
         @media (max-width: 768px) {
-            .btn-grd{
+            .btn-guardar{
                 margin-left: 20px;
                 width: 150px;
             }
@@ -201,7 +201,7 @@
                     <%
                         }
                     %>
-                    <button type="submit" class="btn btn-grd">Guardar Preguntas</button>
+                    <button type="submit" class="btn btn-guardar">Guardar Preguntas</button>
                     <a href="crearPreguntas.jsp" class="btn btn-edi">Editar</a>
                 </form>
             </div>

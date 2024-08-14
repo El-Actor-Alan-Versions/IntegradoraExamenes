@@ -50,8 +50,9 @@ public class PintarExamenServlet extends HttpServlet {
         // Guardar los IDs de las preguntas en la sesión
         List<Integer> idsPreguntas = preguntas.stream()
                 .map(Preguntas::getIdPregunta)
-                .collect(Collectors.toList()); // Usa Collectors.toList()
+                .collect(Collectors.toList());
         session.setAttribute("idPreguntas", idsPreguntas);
+        session.setAttribute("idExamen", idExamen); // Guardar idExamen en sesión
 
         for (Preguntas pregunta : preguntas) {
             List<Opcion> opciones = opcionesDao.obtenerOpcionesPorPregunta(pregunta.getIdPregunta());
@@ -59,7 +60,6 @@ public class PintarExamenServlet extends HttpServlet {
         }
 
         request.setAttribute("preguntas", preguntas);
-        request.setAttribute("idExamen", idExamen);
 
         request.getRequestDispatcher("responderExamen.jsp").forward(request, response);
     }

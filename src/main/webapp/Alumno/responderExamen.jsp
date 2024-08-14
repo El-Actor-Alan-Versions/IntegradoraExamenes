@@ -2,16 +2,14 @@
 <%@ page import="java.util.List" %>
 <%@ page import="mx.edu.utez.integradiratjuans.model.Preguntas" %>
 <%@ page import="mx.edu.utez.integradiratjuans.model.Opcion" %>
+<%@ page import="mx.edu.utez.integradiratjuans.dao.ExamenDao" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Responder Examen</title>
-    <!-- Enlace a Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        <style>
-
         @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
         body {
@@ -21,7 +19,6 @@
             background: #EEEEEE;
             width: 100%;
             height: 100%;
-
         }
         .header-card{
             background-color: #97E3D2;
@@ -35,8 +32,6 @@
             font-size: 32px;
             font-weight: 500;
         }
-
-        /* Todas las cards */
         .card{
             margin: auto;
             box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
@@ -45,33 +40,25 @@
             max-width: 900px;
             margin-bottom: 20px;
             max-width: 482px;
-
         }
-
         #card-preguntas{
             background-color: transparent;
             border-color: transparent ;
             box-shadow: none;
-
         }
-
         .container{
             width: 100%;
             max-width: 1000px;
         }
-
         .btn-enivar{
             background: #97E3D2 ;
             border-radius: 20px;
             font-weight: 500;
-            margin-left: 50%;
+            margin-left: 40%;
         }
-
         #card-title{
             margin-top: 20px;
         }
-    </style>
-
     </style>
 </head>
 <body>
@@ -88,11 +75,15 @@
         <div class="header-card"></div>
         <div class="card-body">
             <div class="card-text"></div>
-            <p class="title-prg">Responder Examen</p>
+            <%
+                ExamenDao examenDao = new ExamenDao();
+                String nombreExamen = examenDao.obtenerNombreExamenPorId((Integer)session.getAttribute("idExamen"));
+            %>
+            <p class="title-prg"> <%= nombreExamen %></p>
         </div>
     </div>
     <form action="EnviarRespuestas" method="post">
-        <input type="hidden" name="id_examen" value="${idExamen}">
+        <input type="hidden" name="id_examen" value="<%= session.getAttribute("idExamen") %>">
 
         <% List<Preguntas> preguntas = (List<Preguntas>) request.getAttribute("preguntas");
             if (preguntas != null && !preguntas.isEmpty()) {
@@ -100,7 +91,6 @@
                     List<Opcion> opciones = pregunta.getOpciones();
         %>
 
-        <!-- Card para cada pregunta -->
         <div class="card">
             <div class="header-card"></div>
             <div class="card-body">

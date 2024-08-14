@@ -4,6 +4,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="mx.edu.utez.integradiratjuans.dao.ClaseDao" %>
+<%@ page import="mx.edu.utez.integradiratjuans.dao.ExamenDao" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,6 +17,8 @@
 
 </head>
 <body>
+
+
 <div id="navbar"></div>
 <script>
     fetch('navbar.jsp')
