@@ -69,10 +69,6 @@
                 margin: 10px 0;
             }
 
-            .button {
-                width: 100%;
-                margin-top: 10px;
-            }
 
             .profile-button img {
                 width: 200px;
@@ -101,11 +97,19 @@
             }
         }
 
-        .dropdown{
-            background-color: transparent;
-            background: transparent;
-            border: transparent;
+        .dropdown-menu {
+            background-color: transparent; /* Elimina el fondo */
+            border: none; /* Elimina el borde */
+            box-shadow: none; /* Elimina cualquier sombra */
         }
+
+        .dropdown-toggle {
+            background-color: transparent; /* Elimina el fondo del botón */
+            border: none; /* Elimina el borde del botón */
+            color: #292727; /* Color del texto */
+        }
+
+
     </style>
 </head>
 
@@ -122,7 +126,7 @@
     </a>
 
     <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class=" btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Mi perfil
         </button>
         <div class=" dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -131,5 +135,8 @@
         </div>
     </div>
 </nav>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
