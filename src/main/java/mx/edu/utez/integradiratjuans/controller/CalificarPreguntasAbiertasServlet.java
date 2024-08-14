@@ -1,10 +1,12 @@
 package mx.edu.utez.integradiratjuans.controller;
 
+import jakarta.mail.Session;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import mx.edu.utez.integradiratjuans.model.Preguntas;
 import mx.edu.utez.integradiratjuans.model.Opcion;
 import mx.edu.utez.integradiratjuans.model.Respuesta;
@@ -24,6 +26,8 @@ public class CalificarPreguntasAbiertasServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int examenId = Integer.parseInt(request.getParameter("id_examen"));
+        HttpSession session = request.getSession();
+        session.setAttribute("idExamen", examenId);
         String matriculaEstudiante = request.getParameter("matricula_estudiante");
 
         PreguntaDao preguntaDao = new PreguntaDao();
