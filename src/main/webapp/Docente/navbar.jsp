@@ -36,13 +36,17 @@
             text-decoration: none;
         }
 
-        .button {
+        .custom-button {
             position: relative;
-            width: 150px;
+            width: 20px; /* Ajusta el tamaño aquí */
+            margin-bottom: 12px; /* Ajusta la posición vertical si es necesario */
             text-align: center;
         }
 
-
+        .custom-button img {
+            width: 60px; /* Ajusta el tamaño de la imagen aquí */
+            height: auto;
+        }
 
         #logo {
             width: 250px;
@@ -69,7 +73,6 @@
                 margin: 10px 0;
             }
 
-
             .profile-button img {
                 width: 200px;
                 height: auto;
@@ -87,7 +90,7 @@
             }
 
             .profile-button img {
-                width: 150px;
+                width: 20px;
                 height: auto;
             }
 
@@ -97,7 +100,7 @@
             }
         }
 
-        .dropdown{
+        .dropdown {
             position: relative;
         }
 
@@ -134,29 +137,39 @@
             text-transform: uppercase;
         }
 
+        /* Nueva clase para el contenedor de los elementos */
+        .custom-card-invisible {
+            background-color: transparent; /* Fondo invisible */
+            border: none; /* Sin borde */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
     </style>
 </head>
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-custom">
-    <a href="indexDocente.jsp" target="_blank" class="profile-button">
+    <a class="profile-button">
         <img src="../img/Logo-utez.png" id="logo" alt="Logo UTEZ">
     </a>
-    <div class="d-flex flex-grow-1 justify-content">
+    <div class="d-flex flex-grow-1 justify-content-center">
         <p class="navbar-text">PLATAFORMA DE EXÁMENES</p>
     </div>
-    <a href="" class="button">
-        <img src="../img/miPerfil.png" alt="perfil">
-    </a>
+    <div class="custom-card-invisible">
+        <a href="indexDocente.jsp" class="custom-button">
+            <img src="../img/home.png" alt="perfil">
+        </a>
 
-    <div class="dropdown">
-        <button class="  btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Mi perfil
-        </button>
-        <div class=" dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a>
-            <a class="dropdown-item" href="#">Modificar Perfil</a>
+        <div class="dropdown" title="Inicio" >
+            <button class="btn-secondary dropdown-toggle" title="Inicio" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Mi perfil
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a>
+                <a class="dropdown-item" href="">Modificar perfil</a>
+            </div>
         </div>
     </div>
 </nav>

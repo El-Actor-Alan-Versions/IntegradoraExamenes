@@ -47,6 +47,7 @@ public class UsuarioServlet extends HttpServlet {
             if (admin != null) {
                 // Si es administrador, redirigir a vista de administrador
                 session.setAttribute("usuario", admin);
+                session.setAttribute("tipoSesion", "admin");
                 ruta = "Admin/indexAdmin.jsp";
             } else if (alumno != null) {
                 // Si es alumno, redirigir a vista de alumno

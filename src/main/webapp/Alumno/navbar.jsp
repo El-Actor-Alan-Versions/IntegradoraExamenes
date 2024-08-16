@@ -36,13 +36,17 @@
             text-decoration: none;
         }
 
-        .button {
+        .custom-button {
             position: relative;
-            width: 150px;
+            width: 20px; /* Ajusta el tamaño aquí */
+            margin-bottom: 12px; /* Ajusta la posición vertical si es necesario */
             text-align: center;
         }
 
-
+        .custom-button img {
+            width: 60px; /* Ajusta el tamaño de la imagen aquí */
+            height: auto;
+        }
 
         #logo {
             width: 250px;
@@ -69,11 +73,6 @@
                 margin: 10px 0;
             }
 
-            .button {
-                width: 100%;
-                margin-top: 10px;
-            }
-
             .profile-button img {
                 width: 200px;
                 height: auto;
@@ -91,7 +90,7 @@
             }
 
             .profile-button img {
-                width: 150px;
+                width: 20px;
                 height: auto;
             }
 
@@ -101,17 +100,36 @@
             }
         }
 
+        .dropdown {
+            position: relative;
+        }
+
         .dropdown-menu {
-            background-color: transparent; /* Elimina el fondo del dropdown */
-            border: none; /* Elimina el borde del dropdown */
-            box-shadow: none; /* Elimina la sombra */
-            margin-left: -100px; /* Mueve el menú más a la izquierda */
+            background-color: white; /* Mantener el fondo del dropdown transparente */
+            border: none; /* Sin borde en el contenedor del menú */
+            max-width: 100%;
+            width: 50px;
+            margin-left: -30px; /* Ajuste para que quede más alineado a la derecha */
+        }
+
+        .dropdown-item {
+            background-color: white; /* Fondo blanco para los elementos */
+            border: none; /* Borde negro de 2px */
+            color: #292727; /* Color negro para el texto */
+            font-family: 'PT Sans'; /* Fuente utilizada */
+            font-size: 18px;
+            text-align: center; /* Alineación del texto a la derecha */
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(133, 197, 183, 0.3); /* Fondo de hover translúcido */
+            color: #000; /* Color del texto en hover */
         }
 
         .dropdown-toggle {
-            background-color: transparent; /* Elimina el fondo del botón */
-            border: none; /* Elimina el borde del botón */
-            color: #292727; /* Color del texto */
+            background-color: transparent;
+            border: none;
+            color: #292727;
             font-family: 'PT Sans';
             font-weight: bold;
             font-size: 18px;
@@ -119,40 +137,44 @@
             text-transform: uppercase;
         }
 
-        .dropdown-item {
-            color: #292727; /* Color de los items desplegados */
-            font-family: 'PT Sans';
-            padding: 10px 20px;
+        /* Nueva clase para el contenedor de los elementos */
+        .custom-card-invisible {
+            background-color: transparent; /* Fondo invisible */
+            border: none; /* Sin borde */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .dropdown-item:hover {
-            background-color: rgba(133, 197, 183, 0.3); /* Fondo en hover */
-            color: #000; /* Color del texto en hover */
-        }
     </style>
 </head>
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-custom">
-    <a href="indexAlumno.jsp" target="_blank" class="profile-button">
+    <a class="profile-button">
         <img src="../img/Logo-utez.png" id="logo" alt="Logo UTEZ">
     </a>
-    <div class="d-flex flex-grow-1 justify-content">
+    <div class="d-flex flex-grow-1 justify-content-center">
         <p class="navbar-text">PLATAFORMA DE EXÁMENES</p>
     </div>
-    <a href="" class="button">
-        <img src="../img/miPerfil.png" alt="perfil">
-    </a>
+    <div class="custom-card-invisible">
+        <a href="indexAlumno.jsp" class="custom-button">
+            <img src="../img/home.png" alt="perfil">
+        </a>
 
-    <div class="dropdown">
-        <button class=" btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Mi perfil
-        </button>
-        <div class=" dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a></li>
-            <a class="dropdown-item" href="#">(PENDIENTE)</a>
+        <div class="dropdown" title="Inicio" >
+            <button class="btn-secondary dropdown-toggle" title="Inicio" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Mi perfil
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a>
+                <a class="dropdown-item" href="">Modificar perfil</a>
+            </div>
         </div>
     </div>
 </nav>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

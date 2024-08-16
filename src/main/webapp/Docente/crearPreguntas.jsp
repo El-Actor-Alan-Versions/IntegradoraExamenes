@@ -250,7 +250,7 @@
                     <a type="button" title="Añadir pregunta" class="btn no-outline" onclick="addQuestion()">
                         <img src="../img/añadirPreg.png" alt="añadir" width="32">
                     </a>
-                    <button type="submit" class="btn no-outline">
+                    <button type="submit" title="Vista previa" class="btn no-outline">
                         <img src="../img/vistaPrevia.png" alt="vista" width="32">
                     </button>
 
