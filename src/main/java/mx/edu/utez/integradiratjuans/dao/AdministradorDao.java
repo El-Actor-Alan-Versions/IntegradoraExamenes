@@ -67,7 +67,7 @@ public class AdministradorDao {
 
 
     public List<Administrador> getAll() throws SQLException {
-        String query = "SELECT * FROM Administrador WHERE ";
+        String query = "SELECT * FROM Administrador";
         List<Administrador> administrador = new ArrayList<>();
         try (Connection connection = DatabaseConnectionManager.getConnection();
              Statement statement = connection.createStatement();

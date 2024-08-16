@@ -76,6 +76,25 @@ public class CalificacionDao {
         return calificaciones;
     }
 
+    public boolean updateCalificaciones(double calificacion, int idCalificacion) {
+        boolean isUpdated = false;
+        String sql = "UPDATE Calificaciones SET calificacion = ? WHERE id_examen = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setDouble(1, calificacion);
+            ps.setInt(2, idCalificacion);
+
+            int rowsAffected = ps.executeUpdate();
+            isUpdated = rowsAffected > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return isUpdated;
+    }
+
 
 
     public List<Calificacion> obtenerCalificacionesPorDocente(String matriculaDocente) throws SQLException {

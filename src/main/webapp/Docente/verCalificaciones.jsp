@@ -191,6 +191,7 @@
                     <td>
                         <form action="calificarExamen" method="get">
                             <input type="hidden" name="id_examen" value="<%= calificacion.getIdExamen() %>">
+                            <input type="hidden" name="id_calificacion" value="<%= calificacion.getIdCalificacion()%>">
                             <input type="hidden" name="matricula_estudiante" value="<%= calificacion.getMatriculaAlumno() %>">
                             <button type="submit" class="btn btn-cal">Calificar</button>
                         </form>

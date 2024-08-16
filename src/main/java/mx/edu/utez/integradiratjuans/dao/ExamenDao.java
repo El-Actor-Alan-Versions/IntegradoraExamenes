@@ -104,7 +104,7 @@ public class ExamenDao {
         String query = "SELECT e.* FROM Examen e " +
                 "JOIN examen_alumno ea ON e.id_examen = ea.id_examen " +
                 "WHERE e.id_clase = ? " +
-                "AND ea.matricula_alumno = ?";
+                "AND ea.matricula_alumno = ? and ea.realizado = 0";
 
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {

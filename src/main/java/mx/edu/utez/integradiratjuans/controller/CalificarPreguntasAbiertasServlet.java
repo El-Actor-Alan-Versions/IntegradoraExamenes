@@ -29,6 +29,9 @@ public class CalificarPreguntasAbiertasServlet extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute("idExamen", examenId);
         String matriculaEstudiante = request.getParameter("matricula_estudiante");
+        int idCalificaciones = Integer.parseInt(request.getParameter("id_calificacion"));
+        System.out.println(idCalificaciones);
+        session.setAttribute("idCalificacion", idCalificaciones);
 
         PreguntaDao preguntaDao = new PreguntaDao();
         OpcionesDao opcionesDao = new OpcionesDao();
