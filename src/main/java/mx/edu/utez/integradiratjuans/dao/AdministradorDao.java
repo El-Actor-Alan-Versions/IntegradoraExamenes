@@ -106,4 +106,15 @@ public class AdministradorDao {
         }
         return flag;
     }
+
+    public String verTabla(String matricula) {
+        String tabla = null;
+
+        String sqlAdmin = "SELECT * FROM administrador WHERE matricula = ?";
+        String sqlAlumno = "SELECT * FROM alumno WHERE matricula = ?";
+        String sqlDocente = "SELECT * FROM docente WHERE matricula = ?";
+
+
+        return tabla;
+    }
 }
