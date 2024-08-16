@@ -12,8 +12,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/CalificarPreguntasAbiertasServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/CalificarPreguntasAbiertasServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/calificarExamen.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/calificarExamen.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -344,7 +342,12 @@
       <workItem from="1723583587408" duration="633000" />
       <workItem from="1723605811466" duration="8385000" />
       <workItem from="1723646680628" duration="4588000" />
-      <workItem from="1723657823605" duration="2258000" />
+      <workItem from="1723657823605" duration="3000000" />
+      <workItem from="1723666101112" duration="1490000" />
+      <workItem from="1723684622286" duration="647000" />
+      <workItem from="1723697505650" duration="1037000" />
+      <workItem from="1723699142095" duration="516000" />
+      <workItem from="1723759624319" duration="802000" />
     </task>
     <servers />
   </component>
