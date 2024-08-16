@@ -171,7 +171,7 @@
                 <% } %>
                 <div class="label-input-group">
                     <label for="nombre_carrera" class="form-label">Nombre de la Carrera:</label>
-                    <input type="text" class="form-control" id="nombre_carrera" name="nombre_carrera" value="<%= action.equals("update") ? carrera.getNombre_carrera() : ""%>" required>
+                    <input type="text" class="form-control" id="nombre_carrera" maxlength="150" name="nombre_carrera" value="<%= action.equals("update") ? carrera.getNombre_carrera() : ""%>" required>
                 </div>
                 <div class="label-input-group">
                     <%--@declare id="id_division"--%><label for="id_division" class="form-label">División:</label>

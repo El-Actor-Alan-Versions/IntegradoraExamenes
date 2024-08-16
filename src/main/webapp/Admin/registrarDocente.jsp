@@ -49,19 +49,19 @@
                 </div>
                 <% } else if (action.equals("update")) { %>
                 <div class="form-group">
-                    <input type="hidden" class="form-control" id="matriculas" name="matricula" value="<%= docente.getMatricula()  %>" readonly />
+                    <input type="hidden" class="form-control" id="matriculas" name="matricula" maxlength="150" value="<%= docente.getMatricula()  %>" readonly />
                 </div>
                 <% } %>
                 <div class="form-group mb-3">
-                    <input type="text" class="form-control rounded-pill text-center" placeholder="Nombre" id="nombre" name="nombre" value="<%= action.equals("update") ? docente.getNombre() : ""%>" required />
+                    <input type="text" class="form-control rounded-pill text-center" placeholder="Nombre" id="nombre" maxlength="120" name="nombre" value="<%= action.equals("update") ? docente.getNombre() : ""%>" required />
                 </div>
 
                 <div class="form-group mb-3">
-                    <input type="text" class="form-control rounded-pill text-center" id="apellidoPaterno"  placeholder="Apellido paterno" name="apellidoPaterno" value="<%= action.equals("update") ? docente.getApellidoPaterno() : ""%>" required />
+                    <input type="text" class="form-control rounded-pill text-center" id="apellidoPaterno" maxlength="120" placeholder="Apellido paterno" name="apellidoPaterno" value="<%= action.equals("update") ? docente.getApellidoPaterno() : ""%>" required />
                 </div>
 
                 <div class="form-group mb-3">
-                    <input type="text" class="form-control rounded-pill text-center" id="apellidoMaterno" placeholder="Apellido materno" name="apellidoMaterno" value="<%= action.equals("update") ? docente.getApellidoMaterno() : ""%>" required />
+                    <input type="text" class="form-control rounded-pill text-center" id="apellidoMaterno"  maxlength="120" placeholder="Apellido materno" name="apellidoMaterno" value="<%= action.equals("update") ? docente.getApellidoMaterno() : ""%>" required />
                 </div>
 
                 <div class="form-group mb-3">

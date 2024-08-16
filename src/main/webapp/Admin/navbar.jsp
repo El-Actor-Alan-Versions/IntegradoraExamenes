@@ -69,10 +69,6 @@
                 margin: 10px 0;
             }
 
-            .button {
-                width: 100%;
-                margin-top: 10px;
-            }
 
             .profile-button img {
                 width: 200px;
@@ -91,7 +87,7 @@
             }
 
             .profile-button img {
-                width: 150px;
+                width: 20px;
                 height: auto;
             }
 
@@ -102,34 +98,71 @@
         }
 
         .dropdown{
-            background-color: transparent;
-            background: transparent;
-            border: transparent;
+            position: relative;
         }
+
+        .dropdown-menu {
+            background-color: white; /* Mantener el fondo del dropdown transparente */
+            border: none; /* Sin borde en el contenedor del menú */
+            max-width: 100%;
+            width: 50px;
+            margin-left: -30px; /* Ajuste para que quede más alineado a la derecha */
+        }
+
+        .dropdown-item {
+            background-color: white; /* Fondo blanco para los elementos */
+            border: none; /* Borde negro de 2px */
+            color: #292727; /* Color negro para el texto */
+            font-family: 'PT Sans'; /* Fuente utilizada */
+            font-size: 18px;
+            text-align: center; /* Alineación del texto a la derecha */
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(133, 197, 183, 0.3); /* Fondo de hover translúcido */
+            color: #000; /* Color del texto en hover */
+        }
+
+        .dropdown-toggle {
+            background-color: transparent;
+            border: none;
+            color: #292727;
+            font-family: 'PT Sans';
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+
     </style>
 </head>
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-custom">
-    <a href="indexAdmin.jsp" target="_blank" class="profile-button">
+    <a  class="profile-button">
         <img src="../img/Logo-utez.png" id="logo" alt="Logo UTEZ">
     </a>
     <div class="d-flex flex-grow-1 justify-content">
         <p class="navbar-text">PLATAFORMA DE EXÁMENES</p>
     </div>
-    <a href="" class="button">
-        <img src="../img/miPerfil.png" alt="perfil">
+    <a href="indexAdmin.jsp" class="button">
+        <img src="../img/home.png" alt="perfil">
     </a>
 
     <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="  btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Mi perfil
         </button>
         <div class=" dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a></li>
-            <a class="dropdown-item" href="#">(PENDIENTE)</a>
+            <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a>
+            <a class="dropdown-item" href="">Modificar perfil</a>
+
         </div>
     </div>
 </nav>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

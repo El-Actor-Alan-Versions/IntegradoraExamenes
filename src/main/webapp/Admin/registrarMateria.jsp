@@ -166,7 +166,7 @@
                 <% } %>
                 <div class="label-input-group">
                     <label for="nombreMateria" class="form-label">Nombre de la Materia:</label>
-                    <input type="text" class="form-control" id="nombreMateria" name="nombreMateria"  value="<%= action.equals("update") ? materia.getNombreMateria() : ""%>" required>
+                    <input type="text" class="form-control" id="nombreMateria" maxlength="150" name="nombreMateria"  value="<%= action.equals("update") ? materia.getNombreMateria() : ""%>" required>
                 </div>
                 <button type="submit" class="btn btn-right"><%= action.equals("update") ? "Actualizar" : "Registrar" %></button>
             </form>

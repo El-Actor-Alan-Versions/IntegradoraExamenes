@@ -43,6 +43,7 @@ public class UsuarioServlet extends HttpServlet {
 
             HttpSession session = req.getSession();
 
+
             if (admin != null) {
                 // Si es administrador, redirigir a vista de administrador
                 session.setAttribute("usuario", admin);

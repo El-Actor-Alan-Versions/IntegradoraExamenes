@@ -169,7 +169,7 @@
                 <% } %>
                 <div class="label-input-group">
                     <label for="gradoGrupo" class="form-label">Grado del Grupo:</label>
-                    <input type="text" class="form-control" id="gradoGrupo" name="gradoGrupo"  value="<%= action.equals("update") ? grupo.getGradoGrupo() : ""%>" required />
+                    <input type="text" class="form-control" id="gradoGrupo" max="150" name="gradoGrupo"  value="<%= action.equals("update") ? grupo.getGradoGrupo() : ""%>" required />
                 </div>
                 <div class="label-input-group">
                     <label for="idCarrera" class="form-label">Carrera:</label>
