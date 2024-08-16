@@ -49,23 +49,23 @@
                 <h1><%= action.equals("update") ? "Actualizar" : "Registrar" %> Administrador</h1>
                 <% if (action.equals("insert")) { %>
                 <div class="form-group mb-3">
-                    <input type="text" class="form-control" id="matricula" name="matricula" placeholder="Matricula" value="<%= action.equals("update") ? administrador.getMatricula() : "" %>" required />
+                    <input type="text" class="form-control" id="matricula" maxlength="120" name="matricula" placeholder="Matricula" value="<%= action.equals("update") ? administrador.getMatricula() : "" %>" required />
                 </div>
                 <% } %>
                 <div class="form-group mb-3">
-                    <input type="text" class="form-control rounded-pill text-center" placeholder="Nombre" id="nombre" name="nombre" value="<%= action.equals("update") ? administrador.getNombre() : "" %>" required />
+                    <input type="text" class="form-control rounded-pill text-center"  maxlength="120" placeholder="Nombre" id="nombre" name="nombre" value="<%= action.equals("update") ? administrador.getNombre() : "" %>" required />
                 </div>
 
                 <div class="form-group mb-3">
-                    <input type="text" class="form-control rounded-pill text-center" id="apellidoPaterno" placeholder="Apellido paterno" name="apellidoPaterno" value="<%= action.equals("update") ? administrador.getApellidoPaterno() : "" %>" required />
+                    <input type="text" class="form-control rounded-pill text-center" id="apellidoPaterno"  maxlength="120" placeholder="Apellido paterno" name="apellidoPaterno" value="<%= action.equals("update") ? administrador.getApellidoPaterno() : "" %>" required />
                 </div>
 
                 <div class="form-group mb-3">
-                    <input type="text" class="form-control rounded-pill text-center" id="apellidoMaterno" placeholder="Apellido materno" name="apellidoMaterno" value="<%= action.equals("update") ? administrador.getApellidoMaterno() : "" %>" required />
+                    <input type="text" class="form-control rounded-pill text-center" id="apellidoMaterno" maxlength="120" placeholder="Apellido materno" name="apellidoMaterno" value="<%= action.equals("update") ? administrador.getApellidoMaterno() : "" %>" required />
                 </div>
 
                 <div class="form-group mb-3">
-                    <input type="hidden" class="form-control rounded-pill text-center" id="correo" placeholder="Correo" name="correo" value="<%= action.equals("update") ? administrador.getCorreo() : "" %>" required />
+                    <input type="hidden" class="form-control rounded-pill text-center" id="correo"  placeholder="Correo" name="correo" value="<%= action.equals("update") ? administrador.getCorreo() : "" %>" required />
                 </div>
 
                 <% if (action.equals("insert")) { %>
@@ -86,5 +86,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

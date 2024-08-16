@@ -29,12 +29,12 @@
             <div class="card-body">
                 <form action="CrearExamenServlet" method="post">
                     <div class="label-input-group">
-                        <label for="nombre" class="form-label">Nombre del Examen</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        <label for="nombre" class="form-label"  >Nombre del Examen</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" maxlength="120" required>
                     </div>
                     <div class="label-input-group">
                         <label for="descripcion" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="descripcion" name="descripcion"  required></textarea>
+                        <textarea class="form-control" id="descripcion" name="descripcion"  maxlength="256" required></textarea>
                     </div>
                     <div class="label-input-group">
                         <label for="fecha_aplicacion" class="form-label">Fecha de Aplicación</label>

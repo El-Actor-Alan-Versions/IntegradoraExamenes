@@ -97,16 +97,41 @@
             }
         }
 
+        .dropdown{
+            position: relative;
+        }
+
         .dropdown-menu {
-            background-color: transparent; /* Elimina el fondo */
-            border: none; /* Elimina el borde */
-            box-shadow: none; /* Elimina cualquier sombra */
+            background-color: white; /* Mantener el fondo del dropdown transparente */
+            border: none; /* Sin borde en el contenedor del menú */
+            max-width: 100%;
+            width: 50px;
+            margin-left: -30px; /* Ajuste para que quede más alineado a la derecha */
+        }
+
+        .dropdown-item {
+            background-color: white; /* Fondo blanco para los elementos */
+            border: none; /* Borde negro de 2px */
+            color: #292727; /* Color negro para el texto */
+            font-family: 'PT Sans'; /* Fuente utilizada */
+            font-size: 18px;
+            text-align: center; /* Alineación del texto a la derecha */
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(133, 197, 183, 0.3); /* Fondo de hover translúcido */
+            color: #000; /* Color del texto en hover */
         }
 
         .dropdown-toggle {
-            background-color: transparent; /* Elimina el fondo del botón */
-            border: none; /* Elimina el borde del botón */
-            color: #292727; /* Color del texto */
+            background-color: transparent;
+            border: none;
+            color: #292727;
+            font-family: 'PT Sans';
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
 
@@ -126,12 +151,12 @@
     </a>
 
     <div class="dropdown">
-        <button class=" btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="  btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Mi perfil
         </button>
         <div class=" dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a></li>
-            <a class="dropdown-item" href="#">(PENDIENTE)</a>
+            <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a>
+            <a class="dropdown-item" href="#">Modificar Perfil</a>
         </div>
     </div>
 </nav>

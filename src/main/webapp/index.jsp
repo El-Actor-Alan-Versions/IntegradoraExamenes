@@ -41,10 +41,10 @@
                 </div>
                 <% } %>
                 <div class="form-group mb-3">
-                    <input type="text" required class="form-control rounded-pill text-center" name="matricula" id="matricula" placeholder="MATRICULA">
+                    <input type="text" required class="form-control rounded-pill text-center" name="matricula" id="matricula"  maxlength="25" placeholder="MATRICULA">
                 </div>
                 <div class="form-group mb-3">
-                    <input type="password" required class="form-control rounded-pill text-center" name="contra" id="contra" placeholder="CONTRASEÑA">
+                    <input type="password" required class="form-control rounded-pill text-center" name="contra" id="contra" maxlength="100" placeholder="CONTRASEÑA">
                 </div>
                 <div class="container si justify-content-between">
                     <a href="/practica3e_war/recuperacion.jsp" class="forgot-password ">¿Has olvidado tu contraseña?</a>

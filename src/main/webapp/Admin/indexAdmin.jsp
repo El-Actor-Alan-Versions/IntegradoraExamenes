@@ -33,9 +33,9 @@
             <a href="verAlumnos.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
-                        <img src="../img/mirarCalificaciones.png" class="text-center" width="68">
+                        <img src="../img/alumno.png" class="text-center" width="68">
                         <h5 class="card-title">Gestionar Alumnos</h5>
-                        <p class="card-text">Gestiona el alumnado, puedes actualizar el estado de los archivos y estadísticas.</p>
+                        <p class="card-text">Gestiona el alumnado y actualizar el estado de los archivos.</p>
                     </div>
                 </div>
             </a>
@@ -45,7 +45,7 @@
             <a href="verDocente.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
-                        <img src="../img/mirarCalificaciones.png" class="text-center" width="68">
+                        <img src="../img/docentes.png" class="text-center" width="68">
                         <h5 class="card-title">Gestionar Profesores</h5>
                         <p class="card-text">Edita el personal, puedes actualizar su estado.</p>
                     </div>
@@ -57,9 +57,9 @@
             <a href="verGrupos.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
-                        <img src="../img/mirarCalificaciones.png" class="text-center" width="68">
+                        <img src="../img/grupos.png" class="text-center" width="68">
                         <h5 class="card-title">Gestionar Grupos</h5>
-                        <p class="card-text">Edita el personal, puedes actualizar su estado.</p>
+                        <p class="card-text">Actualizar y registrar los grupos</p>
                     </div>
                 </div>
             </a>
@@ -69,9 +69,9 @@
             <a href="verClases.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
-                        <img src="../img/mirarCalificaciones.png" class="text-center" width="68">
+                        <img src="../img/clasae.png" class="text-center" width="68">
                         <h5 class="card-title">Gestionar Clases</h5>
-                        <p class="card-text">Gestiona tus clases y creación, puedes modificar y actualizar.</p>
+                        <p class="card-text">Gestiona las clases,  modificar y actualizarlas.</p>
                     </div>
                 </div>
             </a>
@@ -81,7 +81,7 @@
             <a href="verCarreras.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
-                        <img src="../img/mirarCalificaciones.png" class="text-center" width="68">
+                        <img src="../img/carrera.png" class="text-center" width="68">
                         <h5 class="card-title">Gestionar Carreras</h5>
                         <p class="card-text">Gestiona tu carrera con respecto a tu plan académico.</p>
                     </div>
@@ -93,9 +93,9 @@
             <a href="verDivisiones.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
-                        <img src="../img/mirarCalificaciones.png" class="text-center" width="68">
+                        <img src="../img/divisiones.png" class="text-center" width="68">
                         <h5 class="card-title">Gestionar Divisiones</h5>
-                        <p class="card-text">Gestiona las divisiones que conforman parte de tu universidad.</p>
+                        <p class="card-text">Gestiona las divisiones de la universidad.</p>
                     </div>
                 </div>
             </a>
@@ -105,7 +105,7 @@
             <a href="verMaterias.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
-                        <img src="../img/mirarCalificaciones.png" class="text-center" width="68">
+                        <img src="../img/materia.png" class="text-center" width="68">
                         <h5 class="card-title">Gestionar Materias</h5>
                         <p class="card-text">Gestiona las materias que se impartirán en la universidad.</p>
                     </div>
@@ -117,14 +117,17 @@
             <a href="verAdmin.jsp" class="button">
                 <div class="card">
                     <div class="card-body">
-                        <img src="../img/asignacionClases.png" class="text-center" width="68">
+                        <img src="../img/admin.png" class="text-center" width="68">
                         <h5 class="card-title">Gestionar Administradores</h5>
-                        <p class="card-text">Registro, eliminación y actualización de los datos de los administradores</p>
+                        <p class="card-text">Gestion de los datos de los administradores.</p>
                     </div>
                 </div>
             </a>
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

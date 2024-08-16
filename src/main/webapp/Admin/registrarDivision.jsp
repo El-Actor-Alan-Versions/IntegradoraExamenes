@@ -167,7 +167,7 @@
                 <% } %>
                 <div class="label-input-group">
                     <label for="nombreDivision" class="form-label">Nombre de la División</label>
-                    <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" placeholder="Ingrese el nombre de la division"  value="<%= action.equals("update") ? division.getNombreDivision() : "" %>" required>
+                    <input type="text" class="form-control" id="nombreDivision"  maxlength="150" name="nombreDivision" placeholder="Ingrese el nombre de la division"  value="<%= action.equals("update") ? division.getNombreDivision() : "" %>" required>
                 </div>
                 <button type="submit" class="btn btn-right"><%= action.equals("update") ? "Actualizar" : "Registrar" %></button>
             </form>
@@ -176,5 +176,8 @@
 </div>
 <script src="${pageContext.request.contextPath}/JS/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

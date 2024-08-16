@@ -101,10 +101,33 @@
             }
         }
 
-        .dropdown{
-            background-color: transparent;
-            background: transparent;
-            border: transparent;
+        .dropdown-menu {
+            background-color: transparent; /* Elimina el fondo del dropdown */
+            border: none; /* Elimina el borde del dropdown */
+            box-shadow: none; /* Elimina la sombra */
+            margin-left: -100px; /* Mueve el menú más a la izquierda */
+        }
+
+        .dropdown-toggle {
+            background-color: transparent; /* Elimina el fondo del botón */
+            border: none; /* Elimina el borde del botón */
+            color: #292727; /* Color del texto */
+            font-family: 'PT Sans';
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .dropdown-item {
+            color: #292727; /* Color de los items desplegados */
+            font-family: 'PT Sans';
+            padding: 10px 20px;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(133, 197, 183, 0.3); /* Fondo en hover */
+            color: #000; /* Color del texto en hover */
         }
     </style>
 </head>
@@ -122,7 +145,7 @@
     </a>
 
     <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class=" btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Mi perfil
         </button>
         <div class=" dropdown-menu" aria-labelledby="dropdownMenuButton">
