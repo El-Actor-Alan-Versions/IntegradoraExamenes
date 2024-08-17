@@ -14,7 +14,7 @@ public class DivisionDao {
 
     public List<Division> getAll() {
         List<Division> divisiones = new ArrayList<>();
-        String query = "SELECT * FROM Division";
+        String query = "SELECT * FROM division";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -36,7 +36,7 @@ public class DivisionDao {
     }
     public boolean insert(Division division) {
         boolean inserted = false;
-        String query = "INSERT INTO Division (nombre_division) VALUES (?)";
+        String query = "INSERT INTO division (nombre_division) VALUES (?)";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -56,7 +56,7 @@ public class DivisionDao {
     }
     public boolean delete(int id) {
         boolean deleted = false;
-        String query = "DELETE FROM Division WHERE id_division = ?";
+        String query = "DELETE FROM division WHERE id_division = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -77,7 +77,7 @@ public class DivisionDao {
 
     public Division getById(int idDivision) throws SQLException {
         Division division = null;
-        String query = "SELECT * FROM Division WHERE id_division = ?";
+        String query = "SELECT * FROM division WHERE id_division = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -100,7 +100,7 @@ public class DivisionDao {
 
     public boolean update(Division division) {
         boolean updated = false;
-        String query = "UPDATE Division SET nombre_division = ? WHERE id_division = ?";
+        String query = "UPDATE division SET nombre_division = ? WHERE id_division = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {

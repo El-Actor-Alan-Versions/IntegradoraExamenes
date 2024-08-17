@@ -11,8 +11,8 @@ import java.util.List;
 public class PreguntaDao {
 
     public boolean insertarPregunta(Preguntas pregunta) {
-        String sqlPregunta = "INSERT INTO Pregunta (pregunta, id_examen, tipo_pregunta) VALUES (?, ?, ?)";
-        String sqlOpcion = "INSERT INTO Opciones (opcion, id_pregunta, correcta) VALUES (?, ?, ?)";
+        String sqlPregunta = "INSERT INTO pregunta (pregunta, id_examen, tipo_pregunta) VALUES (?, ?, ?)";
+        String sqlOpcion = "INSERT INTO opciones (opcion, id_pregunta, correcta) VALUES (?, ?, ?)";
 
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement pstmtPregunta = conn.prepareStatement(sqlPregunta, Statement.RETURN_GENERATED_KEYS);
@@ -54,7 +54,7 @@ public class PreguntaDao {
 
     public List<Preguntas> obtenerPreguntasPorExamen(int idExamen) {
         List<Preguntas> preguntas = new ArrayList<>();
-        String query = "SELECT id_pregunta, pregunta, tipo_pregunta FROM Pregunta WHERE id_examen = ?";
+        String query = "SELECT id_pregunta, pregunta, tipo_pregunta FROM pregunta WHERE id_examen = ?";
 
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -77,7 +77,7 @@ public class PreguntaDao {
     }
 
     public String getRespuestaCorrecta(int idPregunta) throws SQLException {
-        String sql = "SELECT respuesta_correcta FROM Pregunta WHERE id_pregunta = ?";
+        String sql = "SELECT respuesta_correcta FROM pregunta WHERE id_pregunta = ?";
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, idPregunta);
@@ -91,7 +91,7 @@ public class PreguntaDao {
 
     public List<String> getRespuestasCorrectas(int idPregunta) throws SQLException {
         List<String> respuestasCorrectas = new ArrayList<>();
-        String sql = "SELECT id_opcion FROM OpcionesCorrectas WHERE id_pregunta = ?";
+        String sql = "SELECT id_opcion FROM opcionesCorrectas WHERE id_pregunta = ?";
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, idPregunta);
@@ -104,7 +104,7 @@ public class PreguntaDao {
     }
 
     public double getPuntajePregunta(int idPregunta) throws SQLException {
-        String sql = "SELECT puntaje FROM Pregunta WHERE id_pregunta = ?";
+        String sql = "SELECT puntaje FROM pregunta WHERE id_pregunta = ?";
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, idPregunta);
@@ -144,7 +144,7 @@ public class PreguntaDao {
 
     public List<Preguntas> getPreguntasPorExamen(int examenId) {
         List<Preguntas> preguntas = new ArrayList<>();
-        String query = "SELECT id_pregunta, pregunta, tipo_pregunta FROM Pregunta WHERE id_examen = ?";
+        String query = "SELECT id_pregunta, pregunta, tipo_pregunta FROM pregunta WHERE id_examen = ?";
 
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {

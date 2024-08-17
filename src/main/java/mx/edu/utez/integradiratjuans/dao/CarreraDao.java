@@ -15,7 +15,7 @@ public class CarreraDao {
 
     public Carrera getById(int id) {
         Carrera carrera = null;
-        String query = "SELECT * FROM Carrera WHERE id_carrera = ?";
+        String query = "SELECT * FROM carrera WHERE id_carrera = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -39,7 +39,7 @@ public class CarreraDao {
 
     public List<Carrera> getAll() {
         List<Carrera> carreras = new ArrayList<>();
-        String query = "SELECT * FROM Carrera";
+        String query = "SELECT * FROM carrera";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -63,7 +63,7 @@ public class CarreraDao {
 
     public boolean insert(Carrera carrera) {
         boolean inserted = false;
-        String query = "INSERT INTO Carrera (nombre_carrera, id_division) VALUES (?, ?)";
+        String query = "INSERT INTO carrera (nombre_carrera, id_division) VALUES (?, ?)";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -85,7 +85,7 @@ public class CarreraDao {
 
     public boolean update(Carrera carrera) {
         boolean updated = false;
-        String query = "UPDATE Carrera SET nombre_carrera = ?, id_division = ? WHERE id_carrera = ?";
+        String query = "UPDATE carrera SET nombre_carrera = ?, id_division = ? WHERE id_carrera = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -108,7 +108,7 @@ public class CarreraDao {
 
     public boolean delete(int id) {
         boolean deleted = false;
-        String query = "DELETE FROM Carrera WHERE id_carrera = ?";
+        String query = "DELETE FROM carrera WHERE id_carrera = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {

@@ -17,7 +17,7 @@ public class MateriaDao {
 
         public Materia getById(int idMateria) throws SQLException {
              Materia materia = null;
-            String query = "SELECT * FROM Materia WHERE id_materia = ?";
+            String query = "SELECT * FROM materia WHERE id_materia = ?";
             try (Connection conn = DatabaseConnectionManager.getConnection();
                  PreparedStatement pstmt = conn.prepareStatement(query)) {
                 pstmt.setInt(1, idMateria);
@@ -37,7 +37,7 @@ public class MateriaDao {
     // Obtener todas las materias
     public List<Materia> getAll() {
         List<Materia> materias = new ArrayList<>();
-        String query = "SELECT * FROM Materia";
+        String query = "SELECT * FROM materia";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -61,7 +61,7 @@ public class MateriaDao {
     // Insertar una nueva materia
     public boolean insert(Materia materia) {
         boolean inserted = false;
-        String query = "INSERT INTO Materia (Nombre_materia) VALUES (?)";
+        String query = "INSERT INTO materia (Nombre_materia) VALUES (?)";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -83,7 +83,7 @@ public class MateriaDao {
     // Actualizar una materia existente
     public boolean update(Materia materia) {
         boolean updated = false;
-        String query = "UPDATE Materia SET Nombre_materia = ? WHERE id_materia = ?";
+        String query = "UPDATE materia SET Nombre_materia = ? WHERE id_materia = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -106,7 +106,7 @@ public class MateriaDao {
     // Eliminar una materia por ID
     public boolean delete(int id) {
         boolean deleted = false;
-        String query = "DELETE FROM Materia WHERE id_materia = ?";
+        String query = "DELETE FROM materia WHERE id_materia = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {

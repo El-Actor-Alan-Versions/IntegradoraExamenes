@@ -10,7 +10,7 @@ import java.util.List;
 public class DocenteDao {
 
     public Docente getOne(String matricula, String contrasena) throws SQLException {
-        String query = "SELECT * FROM Docente WHERE Matricula = ? AND Contraseña = SHA2(?, 256)";
+        String query = "SELECT * FROM docente WHERE Matricula = ? AND Contraseña = SHA2(?, 256)";
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, matricula);
@@ -40,7 +40,7 @@ public class DocenteDao {
 
 public Docente getById(String matricula) {
         Docente docente = null;
-        String query = "SELECT * FROM Docente WHERE matricula = ?";
+        String query = "SELECT * FROM docente WHERE matricula = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -67,7 +67,7 @@ public Docente getById(String matricula) {
     }
 
     public boolean insert(Docente docente) throws SQLException {
-        String query = "INSERT INTO Docente (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña, estado) VALUES (?, ?, ?, ?, ?, sha2(?, 256) , ?)";
+        String query = "INSERT INTO docente (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña, estado) VALUES (?, ?, ?, ?, ?, sha2(?, 256) , ?)";
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, docente.getMatricula());
@@ -82,7 +82,7 @@ public Docente getById(String matricula) {
     }
 
     public void updateEstado(String matricula, String nuevoEstado) throws SQLException {
-        String query = "UPDATE Docente SET Estado = ? WHERE Matricula = ?";
+        String query = "UPDATE docente SET Estado = ? WHERE Matricula = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, nuevoEstado);
@@ -92,7 +92,7 @@ public Docente getById(String matricula) {
     }
 
     public List<Docente> getAll() throws SQLException {
-        String query = "SELECT * FROM Docente";
+        String query = "SELECT * FROM docente";
         List<Docente> docentes = new ArrayList<>();
         try (Connection connection = DatabaseConnectionManager.getConnection();
              Statement statement = connection.createStatement();
@@ -115,7 +115,7 @@ public Docente getById(String matricula) {
 
     public boolean update(Docente docente)  {
         boolean update = false;
-        String query = "UPDATE Docente SET Nombre = ?, Apellido_paterno = ?, Apellido_materno = ?, Correo = ?, Contraseña = ? WHERE Matricula = ?";
+        String query = "UPDATE docente SET Nombre = ?, Apellido_paterno = ?, Apellido_materno = ?, Correo = ?, Contraseña = ? WHERE Matricula = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {

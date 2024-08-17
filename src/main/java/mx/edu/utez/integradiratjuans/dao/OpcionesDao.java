@@ -15,8 +15,8 @@ public class OpcionesDao {
 
     // Método para insertar preguntas y opciones
     public void insertarPreguntas(List<Preguntas> preguntas) throws SQLException {
-        String sqlPregunta = "INSERT INTO Pregunta (pregunta, id_examen) VALUES (?, ?)";
-        String sqlOpcion = "INSERT INTO Opciones (opcion, id_pregunta, correcta) VALUES (?, ?, ?)";
+        String sqlPregunta = "INSERT INTO pregunta (pregunta, id_examen) VALUES (?, ?)";
+        String sqlOpcion = "INSERT INTO opciones (opcion, id_pregunta, correcta) VALUES (?, ?, ?)";
 
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement stmtPregunta = connection.prepareStatement(sqlPregunta, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -54,7 +54,7 @@ public class OpcionesDao {
     // Método para obtener opciones por ID de pregunta
     public List<Opcion> obtenerOpcionesPorPregunta(int idPregunta) {
         List<Opcion> opciones = new ArrayList<>();
-        String query = "SELECT id_opcion, opcion, id_pregunta, correcta FROM Opciones WHERE id_pregunta = ?";
+        String query = "SELECT id_opcion, opcion, id_pregunta, correcta FROM opciones WHERE id_pregunta = ?";
 
         System.out.println("Ejecutando consulta: " + query + " con ID de pregunta: " + idPregunta);
 
@@ -81,7 +81,7 @@ public class OpcionesDao {
 
     public List<Opcion> getOpcionesPorPregunta(int idPregunta) throws SQLException {
         List<Opcion> opciones = new ArrayList<>();
-        String sql = "SELECT id_opcion, opcion, correcta FROM Opciones WHERE id_pregunta = ?";
+        String sql = "SELECT id_opcion, opcion, correcta FROM opciones WHERE id_pregunta = ?";
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, idPregunta);
@@ -100,7 +100,7 @@ public class OpcionesDao {
     // Método para obtener todas las opciones
     public List<Opcion> getAll() {
         List<Opcion> opciones = new ArrayList<>();
-        String query = "SELECT * FROM Opciones";
+        String query = "SELECT * FROM opciones";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -147,7 +147,7 @@ public class OpcionesDao {
         return opciones;
     }
     public Opcion getRespuestaCorrecta(int idPregunta) throws SQLException {
-        String sql = "SELECT id_opcion, opcion, correcta FROM Opciones WHERE id_pregunta = ? AND correcta = true";
+        String sql = "SELECT id_opcion, opcion, correcta FROM opciones WHERE id_pregunta = ? AND correcta = true";
         Opcion opcionCorrecta = null;
 
         try (Connection connection = DatabaseConnectionManager.getConnection();

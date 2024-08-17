@@ -11,7 +11,7 @@ import java.util.List;
 public class AlumnoDao {
 
     public Alumno getOne(String matricula, String contrasena) throws SQLException {
-        String query = "SELECT * FROM Alumno WHERE Matricula = ? AND Contraseña = SHA2(?, 256)";
+        String query = "SELECT * FROM alumno WHERE Matricula = ? AND Contraseña = SHA2(?, 256)";
                 ;
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -37,7 +37,7 @@ public class AlumnoDao {
 
 
     public boolean insert(Alumno alumno) throws SQLException {
-        String query = "INSERT INTO Alumno (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña, id_grupo, estado) VALUES (?, ?, ?, ?, ?, SHA2(?, 256), ?, ?)";
+        String query = "INSERT INTO alumno (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña, id_grupo, estado) VALUES (?, ?, ?, ?, ?, SHA2(?, 256), ?, ?)";
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, alumno.getMatricula());
@@ -54,7 +54,7 @@ public class AlumnoDao {
 
 
     public void updateEstado(String matricula, String nuevoEstado) throws SQLException {
-        String query = "UPDATE Alumno SET Estado = ? WHERE Matricula = ?";
+        String query = "UPDATE alumno SET Estado = ? WHERE Matricula = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, nuevoEstado);
@@ -67,8 +67,8 @@ public class AlumnoDao {
     public List<Alumno> getAll() {
         List<Alumno> alumnos = new ArrayList<>();
         String query = "SELECT a.*, g.Grado_grupo " +
-                "FROM Alumno a " +
-                "JOIN Grupo g ON a.id_grupo = g.id_grupo and estado = 'Activo'";
+                "FROM alumno a " +
+                "JOIN grupo g ON a.id_grupo = g.id_grupo and estado = 'Activo'";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -96,7 +96,7 @@ public class AlumnoDao {
 
     public Alumno getById(String matricula) {
         Alumno alumno = null;
-        String query = "SELECT * FROM Alumno WHERE matricula = ?";
+        String query = "SELECT * FROM alumno WHERE matricula = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -123,7 +123,7 @@ public class AlumnoDao {
     }
     public boolean update(Alumno alumno)  {
         boolean update = false;
-        String query = "UPDATE Alumno SET Nombre = ?, Apellido_paterno = ?, Apellido_materno = ?, Correo = ?, Contraseña = ?, Id_grupo = ? WHERE Matricula = ?";
+        String query = "UPDATE alumno SET Nombre = ?, Apellido_paterno = ?, Apellido_materno = ?, Correo = ?, Contraseña = ?, Id_grupo = ? WHERE Matricula = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {

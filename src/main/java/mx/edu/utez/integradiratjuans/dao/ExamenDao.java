@@ -9,7 +9,7 @@ import mx.edu.utez.integradiratjuans.model.Examen;
 public class ExamenDao {
 
     public int insert(Examen examen) {
-        String query = "INSERT INTO Examen (Nombre, Fecha_aplicacion, Fecha_cierre, id_clase, descripcion, estado) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO examen (Nombre, Fecha_aplicacion, Fecha_cierre, id_clase, descripcion, estado) VALUES (?, ?, ?, ?, ?, ?)";
         int id = -1;
 
         try (Connection con = DatabaseConnectionManager.getConnection();
@@ -79,7 +79,7 @@ public class ExamenDao {
 
     public List<Examen> getExamenesPorClase(int idClase) throws SQLException {
         List<Examen> examenes = new ArrayList<>();
-        String sql = "SELECT * FROM Examen WHERE id_clase = ?";
+        String sql = "SELECT * FROM examen WHERE id_clase = ?";
 
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -101,7 +101,7 @@ public class ExamenDao {
     }
     public List<Examen> getExamenesNoRealizadosPorAlumno(int idClase, String matriculaAlumno) {
         List<Examen> examenes = new ArrayList<>();
-        String query = "SELECT e.* FROM Examen e " +
+        String query = "SELECT e.* FROM examen e " +
                 "JOIN examen_alumno ea ON e.id_examen = ea.id_examen " +
                 "WHERE e.id_clase = ? " +
                 "AND ea.matricula_alumno = ? and ea.realizado = 0";
@@ -138,7 +138,7 @@ public class ExamenDao {
 
     public boolean updateEstadoExamen(int idExamen) {
         boolean flag = false;
-        String query = "UPDATE Examen SET estado = true WHERE id_examen = ?";
+        String query = "UPDATE examen SET estado = true WHERE id_examen = ?";
 
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -162,7 +162,7 @@ public class ExamenDao {
 
     public List<Examen> getAll() throws SQLException {
         List<Examen> examenes = new ArrayList<>();
-        String query = "SELECT * FROM Examen";
+        String query = "SELECT * FROM examen";
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = con.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {

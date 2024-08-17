@@ -78,7 +78,7 @@ public class CalificacionDao {
 
     public boolean updateCalificaciones(double calificacion, int idCalificacion) {
         boolean isUpdated = false;
-        String sql = "UPDATE Calificaciones SET calificacion = ? WHERE id_examen = ?";
+        String sql = "UPDATE calificaciones SET calificacion = ? WHERE id_examen = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {

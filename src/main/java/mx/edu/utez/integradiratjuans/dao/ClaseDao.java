@@ -16,7 +16,7 @@ public class ClaseDao {
 
     public List<Clase> getAll() throws SQLException {
         List<Clase> clases = new ArrayList<>();
-        String query = "SELECT * FROM Clase";
+        String query = "SELECT * FROM clase";
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query);
              ResultSet rs = ps.executeQuery()) {
@@ -34,7 +34,7 @@ public class ClaseDao {
     }
 
     public Clase getById(int idClase) throws SQLException {
-        String query = "SELECT * FROM Clase WHERE id_clase = ?";
+        String query = "SELECT * FROM clase WHERE id_clase = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, idClase);
@@ -53,7 +53,7 @@ public class ClaseDao {
     }
 
     public void insert(Clase clase) {
-        String query = "INSERT INTO Clase (id_grupo, id_materia, matricula) VALUES (?, ?, ?)";
+        String query = "INSERT INTO clase (id_grupo, id_materia, matricula) VALUES (?, ?, ?)";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -71,7 +71,7 @@ public class ClaseDao {
 
     public boolean update(Clase clase) {
         boolean updated = false;
-        String query = "UPDATE Clase SET id_grupo = ?, id_materia = ?, matricula = ? WHERE id_clase = ?";
+        String query = "UPDATE clase SET id_grupo = ?, id_materia = ?, matricula = ? WHERE id_clase = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -95,7 +95,7 @@ public class ClaseDao {
 
     public boolean delete(int id) {
         boolean deleted = false;
-        String query = "DELETE FROM Clase WHERE id_clase = ?";
+        String query = "DELETE FROM clase WHERE id_clase = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -117,10 +117,10 @@ public class ClaseDao {
 
     public List<Clase> getClasesByDocente(String matricula) throws SQLException {
         List<Clase> clases = new ArrayList<>();
-        String sql = "SELECT Clase.id_clase, Grupo.Grado_grupo " +
-                "FROM Clase " +
-                "JOIN Grupo ON Clase.id_grupo = Grupo.id_grupo " +
-                "WHERE Clase.matricula = ?";
+        String sql = "SELECT clase.id_clase, grupo.Grado_grupo " +
+                "FROM clase " +
+                "JOIN grupo ON clase.id_grupo = grupo.id_grupo " +
+                "WHERE clase.matricula = ?";
 
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -169,7 +169,7 @@ public class ClaseDao {
     public int getGrupoByAlumno(String matricula) throws SQLException {
         int idGrupo = -1; // Valor predeterminado en caso de no encontrar el grupo
 
-        String sql = "SELECT g.id_grupo FROM Alumno a JOIN Grupo g ON a.id_grupo = g.id_grupo WHERE a.Matricula = ?";
+        String sql = "SELECT g.id_grupo FROM alumno a JOIN grupo g ON a.id_grupo = g.id_grupo WHERE a.Matricula = ?";
 
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -217,7 +217,7 @@ public class ClaseDao {
 
     public String getGrupoNameByIdClase(int idClase) {
         String grupoName = null;
-        String query = "SELECT g.Grado_grupo FROM Clase c JOIN Grupo g ON c.id_grupo = g.id_grupo WHERE c.id_clase = ?";
+        String query = "SELECT g.Grado_grupo FROM clase c JOIN grupo g ON c.id_grupo = g.id_grupo WHERE c.id_clase = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement pstmt = con.prepareStatement(query)) {
