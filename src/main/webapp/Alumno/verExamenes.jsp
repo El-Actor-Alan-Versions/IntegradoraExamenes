@@ -14,10 +14,18 @@
     <!-- Enlace a Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vistas.css">
-
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/datatables.css">
+    <style>
+        .thead-dark th {
+            color: black !important; /* Cambia el color del texto a negro */
+            background-color: #f8f9fa !important; /* Cambia el color de fondo si lo deseas */
+        }
+        .table tbody td {
+            color: black; /* Asegura que el texto del cuerpo de la tabla sea negro */
+        }
+    </style>
 </head>
 <body>
-
 
 <div id="navbar"></div>
 <script>
@@ -27,7 +35,7 @@
             document.getElementById('navbar').innerHTML = data;
         });
 </script>
-<div class="container ">
+<div class="container">
     <div class="card">
         <div class="header-card">
             <img src="../img/calificaciones.png" width="68">
@@ -35,7 +43,7 @@
             <button type="button" class="btn btn-conf" onclick="location.href='indexAlumno.jsp'">Volver</button>
         </div>
         <div class="card-body">
-            <table class="table  table-custom">
+            <table id="examenesTable" class="table table-custom">
                 <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
@@ -44,7 +52,6 @@
                     <th>Fecha de Cierre</th>
                     <th>Grado_Grupo</th>
                     <th class="column-actualizar">Realizar Examen</th>
-
                 </tr>
                 </thead>
                 <tbody>
@@ -88,7 +95,7 @@
                 } else {
                 %>
                 <tr>
-                    <td colspan="5" class="text-center">No hay exámenes disponibles</td>
+                    <td colspan="6" class="text-center">No hay exámenes disponibles</td>
                 </tr>
                 <%
                     }
@@ -103,6 +110,25 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Librerías de DataTables -->
+<script src="${pageContext.request.contextPath}/JS/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath}/JS/datatables.js"></script>
+<script src="${pageContext.request.contextPath}/JS/dataTables.bootstrap5.js"></script>
+<script src="${pageContext.request.contextPath}/JS/es-MX.json"></script>
+
+<script>
+    // Inicializar DataTables en la tabla de exámenes
+    document.addEventListener('DOMContentLoaded', () => {
+        const table = document.getElementById('examenesTable');
+        new DataTable(table, {
+            language: {
+                url: '${pageContext.request.contextPath}/JS/es-MX.json'
+            }
+        });
+    });
+</script>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

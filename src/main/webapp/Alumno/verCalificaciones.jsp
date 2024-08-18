@@ -10,6 +10,7 @@
     <title>Calificaciones</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vistas.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/datatables.css">
     <style>
         .calificacion-verde {
             color: green;
@@ -22,6 +23,10 @@
         .calificacion-rojo {
             color: red;
             font-weight: bold;
+        }
+        .thead-dark th {
+            color: black !important; /* Cambia el color del texto a negro */
+            background-color: #f8f9fa !important; /* Cambia el color de fondo si lo deseas */
         }
     </style>
 </head>
@@ -43,7 +48,7 @@
             <button type="button" class="btn btn-conf" onclick="location.href='indexAlumno.jsp'">Regresar a Inicio</button>
         </div>
         <div class="card-body">
-            <table class="table table-custom">
+            <table id="calificacionesTable" class="table table-custom">
                 <thead class="thead-dark">
                 <tr>
                     <th>ID Calificación</th>
@@ -92,7 +97,26 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Librerías de DataTables -->
+<script src="${pageContext.request.contextPath}/JS/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath}/JS/datatables.js"></script>
+<script src="${pageContext.request.contextPath}/JS/dataTables.bootstrap5.js"></script>
+<script src="${pageContext.request.contextPath}/JS/es-MX.json"></script>
+
+<script>
+    // Inicializar DataTables en la tabla de calificaciones
+    document.addEventListener('DOMContentLoaded', () => {
+        const table = document.getElementById('calificacionesTable');
+        new DataTable(table, {
+            language: {
+                url: '${pageContext.request.contextPath}/JS/es-MX.json'
+            }
+        });
+    });
+</script>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

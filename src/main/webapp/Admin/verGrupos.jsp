@@ -73,6 +73,32 @@
         </div>
     </div>
 </div>
+
+<!-- Librerías de JavaScript necesarias -->
+<script src="${pageContext.request.contextPath}/JS/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/JS/datatables.js"></script>
+<script src="${pageContext.request.contextPath}/JS/dataTables.bootstrap5.js"></script>
+<script src="${pageContext.request.contextPath}/JS/es-MX.json"></script>
+
+<script>
+    // Inicializar DataTables en la tabla de grupos
+    document.addEventListener('DOMContentLoaded', () => {
+        const table = document.getElementById('example');
+        new DataTable(table, {
+            language: {
+                url: '${pageContext.request.contextPath}/JS/es-MX.json'
+            }
+        });
+    });
+
+    function confirmarEliminacion() {
+        return confirm('¿Estás seguro de que deseas eliminar este grupo?');
+    }
+</script>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
