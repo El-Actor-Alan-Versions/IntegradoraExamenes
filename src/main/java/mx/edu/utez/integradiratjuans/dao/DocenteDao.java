@@ -70,12 +70,8 @@ public class DocenteDao {
     }
 
     public boolean insert(Docente docente) throws SQLException {
-        // Generar el correo automáticamente si no se proporciona
-        String correo = docente.getCorreo();
-        if (correo == null || correo.isEmpty()) {
-            correo = docente.getMatricula() + "@utez.edu.mx";
-        }
 
+        String correo = docente.getMatricula() + "@utez.edu.mx";
         String query = "INSERT INTO Docente (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña, Estado) VALUES (?, ?, ?, ?, ?, SHA2(?, 256), ?)";
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
