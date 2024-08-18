@@ -10,11 +10,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:">
+    <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="Ubuntu el servlet">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verGrupos.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verGrupos.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Alumno/verCalificaciones.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Alumno/verCalificaciones.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Alumno/verExamenes.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Alumno/verExamenes.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/VerExamenes.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/VerExamenes.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +29,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="El-Acti" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -353,7 +356,7 @@
       <workItem from="1723841305648" duration="1823000" />
       <workItem from="1723860191442" duration="1811000" />
       <workItem from="1723868919516" duration="1123000" />
-      <workItem from="1723942741032" duration="4204000" />
+      <workItem from="1723942741032" duration="5591000" />
     </task>
     <servers />
   </component>
@@ -395,7 +398,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:" />
+    <MESSAGE value="Ubuntu el servlet" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ubuntu el servlet" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -5,22 +5,21 @@
 <%@ page session="true" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calificaciones por Docente</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
         body {
             font-family: 'PT Sans';
             color: rgb(17, 16, 16);
-            justify-content: center;
-            align-items: center;
             background-color: #EEEEEE;
-            width: 100%;
-            height: 100%;
             margin: 0;
             padding: 0;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
@@ -28,15 +27,14 @@
 
         .container {
             background: #b8eac2;
-            font-family: 'PT Sans', sans-serif;
             width: 100%;
             align-items: center;
             margin-top: 20px;
+            padding: 20px 0;
         }
 
         .card {
             width: 100%;
-            height: 100%;
             background: none;
             border: none;
             align-items: center;
@@ -45,58 +43,76 @@
 
         .card-body {
             background: white;
-            width: 90%;
+            width: 80%;
             overflow-x: auto;
             border-radius: 20px;
-            margin-top: 20px;
+            margin: 20px auto;
             padding: 20px;
         }
 
         .table-custom {
-            padding: 30px 50%;
-            text-align: center;
+            width: 100%;
             background: white;
             border-radius: 15px;
-            margin: 20px auto;
-            width: 90%;
             border-collapse: collapse;
+            text-align: center;
+            margin: 20px auto;
         }
 
-        .table-custom th,
-        .table-custom td {
-            border: 2px solid black;
+        .table-custom th, .table-custom td {
             padding: 10px;
-            white-space: nowrap;
-        }
-        .header-card {
-            background-color: #CDFFF4;
-            padding: 10px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            width: 90%;
-            height: 20%;
-            max-width: 900px;
-            margin: 10px auto;
+            border: 1px solid #ddd;
         }
 
-        .title {
-            margin-left: 10px;
-            font-size: 1.5rem; /* Tamaño ajustado del título */
+        .table-custom th {
+            background-color: #85C5B7;
+            font-weight: bold;
         }
 
-        .header-card img {
-            margin-right: 10px;
-            width: 68px; /* Tamaño ajustado de la imagen */
-            height: auto;
+        .table-custom tbody tr:hover {
+            background-color: #f1f1f1;
         }
 
         .btn-cal {
-            width: 150px;
+            background-color: #FED8D8;
             border-radius: 22px;
-            white-space: nowrap;
-            background: #FED8D8;
+            color: black;
+            padding: 5px 20px;
             font-weight: 700;
+            border: none;
+            cursor: pointer;
+        }
+
+        .calificacion-verde {
+            color: green;
+            font-weight: bold;
+        }
+
+        .calificacion-amarillo {
+            color: gold;
+            font-weight: bold;
+        }
+
+        .calificacion-rojo {
+            color: red;
+            font-weight: bold;
+        }
+
+        .header-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+            background: #CDFFF4;
+            margin-top: 15px;
+            border-radius: 10px;
+            padding: 10px 20px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0;
         }
 
         @media (max-width: 600px) {
@@ -107,30 +123,10 @@
             }
 
             .header-card img,
-            .header-card h2,
-            .btn-cal {
+            .header-card h1 {
                 margin: 5px 0;
                 width: auto;
             }
-
-            .btn-cal {
-                width: 100%;
-                max-width: 200px;
-            }
-        }
-
-        /* Estilos para las calificaciones */
-        .calificacion-verde {
-            color: green;
-            font-weight: bold;
-        }
-        .calificacion-amarillo {
-            color: gold;
-            font-weight: bold;
-        }
-        .calificacion-rojo {
-            color: red;
-            font-weight: bold;
         }
     </style>
 </head>
@@ -146,7 +142,6 @@
 <div class="container">
     <div class="card">
         <div class="header-card">
-            <img src="../img/calificaciones.png" width="68">
             <h1 class="title">Calificaciones de los Alumnos</h1>
         </div>
         <div class="card-body">
@@ -157,7 +152,7 @@
                     ExamenDao examenDao = new ExamenDao();
                     List<Calificacion> calificaciones = calificacionDao.obtenerCalificacionesPorDocente(matriculaDocente);
             %>
-            <table class="table table-custom">
+            <table id="calificacionesTable" class="table table-custom">
                 <thead>
                 <tr>
                     <th>ID Calificación</th>
@@ -165,7 +160,7 @@
                     <th>Examen</th>
                     <th>Calificación</th>
                     <th>Fecha</th>
-                    <th>Acciones</th> <!-- Nueva columna para acciones -->
+                    <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -202,14 +197,13 @@
                 } else {
                 %>
                 <tr>
-                    <td colspan="6">No hay calificaciones disponibles.</td>
+                    <td colspan="6" class="text-center">No hay calificaciones disponibles.</td>
                 </tr>
                 <%
                     }
                 %>
                 </tbody>
             </table>
-
             <%
             } else {
             %>
@@ -220,8 +214,23 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<!-- Inicialización de DataTables -->
+<script>
+    $(document).ready(function() {
+        $('#calificacionesTable').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json"
+            }
+        });
+    });
+</script>
 </body>
 </html>
