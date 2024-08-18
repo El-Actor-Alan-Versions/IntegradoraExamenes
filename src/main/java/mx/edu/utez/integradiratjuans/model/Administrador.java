@@ -7,17 +7,27 @@ public class Administrador {
     private String apellidoMaterno;
     private String correo;
     private String contraseña;
+    private String Codigo_Recuperacion;
 
     public Administrador() {
     }
 
-    public Administrador(String matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contraseña) {
+    public Administrador(String matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contraseña, String Codigo_Recuperacion) {
         this.matricula = matricula;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.correo = correo;
         this.contraseña = contraseña;
+        this.Codigo_Recuperacion = Codigo_Recuperacion;
+    }
+
+    public String getCodigo_Recuperacion() {
+        return Codigo_Recuperacion;
+    }
+
+    public void setCodigo_Recuperacion(String Codigo_Recuperacion) {
+        this.Codigo_Recuperacion = Codigo_Recuperacion;
     }
 
     public String getMatricula() {

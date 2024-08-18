@@ -11,8 +11,9 @@ public class Alumno {
     private int idGrupo;
     private String estado = "activo"; // Valor predeterminado
     private String nombreGrupo; // Nuevo campo
+    private String Codigo_Recuperacion;
 
-    public Alumno(String matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contraseña, int idGrupo, String estado, String nombreGrupo) {
+    public Alumno(String matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contraseña, int idGrupo, String estado, String nombreGrupo, String Codigo_Recuperacion) {
         this.matricula = matricula;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -22,8 +23,10 @@ public class Alumno {
         this.idGrupo = idGrupo;
         this.estado = estado;
         this.nombreGrupo = nombreGrupo;
+        this.Codigo_Recuperacion = Codigo_Recuperacion;
     }
-    //Constructor para los inserts xd
+
+    // Constructor para los inserts
     public Alumno(String matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contraseña, int idGrupo, String estado) {
         this.matricula = matricula;
         this.nombre = nombre;
@@ -35,7 +38,7 @@ public class Alumno {
         this.estado = estado;
     }
 
-    // Constructor, getters y setters
+    // Constructor vacío
     public Alumno() {
         // Otros campos inicializados aquí
     }
@@ -44,29 +47,68 @@ public class Alumno {
     }
 
     // Getters y setters
-    public String getMatricula() { return matricula; }
-    public void setMatricula(String matricula) { this.matricula = matricula; }
+    public String getCodigo_Recuperacion() {
+        return Codigo_Recuperacion;
+    }
+    public void setCodigo_Recuperacion(String Codigo_Recuperacion) {
+        this.Codigo_Recuperacion = Codigo_Recuperacion;
+    }
 
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    public String getMatricula() {
+        return matricula;
+    }
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
 
-    public String getApellidoPaterno() { return apellidoPaterno; }
-    public void setApellidoPaterno(String apellidoPaterno) { this.apellidoPaterno = apellidoPaterno; }
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-    public String getApellidoMaterno() { return apellidoMaterno; }
-    public void setApellidoMaterno(String apellidoMaterno) { this.apellidoMaterno = apellidoMaterno; }
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
+    }
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
 
-    public String getCorreo() { return correo; }
-    public void setCorreo(String correo) { this.correo = correo; }
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
+    }
 
-    public String getContraseña() { return contraseña; }
-    public void setContraseña(String contraseña) { this.contraseña = contraseña; }
+    public String getCorreo() {
+        return correo;
+    }
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 
-    public int getIdGrupo() { return idGrupo; }
-    public void setIdGrupo(int idGrupo) { this.idGrupo = idGrupo; }
+    public String getContraseña() {
+        return contraseña;
+    }
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
 
-    public String getEstado() { return estado; }
-    public void setEstado(String estado) { this.estado = estado; }
+    public int getIdGrupo() {
+        return idGrupo;
+    }
+    public void setIdGrupo(int idGrupo) {
+        this.idGrupo = idGrupo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
     public String getNombreGrupo() {
         return nombreGrupo;
