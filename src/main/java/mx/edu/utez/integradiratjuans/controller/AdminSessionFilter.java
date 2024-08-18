@@ -11,6 +11,7 @@ import java.io.IOException;
 @WebFilter(urlPatterns = {
         "/Admin/error.jsp",
         "/Admin/indexAdmin.jsp",
+        "/Admin/indexAdmin.jsp",
         "/Admin/navbar.jsp",
         "/Admin/registarAlumno.jsp",
         "/Admin/registrarAdmin.jsp",

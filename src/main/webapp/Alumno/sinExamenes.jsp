@@ -71,6 +71,12 @@
     footer {
         margin-top: 15px;
     }
+
+    .line{
+        max-width: 80%;
+        width: 500px;
+    }
+
 </style>
 </body>
 
@@ -85,9 +91,9 @@
 <div class="container">
     <div class="card">
         <p class="text-center">¡Felicidades, vas al dia con tus examenes!</p>
-        <img src="../img/line.png">
+        <img src="../img/line.png" class="line">
 
-        <a href="alumno.html" class="btn btn-custom">Volver</a>
+        <a href="indexAlumno.jsp" class="btn btn-custom">Volver</a>
     </div>
 </div>
 

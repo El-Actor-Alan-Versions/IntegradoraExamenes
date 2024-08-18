@@ -102,6 +102,7 @@
 
         .dropdown {
             position: relative;
+            margin-right: 30px;
         }
 
         .dropdown-menu {
@@ -137,14 +138,7 @@
             text-transform: uppercase;
         }
 
-        /* Nueva clase para el contenedor de los elementos */
-        .custom-card-invisible {
-            background-color: transparent; /* Fondo invisible */
-            border: none; /* Sin borde */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+
 
     </style>
 </head>
@@ -157,19 +151,15 @@
     <div class="d-flex flex-grow-1 justify-content-center">
         <p class="navbar-text">PLATAFORMA DE EXÁMENES</p>
     </div>
-    <div class="custom-card-invisible">
-        <a href="indexAdmin.jsp" class="custom-button">
-            <img src="../img/home.png" alt="perfil">
-        </a>
 
-        <div class="dropdown" title="Inicio" >
-            <button class="btn-secondary dropdown-toggle" title="Inicio" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Mi perfil
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a>
-                <a class="dropdown-item" href="">Modificar perfil</a>
-            </div>
+    <div class="dropdown" title="Inicio" >
+        <button class="btn-secondary dropdown-toggle" title="Inicio" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Menú
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="indexAdmin.jsp">Inicio</a>
+            <a class="dropdown-item" href="">Modificar perfil</a>
+            <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a>
         </div>
     </div>
 </nav>

@@ -42,7 +42,7 @@
 
             // Verificar si se obtuvieron exámenes
             if (examenes == null || examenes.isEmpty()) {
-                request.setAttribute("mensaje", "No hay exámenes disponibles.");
+                request.getRequestDispatcher("sinExamenes.jsp").forward(request, response);
             } else {
                 request.setAttribute("examenes", examenes);
             }
