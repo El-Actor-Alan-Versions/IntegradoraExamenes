@@ -1,17 +1,18 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recuperar Contraseña</title>
+    <title>Plataforma de exámenes</title>
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" >
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-utilities.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/recuperacion.css">
-
 </head>
 <body>
+
 <header class="py-3 position-relative">
     <div class="container d-flex justify-content-between align-items-center">
         <div class="col-custom text-end">
@@ -24,13 +25,13 @@
 </header>
 <img src="IMG2/Rectangle 30.png" alt="rectangulo" class="rectangulo">
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <h2 class="text-center mt-5">Solicitud de Recuperación de contraseña</h2>
-            <form method="post" action="recuContra" class="mt-4">
+    <div class="form text-center d-flex justify-content-center align-items-center vh-100">
+        <div class="text-center">
+            <img src="img/contrasena.png" alt="profile icon" class="profile-icon">
+            <p>SOLICITUD PARA CAMBIAR CONTRASEÑA</p>
+            <form method="post" action="recuContra" >
                 <div class="form-group mb-3">
-                    <label for="correo">Ingrese su correo:</label>
-                    <input type="email" class="form-control" id="correo" name="correo" required>
+                    <input type="email" required class="form-control rounded-pill text-center" name="correo" id="correo"   placeholder="INGRESE SU CORREO" >
                 </div>
                 <%
                     HttpSession sesion = request.getSession();
@@ -40,10 +41,9 @@
                     if(mensaje != null){ %>
                 <p class="text-danger"><%=mensaje%></p>
                 <% } %>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-dark botonesApp btn-block">Solicitar</button>
+                <div class="form-floating mt-3">
+                    <button type="submit" class="btn rounded-pill" id="Solicitar" value="Solicitar"> SOLICITAR</button>
                 </div>
-
             </form>
         </div>
     </div>
