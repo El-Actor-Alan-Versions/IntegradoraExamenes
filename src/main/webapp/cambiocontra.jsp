@@ -35,7 +35,7 @@
                 </div>
                 <input type="hidden" name="codigo" value="<%= request.getParameter("codigo") %>">
                 <div class="form-floating mt-3">
-                    <button type="submit" class="btn rounded-pill" id="Cambiar" value="Cambiar"> ENVIAR</button>
+                    <button type="submit" class="btn rounded-pill" id="Cambiar" value="Cambiar"> CAMBIAR</button>
                 </div>
             </form>
         </div>

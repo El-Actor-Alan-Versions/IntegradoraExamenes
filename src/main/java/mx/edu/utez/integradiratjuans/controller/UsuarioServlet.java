@@ -71,7 +71,7 @@ public class UsuarioServlet extends HttpServlet {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            req.getSession().setAttribute("mensaje", "Error en la base de datos");
+            req.getSession().setAttribute("mensaje", "Credenciales incorrectas");
             ruta = "index.jsp";
         }
 
