@@ -91,8 +91,7 @@
                     <th>Fecha de Aplicación</th>
                     <th>Fecha de Cierre</th>
                     <th>Grado_Grupo</th>
-                    <th>Actualizar</th>
-                    <th>Eliminar</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -118,15 +117,7 @@
                     <td><%= fechaAplicacion != null ? sdf.format(fechaAplicacion) : "N/A" %></td>
                     <td><%= fechaCierre != null ? sdf.format(fechaCierre) : "N/A" %></td>
                     <td><%= gradoGrupo %></td>
-                    <td>
-                        <a href="modificarExamen.jsp?id_examen=<%= examen.getId_examen() %>" class="btn btn-act">Modificar</a>
-                    </td>
-                    <td>
-                        <form method="post" action="eliminarExamenServlet">
-                            <input type="hidden" name="id_examen" value="<%= examen.getId_examen() %>">
-                            <button type="submit" class="btn btn-del" onclick="return confirmarEliminacion()">Eliminar</button>
-                        </form>
-                    </td>
+
                 </tr>
                 <%
                     }

@@ -7,9 +7,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DatabaseConnectionManager {
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/integradoraExamenes_P2";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
+    private static final String JDBC_URL = "jdbc:mysql://dbintegradora.clxgooeofek1.us-east-1.rds.amazonaws.com:3306/integradoraExamenes_P2";
+    private static final String USERNAME = "admin";
+    private static final String PASSWORD = "alanXDlol1-alan";
     private static final HikariConfig config = new HikariConfig();
     private static final HikariDataSource dataSource;
 
