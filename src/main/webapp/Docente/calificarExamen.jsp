@@ -134,17 +134,26 @@
             </div>
 
             <!-- Campo para que el profesor indique si la respuesta es correcta o no -->
-            <div class="col-md-4 d-flex align-items-center">
                 <div class="form-group w-100">
                     <label for="calificacion_<%= pregunta.getIdPregunta() %>">Calificación:</label>
                     <input type="hidden" name="pregunta_<%= pregunta.getIdPregunta() %>" value="<%= respuestaAlumno != null ? respuestaAlumno.getIdRespuesta() : "" %>">
-                    <input type="number" id="calificacion_<%= pregunta.getIdPregunta() %>" name="calificacion_<%= pregunta.getIdPregunta() %>"
-                           value="<%= esCorrecta ? 1 : 0 %>"
-                           min="0" max="1" class="form-control">
+
+                    <div>
+                        <label>
+                            <input type="radio" id="correcto_<%= pregunta.getIdPregunta() %>" name="calificacion_<%= pregunta.getIdPregunta() %>" value="1" <%= esCorrecta ? "checked" : "" %>>
+                            Correcto
+                        </label>
+                    </div>
+
+                    <div>
+                        <label>
+                            <input type="radio" id="incorrecto_<%= pregunta.getIdPregunta() %>" name="calificacion_<%= pregunta.getIdPregunta() %>" value="0" <%= !esCorrecta ? "checked" : "" %>>
+                            Incorrecto
+                        </label>
+                    </div>
                 </div>
+
             </div>
-            </div>
-        </div>
         <% } %>
         <button type="submit" class="btn btn-primary">Guardar Calificaciones</button>
     </form>

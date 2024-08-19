@@ -123,6 +123,7 @@ public class ExamenDao {
                     examen.setFecha_cierre(resultSet.getTimestamp("fecha_cierre"));
                     examen.setId_clase(resultSet.getInt("id_clase"));
 
+                    System.out.println("Examen encontrado: " + examen.getNombre());
                     examenes.add(examen);
                 }
             }
