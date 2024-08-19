@@ -10,7 +10,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="Ubuntu el servlet" />
+    <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="Ubuntu el servlet">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_07_2024_03_49_a__m___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_07_2024_03_49_a__m___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_07_2024_12_17_a__m___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_07_2024_12_17_a__m___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_31_07_2024_01_57_p__m___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_31_07_2024_01_57_p__m___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_31_07_2024_12_10_p__m___Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_31_07_2024_12_10_p__m___Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verAdmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verAdmin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verCarreras.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verCarreras.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verClases.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verClases.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verDivisiones.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verDivisiones.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verDocente.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verDocente.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verGrupos.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verGrupos.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Admin/verMaterias.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Admin/verMaterias.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Alumno/verCalificaciones.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Alumno/verCalificaciones.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Alumno/verExamenes.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Alumno/verExamenes.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/VerExamenes.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/VerExamenes.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/verCalificaciones.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/verCalificaciones.jsp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -354,6 +371,7 @@
       <workItem from="1723860191442" duration="1811000" />
       <workItem from="1723868919516" duration="1123000" />
       <workItem from="1723942741032" duration="5591000" />
+      <workItem from="1724041054263" duration="2591000" />
     </task>
     <servers />
   </component>

@@ -33,7 +33,6 @@
             <table id="example" class="table table-custom">
                 <thead>
                 <tr>
-                    <th>ID Carrera</th>
                     <th>Nombre de la Carrera</th>
                     <th>ID División</th>
                     <th>Actualizar</th>
@@ -48,7 +47,6 @@
                         for (Carrera c : lista) {
                 %>
                 <tr>
-                    <td><%= c.getId_carrera() %></td>
                     <td><%= c.getNombre_carrera() %></td>
                     <td><%= c.getId_division() %></td>
                     <td>

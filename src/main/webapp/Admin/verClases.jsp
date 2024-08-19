@@ -39,7 +39,6 @@
             <table id="example" class="table table-custom">
                 <thead>
                 <tr>
-                    <th>ID Clase</th>
                     <th>Grupo</th>
                     <th>Materia</th>
                     <th>Docente</th>
@@ -65,7 +64,6 @@
                             Docente docente = docenteDao.getById(c.getMatricula());
                 %>
                 <tr>
-                    <td><%= c.getId_clase() %></td>
                     <td><%= grupo.getGradoGrupo() %></td>
                     <td><%= materia.getNombreMateria() %></td>
                     <td><%= docente.getNombre() %> <%= docente.getApellidoPaterno() %> <%= docente.getApellidoMaterno() %></td>

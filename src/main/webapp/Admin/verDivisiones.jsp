@@ -32,7 +32,6 @@
             <table id="example" class="table table-custom">
                 <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Nombre de División</th>
                     <th>Actualizar</th>
                     <th>Eliminar</th>
@@ -46,7 +45,6 @@
                         for (Division d : lista) {
                 %>
                 <tr>
-                    <td><%= d.getIdDivision() %></td>
                     <td><%= d.getNombreDivision() %></td>
                     <td>
                         <a href="registrarDivision.jsp?idDivision=<%= d.getIdDivision() %>" class="btn btn-act">Modificar</a>

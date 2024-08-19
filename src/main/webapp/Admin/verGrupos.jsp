@@ -33,7 +33,6 @@
             <table id="example" class="table table-custom">
                 <thead>
                 <tr>
-                    <th>ID Grupo</th>
                     <th>Grado Grupo</th>
                     <th>Carrera</th>
                     <th>Actualizar</th>
@@ -48,7 +47,6 @@
                         for (Grupo g : lista) {
                 %>
                 <tr>
-                    <td><%= g.getIdGrupo() %></td>
                     <td><%= g.getGradoGrupo() %></td>
                     <td><%= g.getNombreCarrera() %></td>
                     <td>

@@ -202,7 +202,7 @@
                 <th>Fecha de Aplicación</th>
                 <th>Fecha de Cierre</th>
                 <th>Grado_Grupo</th>
-                <th>Acciones</th>
+
             </tr>
             </thead>
             <tbody>
@@ -228,12 +228,6 @@
                 <td><%= fechaAplicacion != null ? sdf.format(fechaAplicacion) : "N/A" %></td>
                 <td><%= fechaCierre != null ? sdf.format(fechaCierre) : "N/A" %></td>
                 <td><%= gradoGrupo %></td>
-                <td>
-                    <form action="EditarExamenServlet" method="post">
-                        <input type="hidden" name="id_examen" value="<%= examen.getId_examen() %>">
-                        <button type="submit" class="btn btn-del">Modificar</button>
-                    </form>
-                </td>
             </tr>
             <%
                 }

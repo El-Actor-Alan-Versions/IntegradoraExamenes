@@ -61,7 +61,6 @@
             <table id="calificacionesTable" class="table table-custom">
                 <thead class="thead-dark">
                 <tr>
-                    <th>ID Calificación</th>
                     <th>Matrícula Alumno</th>
                     <th>Nombre Examen</th>
                     <th>Calificación</th>
@@ -86,7 +85,6 @@
                             }
                 %>
                 <tr>
-                    <td><%= c.getIdCalificacion() %></td>
                     <td><%= c.getMatriculaAlumno() %></td>
                     <td><%= c.getNombreExamen() %></td>
                     <td class="<%= colorClass %>"><%= calificacion %></td>

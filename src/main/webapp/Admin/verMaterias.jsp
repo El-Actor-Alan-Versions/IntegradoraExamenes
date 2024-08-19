@@ -34,7 +34,6 @@
             <table id="example" class="table table-custom">
                 <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Nombre de Materia</th>
                     <th class="column-actualizar">Actualizar</th>
                     <th class="column-eliminar">Eliminar</th>
@@ -48,7 +47,6 @@
                         for (Materia m : lista) {
                 %>
                 <tr>
-                    <td><%= m.getIdMateria() %></td>
                     <td><%= m.getNombreMateria() %></td>
                     <td>
                         <a href="registrarMateria.jsp?idMateria=<%=m.getIdMateria() %>" class="btn btn-act">Modificar</a>

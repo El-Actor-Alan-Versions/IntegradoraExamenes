@@ -33,7 +33,7 @@
             <table id="example" class="table table-custom">
                 <thead>
                 <tr>
-                    <th>Matrícula</th>
+                    <th>Clave de empleado</th>
                     <th>Nombre</th>
                     <th>Apellido Paterno</th>
                     <th>Apellido Materno</th>

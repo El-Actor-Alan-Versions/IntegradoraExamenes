@@ -23,6 +23,26 @@
         .table tbody td {
             color: black; /* Asegura que el texto del cuerpo de la tabla sea negro */
         }
+
+        /* Custom CSS to fix overlapping issue */
+        .dataTables_wrapper .dataTables_length {
+            display: flex;
+            align-items: center;
+        }
+
+        .dataTables_wrapper .dataTables_length label {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem; /* Add a small gap between elements */
+        }
+
+        .dataTables_wrapper .dataTables_length select {
+            margin-left: 0;
+            margin-right: 0;
+            padding: 0.25rem; /* Adjust the padding */
+            border-radius: 0.2rem; /* Adjust the border radius */
+            font-size: 0.9rem; /* Slightly decrease font size */
+        }
     </style>
 </head>
 <!-- Incluir el JS de Bootstrap y dependencias -->
