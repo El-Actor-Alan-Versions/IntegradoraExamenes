@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 
@@ -15,8 +14,8 @@ body{
     text-align: center;
     color: black;
     border: none;
-    width: 370px;  /* Ancho ajustado */
-    height: 48px;  /* Altura ajustada */
+    width: 370px;  /* Ancho ajustado /
+    height: 48px;  / Altura ajustada /
     font-size: 16px;
     font-weight: bold;
 }
@@ -37,20 +36,20 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Asegura que el contenedor ocupe toda la altura de la ventana */
-    flex-direction: column; /* Alinea los elementos en columna */
+    height: 100vh; / Asegura que el contenedor ocupe toda la altura de la ventana /
+    flex-direction: column; / Alinea los elementos en columna /
 }
 
 .form-group {
     display: flex;
-    justify-content: center; /* Centra horizontalmente el input */
-    align-items: center; /* Asegura la alineación vertical */
-    width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+    justify-content: center; / Centra horizontalmente el input /
+    align-items: center; / Asegura la alineación vertical /
+    width: 100%; / Asegura que ocupe todo el ancho del contenedor /
 }
 
 form {
-    width: 100%; /* Asegura que el formulario ocupe todo el ancho disponible */
-    max-width: 400px; /* Limita el ancho máximo del formulario */
+    width: 100%; / Asegura que el formulario ocupe todo el ancho disponible /
+    max-width: 400px; / Limita el ancho máximo del formulario */
 }
 
 
@@ -90,7 +89,6 @@ header{
     position: absolute;
     left: 80%;
 }
-
 .col-custom {
     width: 70%;
 }
@@ -133,9 +131,9 @@ header{
 
 .rectangulo3 {
     position: absolute;
-    bottom:-35%; /* Ajusta esta posición relativa a rectangulo2 */
+    bottom:-35%; /* Ajusta esta posición relativa a rectangulo2 /
     right: -10px;
-    width: 15%; /* Ajusta el tamaño según sea necesario */
+    width: 15%; / Ajusta el tamaño según sea necesario */
     height: auto;
     z-index: -1;
 }
