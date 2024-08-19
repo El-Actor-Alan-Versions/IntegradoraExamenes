@@ -10,10 +10,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="Ubuntu el servlet">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/calificarExamen.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/calificarExamen.jsp" afterDir="false" />
-    </list>
+    <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="Ubuntu el servlet" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
