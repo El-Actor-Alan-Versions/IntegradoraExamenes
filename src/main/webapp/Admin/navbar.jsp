@@ -109,8 +109,8 @@
             background-color: white; /* Mantener el fondo del dropdown transparente */
             border: none; /* Sin borde en el contenedor del menú */
             max-width: 100%;
-            width: 50px;
-            margin-left: -30px; /* Ajuste para que quede más alineado a la derecha */
+            width: 220px;
+            margin-left: -50px; /* Ajuste para que quede más alineado a la derecha */
         }
 
         .dropdown-item {
@@ -158,7 +158,7 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="indexAdmin.jsp">Inicio</a>
-            <a class="dropdown-item" href="">Modificar perfil</a>
+            <a class="dropdown-item" href="cambiarContra.jsp">Contraseña</a>
             <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a>
         </div>
     </div>

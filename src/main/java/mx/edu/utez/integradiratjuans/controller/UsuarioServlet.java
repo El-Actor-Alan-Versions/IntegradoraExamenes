@@ -45,6 +45,7 @@ public class UsuarioServlet extends HttpServlet {
             if (admin != null) {
                 session.setAttribute("usuario", admin);
                 session.setAttribute("tipoSesion", "admin");
+                session.setAttribute("matriculaAdmin", admin.getMatricula());
                 ruta = "Admin/indexAdmin.jsp";
             } else if (alumno != null) {
                 session.setAttribute("usuario", alumno);

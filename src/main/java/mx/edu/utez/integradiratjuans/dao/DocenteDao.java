@@ -122,7 +122,7 @@ public class DocenteDao {
 
     public boolean update(Docente docente) {
         boolean update = false;
-        String query = "UPDATE docente SET Nombre = ?, Apellido_paterno = ?, Apellido_materno = ?, Correo = ?, Contraseña = ?, Codigo_recuperacion = ? WHERE Matricula = ?";
+        String query = "UPDATE docente SET Nombre = ?, Apellido_paterno = ?, Apellido_materno = ?, Correo = ?, Contraseña = ? WHERE Matricula = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -132,8 +132,7 @@ public class DocenteDao {
             ps.setString(3, docente.getApellidoMaterno());
             ps.setString(4, docente.getCorreo());
             ps.setString(5, docente.getContraseña()); // Asegúrate de que la contraseña esté hasheada
-            ps.setString(6, docente.getCodigo_Recuperacion()); // Actualiza el código de recuperación
-            ps.setString(7, docente.getMatricula());
+            ps.setString(6, docente.getMatricula());
 
             int rowsAffected = ps.executeUpdate();
 
@@ -146,6 +145,26 @@ public class DocenteDao {
         }
         return update;
     }
+
+    public boolean updateContra(String matricula, String nuevaContraseña) {
+        boolean updated = false;
+        String query = "UPDATE docente SET Contraseña = SHA2(?, 256) WHERE Matricula = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, nuevaContraseña);
+            ps.setString(2, matricula);
+
+            updated = ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return updated;
+    }
+
 
 
     public boolean updateContraseña(String matricula, String nuevaContraseña) {

@@ -66,11 +66,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        $('.dropdown-toggle').dropdown();
-    });
-</script>
 <body>
 <div id="navbar"></div>
 <script>
@@ -78,7 +73,9 @@
         .then(response => response.text())
         .then(data => {
             document.getElementById('navbar').innerHTML = data;
+            $('.dropdown-toggle').dropdown();  // Inicializar el dropdown manualmente
         });
+
 </script>
 <div class="container">
     <div id="card-title" class="card">
