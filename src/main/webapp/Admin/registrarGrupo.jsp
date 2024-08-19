@@ -29,7 +29,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
     <title><%= action.equals("update") ? "Actualizar" : "Registrar" %> Grupo</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
@@ -71,6 +71,11 @@
             width: 70%;
             box-sizing: border-box;
         }
+
+
+        .input-group{
+            margin-right: 10%;
+         }
 
         .label-input-group {
             display: flex;
@@ -133,6 +138,7 @@
                 flex-direction: column;
                 align-items: flex-start;
                 width: 100%;
+                margin-right: 10%;
             }
 
             label {
@@ -145,7 +151,19 @@
                 width: 100%;
             }
         }
-    </style></head>
+    </style>
+
+    <!-- Incluir el JS de Bootstrap y dependencias -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.dropdown-toggle').dropdown();
+        });
+    </script>
+</head>
 <body>
 <div id="navbar"></div>
 <script>
@@ -214,8 +232,11 @@
             .catch(error => console.error('Error:', error));
     });
 </script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- Incluir el JS de Bootstrap y dependencias -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 </body>
 </html>

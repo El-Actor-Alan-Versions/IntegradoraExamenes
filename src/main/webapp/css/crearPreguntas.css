@@ -55,34 +55,16 @@ body{
     background-color: #97e6d4;
 }
 
-.btn-vista {
-    border-radius: 20px;
-    font-weight: 530;
-    width: 150px; /* Tamaño fijo */
-    padding: 0.5em;
-    box-sizing: border-box;
-}
 
-.btn-agr {
-    background-color: #85C5B7;
-}
 
-.btn-vista {
-    background-color: #BAF1B4;
-}
+
 
 @media (max-width: 768px) {
-    .btn-agr{
+    .btn{
         margin-left: 20px;
-        width: 150px;
+        width: 34px;
     }
-    .btn-vista {
-        width: 150px;
-    }
-    .btn-si{
-        margin-left: 20px;
-        width: 120px;
-    }
+
 }
 
 
@@ -122,7 +104,7 @@ footer{
 }
 /* Efecto de la linea */
 .form-input:focus {
-    border-bottom-color: #6200EE;
+    border-bottom-color: #7cead0;
 }
 
 /* select */
@@ -150,6 +132,14 @@ select{
 option{
     font-family: 'PT Sans';
     font-weight: 800;
+}
+
+.no-outline:focus {
+    outline: none;
+}
+
+.btn:focus {
+    outline: none;
 }
 
 

@@ -148,7 +148,7 @@
         <% } %>
         <button type="submit" class="btn btn-primary">Guardar Calificaciones</button>
     </form>
-    <% } else { %>
+    <% } else { %>1
     <p>No se encontraron preguntas para este examen.</p>
     <% } %>
 </div>

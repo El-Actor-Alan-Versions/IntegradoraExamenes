@@ -75,155 +75,18 @@
         };
     </script>
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-        body{
-            font-family: 'PT Sans';
-            justify-content: center;
-            align-items: center;
-            background: #EEEEEE;
-            width: 100%;
-            height: 100%;
-        }
-
-        .container{
-            margin-top: 20px;
-        }
-
-        /* Titulo */
-        .header-card{
-            background-color: #97E3D2;
-            display: flex;
-            width: 100%;
-            height: 12px;
-            border-top-left-radius: 6px;
-            border-top-right-radius: 6px;
-        }
-
-        .title-prg{
-            font-size: 32px;
-            font-weight: 500;
-        }
-
-        /* Todas las cards */
-        .card{
-            margin: auto;
-            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-            width: 100%;
-            max-width: 700px;
-            margin-bottom: 20px;
-        }
-        /* Botones */
-        .btn-agr{
-            border-radius: 20px;
-            font-weight: 530;
-            width: 150px; /* Tamaño fijo */
-            padding: 0.5em;
-            box-sizing: border-box;
-        }
-
-        .btn-si{
-            border-radius: 20px;
-            font-weight: 530;
-            width: 150px; /* Tamaño fijo */
-            padding: 0.5em;
-            box-sizing: border-box;
-            background-color: #97e6d4;
-        }
-
-
-
-
-
-        @media (max-width: 768px) {
-            .btn{
-                margin-left: 20px;
-                width: 34px;
-            }
-
-        }
-
-
-        footer{
-            height: 20%;
-        }
-
-        /* Cards restantes */
-        .body{
-            width: 100%;
-        }
-
-
-
-        .bord-label{
-            margin-top: 40px;
-        }
-
-        .input-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .form-label {
-            margin-right: 10px;
-            font-weight: 500;
-            margin-top: 8px;
-        }
-
-        .form-input {
-            flex-grow: 1;
-            border: none;
-            border-bottom: 2px solid #ccc;
-            outline: none;
-            font-size: 16px;
-        }
-        /* Efecto de la linea */
-        .form-input:focus {
-            border-bottom-color: #7cead0;
-        }
-
-        /* select */
-        .form-control{
-            border-radius: 6px;
-            color: gray;
-            font-weight: 600;
-        }
-
-        select{
-            border-radius: 6px;
-            color: gray;
-            font-weight: 600;
-            background-color: #fff; /* Asegúrate de que el fondo sea blanco */
-            background-image: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="none" stroke="%23222" stroke-width="2" d="M5 7l5 5 5-5"/></svg>'); /* Flecha personalizada */
-            background-repeat: no-repeat;
-            background-position: right 10px center; /* Posición de la flecha */
-            background-size: 12px 12px; /* Tamaño de la flecha */
-            padding-right: 30px; /* Espacio para la flecha */
-            appearance: none; /* Elimina el estilo predeterminado del navegador */
-            -webkit-appearance: none; /* Para Safari */
-            -moz-appearance: none; /* Para Firefox */
-        }
-
-        option{
-            font-family: 'PT Sans';
-            font-weight: 800;
-        }
-
-        .no-outline:focus {
-            outline: none;
-        }
-
-        .btn:focus {
-            outline: none;
-        }
-
-
-
-    </style>
 </head>
+<!-- Incluir el JS de Bootstrap y dependencias -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.dropdown-toggle').dropdown();
+    });
+</script>
 <body>
 <div id="navbar"></div>
 <script>

@@ -74,7 +74,7 @@ public class UsuarioServlet extends HttpServlet {
             } else {
                 // Si no coincide con ningún usuario, mostrar mensaje de error y redirigir a login
                 session.setAttribute("mensaje", "Credenciales incorrectas");
-                ruta = "login.jsp"; // Redirigir a la página de login
+                ruta = "index.jsp"; // Redirigir a la página de login
             }
         } catch (SQLException e) {
             e.printStackTrace();
