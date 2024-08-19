@@ -10,17 +10,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:">
+    <list default="true" id="0f54b344-04b0-4fd3-a2f7-740cc706caf4" name="Changes" comment="Ubuntu el servlet">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/UpdateContraServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/UpdateContraServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/UsuarioServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/controller/UsuarioServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/AdministradorDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/AdministradorDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/AlumnoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/AlumnoDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/DocenteDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/dao/DocenteDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/utils/HashingUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/utils/HashingUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/cambiocontra.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/cambiocontra.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/utils/DatabaseConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/utils/DatabaseConnectionManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,13 +23,18 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="CSS File" />
         <option value="Jsp File" />
         <option value="Class" />
-        <option value="CSS File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="El-Acti" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -86,6 +84,7 @@
   &quot;keyToString&quot;: {
     &quot;Application.GmailSender.executor&quot;: &quot;Run&quot;,
     &quot;Application.mx.edu.utez.integradiratjuans.utils.GmailSender.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.calificarExamen.jsp.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;Tomcat Server.Tomcat 10.1.8.executor&quot;: &quot;Run&quot;,
@@ -93,7 +92,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/salem/IdeaProjects/SISOC_INTEGRADORA&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/walge/IdeaProjects/IntegradoraExamenes/src/main/webapp/Docente&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -115,7 +114,6 @@
       <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\img" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\salem\IdeaProjects\IntegradoraExamenes\src\main\resources\tokens" />
       <recent name="C:\Users\coke_\IdeaProjects\IntegradoraExamenes\src\main\webapp\img" />
       <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\Admin" />
       <recent name="C:\Users\walge\IdeaProjects\IntegradoraExamenes\src\main\webapp\Docente" />
@@ -258,8 +256,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
       </set>
     </attachedChunks>
   </component>
@@ -345,20 +343,21 @@
       <workItem from="1723182657515" duration="8031000" />
       <workItem from="1723213538936" duration="5702000" />
       <workItem from="1723227269701" duration="472000" />
-      <workItem from="1723229767381" duration="5252000" />
-      <workItem from="1723493998122" duration="660000" />
-      <workItem from="1723495390632" duration="388000" />
-      <workItem from="1723502780657" duration="222000" />
-      <workItem from="1723609104503" duration="420000" />
-      <workItem from="1723609530280" duration="1460000" />
-      <workItem from="1723776427589" duration="2019000" />
-      <workItem from="1723778865247" duration="219000" />
-      <workItem from="1723779086973" duration="13200000" />
-      <workItem from="1723862293937" duration="782000" />
-      <workItem from="1723929808315" duration="8141000" />
-      <workItem from="1723956166726" duration="3420000" />
-      <workItem from="1723959602780" duration="8946000" />
-      <workItem from="1724013112465" duration="21287000" />
+      <workItem from="1723496364149" duration="1536000" />
+      <workItem from="1723525644602" duration="1668000" />
+      <workItem from="1723568141380" duration="1810000" />
+      <workItem from="1723583587408" duration="633000" />
+      <workItem from="1723605811466" duration="8385000" />
+      <workItem from="1723646680628" duration="4588000" />
+      <workItem from="1723657823605" duration="2258000" />
+      <workItem from="1723814691153" duration="1207000" />
+      <workItem from="1723829275087" duration="646000" />
+      <workItem from="1723837221920" duration="836000" />
+      <workItem from="1723838811440" duration="1099000" />
+      <workItem from="1723841305648" duration="1823000" />
+      <workItem from="1723860191442" duration="1811000" />
+      <workItem from="1723868919516" duration="1123000" />
+      <workItem from="1723942741032" duration="5591000" />
     </task>
     <servers />
   </component>
@@ -400,6 +399,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creacion de examen junto con preguntas ademas de visualizasion previa ubuntu el servlet me consumio D:" />
+    <MESSAGE value="Ubuntu el servlet" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ubuntu el servlet" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/webapp/Admin/navbar.jsp</url>
+          <line>117</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

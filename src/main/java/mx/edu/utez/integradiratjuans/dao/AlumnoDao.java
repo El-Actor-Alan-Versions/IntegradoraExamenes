@@ -74,7 +74,7 @@ public class AlumnoDao {
         List<Alumno> alumnos = new ArrayList<>();
         String query = "SELECT a.*, g.Grado_grupo " +
                 "FROM alumno a " +
-                "JOIN Grupo g ON a.id_grupo = g.id_grupo";
+                "JOIN grupo g ON a.id_grupo = g.id_grupo";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
