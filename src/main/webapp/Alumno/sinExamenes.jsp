@@ -25,7 +25,6 @@
         border-radius: 8px;
         font-family: 'PT Sans';
         font-size: 48px;
-        font-weight: Regular;
         color: black;
         max-width: 90%;
         width: 1367px;
@@ -80,15 +79,7 @@
 </style>
 </body>
 <!-- Incluir el JS de Bootstrap y dependencias -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        $('.dropdown-toggle').dropdown();
-    });
-</script>
 <div id="navbar"></div>
 <script>
     fetch('navbar.jsp')
