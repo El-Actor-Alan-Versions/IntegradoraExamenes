@@ -32,7 +32,6 @@ public class UsuarioServlet extends HttpServlet {
         String nombreUsuario = req.getParameter("matricula");
         String contrasena = req.getParameter("contra");
 
-
         String ruta = "index.jsp"; // Página por defecto
 
         try {
@@ -43,38 +42,29 @@ public class UsuarioServlet extends HttpServlet {
 
             HttpSession session = req.getSession();
 
-
             if (admin != null) {
-                // Si es administrador, redirigir a vista de administrador
                 session.setAttribute("usuario", admin);
                 session.setAttribute("tipoSesion", "admin");
                 ruta = "Admin/indexAdmin.jsp";
             } else if (alumno != null) {
-                // Si es alumno, redirigir a vista de alumno
                 session.setAttribute("usuario", alumno);
-                session.setAttribute("matriculaAlumno", alumno.getMatricula()); // Establecer la matrícula del alumno en la sesión
-
+                session.setAttribute("matriculaAlumno", alumno.getMatricula());
 
                 int idGrupo = claseDao.getGrupoByAlumno(alumno.getMatricula());
                 int idClase = claseDao.getClasesByGrupo(idGrupo);
                 session.setAttribute("clase", idClase);
                 ruta = "Alumno/indexAlumno.jsp";
-
-
             } else if (docente != null) {
-                // Si es docente, redirigir a vista de docente
                 session.setAttribute("usuario", docente);
-                session.setAttribute("matriculaDocente", docente.getMatricula()); // Establecer la matrícula del docente en la sesión
+                session.setAttribute("matriculaDocente", docente.getMatricula());
 
-                // Obtener clases del docente y guardarlas en la sesión
                 List<Clase> clases = claseDao.getClasesByDocente(docente.getMatricula());
                 session.setAttribute("clases", clases);
 
                 ruta = "Docente/indexDocente.jsp";
             } else {
-                // Si no coincide con ningún usuario, mostrar mensaje de error y redirigir a login
                 session.setAttribute("mensaje", "Credenciales incorrectas");
-                ruta = "login.jsp"; // Redirigir a la página de login
+                ruta = "login.jsp";
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -4,31 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cambiar Contraseña</title>
-    <!-- Agrega Bootstrap CSS si no está incluido -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Plataforma de exámenes</title>
+    <link href="${pageContext.request.contextPath}/css/bootstrap.css" >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-utilities.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/cambioContra.css">
 </head>
 <body>
+
+<header class="py-3 position-relative">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div class="col-custom text-end">
+            <p class="m-0">PLATAFORMA DE EXÁMENES</p>
+        </div>
+        <div class="col text-end">
+            <img src="IMG2/Logo-utez .png" width="180px" height="auto" alt="logo">
+        </div>
+    </div>
+</header>
+
+<img src="IMG2/Rectangle 30.png" alt="rectangulo" class="rectangulo">
+
+
+
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <h2 class="text-center mt-5">Cambiar contraseña</h2>
+    <div class="form text-center d-flex justify-content-center align-items-center vh-100">
+        <div class="text-center">
+            <img src="img/contrasena.png" alt="profile icon" class="profile-icon">
+            <p>CAMBIO DE CONTRASEÑA</p>
             <form method="post" action="updateContra">
-                <div class="form-group">
-                    <label for="contraseña">Nueva Contraseña: </label>
-                    <input type="password" id="contraseña" name="contraseña" class="form-control" required>
+                <div class="form-group mb-3">
+                    <input type="password" required class="form-control rounded-pill text-center" name="contraseña" id="contraseña"   placeholder="CONTRASEÑA NUEVA">
                 </div>
                 <input type="hidden" name="codigo" value="<%= request.getParameter("codigo") %>">
-                <div class="text-center">
-                    <input type="submit" class="btn btn-dark btn-block" value="Cambiar">
+                <div class="form-floating mt-3">
+                    <button type="submit" class="btn rounded-pill" id="Cambiar" value="Cambiar"> ENVIAR</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<!-- Agrega Bootstrap JS si no está incluido -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<img src="IMG2/Rectangle 27.png" alt="rectangulo" class="rectangulo2">
+<img src="IMG2/Rectangle 29.png" alt="rectangulo" class="rectangulo3">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

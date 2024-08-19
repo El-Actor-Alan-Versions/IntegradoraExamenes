@@ -13,11 +13,11 @@ import java.util.List;
 public class DocenteDao {
 
     public Docente getOne(String matricula, String contrasena) throws SQLException {
-        String query = "SELECT * FROM Docente WHERE Matricula = ? AND Contraseña = SHA2(?, 256)";
+        String query = "SELECT * FROM docente WHERE Matricula = ? AND Contraseña = SHA2(?, 256)";
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, matricula);
-            statement.setString(2, contrasena); // La contraseña debe ser en texto plano
+            statement.setString(2, contrasena); // La contraseña será cifrada usando SHA2 en la consulta
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
@@ -28,7 +28,8 @@ public class DocenteDao {
                     docente.setApellidoMaterno(resultSet.getString("Apellido_materno"));
                     docente.setCorreo(resultSet.getString("Correo"));
                     docente.setContraseña(resultSet.getString("Contraseña"));
-                    docente.setEstado(resultSet.getString("Estado"));
+                    // Asegúrate de tener un método setEstado en la clase Docente si no existe
+                    docente.setEstado(resultSet.getString("estado"));
                     return docente;
                 }
             }
@@ -41,9 +42,10 @@ public class DocenteDao {
 
 
 
+
     public Docente getById(String matricula) {
         Docente docente = null;
-        String query = "SELECT * FROM Docente WHERE matricula = ?";
+        String query = "SELECT * FROM docente WHERE matricula = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -71,15 +73,14 @@ public class DocenteDao {
 
     public boolean insert(Docente docente) throws SQLException {
 
-        String correo = docente.getMatricula() + "@utez.edu.mx";
-        String query = "INSERT INTO Docente (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña, Estado) VALUES (?, ?, ?, ?, ?, SHA2(?, 256), ?)";
+        String query = "INSERT INTO docente (Matricula, Nombre, Apellido_paterno, Apellido_materno, Correo, Contraseña, Estado) VALUES (?, ?, ?, ?, ?, SHA2(?, 256), ?)";
         try (Connection connection = DatabaseConnectionManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, docente.getMatricula());
             statement.setString(2, docente.getNombre());
             statement.setString(3, docente.getApellidoPaterno());
             statement.setString(4, docente.getApellidoMaterno());
-            statement.setString(5, correo); // Se utiliza el correo generado o proporcionado
+            statement.setString(5, docente.getCorreo()); // Se utiliza el correo generado o proporcionado
             statement.setString(6, docente.getContraseña()); // Contraseña en texto plano, será encriptada en la consulta
             statement.setString(7, docente.getEstado() != null ? docente.getEstado() : "activo");
             return statement.executeUpdate() > 0;
@@ -88,7 +89,7 @@ public class DocenteDao {
 
 
     public void updateEstado(String matricula, String nuevoEstado) throws SQLException {
-        String query = "UPDATE Docente SET Estado = ? WHERE Matricula = ?";
+        String query = "UPDATE docente SET Estado = ? WHERE Matricula = ?";
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, nuevoEstado);
@@ -98,7 +99,7 @@ public class DocenteDao {
     }
 
     public List<Docente> getAll() throws SQLException {
-        String query = "SELECT * FROM Docente";
+        String query = "SELECT * FROM docente";
         List<Docente> docentes = new ArrayList<>();
         try (Connection connection = DatabaseConnectionManager.getConnection();
              Statement statement = connection.createStatement();
@@ -121,7 +122,7 @@ public class DocenteDao {
 
     public boolean update(Docente docente) {
         boolean update = false;
-        String query = "UPDATE Docente SET Nombre = ?, Apellido_paterno = ?, Apellido_materno = ?, Correo = ?, Contraseña = ?, Codigo_recuperacion = ? WHERE Matricula = ?";
+        String query = "UPDATE docente SET Nombre = ?, Apellido_paterno = ?, Apellido_materno = ?, Correo = ?, Contraseña = ?, Codigo_recuperacion = ? WHERE Matricula = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -130,7 +131,7 @@ public class DocenteDao {
             ps.setString(2, docente.getApellidoPaterno());
             ps.setString(3, docente.getApellidoMaterno());
             ps.setString(4, docente.getCorreo());
-            ps.setString(5, HashingUtils.hashPassword(docente.getContraseña())); // Asegúrate de que la contraseña esté hasheada
+            ps.setString(5, docente.getContraseña()); // Asegúrate de que la contraseña esté hasheada
             ps.setString(6, docente.getCodigo_Recuperacion()); // Actualiza el código de recuperación
             ps.setString(7, docente.getMatricula());
 
@@ -147,10 +148,31 @@ public class DocenteDao {
     }
 
 
+    public boolean updateContraseña(String matricula, String nuevaContraseña) {
+        boolean updated = false;
+        String query = "UPDATE docente SET Contraseña = SHA2(?, 256), Codigo_recuperacion = NULL WHERE Matricula = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, nuevaContraseña);
+            ps.setString(2, matricula);
+
+            updated = ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return updated;
+    }
+
+
+
 
     public Docente getByEmail(String email) {
         Docente d = null;
-        String query = "SELECT * FROM Docente WHERE correo = ?";
+        String query = "SELECT * FROM docente WHERE correo = ?";
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, email);
@@ -169,7 +191,7 @@ public class DocenteDao {
 
     public boolean updateCodigoRecuperacion(Docente d) {
         boolean flag = false;
-        String query = "UPDATE Docente SET codigo_recuperacion = ? WHERE matricula = ?";
+        String query = "UPDATE docente SET codigo_recuperacion = ? WHERE matricula = ?";
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, d.getCodigo_Recuperacion());
@@ -183,33 +205,12 @@ public class DocenteDao {
         return flag;
     }
 
-    public boolean updateContraseña(Docente docente) {
-        boolean flag = false;
-        String query = "UPDATE Docente SET Contraseña = ?, codigo_recuperacion = NULL WHERE Matricula = ?";
-
-        try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
-
-            // Encriptar la contraseña antes de actualizar
-            String contrasenaEncriptada = HashingUtils.hashPassword(docente.getContraseña());
-            ps.setString(1, contrasenaEncriptada);
-            ps.setString(2, docente.getMatricula());
-
-            int rowsAffected = ps.executeUpdate();
-            if (rowsAffected > 0) {
-                flag = true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return flag;
-    }
 
 
 
     public Docente getByCodigoRecuperacion(String codigo) {
         Docente d = null;
-        String query = "SELECT * FROM Docente WHERE Codigo_recuperacion = ?";
+        String query = "SELECT * FROM docente WHERE Codigo_recuperacion = ?";
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, codigo);

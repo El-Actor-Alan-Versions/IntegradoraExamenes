@@ -12,7 +12,6 @@ import mx.edu.utez.integradiratjuans.model.Administrador;
 import mx.edu.utez.integradiratjuans.model.Docente;
 import mx.edu.utez.integradiratjuans.model.Alumno;
 import mx.edu.utez.integradiratjuans.utils.GmailSender;
-import mx.edu.utez.integradiratjuans.utils.HashingUtils;
 
 import java.io.IOException;
 
@@ -22,8 +21,8 @@ public class UpdateContraServlet extends HttpServlet {
     private final DocenteDao docenteDao = new DocenteDao();
     private final AlumnoDao alumnoDao = new AlumnoDao();
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 1. Obtener nueva contraseña
         String nuevaContra = request.getParameter("contraseña");
         if (nuevaContra == null || nuevaContra.trim().isEmpty()) {
             request.getSession().setAttribute("mensaje", "La contraseña no puede estar vacía.");
@@ -31,21 +30,13 @@ public class UpdateContraServlet extends HttpServlet {
             return;
         }
 
-        // Hash de la nueva contraseña
-        String nuevaContraHash;
-        try {
-            nuevaContraHash = HashingUtils.hashPassword(nuevaContra);
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.getSession().setAttribute("mensaje", "Error al procesar la contraseña.");
+        String codigo = request.getParameter("codigo");
+        if (codigo == null || codigo.trim().isEmpty()) {
+            request.getSession().setAttribute("mensaje", "El código de recuperación no puede estar vacío.");
             response.sendRedirect("recuperacion.jsp");
             return;
         }
 
-        // 2. Obtener código
-        String codigo = request.getParameter("codigo");
-
-        // 3. Buscar al usuario en las tres tablas
         Administrador administrador = administradorDao.getByCodigoRecuperacion(codigo);
         Docente docente = docenteDao.getByCodigoRecuperacion(codigo);
         Alumno alumno = alumnoDao.getByCodigoRecuperacion(codigo);
@@ -57,34 +48,26 @@ public class UpdateContraServlet extends HttpServlet {
         }
 
         boolean exito = false;
+        String email = null;
 
-        // 4. Actualizar contraseña y código en la BD según el tipo de usuario
         if (administrador != null) {
-            administrador.setContraseña(nuevaContraHash); // Contraseña hasheada
-            administrador.setCodigo_Recuperacion(null); // Limpiar el código
-            exito = administradorDao.updateContraseña(administrador);
+            exito = administradorDao.updateContraseña(administrador.getMatricula(), nuevaContra);
+            email = administrador.getCorreo();
         } else if (docente != null) {
-            docente.setContraseña(nuevaContraHash); // Contraseña hasheada
-            docente.setCodigo_Recuperacion(null); // Limpiar el código
-            exito = docenteDao.updateContraseña(docente);
+            exito = docenteDao.updateContraseña(docente.getMatricula(), nuevaContra);
+            email = docente.getCorreo();
         } else if (alumno != null) {
-            alumno.setContraseña(nuevaContraHash); // Contraseña hasheada
-            alumno.setCodigo_Recuperacion(null); // Limpiar el código
-            exito = alumnoDao.updateContraseña(alumno);
+            exito = alumnoDao.updateContraseña(alumno.getMatricula(), nuevaContra);
+            email = alumno.getCorreo();
         }
 
-        // 5. Verificar si la actualización fue exitosa
         if (exito) {
             try {
-                String email = administrador != null ? administrador.getCorreo() :
-                        docente != null ? docente.getCorreo() :
-                                alumno.getCorreo();
                 new GmailSender().sendMail(email, "Contraseña actualizada", "Su contraseña ha sido actualizada correctamente.");
+                request.getSession().setAttribute("mensaje", "La contraseña ha sido actualizada exitosamente.");
             } catch (Exception e) {
                 e.printStackTrace();
                 request.getSession().setAttribute("mensaje", "Error al enviar el correo de confirmación.");
-                response.sendRedirect("recuperacion.jsp");
-                return;
             }
             response.sendRedirect("index.jsp");
         } else {
@@ -93,3 +76,7 @@ public class UpdateContraServlet extends HttpServlet {
         }
     }
 }
+
+
+
+

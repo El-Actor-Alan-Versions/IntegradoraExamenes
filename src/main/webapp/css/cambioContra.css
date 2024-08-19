@@ -11,8 +11,7 @@ body{
 
 
 
-
-#matricula {
+#email{
     border-radius: 50px;
     background-color: #7BCFBD;
     text-align: center;
@@ -25,7 +24,7 @@ body{
 }
 
 
-#contra{
+#contraseña {
     border-radius: 50px;
     background-color: #7BCFBD;
     text-align: center;
@@ -51,6 +50,7 @@ body{
     background-color: #7ecf6e;
     transform: scale(1.05);
 }
+
 
 
 .profile-icon {
@@ -120,9 +120,3 @@ header{
     height: auto;
     z-index: -1;
 }
-
-
-
-
-
-
