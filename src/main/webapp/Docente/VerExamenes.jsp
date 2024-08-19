@@ -54,7 +54,7 @@
         <div class="header-card">
             <img src="../img/calificaciones.png" width="68">
             <h2>Exámenes Disponibles</h2>
-            <button type="button" class="btn btn-conf" onclick="location.href='indexAdmin.jsp'">Volver</button>
+            <button type="button" class="btn btn-conf" onclick="location.href='indexDocente.jsp'">Volver</button>
         </div>
         <div class="card-body">
             <div class="form-container">

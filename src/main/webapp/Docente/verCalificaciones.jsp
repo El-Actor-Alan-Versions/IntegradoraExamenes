@@ -67,7 +67,7 @@
         <div class="header-card">
             <img src="${pageContext.request.contextPath}/img/calificaciones.png" alt="Calificaciones">
             <h2>Calificaciones por Docente</h2>
-            <button type="button" class="btn btn-conf" onclick="location.href='index.jsp'">Regresar</button>
+            <button type="button" class="btn btn-conf" onclick="location.href='indexDocente.jsp'">Regresar</button>
         </div>
         <div class="card-body">
             <table id="calificacionesTable" class="table table-custom">

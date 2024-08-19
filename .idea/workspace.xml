@@ -14,7 +14,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/utils/DatabaseConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/integradiratjuans/utils/DatabaseConnectionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/VerExamenes.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/VerExamenes.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/recuperacion.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/recuperacion.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Docente/verCalificaciones.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Docente/verCalificaciones.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
