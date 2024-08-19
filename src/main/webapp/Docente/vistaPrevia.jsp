@@ -53,7 +53,7 @@
             height: 20%;
         }
 
-        . btn-guardar{
+        .btn-guardar{
             border-radius: 20px;
             font-weight: 530;
             width: 150px;
@@ -90,6 +90,16 @@
         }
     </style>
 </head>
+<!-- Incluir el JS de Bootstrap y dependencias -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.dropdown-toggle').dropdown();
+    });
+</script>
 <body>
 <div id="navbar"></div>
 <script>

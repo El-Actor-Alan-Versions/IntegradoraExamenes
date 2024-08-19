@@ -17,6 +17,16 @@
 
 
 </head>
+<!-- Incluir el JS de Bootstrap y dependencias -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.dropdown-toggle').dropdown();
+    });
+</script>
 <body>
 <div id="navbar"></div>
 <script>
@@ -48,18 +58,6 @@
                         <img src="../img/mirarCalificaciones.png" class="text-center" width="68">
                         <h5 class="card-title">Mirar Calificaciones</h5>
                         <p class="card-text">Mira tus calificaciones de exámenes ya contestados.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-md-4 col-sm-6 text-center mb-4">
-            <!-- aqui va la direccion de la pagina -->
-            <a href="" class="button">
-                <div class="card">
-                    <div class="card-body">
-                        <img src="../img/modificarPerfil.png" class="text-center" width="68">
-                        <h5 class="card-title">Modificar Perfil</h5>
-                        <p class="card-text">Actualiza tu información personal y ajustes de cuenta.</p>
                     </div>
                 </div>
             </a>
