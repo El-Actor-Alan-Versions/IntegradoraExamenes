@@ -130,7 +130,7 @@ public class AlumnoDao {
 
     public boolean update(Alumno alumno) {
         boolean update = false;
-        String query = "UPDATE alumno SET Nombre = ?, Apellido_paterno = ?, Apellido_materno = ?, Correo = ?, Contraseña = ?, Id_grupo = ?, Codigo_recuperacion = ? WHERE Matricula = ?";
+        String query = "UPDATE alumno SET Nombre = ?, Apellido_paterno = ?, Apellido_materno = ?, Correo = ?, Contraseña = ?, Id_grupo = ? WHERE Matricula = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -155,6 +155,27 @@ public class AlumnoDao {
         }
         return update;
     }
+
+
+    public boolean updateContra(String matricula, String nuevaContraseña) {
+        boolean updated = false;
+        String query = "UPDATE alumno SET Contraseña = SHA2(?, 256) WHERE Matricula = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, nuevaContraseña);
+            ps.setString(2, matricula);
+
+            updated = ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return updated;
+    }
+
 
     public boolean updateContraseña(String matricula, String nuevaContraseña) {
         boolean updated = false;

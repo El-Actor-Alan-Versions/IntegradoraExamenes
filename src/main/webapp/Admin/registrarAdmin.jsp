@@ -42,7 +42,7 @@
         });
 </script>
 <div class="container">
-    <div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="d-flex justify-content-center align-items-center ">
         <div class="text-center">
             <form class="border-0 text-center" action="<%= action.equals("update") ? "ActualizarAdministradorServlet" : "RegistrarAdministradorServlet"%>" method="post">
                 <img src="../IMG2/login.png" alt="profile icon" class="profile-icon" width="174px">

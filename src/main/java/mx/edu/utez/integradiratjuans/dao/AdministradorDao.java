@@ -195,6 +195,26 @@ public class AdministradorDao {
         return updated;
     }
 
+    public boolean updateContra(String matricula, String nuevaContraseña) {
+        boolean updated = false;
+        String query = "UPDATE Administrador SET Contraseña = SHA2(?, 256) WHERE Matricula = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, nuevaContraseña);
+            ps.setString(2, matricula);
+
+            updated = ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return updated;
+    }
+
+
 
     public boolean update(Administrador administrador) {
         boolean updated = false;

@@ -109,8 +109,8 @@
             background-color: white; /* Mantener el fondo del dropdown transparente */
             border: none; /* Sin borde en el contenedor del menú */
             max-width: 100%;
-            width: 50px;
-            margin-left: -30px; /* Ajuste para que quede más alineado a la derecha */
+            width: 120px;
+            margin-left: -50px; /* Ajuste para que quede más alineado a la derecha */
         }
 
         .dropdown-item {
@@ -125,6 +125,9 @@
         .dropdown-item:hover {
             background-color: rgba(133, 197, 183, 0.3); /* Fondo de hover translúcido */
             color: #000; /* Color del texto en hover */
+            border: none; /* Asegura que no haya borde */
+            outline: none; /* También elimina cualquier contorno */
+            box-shadow: none; /* Elimina sombras que puedan parecer bordes */
         }
 
         .dropdown-toggle {
@@ -153,12 +156,12 @@
     </div>
 
         <div class="dropdown" title="Inicio" >
-            <button class="btn-secondary dropdown-toggle" title="Inicio" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="dropdown-toggle" title="Inicio" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Menú
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="indexAlumno.jsp">Inicio</a>
-                <a class="dropdown-item" href="">Modificar perfil</a>
+                <a class="dropdown-item" href="cambiarContra.jsp">Cambiar contraseña</a>
                 <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a>
             </div>
         </div>
