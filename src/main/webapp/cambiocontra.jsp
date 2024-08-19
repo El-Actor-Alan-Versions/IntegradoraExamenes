@@ -23,11 +23,7 @@
         </div>
     </div>
 </header>
-
 <img src="IMG2/Rectangle 30.png" alt="rectangulo" class="rectangulo">
-
-
-
 <div class="container">
     <div class="form text-center d-flex justify-content-center align-items-center vh-100">
         <div class="text-center">
@@ -39,7 +35,7 @@
                 </div>
                 <input type="hidden" name="codigo" value="<%= request.getParameter("codigo") %>">
                 <div class="form-floating mt-3">
-                    <button type="submit" class="btn rounded-pill" id="Cambiar" value="Cambiar"> ENVIAR</button>
+                    <button type="submit" class="btn rounded-pill" id="Cambiar" value="Cambiar"> CAMBIAR</button>
                 </div>
             </form>
         </div>
@@ -52,3 +48,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

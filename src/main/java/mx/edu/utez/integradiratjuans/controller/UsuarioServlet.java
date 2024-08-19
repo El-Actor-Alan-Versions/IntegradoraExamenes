@@ -65,14 +65,14 @@ public class UsuarioServlet extends HttpServlet {
             } else {
                 session.setAttribute("mensaje", "Credenciales incorrectas");
 
-                ruta = "login.jsp";
+
                 ruta = "index.jsp"; // Redirigir a la página de login
 
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            req.getSession().setAttribute("mensaje", "Error en la base de datos");
-            ruta = "login.jsp";
+            req.getSession().setAttribute("mensaje", "Credenciales incorrectas");
+            ruta = "index.jsp";
         }
 
         resp.sendRedirect(ruta);
