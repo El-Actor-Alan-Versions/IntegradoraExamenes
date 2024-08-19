@@ -158,7 +158,7 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="indexDocente.jsp">Inicio</a>
-            <a class="dropdown-item" href="cambiarContra.jsp">Cambiar contraseña</a>
+            <a class="dropdown-item" href="cambiarContra.jsp">Contraseña</a>
             <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Cerrar Sesión</a>
         </div>
     </div>

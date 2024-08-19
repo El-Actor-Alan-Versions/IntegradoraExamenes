@@ -56,7 +56,6 @@
     });
 </script>
 <body>
-
 <div id="navbar"></div>
 <script>
     fetch('navbar.jsp')
